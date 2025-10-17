@@ -1,0 +1,39 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: 8.bt
+//   Authors: ReichardTheThird
+//   Version: 1.0
+//   Purpose: Parse the file name 8.bin, which controls XY positions of Battalion models relative to the main unit
+//  Category: Reichard
+// File Mask: *8.bin
+//  ID Bytes: 
+//   History:
+//   1.0    09/03/25 ReichardTheThird: Started this, completed this
+//------------------------------------------------
+
+#include "Structs.bt"
+
+LittleEndian();
+local int i =0;
+
+struct sBModelPositions{
+    short defaultX;
+    short defaultY;
+    short XOffset[16];
+    short YOffset[16];
+};
+
+
+
+struct sBModelPositionEntry{
+    DataSection Header;
+    for(i=0; i<Header.NumEntries;i++){
+        sBModelPositions BModel;
+    }
+};
+
+struct sFile {
+    FileSections Sections;
+    sBModelPositionsEntry BModels;
+}File<open=true>;

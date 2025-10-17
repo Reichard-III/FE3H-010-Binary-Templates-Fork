@@ -1,0 +1,92 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: fixed_areadata.bin
+//   Authors: Reichard
+//   Version: 1.0
+//   Purpose: parse areadata
+//  Category: Reichard
+// File Mask: *fixed_areadata.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    6/10/25 ReichardTheThird: 
+//------------------------------------------------
+#include "Structs.bt"
+LittleEndian();
+local int i;
+struct GenericFile {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct sunkTable0{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry0{
+                ushort someShort0x0;
+                ubyte someIndex;
+                ubyte unkByte0x3;
+                
+                ubyte unkByte0x4;
+                ubyte unkByte0x5;
+                ubyte unkByte0x6;
+                ubyte unkByte0x7;
+                
+                ubyte unkByte0x8;
+                ubyte unkByte0x9;
+            }unkEntry0;   
+        };
+        byte padding[2];
+    }unkTable0;
+    
+    struct sunkTable1{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry1{
+                ubyte unkByte0x0;
+                ubyte unkByte0x1;
+                ubyte unkByte0x2;
+                ubyte unkByte0x3;
+                
+                ubyte unkByte0x4;
+                ubyte unkByte0x5;
+                ubyte unkByte0x6;
+                ubyte unkByte0x7;
+            }unkEntry1;   
+        };
+    }unkTable1;
+    
+    struct sunkTable2{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry2{
+                ubyte unkByte0x0;
+                ubyte unkByte0x1;
+                ubyte unkByte0x2;
+                ubyte unkByte0x3;
+                
+                uint unkInt0x4;
+                
+                ubyte someIndex;
+                ubyte unkByte0x9;
+                ubyte unkByte0xa;
+                ubyte unkByte0xb;
+            }unkEntry2;
+        };
+    }unkTable2;
+    
+    struct sunkTable3{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry3{
+                ubyte unkByte0x0;
+                ubyte unkByte0x1;
+                ubyte unkByte0x2;
+                ubyte unkByte0x3;
+                
+                ubyte unkByte0x4<name="index?">;
+                ubyte unkByte0x5;
+                ubyte unkByte0x6;
+                ubyte unkByte0x7;
+            }unkEntry3;   
+        };
+    }unkTable3;
+}File<open=true>;

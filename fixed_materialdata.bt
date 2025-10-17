@@ -1,0 +1,69 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: fixed_materialdata.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Items that go into the storehouse (ores, fish, flowers, seeds, etc)
+//  Category: Reichard
+// File Mask: fixed_materialdata.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+local int i = 0;
+#include "Structs.bt"
+enum<byte> Quality {
+    One_Star,
+    Two_Star,
+    Three_Star,
+    Four_Star,
+    Five_Star,
+};
+enum<byte> Icon {
+    Bait_Icon,
+    Seed_Icon,
+    Ore_Icon,
+    Fish_Icon,
+    Crop_Icon,
+    Meat_Icon,
+    Tea_Icon,
+};
+struct GenericFile {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct MaterialBlock {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; ++i){
+            struct Material {
+                local MiscItem name<hidden=true>;
+                name = i;
+                int price<bgcolor=cDkGreen>;
+                ushort renown<name="Renown from Altar", bgcolor=cPurple>;
+                short exp<name="Professor EXP", bgcolor=cRed>;
+                Quality stars<name="Grade of the Material">;
+                Icon materialIcon<name="Icon">;
+                short unk;
+            }item<read=EnumToString(name)>;
+        };
+    }MiscItemBlock;
+    FSeek(Sections.SectionPointers[1].Ptr);
+    struct CookingBlock {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; ++i){
+            struct LOL{
+                ushort exp<name="Professor EXP">;
+                //short item[3]<name="Ingredients">;
+                local int o;
+                MiscItemShort miscitem0;
+                MiscItemShort miscitem1;
+                MiscItemShort miscitem2;
+                MinRanks RequiredProfessorRank<name="Required Professor Rank">;
+                byte unk;
+                byte hp<name="HP Boost">;
+                Stats boost<name="Stat Boosts">;   
+                byte amount_required[4]<name="Ingredient Cost">;
+            }cook;
+        };
+    } CookingBlockd;
+}File<open=true>;

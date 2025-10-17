@@ -1,0 +1,50 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: 37.bt
+//   Authors: Reichard
+//   Version: 1.0
+//   Purpose: Parse 37.bin which was never updated
+//  Category: Reichard
+// File Mask: *37.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    09/10/25 ReichardTheThird: Started this
+//------------------------------------------------
+#include "Structs.bt"
+
+LittleEndian();
+local int i=0;
+
+struct sUnkD{
+    ushort unkShort2F0x0_A;
+    ushort unkShort2F0x2_B;
+    ushort unkShort2F0x4_B;
+    ushort unkShort2F0x6_A;
+    ushort unkShort2F0x8_A_Z;
+    ushort unkShort2F0xa_B;
+    ushort unkShort2F0xc_C;
+    ushort unkShort2F0xe_C;
+    ushort unkShort2F0x10_D;
+    ushort unkShort2F0x12_E;
+    ushort unkShort2F0x14_D;
+    ushort unkShort2F0x16_E;    
+    TrueFalse enabled<name="enabled?">;
+    byte unkByte2F0x19_Rotation<name="Rotation Octant">;
+    byte unkByte2F0x1a;
+    byte unkByte0x1b;
+    short unkShort0x1c;
+};
+
+struct sUnkE{
+    DataSection Header;
+    for(i=0;i<Header.NumEntries;i++){
+        sUnkD asdf;
+    }
+};
+
+
+struct freeScenario {
+    FileSections Sections;
+    sUnkE Unk;    
+}File<open=true>;

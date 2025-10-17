@@ -1,0 +1,59 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: fixed_gimmick.bt
+//   Authors: ReichardTheThird
+//   Version: 1.0
+//   Purpose: Parse fixed_gimmick.bin, seems to control weird things like map fog and warp tile terrain visuals/description
+//  Category: Reichard
+// File Mask: *fixed_gimmick.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    5/10/25 ReichardTheThird: Created template, mapped out the data types
+//------------------------------------------------
+
+LittleEndian();
+#include "Structs.bt"
+local int i;
+struct sFile{
+    FileSections Sections;
+    struct sItemSpotTable{
+        DataSection SectionHeader;
+        
+        struct sGimmicks{
+            for(i=0;i<SectionHeader.NumEntries;i++){
+                struct sGimmick{
+                    byte    Y0<comment="YCoordinate of Tile 0">;
+                    byte    X0<comment="XCoordinate of Tile 0">;
+                    MapList MapName<name="Map Name">;
+                    enum GimmickEffect GimmickType;
+                    byte    Y1<comment="YCoordinate of Tile 1">;
+                    byte    X1<comment="XCoordinate of Tile 1">;
+                    struct sFlags0x7{
+                        ubyte bit0 : 1<name="TerrainEffects",comment="Activates the alternative terrain mode i.e. Bernie Hill fire, Lonato Fog, etc.">;
+                        ubyte bit1 : 1<name="unkF0B1">;
+                        ubyte bit2 : 1<name="unkF0B2">;
+                        ubyte bit3 : 1<name="Unused F0B3">;
+                        ubyte bit4 : 1<name="Unused F0B4">;
+                        ubyte bit5 : 1<name="Unused F0B5">;
+                        ubyte bit6 : 1<name="Unused F0B6">;
+                        ubyte bit7 : 1<name="Unused F0B7">;
+                        local string s;
+                        s = Str("%d, %d, %d, %d, %d, %d, %d, %d",bit0,bit1,bit2,bit3,bit4,bit5,bit6,bit7);
+                    }Flag<read = s>;
+                }Gimmick<read=GetMapName>;
+            };
+        }Gimmicks<open=true,comment="">;
+    }Gimmicks<open=true>;
+    
+}File<open=true>;
+
+string GetMapName(sGimmick &i) { return EnumToString(i.MapName); }
+
+enum<ubyte> GimmickEffect
+{
+    Levers_=15,
+    FlameVisualEffect=37,
+    foggy=44,
+    DLCMagicSeal=82,//used as levers for the golems battle
+};

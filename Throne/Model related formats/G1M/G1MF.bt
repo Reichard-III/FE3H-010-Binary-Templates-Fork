@@ -1,0 +1,253 @@
+//------------------------------------------------
+//--- 010 Editor v9.0.2 Binary Template
+//
+//      File: G1MF.bt
+//   Authors: HealingBrew, Raywto, Joschka
+//   Version: 1.6
+//   Purpose: Outlines G1MF format found in G1M files
+//  Category: Game File
+// File Mask: 
+//  ID Bytes: 46 4D 31 47
+//   History:
+//   1.5      2021-11-01  Raytwo : SOFT info
+//   1.5      2020-11-12  Joschka : NUNO4 info
+//   1.4      2020-11-11  Joschka, Raywto : Updated with new info
+//   1.3      2020-10-22  Joschka : Added more info
+//   1.2      2020-04-30  Raytwo: Found the significance of all values related to G1MG
+//   1.1      2020-01-18  HealingBrew: Updated with logic from Ryza.
+//   1.0      2019-11-06  HealingBrew: Created the file
+//------------------------------------------------
+
+#ifndef G1M_F
+#define G1M_F
+
+#ifndef G1M_SHAREDSTRUCTURES
+#include "../G1SharedStructures.bt"
+#endif // G1M_SHAREDSTRUCTURES
+
+typedef struct G1MFORMAT20 {
+    int unknown0<name="Unknown 0">; // 00
+    int total_bone_count<name="Total bone count">; // 04
+    int g1ms_section_count<name="G1MS section count">; // 08
+    int unknown3<name="Total matrices count">; // 0C
+    int unknown4<name="G1MG section 1 element count">; // 10
+    int unknown5<name="Materials count">; // 14
+    int unknown6<name="Shader params count">; // 18
+    int unknown7<name="Total shader params count">; // 1C
+    int unknown8<name="Total shader params padded string names size">; // 20
+    int unknown9<name="'Useful' shared params data (see comment)",comment="Section size - count*4 (count info) - header size (12)">; // 24
+    int unknown10<name="Vertex buffer count">; // 28
+    int unknown11<name="Vertex attributes count">; // 2C
+    int unknown12<name="Unknown C">; // 30
+    int unknown13<name="Bone bind count">; // 34
+    int unknown14<name="Total bone bind count">; // 38
+    int unknown15<name="Index buffers count">; // 3C
+    int unknown16<name="Submeshes count">; // 40
+    int unknown17<name="Total submesh count?">; // 44
+    int unknown18<name="Mesh groups count">; // 48
+    int unknown19<name="Total mesh groups mesh count">; // 4C
+    int unknown20<name="Total mesh groups meshes' submeshes count">; // 50
+    int unknown21<name="COLL entry count?">; // 54
+    int unknown22<name="COLL total something count">; // 58
+    int unknown23<name="Nuno2 entry count">; // 5C
+    int unknown24<name="Nuno2 skip1 count">; // 60
+    int unknown25<name="Nuno2 physics bones count">; // 64
+    int unknown26<name="Nuno1 count">; // 68
+    int unknown27<name="Nuno1 skip3 count">; // 6C
+    int unknown28<name="Nuno1 total control point count">; // 70
+    int unknown29<name="Nuno1 total Unknown section count">; // 74
+    int unknown30<name="Nuno1 skip1 + skip2 count">; // 78
+    int unknown31<name="Total bone global indices count",comment="Takes duplicated G1MS sections into account">; // 7C
+} G1MFormatV20;
+
+typedef struct G1MFORMAT21 {
+    int unknown0<name="Extr section count">; // 80, 20
+} G1MFormatV21;
+
+typedef struct G1MFORMAT22 {
+    int unknown0<name="Nunv1 count">; // 84, 21
+    int unknown1<name="Nunv1 skip1 count">; // 88, 22
+    int unknown2<name="Nunv1 total control point count">; // 8C, 23
+    int unknown3<name="Nunv1 total Unknown section count">; // 90, 24
+} G1MFormatV22;
+
+//NUNS
+typedef struct G1MFORMAT23 {
+    int unknown0<name="Nuns1 count">; // 94, 25
+    int unknown1<name="Unknown 1">; // 98, 26
+    int unknown2<name="Nuns1 total control point count">; // 9C, 27
+    int unknown3<name="Unknown 3">; // A0, 28
+    int unknown4<name="Unknown 4">; // A4, 29
+    int unknown5<name="Nuns1 skip1 count">; // A8, 2A
+    int unknown6<name="Unknown 6 (HAIR section related)">; // AC, 2B
+    int unknown7<name="Unknown 7 (HAIR section related)">; // B0, 2C
+    int unknown8<name="Unknown 8 (HAIR section related)">; // B4, 2D
+    int unknown9<name="Unknown 9 (HAIR section related)">; // B8, 2E
+    int unknown10<name="Unknown A (HAIR section related)">; // BC, 2F
+} G1MFormatV23;
+
+// SOFT related
+typedef struct G1MFORMAT24 {
+    int unknown0<name="Soft region 1 entry count">; // C0, 30
+    int unknown1<name="Unknown 1">; // C4, 31
+    int unknown2<name="Unknown 2">; // C8, 32
+    int unknown3<name="Unknown 3">; // CC, 33
+    int unknown4<name="Soft subentry count?">; // D0, 34
+    int unknown5<name="Soft total u4 count">; // D4, 35
+    int unknown6<name="Unknown 6">; // D8, 36
+    int unknown7<name="Soft total len2 count">; // DC, 37
+    int unknown8<name="Soft total len4 count">; // E0, 38
+    int unknown9<name="Nuno3 count", comment="See Eddie's head for that section">; // E4, 39
+    int unknown10<name="Nuno3 skip1 count">; // E8, 3A
+    int unknown11<name="Nuno3 total control point count">; // EC, 3B
+    int unknown12<name="Nuno3 total Unknown section count">; // F0, 3C
+    int unknown13<name="Nuno3 skip2 count">; // F4, 3E
+} G1MFormatV24;
+
+// SOFT related, it seems
+typedef struct G1MFORMAT25 {
+    int unknown0<name="Unknown 0">; // F8, 3F
+    int unknown1<name="Unknown 1">; // FC, 40
+} G1MFormatV25;
+
+typedef struct G1MFORMAT26 {
+    int unknown0<name="Unknown 0">; // 100, 41
+    int unknown1<name="Unknown 1">; // 104, 42
+} G1MFormatV26;
+
+//NUNO4
+typedef struct G1MFORMAT27 {
+    int unknown0<name="Nuno4 count">; // 108, 43
+    int unknown1<name="Nuno4 total bone count",comment="(check AoC helmet)">; // 10C, 44
+    int unknown2<name="Nuno4 chain count">; // 110, 45
+    int unknown3<name="Nuno4 skip 1 count">; // 114, 46
+    int unknown4<name="Nuno4 physbone count">; // 118, 47
+} G1MFormatV27;
+
+typedef struct G1MFORMAT28 {
+    int unknown0<name="Nuno3 skip3 count">; // 11C, 48
+} G1MFormatV28;
+
+typedef struct G1MFORMAT29 {
+    int unknown0<name="Unknown 0 (SOFT section related)", comment="See DOA6">; // 120, 49
+} G1MFormatV29;
+
+typedef struct G1MFORMAT30 {
+    int unknown0<name="Unknown 0">; // 124, 50
+} G1MFormatV30;
+
+typedef struct G1MFORMAT31 {
+    int unknown0<name="Unknown 0">; // 128, 51
+    int unknown1<name="Unknown 1">; // 12C, 52
+    int unknown2<name="Nuno3 offset count">; // 130, 53
+    int unknown3<name="Nuno4 offset count">; // 134, 54
+    int unknown4<name="Nuno3 skip4 count">; // 138, 55
+} G1MFormatV31;
+
+typedef struct G1MFORMAT33 {
+    int unknown0<name="Nuno4 vBones count">; // 13C, 57
+    int unknown1<name="Nuno4 vBones section size">; // 140, 58
+    int unknown2<name="Unknown 2">; // 144, 59
+    int unknown3<name="Unknown 3">; // 148, 60
+    int unknown4<name="Unknown 4">; // 14C, 61
+    int unknown5<name="Unknown 5">; // 150, 62
+    int unknown6<name="Unknown 6">; // 154, 63
+    int unknown7<name="Unknown 7">; // 158, 64
+    int unknown8<name="Unknown 8">; // 15C, 65
+    int unknown9<name="Unknown 9">; // 160, 66
+    int unknownA<name="Unknown 10">; // 164, 67
+    int unknownB<name="Unknown 11">; // 168, 68
+    int unknownC<name="Unknown 12">; // 16C, 69
+    int unknownD<name="Unknown 13">; // 170, 70
+    int unknownE<name="Unknown 14">; // 174, 71
+    int unknownF<name="Unknown 15">; // 178, 72
+} G1MFormatV33;
+
+typedef struct G1MFORMAT34 {
+    int unknown0<name="Unknown 0">; // 17C, 73
+} G1MFormatV34;
+
+typedef struct G1MFORMAT {
+    GResourceSectionHeader header<name="Section Header", read=GetSectionName>;
+    local int version = G1Helper_GetVersionA(header.version);
+
+    // It must be noted that regardless of version, the game expects the latest supported version.
+    // So for example, Three Houses will always create an array with 74 integers, even if the G1MF chunk has 62.
+    // The missing integers will be zero.
+    if(version < 20) {
+        int unknowns[(header.size - 0xC) / 0x4]<name="Unknown Version Indices">;
+    }
+
+    if(version >= 20) { // 0x80 bytes total
+        G1MFormatV20 version20<name="G1MS/G1MM/G1MG/COLL/NUNO">;
+    }
+    
+    if(version >= 21) { // 0x84 bytes total
+        G1MFormatV21 version21<name="V21">;
+    }
+    
+    if(version >= 22) { // 0x94 bytes total
+        G1MFormatV22 version22<name="NUNV section">;
+    }
+    
+    if(version >= 23) { // 0xC0 bytes total
+        G1MFormatV23 version23<name="NUNS/HAIR">;
+    }
+    
+    if(version >= 24) { // 0xF8 bytes total
+        G1MFormatV24 version24<name="SOFT/NUNO3">;
+    }
+    
+    if(version >= 25) { // 0x100 bytes total
+        G1MFormatV25 version25<name="V25">;
+    }
+    
+    if(version >= 26) { // 0x108 bytes total
+        G1MFormatV26 version26<name="V26">;
+    }
+    
+    if(version >= 27) { // 0x11C bytes total
+        G1MFormatV27 version27<name="NUNO4">;
+    }
+    
+    if(version >= 28) { // 0x120 bytes total
+        G1MFormatV28 version28<name="V28">;
+    }
+    
+    if(version >= 29) { // 0x124 bytes total
+        G1MFormatV29 version29<name="V29">;
+    }
+
+    if(version >= 30) { // 0x128 bytes total
+        G1MFormatV30 version30<name="V30">;
+    }
+
+    if(version >= 31) { // 0x13C bytes total
+        G1MFormatV31 version31<name="V31">;
+    }
+
+    if(version >= 33) { // 0x17C bytes total
+        G1MFormatV33 version33<name="V33">;
+    }
+
+    if(version >= 34) { // 0x180 bytes total
+        G1MFormatV34 version34<name="V34">;
+    }
+
+    if(version >= 35) {
+        int unknowns[(header.size - 0xC - 0x180) / 0x4]<name="Unknown Version Indices">;
+    }
+} G1MFormat;
+
+#ifndef G1M_FILELESS
+#define G1M_FILELESS
+
+LittleEndian();
+
+struct FILE {
+    G1MFormat data<name="Format">;
+} File<name="G1MF", open=true>;
+
+#endif // G1M_FILELESS
+
+#endif // G1M_F

@@ -1,0 +1,614 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: Character File from Falo's Save Editor
+//   Authors: Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Map out Character File Exports
+//  Category: Reichard
+// File Mask: slot*
+//  ID Bytes: 
+//   History: 
+//   1.1    6/7/25  ReichardTheThird: Added BattalionReserve @ 0x250f8
+//                                      Changed to use "include_enums.bt" instead
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+#include "include_enums.bt"
+local int i;
+struct ItemBlock {
+    Item_Adjusted item<bgcolor=cGreen>;
+    byte remainingDurability;
+    byte count<bgcolor=cLtGreen>;
+};
+
+struct BattalionData {
+    CharID character;
+    ushort Exp;
+    ushort Endurance;
+    BattalionID battalion;
+    byte Gambit;
+};
+struct SkillExp {
+    ushort Sword;
+    ushort Lance;
+    ushort Axe;
+    ushort Bow;
+    ushort Brawl;
+    ushort Reason;
+    ushort Faith;
+    ushort Authority;
+    ushort HeavyArmor;
+    ushort Riding;
+    ushort Flying;
+};
+struct SkillMinRanks {
+    MinRanks Sword;
+    MinRanks Lance;
+    MinRanks Axe;
+    MinRanks Bow;
+    MinRanks Brawl;
+    MinRanks Reason;
+    MinRanks Faith;
+    MinRanks Authority;
+    MinRanks HeavyArmor;
+    MinRanks Riding;
+    MinRanks Flying;
+
+};
+struct Stat {
+    ubyte Str;
+    ubyte Mag;
+    ubyte Dex;
+    ubyte Spd;
+    ubyte Luck;
+    ubyte Def;
+    ubyte Res;
+    ubyte Move;
+    ubyte Cha;
+};
+struct AbilityUnlock {
+    ubyte Ability00:1;
+    ubyte Ability01:1;
+    ubyte Ability02:1;
+    ubyte Ability03:1;
+    ubyte Ability04:1;
+    ubyte Ability05:1;
+    ubyte Ability06:1;
+    ubyte Ability07:1;
+};
+struct ClassUnlock {
+    ubyte Ability00:1;
+    ubyte Ability01:1;
+    ubyte Ability02:1;
+    ubyte Ability03:1;
+    ubyte Ability04:1;
+    ubyte Ability05:1;
+    ubyte Ability06:1;
+    ubyte Ability07:1;
+};
+struct UnitFlags {
+    int32 Flag0:1<name="IsAvailable?">;
+    int32 Flag1:1<name="HasJoined?">;
+    int32 Flag2:1<name="Dead And Unrecruited">;
+    int32 Flag3:1<name="Is Dead">;
+    int32 Flag4:1<name="HideSecondCrest?">;
+    int32 Flag5:1<name="Is currently Mounted?">;
+    int32 Flag6:1<name="Sword budding Talent">;
+    int32 Flag7:1<name="Lance budding Talent">;
+    int32 Flag8:1<name="Axe budding Talent">;
+    int32 Flag9:1<name="Bow budding Talent">;
+    int32 Flag10:1<name="Brawling budding Talent">;
+    int32 Flag11:1<name="Reason budding Talent">;
+    int32 Flag12:1<name="Faith budding Talent">;
+    int32 Flag13:1<name="Authority budding Talent">;
+    int32 Flag14:1<name="Heavy Armor budding Talent">;
+    int32 Flag15:1<name="Riding budding Talent">;
+    int32 Flag16:1<name="Flying budding Talent">;
+    int32 Flag17:1<name="BylethGreenHair/ Dimitri Anger">;
+    int32 Flag18:1<name="Deployed?">;
+    int32 Flag19:1<name="Force on Map">;
+    int32 Flag20:1<name="Assigned Adjutant">;
+    int32 Flag21:1<name="Battalion Equipped">;
+    int32 Flag22:1<name="Byleth Support Queued Up">;
+    int32 Flag23:1<name="Reject Tea Time">;
+    int32 Flag24:1<name="Something Personal?">;
+    int32 Flag25:1;
+    int32 Flag26:1;
+    int32 Flag27:1;
+    int32 Flag28:1;
+    int32 Flag29:1;
+    int32 Flag30:1;
+    int32 Flag31:1;
+};
+// Size of 588
+struct CombatArtUnlock {
+    ubyte CombatArt0:1;
+    ubyte CombatArt1:1;
+    ubyte CombatArt2:1;
+    ubyte CombatArt3:1;
+    ubyte CombatArt4:1;
+    ubyte CombatArt5:1;
+    ubyte CombatArt6:1;
+    ubyte CombatArt7:1;
+    ubyte CombatArt8:1;
+    ubyte CombatArt9:1;
+    ubyte CombatArt10:1;
+    ubyte CombatArt11:1;
+    ubyte CombatArt12:1;
+    ubyte CombatArt13:1;
+    ubyte CombatArt14:1;
+    ubyte CombatArt15:1;
+    ubyte CombatArt16:1;
+    ubyte CombatArt17:1;
+    ubyte CombatArt18:1;
+    ubyte CombatArt19:1;
+    ubyte CombatArt20:1;
+    ubyte CombatArt21:1;
+    ubyte CombatArt22:1;
+    ubyte CombatArt23:1;
+    ubyte CombatArt24:1;
+    ubyte CombatArt25:1;
+    ubyte CombatArt26:1;
+    ubyte CombatArt27:1;
+    ubyte CombatArt28:1;
+    ubyte CombatArt29:1;
+    ubyte CombatArt30:1;
+    ubyte CombatArt31:1;
+    ubyte CombatArt32:1;
+    ubyte CombatArt33:1;
+    ubyte CombatArt34:1;
+    ubyte CombatArt35:1;
+    ubyte CombatArt36:1;
+    ubyte CombatArt37:1;
+    ubyte CombatArt38:1;
+    ubyte CombatArt39:1;
+    ubyte CombatArt40:1;
+    ubyte CombatArt41:1;
+    ubyte CombatArt42:1;
+    ubyte CombatArt43:1;
+    ubyte CombatArt44:1;
+    ubyte CombatArt45:1;
+    ubyte CombatArt46:1;
+    ubyte CombatArt47:1;
+    ubyte CombatArt48:1;
+    ubyte CombatArt49:1;
+    ubyte CombatArt50:1;
+    ubyte CombatArt51:1;
+    ubyte CombatArt52:1;
+    ubyte CombatArt53:1;
+    ubyte CombatArt54:1;
+    ubyte CombatArt55:1;
+    ubyte CombatArt56:1;
+    ubyte CombatArt57:1;
+    ubyte CombatArt58:1;
+    ubyte CombatArt59:1;
+    ubyte CombatArt60:1;
+    ubyte CombatArt61:1;
+    ubyte CombatArt62:1;
+    ubyte CombatArt63:1;
+    ubyte CombatArt64:1;
+    ubyte CombatArt65:1;
+    ubyte CombatArt66:1;
+    ubyte CombatArt67:1;
+    ubyte CombatArt68:1;
+    ubyte CombatArt69:1;
+    ubyte CombatArt70:1;
+    ubyte CombatArt71:1;
+    ubyte CombatArt72:1;
+    ubyte CombatArt73:1;
+    ubyte CombatArt74:1;
+    ubyte CombatArt75:1;
+    ubyte CombatArt76:1;
+    ubyte CombatArt77:1;
+    ubyte CombatArt78:1;
+    ubyte CombatArt79:1;
+};
+struct CharacterBlock {
+    ItemBlock CharacterItem[6]<read=EnumToString(item)>;
+    BattalionData battalion<read=EnumToString(battalion), bgcolor=cGray>;
+    uint seed<bgcolor=cRed, name="Seed">;
+    CharID ID<name="ID", bgcolor=cBlue>;
+    short unk<bgcolor=cYellow>;
+    short unk2<bgcolor=cYellow>;
+    short unk3<bgcolor=cYellow>;
+    short exp;
+    short equipped_item;
+    short Accessory_item_equipped;
+    struct sskill_exp{
+        short swordExp;   
+        short lanceExp;
+        short axeExp;
+        short bowExp;
+        short brawlingExp;
+        short reasonExp;   
+        short faithExp;
+        short authorityExp;
+        short ridingExp;
+        short flyingExp;
+        short classExp;
+    }skill_exp;
+    short current_class_exp;
+    ubyte Level;
+    ubyte Class;
+    ushort MaxHP;
+    Stat CurrentStats;
+    CombatArtUnlock CombatArtAvailable<name="Combat Arts Unlocked", bgcolor=cDkRed>;
+    AbilityUnlock AbilityAvailable[30]<name="Abilities Unlocked", bgcolor=cDkBlue>;
+    AbilityID EquippedAbilities[5]<name="Equipped Abilities", bgcolor=cBlue>;
+    CombatArtID EquippedCombatArts[3]<name="Equipped Combat Arts", bgcolor=cRed>;
+    ubyte ItemCount;
+    SkillMinRanks CurrentSkillLevel<name="Skill MinRankss", bgcolor=cYellow>;
+    ubyte ClassLevel;
+    ubyte MagicDuarability[12]<name="Magic Duarability", bgcolor=cPurple>;
+    SpellID MagicEquipped[12]<name="Magic Equipped", bgcolor=cPurple>;
+    UnitFlags Flags<bgcolor=cSilver>;
+    byte CurrentCostume;
+    byte QuestMarkerMaybe;
+    byte CostumeFlags;
+    byte unk_0xB3;
+    byte CookingBoost[4];
+    byte unk_0xb8[6];
+    AbilityUnlock AbilityAvailableSet2[2]<name="Equipped Abilities Set 2", bgcolor=cBlue>;
+    byte UnknownValues0xc0[4]<bgcolor=cBlack>;
+    byte Motivation;
+    
+    byte TimesGiftedMaybe;
+    byte TimesInstructed[11];
+    byte UnknownV[2]<bgcolor=cBlack>;
+    ClassUnlock ClassUnlockFlagsSet1[8];
+    byte LearningGoal<bgcolor=cRed>;
+    
+    byte unknown;
+    byte MonthlyCharmIncreaseMaybe;
+    byte TotalTeaTimes;
+    struct sMonasteryStatus{
+        byte HasEaten:1;
+        byte flag1:1;
+        byte flag2:1;
+        byte flag3:1;
+        byte flag4:1;
+        byte HasUsedSauna:1;
+        byte SaunaRelaxed:1;
+        byte SaunaVeryRelaxe:1;
+
+
+    }MonasteryStatus;
+    byte unknownX[2];
+    byte TotalTeaCharmCountMaybe;
+    
+    ClassUnlock ClassUnlockFlagsSet2[3];
+    short RecruitmentRelated[4];
+    /*
+    short unk_26;
+    short unk_28;
+    byte unk_2A;
+    byte unk_2B;
+    MinRanks Exp<name="EXP", bgcolor=cBlue>;
+    FSeek(0x32);
+    SkillExp Wexp<bgcolor=cGreen>;
+    short classEXP<name="Class EXP", bgcolor=cBlue>;
+    ubyte currentLevel<name="Level", bgcolor=cLtGreen>;
+    CID currentClass<name="Class">;
+    ubyte HP<bgcolor=cRed>;
+    byte unk_4D;
+    Stat characterStats<name="Character Stats", bgcolor=cRed>;
+    FSeek(0x7F);
+    AbilityID EquippedAbilities[5]<bgcolor=cYellow>;
+    CombatArtID Equipped_CombatArts[3];
+    FSeek(0x88);
+    SkillMinRanks WeaponMinRanks<bgcolor=cYellow>;
+    FSeek(0xFC);
+    SkillExp Wexp2<bgcolor=cGreen, comment="Not sure why there are two copies of Skill Exp here...">;
+    FSeek(0x1DC);
+    SkillMinRanks WeaponMinRanks2<bgcolor=cYellow, comment="Not sure why there are two copies of Skill MinRankss here...">;
+    */
+    byte junk[12];
+    short adjutantID;
+    short SkillExp2[11];
+    short class_exp[100]<bgcolor=cBlue>;
+    byte deploy;
+    byte deploy_slot;
+    SkillMinRanks skill_level2<bgcolor=cRed>;
+    byte class_level[100]<bgcolor=cGreen>;
+    byte unknown_possiblyPadding;
+};
+
+struct SaveHeader {
+    int value;
+    int version;
+    int hash;
+}header;
+ItemBlock items[400]<name="Items">;
+int item_count;
+CharacterBlock character[60]<read=EnumToString(ID)>;
+char PlayerName[40];
+//uint m_NPC;
+byte unkByte0x903c;
+byte BylethBirthMonth<comment="the Month is 0 indexed, i.e. 0 = January (1st month)">;
+byte BylethBirthDay;
+
+
+FSeek(0x23200-0x1b);
+struct sPlayerData{
+    byte unkByte[8];
+    struct sOnlineCharacter{
+        byte unkByte0x0[0x34];
+        CharID CharacterID;
+        byte unkByte0x36[0x17a];
+    }OnlineCharacter[5];
+    ubyte unk0x878[0x1b8];
+    
+    struct sBattalionBarracks{
+        for(i=0;i<200;i++){
+            struct sBattalionBarracksEntry{
+                local string display;
+                CharID AssignedCharacter;
+                ushort BattalionExp;
+                ushort BattalionEndurance;
+                BattalionID battID;
+                GambitType GambitID;
+                display += Str("%s - ", EnumToString(AssignedCharacter));
+                display += EnumToString(battID);
+            }BattalionBarracksEntry<read = display>;
+        }
+    }BattalionBarracks;
+    
+    uint Playtime;
+    uint Money;
+    uint unkownInt0x1078;
+    uint Chapter;
+    ushort SupportExp[270];
+    Difficulty DifficultyLevel;
+    ubyte GameMode;
+    ubyte Route;
+    ubyte Timeskip;
+    ubyte MoreFlags_UnsureDueToRandom39BytesBelow[234];
+    
+    
+    ubyte wtf[39];
+    
+    
+    struct sStorehouseItems{
+        for(i=0;i<223;i++){
+            struct sStorehouseItemsEntry{
+                local string display;
+                local MiscItem Name;
+                Name= i;
+                
+                ubyte StorehouseItems;
+                display+=Str("%d - ",StorehouseItems);
+                display += EnumToString(Name);
+            }StorehouseItemsEntry<read = display>;
+        };
+    }StorehouseItems;
+    
+    struct sLostItemsCount{
+        for(i=0;i<225;i++){
+            struct sLostItemsCountEntry{
+                local string display;
+                local Gifts Name;
+                Name= i;
+                
+                ubyte StorehouseItems;
+                display+=Str("%d - ",StorehouseItems);
+                display += EnumToString(Name);
+            }LostItemsCountEntry<read = display>;
+        };
+    }LostItemsCount;
+    
+    byte unk0x1571[0x25f];
+    byte GameCompletionCount;
+    byte unk0x15d1[3];
+    byte mapRngSeed_;
+    byte unk0x17d5[0x5be];
+    
+    
+    struct sLostItemsCount2{
+        for(i=0;i<245;i++){
+            struct sLostItemsCountEntry2{
+                local string display;
+                local Gifts Name;
+                Name= i;
+                
+                ubyte StorehouseItems;
+                display+=Str("%d - ",StorehouseItems);
+                display += EnumToString(Name);
+            }LostItemsCountEntry2<read = display>;
+        };
+    }LostItemsCount2;
+}PlayerData;
+
+
+
+
+FSeek(0x250c8-0x1b);
+struct sActivities{
+    byte chicken[0xc];
+    uint Renown;
+    byte unkActivityBytes0x10[2];
+    ushort ProfessorExp;
+    CharID BylethSupportVisitList_[7];
+    CharID UnkCharsMaybe_[2];
+    byte CalendarDay;
+    byte ActivityExplore;
+    byte ActivityLesson;
+    byte ActivityBattle;
+    byte unkLOL;
+    struct sSaintStatue_UpgradeLevels{
+        byte Cethleann;
+        byte Cichol;
+        byte Macuil;
+        byte Indech;
+    }SaintStatue_UpgradeLevels;
+    byte BattalionShopLevel;
+    struct sBattalionShopStock{
+        for(i=0;i<200;i++){
+            struct sBattalionShopStockEntry{
+                local BattalionID Name;
+                Name = i;
+                local string display;
+                ubyte Count;
+                display += Str("%d - ",Count);
+                display += EnumToString(Name);
+                display += Str("_%d",i);
+            }BattEntry<read = display>;
+        }
+    }BattalionShopStock;
+    struct sMonasteryMerchantStock{
+        for(i=0;i<100;i++){
+            struct sMonasteryMerchantStockEntry{
+                //local MiscItem Name;
+                //Name = i;
+                //local string display;
+                ubyte Count;
+                //display += Str("%d - ",Count);
+                //display += EnumToString(Name);
+                //display += Str("_%d",i);
+            }MonasteryMerchantStockEntry<comment="refer to Shopdata monasterymerchant table for items/merchants, 255 means infinite">;
+        }
+    }MonasterMerchantStock;
+    struct sAnnaSecretShopStock{
+        for(i=0;i<50;i++){
+            struct sAnnaSecretShopStockEntry{
+                //local MiscItem Name;
+                //Name = i;
+                //local string display;
+                ubyte Count;
+                //display += Str("%d - ",Count);
+                //display += EnumToString(Name);
+                //display += Str("_%d",i);
+            }AnnaSecretShopStockEntry<comment="refer to Shopdata Anna secret shop table for items, 255 means infinite">;
+        }
+    }AnnaSecretShopStock;
+    byte WeaponShopLevel;
+    struct sWeaponShopStock{
+        for(i=0;i<200;i++){
+            struct sWeaponShopStockEntry{
+                local Item Name;
+                Name = i;
+                local string display;
+                ubyte Count;
+                display += Str("%d - ",Count);
+                display += EnumToString(Name);
+                display += Str("_%d",i);
+            }WeaponShopStockEntry<read=display>;
+        }
+    }WeaponShopStock;
+    byte ItemShopLevel;
+    struct sEquipmentShopStock{
+        for(i=0;i<50;i++){
+            struct sEquipmentShopStockEntry{
+                local EquipID Name;
+                Name = i;
+                local string display;
+                ubyte Count;
+                display += Str("%d - ",Count);
+                display += EnumToString(Name);
+                display += Str("_%d",i);
+            }EquipmentShopStockEntry<read=display>;
+        }
+    }EquipmentShopStock;
+    struct sItemShopStock{
+        for(i=0;i<200;i++){
+            struct sItemShopStockEntry{
+                local Consumables Name;
+                Name = i;
+                local string display;
+                ubyte Count;
+                display += Str("%d - ",Count);
+                display += EnumToString(Name);
+                display += Str("_%d",i);
+            }ItemShopStockEntry<read=display>;
+        }
+    }ItemShopStock;
+    ubyte unk10ByteArray0[10];
+    ubyte unk10ByteArray1[10];
+    ubyte unk100ByteArray[100];
+    MiscItem SeedsSetInGreenhouse[5];
+    ubyte CultivationMethod;
+    MiscItem MiscItemByte;
+    ubyte Calendar7Index;
+    ubyte ComparedTo3d3;
+    ubyte ComparedTo3d2;
+    ubyte unk0x3d4[19];
+    ubyte unk5Byte[5];
+    ubyte unk0x3ec[8];
+    struct sQuestStatuses{
+        for(i=0;i<151;i++){
+            struct sQuestStatusesEntry{
+                local QuestID Name;
+                Name = i;
+                local string display;
+                
+                QuestStatus QS<name="Quest Status">;
+                
+                display = Str("%d - ", QS);
+                display += EnumToString(Name);
+            }QuestStatusesEntry<read=display>;
+        };
+    }QuestStatuses;
+    struct sAuxBattles{
+        ScenarioName NormalAuxBattle0;
+        ScenarioName NormalAuxBattle1;
+        ScenarioName CalendarEventAux;
+    }AuxBattles;
+    ubyte MatchesSomethingInFreeScenario0[3];
+    ubyte unk0x491[6];
+    ubyte FixedLobbyQuestTable0_Index;
+    ubyte PreTimeSkipQuestionsAsked[13];
+    ubyte PostTimeSkipQuestionsAsked[13];
+    ubyte SeminarEnabledBits_[7];
+    ubyte unk0x4b9[26];
+    ubyte SpotDataEnabledFlagsA_[38];
+    ubyte SpotDataEnabledFlagsB_[38];
+    ubyte SpotDataEnabledFlagsC_[38];
+    ubyte unk0x545[3];
+    MiscItem MiscItemsToRemove[2];
+    ubyte MiscItemAmountToRemove[2];
+    ubyte BitFlagArray0x54c[13];
+    ubyte unkByte0x559_RelatedToCharArray;
+    ubyte unkByte0x55a_RelatedToCharArray;
+    ubyte ProfessorRankRelated;
+    ubyte unk0x55c;
+    ubyte PlayLog_Wark;
+    ubyte PlayLog_Lecture;
+    ubyte PlayLog_ToBattle;
+    ubyte PlayLog_Rest;
+    ubyte PlayLog_TrainMount;
+    ubyte PlayLog_Sing;
+    ubyte PlayLog_Lunch;
+    ubyte PlayLog_Cooking;
+    ubyte PlayLog_Drill;
+    ubyte PlayLog_TeaParty;
+    ubyte PlayLog_Scout;
+    ubyte unk0x568[4];
+    ubyte InfluencerUpgradeLevel;
+    struct sPaganAltarWeaponShopStock{
+        for(i=0;i<50;i++){
+            struct sPaganAltarWeaponShopStockEntry{
+                ubyte Count;
+            }PaganAltarWeaponShopStockEntry;
+        }
+    }PaganAltarWeaponShopStock;
+    struct sPaganAltarEquipShopStock{
+        for(i=0;i<30;i++){
+            struct sPaganAltarEquipShopStockEntry{
+                ubyte Count;
+            }PaganAltarEquipShopStockEntry;
+        }
+    }PaganAltarEquipShopStock;
+    struct sPaganAltarItemShopStock{
+        for(i=0;i<20;i++){
+            struct sPaganAltarItemShopStockEntry{
+                ubyte Count;
+            }PaganAltarItemShopStockEntry;
+        }
+    }PaganAltarItemShopStock;
+    struct sMiscItemShopStock{
+        for(i=0;i<30;i++){
+            struct sMiscItemShopStockEntry{
+                ubyte Count;
+            }MiscItemShopStockEntry;
+        }
+    }MiscItemShopStock;
+}Activities;

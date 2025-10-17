@@ -1,0 +1,399 @@
+//------------------------------------------------
+//--- 010 Editor v9.0.2 Binary Template
+//
+//      File: event/talk_event/script (6341-7437)
+//   Authors: Sloth
+//   Version: Beta
+//   Purpose: Read event scripts, mainly supports (6682-7437)
+//------------------------------------------------
+#include "include/event_script_enums.bt"
+#include "include/event_script_typedefs.bt"
+
+LittleEndian();
+
+struct StructHeader{
+    uint32 numberOfScriptBlocks<name="Number of Script Blocks">;
+    uint32 unknown;
+    uint32 unknown;
+    uint32 unknown;
+}refHeader<bgcolor=cGreen, name="Header">;
+
+local int i = 0;
+local int magicFunction = ReadInt();
+local int nblocks = ((FileSize() - 16) / 48);
+
+
+for(i = 0; i < nblocks; i++){
+        magicFunction = ReadInt();
+    switch(magicFunction){
+        case(0x0):{ StructCubeScene cubeScene<name="Cube Scene", read=readCubeScene>; break; }
+        case(0x1):
+        {
+            StructCharacterList characterList<name="Character List", read=readCharacterList>;
+        break;
+        }
+        case(0x3):
+        {
+            StructDialogueBox dialogueBox<name="Dialogue Box", read=readDialogueBox>;
+        break;
+        }
+        case(0x4):
+        {
+            StructSceneEvent sceneEvent<name="Scene Event", read=readSceneEvent>;
+        break;
+        }
+        case(0x5):
+        {
+            StructSceneCharacterEvent sceneCharacterEvent<name="Scene Character Event", read=readSceneCharacterEvent>;
+        break;
+        }
+        case(0xB):
+        {
+            StructAnimation animation<name="Animation", read=readAnimation, comment="Used when character isn't speaking">;
+        break;
+        }
+        case(0x10):
+        {
+            StructBGMChange bgmChange<name="BGM Fade out?">;
+        break;
+        }
+        case(0x11):
+        {
+            StructSoundEffect soundEffect<name="Sound Effect", read=("Sound Effect: " + EnumToString(sfx))>;
+        break;
+        }
+        case(0x17):
+        {
+            StructBodyMotion bodyMotion<name="Body Motion", read=readBodyMotion>;
+        break;
+        }
+        case(0x1C): { CharacterPositions positions<name="Charcter Positions">; break; }
+        case(0x18):
+        {
+            StructHeadMotionX headMotionX<name="Head Motion: x-axis">;
+        break;
+        }
+        case(0x45):
+        {
+            StructHeadMotionY headMotionY<name="Head Motion: y-axis">;
+        break;
+        }
+        case(0x12):
+        {
+            StructMiniCard miniCard<name="Mini Card", read=("Image Mini Card: " + EnumToString(miniCard))>;
+        break;
+        }
+        case(0x69):
+        {
+            StructLargeCard largeCard<name="Large Card", read="Image Big Card">;
+        break;
+        }
+        case(0x21):
+        {
+            StructDialogueChoices dialogueChoices<name="Dialogue Choices", read=readDialogueChoice, comment="The conditional block of the first choice will be between 'Conditional Statement' and 'Start of Conditional'">;
+        break;
+        }
+        case(0x23):
+        {
+            StructConditional conditional<name="Conditional Statement", read=readConditional, comment="Between 'Conditional Statement' and 'Start of Conditional' is the else statement">;
+        break;
+        }
+        case(0x24):{ StructEndConditional endConditional<name="End of Conditional", read="End of Conditional Statement/Check">; break; }
+        case(0x25):
+        {
+            StructStartConditional startConditional<name="Start of Conditional">;
+        break;
+        }
+        case(0x2D):
+        {
+            StructSupportPoints supportPoints<name="Support Points", read=readSupportPoints>;
+        break;
+        }
+        case(0x60):
+        {
+            StructEmoteEffect emoteEffect<name="Emote Effect", read=readEmoteEffect>;
+        break;
+        }
+        case(0xD):
+        {
+            Pause shortPause<name="Pause", read=readPause>;
+        break;
+        }
+        case(0xF): { ChangeBGM bgm<name="BGM", read=("BGM changed to " + EnumToString(Music))>;  break;  }
+        case(0x19): { StructCameraFade cameraFade<name="Camera: Fade", comment="Can fade into new cube scene", read=readCameraFade>;  break;  }
+        case(0x63): { RouteSelection route<name="Route Selection", read=readRouteName, comment="Cannot switch between routes once selected. Any route can change into Crimson Flower.">; break; }
+        case(0x7F): { BattleCompleted completedBattle<name="Battle Completion Conditional", read=readBattleComplete>; break; }
+        case(0x82): { FancyDialogueChoiceList choiceFancy<name="Fancy Dialogue Choice Menu", read="'This Choice Drastically Changes the Story' Dialogue Menu">; break; }
+        case(0x5F): { ReceiveItem item<name="Item 95", read=readItem1>; break; }
+        case(0x93): { ReceiveItem item<name="Item 147", read=readItem1>; break; }
+        case(0x2E): {
+            struct SetFlag46{
+                enumScriptFunction scriptFunction<name="Script Function", format=hex>;
+                int value;
+                int Flag<bgcolor=cDkGreen>;
+                int unk[9]<hidden=true>;
+            }ref46<name="Set Flag", read=readSetFlag>;
+        break;}
+        case(0x80): { 
+            struct CheckFlag128{
+                enumScriptFunction scriptFunction<name="Script Function", format=hex>;
+                int Flag<bgcolor=cDkGreen>;
+                int value;
+                int unknown[9]<hidden=true>;
+            }ref128<name="Check Flag", read=readFlagCheck>;
+        break;
+        }
+        case(0x4F): { CharacterCheck checkCharacter<name="Character Check", read=readCharacterCheck>; break; }
+        case(0x4E): { RecruitmentList recruited<name="Recruited", read=readCharacterCheck2>; break; }
+        case(0x53): { VisualFX vfx<name="Visual Effect", read=("VFX " + EnumToString(fx) + " " +  EnumToString(status))>; break; }
+        case(0x57): { CameraMovement cameraMove<name="Camera Angle", read=readCamera87>; break; }
+        case(0x5E): { CharacterLooking looking<name="Character Looking", read=readCharacterLooks>; break; }
+        case (67): {CharacterRotation rotate<name="Rotate Character", read=(EnumToString(character) + " Rotate " + EnumToString(direction))>; break; }
+        case(73): {
+            Camera73 characterCamera<name="Camera at Character", read=(EnumToString(cameraPosition) + " " + EnumToString(character) + " " + EnumToString(panning))>;
+            break;
+        };
+        case(89): { SingleDialogueChoice singleChoice<name="Single Dialogue Choice", read=readFxn89>; break; }
+        case(43): { CharacterDisappears disappears<name="Character Disappears?", read=readFxn43>; break; }
+        case(91): { Looking91 lookCharacter<name="Look at Character", read=("Everyone look at " + EnumToString(character))>; break;}
+        case(98): { CharacterEyes eyes<name="Character Eyes", read=readEyes>; break; }
+        case(100): {Camera100 camera100<name="Camera 100", read=readCamera100>; break;}
+        case(135): { TimedAnimation timed<name="Timed Next Motion/Animation", read=readTimed, comment="Used to timed the following character animation during dialogue.">; break; }
+        case(146): { CubeLabel label<name="Change Cube Label To", read=readLabel>; break; };
+        case(140): {CameraCoordinates cameraCoor<name="Camera Coordinates", read=readCameraCoordinates>; break; }
+        case(64): { AdjustPosition adjust<name="Adjust Position", read=readAdjustPos>; break; };
+        case(133): {
+            struct SustainMusic {
+                enumScriptFunction scriptFunction<name="Script Function", format=hex>;
+                int unknown[11]<hidden=true>;
+            }sustain<read="Sustain Music after Cutscene">;
+            break;
+
+        };
+        case(54): { TwoCharacterCamera twoCharacter<name="Camera 2 Character Focus", read=(EnumToString(character1) + " " + EnumToString(character2) + ": " + EnumToString(cameraPosition))>; break; }
+        default:
+        {
+            struct StructScript{
+                enumScriptFunction scriptFunction<name="Script Function", format=hex>;
+                int unknown;
+                int unknown;
+                int unknown;
+                int unknown;
+                int unknown;
+                int unknown;
+                int unknown;
+                int Unknown;
+                int unknown;
+                int unknown;
+                int unknown;
+            }refScript<name="Script Block">;
+        break;
+        }
+    }
+
+}
+
+// Initalization of variables for functions
+
+local int j = 0;
+local string stringCharacterList;
+local int stringNextCharacter = 0;
+
+
+// Read Functions
+string readFxn89(SingleDialogueChoice& p){
+    string out;
+    SPrintf(out, "Single Dialogue Choice: Line %d", p.TextLine);
+    return out;
+
+};
+string readFxn43(CharacterDisappears& p ){
+    string out = EnumToString(p.character);
+    if (p.Appears) return(out + " Reappears");
+    else return(out + " Disappears");
+
+};
+string readCameraCoordinates(CameraCoordinates& p){
+    string out;
+    SPrintf(out, "Camera Coordinates: %d, %d, %d", p.X_Position, p.Y_Position, p.Z_Position);
+    return out;
+
+
+};
+string readAdjustPos(AdjustPosition& p){
+    string out;
+    SPrintf(out, "Adjust Position %s by %d, %d, %d", EnumToString(p.character), p.X_adjust, p.Y_adjust, p.Z_adjust);
+    return out;
+
+};
+string readLabel(CubeLabel& p){
+    string out;
+    if (p.monthLabel != -1)
+    out = EnumToString(p.locationLabel) + ": " + EnumToString(p.monthLabel) + " (" + EnumToString(p.time) + ")";
+    else out = EnumToString(p.locationLabel) + ": " + EnumToString(p.time);
+    return out;
+
+}
+string readTimed(TimedAnimation& p){
+    string out;
+    SPrintf(out, "Timed/Delay next Animation for %d", p.frames);
+    return out;
+}
+string readEyes(CharacterEyes& p){
+    string out;
+    string character = EnumToString(p.character);
+    if (p.open == 0){
+        SPrintf(out, "%s closes eyes in %d frames", character, p.rate);
+        return out;
+    }
+    else {
+        SPrintf(out, "%s opens eyes in %d frames", character, p.rate);
+        return out;
+    }
+
+};
+string readPause(Pause& p){
+    string out;
+    SPrintf(out, "Forced Pause for %d frames?", p.length);
+return out;
+
+};
+string readFlagCheck(CheckFlag128& p){
+    string out;
+    string value;
+    if (p.value == 1) value = "False";
+    else value = "True"; 
+    SPrintf(out, "If Flag %d is %s ", p.Flag, value);
+    return out;
+};
+string readSetFlag(SetFlag46& p){
+    string out;
+    string value;
+    if (p.value == 1) value = "True";
+    else value = "False";
+    SPrintf(out, "Set Flag %d to %s ", p.Flag, value);
+    return out;
+
+};
+string readDialogueChoice(StructDialogueChoices &p){
+    string out;
+    string Lines;
+    SPrintf(out, "Dialogue Choice Conditional Slot %d: Lines %d", p.slot, p.textLine[0]);
+    for (j = 1; j < 10; ++j){
+        if (p.textLine[j] != 0){
+        SPrintf(Lines, "%s , %d", out, p.textLine[j]);
+            out = Lines;
+        }
+
+    }
+    return out;
+
+
+};
+string readCamera87(CameraMovement &p){
+    string out; 
+    string Pan = EnumToString(p.panning);
+    SPrintf(out, "Camera at Angle %d? -  %s", p.cameraAngle, Pan);
+    return out;
+};
+string readCamera100(Camera100 &p){
+    string out; 
+    string Pan = EnumToString(p.panning);
+    SPrintf(out, "Camera Fxn 100: Position  %d? - %s", p.CameraPosition, Pan);
+    return out;
+};
+string readCharacterList(StructCharacterList &p){               // This function is not good for more than one iteration of characterList
+if (stringCharacterList == "")
+    {
+        for(j = 0; j <= 10; j++)
+        {
+            if (p.character[j] == -1) continue;
+            stringCharacterList += EnumToString(p.character[j]);
+            if(j < 10)
+            {
+                stringNextCharacter = p.character[j+1];
+                if(stringNextCharacter != -1)
+                {
+                    stringCharacterList += ", ";
+                }
+            }
+        }
+    }
+    return stringCharacterList;
+}
+
+string readDialogueBox(StructDialogueBox &p){ 
+    string out;
+    string portrait = EnumToString(p.portraitExpression);
+    string character = EnumToString(p.character); 
+    SPrintf(out, "%s %s: Line %d", portrait, character, p.textLine);
+
+return out; 
+}
+string readBodyMotion(StructBodyMotion &p){ return EnumToString(p.character); }
+string readEmoteEffect(StructEmoteEffect &p){ return (EnumToString(p.character) + ": " + EnumToString(p.emoteEffect)); }
+string readAnimation(StructAnimation &p){ return (EnumToString(p.character) + ": " + EnumToString(p.animation)); }
+string readSceneEvent(StructSceneEvent &p){ return EnumToString(p.sceneEvent); }
+string readSceneCharacterEvent(StructSceneCharacterEvent &p){ return EnumToString(p.sceneCharacterEvent); }
+string readCubeScene(StructCubeScene &p){ return EnumToString(p.cubeScene[0]); }
+string readCameraFade(StructCameraFade &p){ return EnumToString(p.cubeScene[0]); }
+string readSupportPoints(StructSupportPoints &p){ return ("Support " + EnumToString(p.supportPoints) + " with " + EnumToString(p.character)); }
+string readRouteName(RouteSelection &p){ return ("Route Change to " + EnumToString(p.route));}
+string readBattleComplete(BattleCompleted &p) { return (EnumToString(p.map) + " " + EnumToString(p.mapStatus) ); }
+string readFancyMenu(FancyDialogueChoiceList &p) {return ("'This Choice Drastically Changes the Story' Dialogue Menu"); }
+string readConditional(StructConditional &p){
+    if (p.conditionalStatement == 4){
+      //  enumRoute route = p.slot1;
+        string out = "Conditional Statement: Route Check " + EnumToString(p.Route);
+
+
+
+
+        return out;
+  
+    }
+    else if (p.conditionalStatement == 3){
+        string slot;
+        SPrintf(slot, "Conditional Slot %d Check", p.slot2);
+        return slot;
+    }
+    else if (p.conditionalStatement == 0){
+        string slot;
+        SPrintf(slot, "Dialogue Choice Conditional Slot %d Check", p.slot2);
+        return (slot);
+    }
+    return ("Conditional Statment");
+
+
+
+};
+string readItem1(ReceiveItem& q){
+    return EnumToString(q.character) + " receieves " + EnumToString(q.item);
+
+
+};
+string readCharacterCheck(CharacterCheck& q){
+    int i;
+    string characters = "";
+    for (i = 0; i < 9; ++i){
+        if (q.character[i] != -1){
+            characters += EnumToString(q.character[i]) + " ";
+        }
+    }
+    string conditionSlot;
+    SPrintf(conditionSlot, "Condition Slot %d", q.Conditional_Check_Slot);
+    return conditionSlot + " " + characters + ": " + EnumToString(q.characterStatus);
+};
+string readCharacterCheck2(RecruitmentList& q){
+    int i;
+    string characters = "";
+    for (i = 0; i < 8; ++i){
+        if (q.character[i] != -1 && q.character[i] != 0){
+            characters += EnumToString(q.character[i]) + " ";
+        }
+    }
+    return characters;
+};
+string readCharacterLooks(CharacterLooking& p){
+    return  EnumToString(p.character) + " looks at " + EnumToString(p.character2);
+};

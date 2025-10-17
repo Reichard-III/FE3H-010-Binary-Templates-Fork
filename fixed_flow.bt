@@ -1,0 +1,112 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: fixed_flow.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.1
+//   Purpose: Parses fixed_flow.bin, a file that seems to control chapter to chapter progression. File that controls cutscenes, map, labels of a chapter. Can be used to add more chapters if there's room
+//  Category: Reichard
+// File Mask: *fixed_flow.bin
+//  ID Bytes: 
+//   History: 
+//   1.1    3/9/25  ReichardTheThird: Changed #include "include/flow_enums.bt" to "Enum/flow_enums.bt"
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+
+LittleEndian();
+#include "Enum/flow_enums.bt"
+local int m = 0;
+local int o = 0;
+struct ParalogueBlock {
+    int magic<bgcolor=cRed>; 
+    int EntryCount<bgcolor=cRed>;
+    int Size<bgcolor=cRed>;
+    int Padding[13]<hidden=true>;
+    for (m = 0; m < EntryCount; ++m){
+        struct ParalogueEvent {
+        Event postBattleCutscene<bgcolor=cYellow, name="Post Battle Cutscene">;
+        Names ParalogueCharacter1<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
+        Names ParalogueCharacter2<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
+        Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene">;
+        ScenarioName map<bgcolor=cGreen, name="Map ID">;
+        byte Padding<hidden=false>;
+        }paralogue<read=EnumToString(map), name="Paralogue">;
+    }
+};
+/*
+for (i = 0; i < file.paralogues.EntryCount; ++i){
+    file.paralogues.paralogue[i].preBattleCutscene = -1;
+
+}
+
+*/
+struct RouteFlow {
+    int magic<bgcolor=cRed>;
+    int EntryCount<bgcolor=cRed>;
+    int Size<bgcolor=cRed>;
+    int Padding[13]<hidden=true>;
+    for (o = 0; o < EntryCount; ++o){
+        struct Chapter {
+            Event cutscene1<bgcolor=cBlue, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event cutscene2<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event cutscene3<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event cutscene4<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event preChapterNarration<bgcolor=cGreen, name="Pre Battle Narration/Opening/Cutscene",comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event cutscene<bgcolor=cYellow, name="Pre Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event preBattleNarration<bgcolor=cGreen, name="Chapter Narration/Opening/Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event CutScene1<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event CutScene2<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event CutScene3<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            Event CutScene4<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+            ubyte unk1;
+            // Added file index for quick reference, DLC files in DATA1 from the DLC.
+            bsi monastery<bgcolor=cBlue, name="Monastery Script", comment="Monastery BSI scripts in order, Skips the monastery if this is -1">;
+            ubyte unk2;
+            ubyte unk3;
+            ChapterNames chapterLabel<bgcolor=cBlue,name="Chapter String Index", comment="Number is msgdata index in table 2">;
+            Month MonthLabel<bgcolor=cBlue, name="Month", comment="Month on the calander">;
+            ScenarioName map<bgcolor=cGreen, name="Map ID", comment="Matches Scenario Index in fixed_scenario">;
+            ubyte unk4<name="Day of Mission?">;
+            RouteName route<bgcolor=cRed, name="Route Label">;
+            // Seems to be calander related
+            //ubyte unk5;
+            struct sFlags0x21{
+                ubyte bit0 : 1<name="Unk", comment="">;
+                ubyte bit1 : 1<name="Unk?", comment="">;
+                ubyte bit2 : 1<name="Unk", comment="">;
+                ubyte bit3 : 1<name="Unk", comment="">;
+                ubyte bit4 : 1<name="Unk", comment="">;
+                ubyte bit5 : 1<name="Unk", comment="">;
+                ubyte bit6 : 1<name="Unk", comment="">;
+                ubyte bit7 : 1<name="Unk", comment="">;
+            }Flags0x21;
+            b8f unk6;
+            ubyte unk7;
+            ubyte unk8;
+            ubyte unk9;
+            short padding<hidden=false>;
+        }chapter<name="Chapter", read=EnumToString(map)>;
+    };
+};
+
+struct File {
+    int count<bgcolor=cBlack>;
+    struct PointerPair {
+        int start<format=hex>;
+        int length<format=hex>;
+    } pointertable[count]<bgcolor=cRed>;
+    local int i = 0;
+        FSeek(pointertable[0].start);
+        RouteFlow route<name="Route", read="Silver Snow">;
+        FSeek(pointertable[1].start);
+        RouteFlow route<name="Route",read="Azure Moon">;
+        FSeek(pointertable[2].start);
+        RouteFlow route<name="Route", read="Verdant Wind">;
+        FSeek(pointertable[3].start);
+        RouteFlow route<name="Route",read="Crimson Flower">;
+        FSeek(pointertable[4].start);
+        ParalogueBlock paralogues<name="Paralogues", read="Paralogue Block">;
+        FSeek(pointertable[5].start);
+        RouteFlow route<name="Route", read="Cindered Shadows">;
+} file<open=true>;

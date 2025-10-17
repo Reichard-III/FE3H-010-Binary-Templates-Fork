@@ -1,0 +1,52 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: include_Enums.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Loads various enum files
+//  Category: ReichardEnum
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+
+// Class Name Enums
+#include "Enum/Class.bt"
+
+// Character Name Enums
+#include "Enum/Names.bt"
+
+// Magic Enums
+#include "Enum/Magic.bt"
+
+// Ability Enums
+#include "Enum/Ability.bt"
+
+// Combat Art Enums
+#include "Enum/Combat Art.bt"
+
+// Battalion Enums
+#include "Enum/Battalion.bt"
+
+#include "Enum/Crest.bt"
+
+// Item Enums
+#include "Enum/Item.bt"
+#include "Enum/ItemData.bt"
+
+// Misc Enums: 
+#include "Enum/Misc.bt"
+
+// Skill Enums:
+#include "Enum/Skill.bt"
+
+//Scenario Enums:
+#include "Enum/Scenario.bt"
+
+//Act Enums:
+#include "Enum/Act.bt"
+
+//Calendar Data
+#include "Enum/Calendar.bt"

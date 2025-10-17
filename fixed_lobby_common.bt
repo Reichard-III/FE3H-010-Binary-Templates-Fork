@@ -1,0 +1,497 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: Tile.bt
+//   Authors: DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.1
+//   Purpose: Parameters for monastery activities like teaTime
+//  Category: Reichard
+// File Mask: *fixed_lobby_common.bin
+//  ID Bytes: 
+//   History: 
+//   1.1    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//   1.00   2019-08-31  DeathChaos - started thisProficiencies
+//------------------------------------------------
+
+//---------------------------------------------
+// Includes
+//---------------------------------------------
+#include "Structs.bt"
+LittleEndian();
+
+local int i<hidden=true>;
+local int k;
+enum<ubyte> LvlRequired {
+    No_Level_Requirement = 255,
+};
+
+enum<ubyte> ConstanceSunShadeMode{
+    Shaded_Mode,
+    Sun_Mode
+};
+
+struct File{
+	struct SectionPointers{
+		uint32 NumberOfSectionPointers;
+		uint32 PointerToUnk1<bgcolor=cRed>;
+		uint32 Unk1StructSize<bgcolor=cRed>;
+		uint32 PointerToUnk2<bgcolor=cBlue>;
+		uint32 Unk2StructSize<bgcolor=cBlue>;
+		uint32 PointerToUnk3<bgcolor=cPurple>;
+		uint32 Unk3StructSize<bgcolor=cPurple>;
+		uint32 PointerToUnk4<bgcolor=cDkBlue>;
+		uint32 Unk4StructSize<bgcolor=cDkBlue>;
+		uint32 PointerToRecruitRanks<bgcolor=cDkYellow>;
+		uint32 RecruitRanksStructSize<bgcolor=cDkYellow>;
+		uint32 PointerToUnk5<bgcolor=cBlack>;
+		uint32 Unk5StructSize<bgcolor=cBlack>;
+		uint32 PointerToUnk6<bgcolor=cGreen>;
+		uint32 Unk6StructSize<bgcolor=cGreen>;
+		uint32 PointerToUnk7<bgcolor=cDkRed>;
+		uint32 Unk7StructSize<bgcolor=cDkRed>;
+		uint32 PointerToUnk8<bgcolor=cDkPurple>;
+		uint32 Unk8StructSize<bgcolor=cDkPurple>;
+		uint32 PointerToUnk9<bgcolor=cDkGreen>;
+		uint32 Unk9StructSize<bgcolor=cDkGreen>;
+		uint32 PointerToFavTeaLeaves<bgcolor=cLtGreen>;
+		uint32 FavTeaLeavesStructSize<bgcolor=cLtGreen>;
+		uint32 PointerToFinalComment<bgcolor=cLtRed>;
+		uint32 FinalCommentStructSize<bgcolor=cLtRed>;
+		uint32 PointerToTeaAnswers1<bgcolor=cLtBlue>;
+		uint32 TeaAnswers1StructSize<bgcolor=cLtBlue>;
+		uint32 PointerToTeaAnswers2<bgcolor=cLtPurple>;
+		uint32 TeaAnswers2StructSize<bgcolor=cLtPurple>;
+	}sectionpointers<name="Section Pointers">;
+	FSeek(sectionpointers.PointerToUnk1);
+	struct Unk1{
+		DataSection SectionHeader;
+		struct UnknownSection1{
+            struct sNPCFlags0x0{
+                byte Headchef:1;
+                byte DiningHallNPC:1;
+                byte Counselor:1;
+                byte ChoirCoordinator:1;
+                
+                byte bit4:1;
+                byte bit5:1;
+                byte Fishkeeper:1;
+                byte GreenhouseKeeper:1;
+            }NPCflags0x0;
+            struct sNPCFlags0x1{
+                byte TournamentOrganizer:1;
+                byte bit1:1;
+                byte bit2:1;
+                byte bit3:1;
+                
+                byte bit4:1;
+                byte VariousNPCsIncludingGateKeeper318:1;
+                byte bit6:1;
+                byte bit7:1;
+            }NPCflags0x1;
+            
+            byte unk0x2;
+            byte unk0x3;
+            
+            byte unk0x4;
+            byte Sunlight;
+            
+            struct sNPCFlags0x6{
+                byte Gatekeeper317:1;
+                byte bit1:1;
+                byte bit2:1;
+                byte SaintStatueNPC:1;
+                
+                byte bit4:1;
+                byte bit5:1;
+                byte bit6:1;
+                byte bit7:1;
+            }NPCflags0x6;
+            byte ShopLevel_Item;
+            
+            struct sExplorationFlags0x8{
+                byte bit0:1;
+                byte bit1:1;
+                byte bit2:1;
+                byte bit3:1;
+                
+                byte bit4:1;
+                byte bit5:1;
+                byte bit6:1;
+                byte bit7:1;
+            }Explorationflags0x8;
+            byte ShopLevel_Weapon;
+            
+			BGM music;
+            byte ShopLevel_Battalion;
+		}unknownsection1[SectionHeader.NumEntries]<name="Unknown Section1">;
+	}unk1<name="Unknown Section 0",bgcolor=cRed>;
+	
+	FSeek(sectionpointers.PointerToUnk2);
+	struct Unk2{
+		uint32 Unk2Magic;
+		uint32 numunk2;
+		uint32 SizeOfUnk2;
+		struct Unk2Padding{
+			byte Padding[0x34];
+		}unk2padding<name="Padding">;
+		struct UnknownSection2{
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+		}unknownsection2[numunk2]<name="Unknown Section2">;
+	}unk2<name="Unknown Section 1",bgcolor=cBlue>;
+	
+	FSeek(sectionpointers.PointerToUnk3);
+	struct Unk3{
+		uint32 Unk3Magic;
+		uint32 numunk3;
+		uint32 SizeOfUnk3;
+		struct Unk3Padding{
+			byte Padding[0x34];
+		}unk3padding<name="Padding">;
+		struct UnknownSection3{
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+		}unknownsection3[numunk3]<name="Unknown Section3">;
+	}unk3<name="Unknown Section 2",bgcolor=cPurple>;
+	
+	FSeek(sectionpointers.PointerToUnk4);
+	struct Unk4{
+		uint32 Unk4Magic;
+		uint32 numunk4;
+		uint32 SizeOfUnk4;
+		struct Unk4Padding{
+			byte Padding[0x34];
+		}unk4padding<name="Padding">;
+		struct UnknownSection4{
+			uint16 unk;
+			CharID character<name="Character ID">;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+		}unknownsection4[numunk4]<name="Unknown Section4">;
+	}unk4<name="Unknown Section 3",bgcolor=cDkBlue>;
+	
+	FSeek(sectionpointers.PointerToRecruitRanks);
+	struct RecruitRanks{
+		uint32 RecruitRanksMagic;
+		uint32 numRecruitRanks;
+		uint32 SizeOfRecruitRanks;
+		struct RecruitRanksPadding{
+			byte Padding[0x34];
+		}recruitrankspadding<name="Padding">;
+		struct RecruitRank{
+			CharID charID<name="Character", bgcolor=cRed>;
+			Item item1<name="Recruit Item 1", comment="Item that unit comes with when recruited">;
+			Item item2<name="Recruit Item 2", comment="Item that unit comes with when recruited">;
+			ClassID BeginnerClass<name="Recruited Class 1", comment="Recruited Class when Level < 10">;
+			LvlRequired  LvReq<name="Level Required">;
+			ClassID IntermediateClass<name="Recruited Class 2", comment="Recruited Class when Recruit Level >= 10">;
+			Stat StatReq2<name="Stat Type Required">;
+			RankStats WepRnkTypeReq<name="Weapon Rank Type Required">;
+			MinRanks Req<name="Weapon Rank Required">;
+			TrueFalse SylvainFlag<name="The Sylvain Flag", bgcolor=cLtRed>;
+			ubyte StatReq1<name="Stat Amount Required">;
+		}recruitrank[numRecruitRanks]<name="Recruit Conditions",read=GetName>;
+        byte padding[2];
+	}recruitranks<name="Recruit Conditions",bgcolor=cDkYellow>;
+	
+	FSeek(sectionpointers.PointerToUnk5);
+	struct Unk5{
+		uint32 Unk5Magic;
+		uint32 numunk5;
+		uint32 SizeOfUnk5;
+		struct Unk5Padding{
+			byte Padding[0x34];
+		}unk5padding<name="Padding">;
+		struct UnknownSection5{
+			uint16 unkShort0x0;
+			uint16 unkShort0x2;
+			ubyte unk;
+			ubyte unk;
+		}unknownsection5[numunk5]<name="Unknown Section4">;
+	}unk5<name="Unknown Section 5",bgcolor=cBlack>;
+	
+	FSeek(sectionpointers.PointerToUnk6);
+	struct sItemSpotAltItems{
+		DataSection SectionHeader;
+		struct sItemSpotAltDropItem{
+			Item MiscellaneousItem<name="Miscellaneous Item">;
+			ubyte AdvancedItemPool<name="Enabled in Advanced Item Pool">;
+			ubyte IntermediateItemPool<name="Enabled in Intermediate Item Pool">;
+			ubyte BasicItemPool<name="Enabled in Basic Item Pool">;
+			ubyte unk1<name="padding?">;
+		}ItemSpotAltDropItem[SectionHeader.NumEntries]<name="ItemSpot Alt Drop Item">;
+	}ItemSpotAltItems<name="ItemSpot Alt Drop Items",bgcolor=cGreen, comment="If ItemSpots are configured to drop random items, they have a chance to drop these items">;
+	
+	FSeek(sectionpointers.PointerToUnk7);
+	struct UnknownSection7{
+		uint32 unk7Magic;
+		uint32 numunk7;
+		uint32 SizeOfunk7;
+		struct Unk7Padding{
+			byte Padding[0x34];
+		}unk7padding<name="Padding">;
+		struct Unk7{
+            ushort unkShort0x0<name="Story Flags?">;
+			NameID charID<name="Character">;
+            //Gifts unk[20];
+            ushort unkShort0x4;
+            ushort unkShort0x6;
+            ushort unkShort0x8;
+            ubyte unkByte0xa;
+            ubyte unkByte0xb;
+            ubyte RotationOctant;
+            ubyte unkByte0xd;
+            ubyte unkByte0xe;
+            ubyte unkByte0xf;
+            ubyte unkByte0x10;
+            ubyte unkByte0x11;
+            ubyte unkByte0x12;
+            ubyte unkByte0x13;
+            ubyte unkByte0x14;
+            ubyte unkByte0x15;
+            ubyte unkByte0x16;
+            ubyte RotationOctant_TS;
+            
+		}unk7[numunk7]<name="Recruit Conditions 2",read=GetName2>;
+	}unknownsection7<name="Recruit Conditions 2",bgcolor=cDkRed>;
+	
+	FSeek(sectionpointers.PointerToUnk8);
+	struct Unk8{
+		uint32 Unk8Magic;
+		uint32 numunk8;
+		uint32 SizeOfUnk8;
+		struct Unk8Padding{
+			byte Padding[0x34];
+		}unk8padding<name="Padding">;
+		struct UnknownSection8{
+			float unkFloat0x0;
+			float unkFloat0x4;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+		}unknownsection8[numunk8]<name="Unknown Section8">;
+	}unk8<name="Unknown Section 8",bgcolor=cDkPurple>;
+		
+	FSeek(sectionpointers.PointerToUnk9);
+	struct Unk9{
+		uint32 Unk9Magic;
+		uint32 numunk9;
+		uint32 SizeOfUnk9;
+		struct Unk9Padding{
+			byte Padding[0x34];
+		}unk9padding<name="Padding">;
+		struct UnknownSection9{
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			uint16 unk;
+			long unkLong0x40;
+			/*uint16 unk;
+			uint16 unk;
+			uint16 unk;*/
+		}unknownsection9[numunk9]<name="Unknown Section9">;
+        byte unknownExtra[16];
+	}unk9<name="Unknown Section 9",bgcolor=cDkGreen>;
+	
+	FSeek(sectionpointers.PointerToFavTeaLeaves);
+	struct FavoriteTeaLeaves{
+		uint32 TeaMagic;
+		uint32 numFavoriteTea;
+		uint32 SizeOfFavoriteTea;
+		struct TeaPadding{
+			byte Padding[0x34];
+		}teapadding<name="Padding">;
+		struct FavoriteTea{
+			CharID CharacterID;
+            Gifts disliked[4];
+			MiscItem tea<name="Favorite Tea">;
+			MiscItem tea<name="Favorite Tea">;
+			MiscItem tea<name="Favorite Tea">;
+			MiscItem tea<name="Favorite Tea">;
+		}favoritetea[numFavoriteTea]<name="Favorite Tea Leaves",read=GetName3>;
+        byte padding[2];
+	}favoritelealeaves<name="Favorite Tea Leaves",bgcolor=cLtGreen>;
+    
+	FSeek(sectionpointers.PointerToFinalComment);
+	struct FinalComment{
+		uint32 TeaMagic;
+		uint32 numFinalComment;
+		uint32 SizeOfFinalComment;
+		struct CommentPadding{
+			byte Padding[0x34]<hidden=true>;
+		}commentpadding<name="Padding">;
+		struct FinalTeaComment{
+			CharID CharacterID;
+            ConstanceSunShadeMode ConstanceMode<comment="If in Shaded Mode, ">;
+			ubyte CommentID;
+			TrueFalse Nod;
+			TrueFalse Laugh;
+			TrueFalse Commend;
+			TrueFalse Disagree;
+			TrueFalse Admonish;
+			TrueFalse Sigh;
+			TrueFalse Chat;
+			TrueFalse SipTea;
+			TrueFalse Blush;
+			TrueFalse Praise;
+		}finalteacomment[numFinalComment]<name="Final Comment",read=GetName4>;
+	}finalcomment<name="Final Comment",bgcolor=cLtRed>;
+	FSeek(sectionpointers.PointerToTeaAnswers1);
+	struct TeaTopics{
+		uint32 TeaMagic;
+		uint32 numFinalComment;
+		uint32 Size;
+		struct padding{
+			byte Padding[0x34];
+		}commentpadding<name="Padding", hidden=true>;
+        for (k = 0; k < numFinalComment; ++k){
+            struct TeaResponse {
+                byte response[Size];
+            }answer;
+        }
+        byte padding__[2];
+    }tea;
+    
+    FSeek(sectionpointers.PointerToTeaAnswers2);
+	TeaTopics Tea2<name="Tea Time Topic Responses 2",bgcolor=cLtRed>;
+}file<open=true>;
+string GetName(RecruitRank& value)
+{
+    return EnumToString(value.charID);
+}
+
+string GetName2(Unk7& value)
+{
+    return EnumToString(value.charID);
+}
+
+string GetName4(FinalTeaComment& value)
+{
+    return EnumToString(value.CharacterID);
+}
+
+string GetName3(FavoriteTea& value)
+{
+    return EnumToString(value.CharacterID);
+}

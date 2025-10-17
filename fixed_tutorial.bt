@@ -1,0 +1,33 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: fixed_tutorial.bt
+//   Authors: Reichard
+//   Version: 1.0
+//   Purpose: Parse fixed_tutorial.bin
+//  Category: Reichard
+// File Mask: *fixed_tutorial.bin
+//  ID Bytes: 
+//   History: 1.0
+//------------------------------------------------
+
+#include "Structs.bt"
+LittleEndian();
+local int i=0;
+
+struct sTutorial{
+  ubyte unk[42];  
+    
+};
+
+struct sTutorials{
+    DataSection Header;
+    for(i=0;i<Header.NumEntries;i++){
+        sTutorial Tutorial;
+    }
+};
+
+struct freeScenario {
+    FileSections Sections;
+    sTutorials Tutorials;
+}File<open=true>;

@@ -1,0 +1,200 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: fixed_spotdata.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Probably the way you get random drops in the monastery
+//  Category: Reichard
+// File Mask: *fixed_spotdata.bin
+//  ID Bytes: 
+//   History: 
+//   1.1    4/27/25 ReichardTheThird: Moved away from using generic file format
+//                      
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+/*
+Item Slot appears at these location (need more research)
+
+    Battalion Guild Right: 0    Battalion Guild Left: 27, 26    Officer Academy L (box): 21, 22    Officer Academy R (bags): 24, 28, 30    Outside Dining Hall (sacks): 20    Outside Dining Hall 2: 33    Tea Patio (box): 53, 54, 50    Tea Patio (sacks): 55    Blacksmith: 21, 22    Cooking Cabanets: 23, 28    Fishing Dock: 42 47    Fish Stall: 37, 31    Food Stall 1: 42, 41, 41, 45, 47    Food Stall 2: 44, 46    Itemshop bags: 35, 36    Fishing Lake Barrels: 1, 2
+
+*/
+#include "structs.bt"
+
+
+
+LittleEndian();
+local int i = 0;
+
+struct sFile{
+    FileSections Sections;
+    struct sItemSpotTable{
+        DataSection SectionHeader;
+        
+        struct sItemSpotEntries{
+            for(i=0;i<SectionHeader.NumEntries;i++){
+                struct sItemSpot{
+                    int ItemSpotTypeStringOffset<comment="used to index the strings in ItemLocationType">;
+                    struct Flags0x4{
+                        ubyte bit0 : 1<name="Byleth's NG+ Journal">;
+                        ubyte bit1 : 1<name="Spend Free Day on Battles">;
+                        ubyte bit2 : 1<name="Hanneman's Crest Analyzer">;
+                        ubyte bit3 : 1<name="Quest Bulletin Board">;
+                        ubyte bit4 : 1<name="unkF0B4">;
+                        ubyte bit5 : 1<name="Amiibo Gazebo">;
+                        ubyte bit6 : 1<name="unkF0B6">;
+                        ubyte bit7 : 1<name="unkF0B7">;
+                    }SpecialSpotDataTypes;
+                    struct Flags0x5{
+                        ubyte bit0 : 1<name="Uses Large Text box for Sitri Grave? Probably wrong">;
+                        ubyte bit1 : 1<name="unkF1B1">;
+                        ubyte bit2 : 1<name="unkF1B2">;
+                        ubyte bit3 : 1<name="Makes item spots disappear?">;
+                        ubyte bit4 : 1<name="Makes item spots disappear?">;
+                        ubyte bit5 : 1<name="Makes item spots disappear?">;
+                        ubyte bit6 : 1<name="Makes item spots disappear?">;
+                        ubyte bit7 : 1<name="Makes item spots disappear?">;
+                    }unkFlags0x5;
+                    //ubyte unkByte0x6;
+                    struct unkByte0x6{
+                        ubyte bit0 : 1<name="Makes item spots disappear?">;
+                        ubyte bit1 : 1<name="Makes item spots disappear?">;
+                        ubyte bit2 : 1<name="unkF2B2">;
+                        ubyte bit3 : 1<name="unkF2B3">;
+                        ubyte bit4 : 1<name="unkF2B4">;
+                        ubyte bit5 : 1<name="unkF2B5">;
+                        ubyte bit6 : 1<name="unkF2B6">;
+                        ubyte bit7 : 1<name="unkF2B7">;
+                    }unkFlags0x6;
+                    //ubyte unkByte0x7;
+                    struct unkByte0x7{
+                        ubyte bit0 : 1<name="unkF3B0">;
+                        ubyte bit1 : 1<name="unkF3B1">;
+                        ubyte bit2 : 1<name="unkF3B2">;
+                        ubyte bit3 : 1<name="unkF3B3">;
+                        ubyte bit4 : 1<name="unkF3B4">;
+                        ubyte bit5 : 1<name="unkF3B5">;
+                        ubyte bit6 : 1<name="unkF3B6">;
+                        ubyte bit7 : 1<name="unkF3B7">;
+                    }unkFlags0x7;
+                    short unkShort0x8;
+                    ushort ItemXCoord<comment="Coordinate is this value/65535">;
+                    ushort ItemYCoord<comment="which represents a percentage of">;
+                    ushort CameraTargetXCoord<comment="determines the position the camera should point towards">;
+                    ushort ItemZCoord<comment="the map size for the item coordinate">;
+                    ushort IncreaseProfessorExperience;
+                    sWhiteCloudsEnabledChaptersBitMask WhiteCloudsEnabledChaptersBitMask<comment="May require loading a new month/ leaving and entering monastery to see it update">;
+                    ushort CameraTargetZCoord;
+                    ushort CameraTargetYCoord;
+                    ushort CameraPositionZCoord;
+                    WeaponID Weapon<comment="The actual Weapon granted is the WeaponID minus 6 indexes i.e. writing Aymr will give Zoltan Bow">;
+                    ushort CameraPositionYCoord;
+                    ushort CameraPositionXCoord;
+                    sSilverSnowEnabledChaptersBitMask SilverSnowEnabledChaptersBitMask;
+                    sCrimsonFlowerEnabledChaptersBitMask CrimsonFlowerEnabledChaptersBitMask;
+                    byte EnableItem<comment="needs to be turned on to spawn the Item probably">;
+                    byte DeleteItemAfterPickup<comment="Does not work with everything?">;
+                    sAzureMoonEnabledChaptersBitMask AzureMoonEnabledChaptersBitMask;
+                    struct sRandomFlags{
+                        ubyte bit0 : 1<name="flag0", comment="Generally Should be False? Makes stuff disappear">;
+                        ubyte bit1 : 1<name="Roll Random Misc Item", comment="Disables granting Weapon written in 0x1c">;
+                        ubyte bit2 : 1<name="Unused", comment="">;
+                        ubyte bit3 : 1<name="Unused", comment="">;
+                        ubyte bit4 : 1<name="Unused", comment="">;
+                        ubyte bit5 : 1<name="Unused", comment="">;
+                        ubyte bit6 : 1<name="Unused", comment="">;
+                        ubyte bit7 : 1<name="Unused", comment="">;
+                    }RandomFlags;
+                    byte unk5;
+                    byte MsgDataIndexMaybe;
+                    byte unkByte0x2a;
+                    byte EnableAlternateCamera<comment="enables the use of the special camera coordinates written above">;
+                    byte CompletesQuest<comment="toggles the Quest index listed here">;
+                    byte Unused[2];
+                    sRoutesEnabledBitMask RoutesEnabledBitMask;
+                    byte unkByte0x30;
+                    sVerdantWindEnabledChaptersBitMask VerdantWindEnabledChaptersBitMask;
+                    byte unkByte0x32;
+                    byte unkByte0x33;
+                    byte unkByte0x34;
+                    byte UnusedOrPadding[3];   
+                }ItemSpot<name="Item Spot">;
+            };
+        }ItemSpotEntries<name="Item Spot Entries",comment="Probably requires reloading monastery to see stuff update">;
+        
+        struct UntrackedSection{
+            for(i=0;i<SectionHeader.NumEntries;i++){
+                struct stringArray{
+                    string str;
+                }stringArr<read=str>;
+            };
+            ubyte padding[3];
+        }UntrackedStuffInSect0<name="Item Location Type",comment="Section isn't tracked by Section header">;
+    }ItemSpotTable<name="ItemSpots">;
+    
+    struct SpotDataTable1{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct unkSect1Entries{
+                ushort ItemXCoord;
+                ushort ItemZCoord;
+                ushort ItemYCoord;
+                RNGItemPool RNGPool<name="RNG Item Pool">;
+                ubyte paddingMaybe<name="padding?">;
+            }RandomItemSpot;
+        };
+    }RandomItemSpots<name="Random ItemSpots", comment="Picks a random item from various pools of items, ">;
+    
+    struct SpotDataTable2 {
+        DataSection SectionHeader;
+        struct RNG_Item{
+            RNGItemPool RNGPool<name="Random Item Pool",comment="Items with the same number belong to the same Item pool. Locations in SDT1 roll a random item out of this Item pool">;
+            MiscItem MiscellaneousItem;
+        }RandomItems[SectionHeader.NumEntries]<read=EnumToString(MiscellaneousItem), open=false>;
+    }RandomItemPools<name="Random Item Pools">;
+    
+    struct sItemSpotAltDropMiscItems{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sItemSpotAltDropMiscItem{
+                MiscItem MiscellaneousItem;
+            }ItemSpotAltDropMiscItem<name="ItemSpot Alt Drop MiscItem",open=true>;
+        };
+        struct UntrackedSection3{
+            ubyte unk[0x3];
+        }Padding<comment="likely padding">;
+    }ItemSpotAltDropMiscItems<name="ItemSpot Alt Drop MiscItems">;
+    
+    
+    struct sAbyssLostAndFoundItems{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sRandomItems{
+                Item weapon<comment="For Weapons, the actual item granted is -10 of what's written here (i.e.: 72 Ukonvasara actually gives you 62 Sword of the Creator ), but for equips like shields, their index is the same as what's written">;
+                byte BaseDurabilityPercent<name="Base Durability%",comment="if -1, then it has no durability (i.e. equips/ broken/ rusted)">;
+                AbyssItemPool AbyssPool<name="Abyss Item Pool",comment="determines the tier of the item when rolling">;
+                ubyte Enabled;
+                ubyte paddingProbably;
+                //ubyte unk[6];
+            }RandomItems;
+        };
+    }AbyssLostAndFoundItems<name="Abyss Lost and Found - Items">;
+    
+    struct sAbyssLostAndFoundItemPoolTiers{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sAbyssLostAndFoundItemPoolTier{
+                local AbyssItemPool name;
+                name = i;
+                ubyte ItemPoolChance[6]<name="Item Pool Chances @ Influencer Rank">;
+                ubyte ProbablyUnused[9];
+            }AbyssLostAndFoundItemPoolTiers<name="Item Pool",read=GetItemPoolName>;
+        };
+    }AbyssLostAndFoundItemPoolTiers<name="Abyss Lost and Found - Item Pools">;
+}File<open=true>;
+
+
+string GetItemPoolName(sAbyssLostAndFoundItemPoolTier &i)
+{
+    return EnumToString(i.name);
+}

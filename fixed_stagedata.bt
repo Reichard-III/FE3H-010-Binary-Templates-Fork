@@ -1,0 +1,182 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: fixed_stagedata.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Determines parameters for terrain and the moveCosts associated for each moveType on those tileTypes
+//  Category: Reichard
+// File Mask: *fixed_stagedata.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+LittleEndian();
+local int i,x,y = 0;
+#include "Structs.bt"
+enum<byte> Restriction {
+    Not_Passable = 0,
+    Flier_Only = 1,
+    Normal_Movement = 2,
+    Forest_Type = 3,
+    Desert_Type = 4,
+    Wild_Thicket = 5,
+    
+    // 2 Infantry, 3 Cav, 2 - Mage, Flier - 1
+    Type_6 = 6,
+
+    // 3 Infantry, No Cav
+    NoCav_3Infantry = 7,
+    
+    // 3 Thief, No Cav,Infantry, Mage, Flier 1
+    Thief3_NoCav_Infantry = 8,
+    
+    Type_9 = 9,
+    Type_10 = 10,
+    // 3 Cav
+    Cav3 = 11,
+    // 2 Cav
+    Cav2 = 12,
+    NoMovementCost = 13,
+
+};
+
+struct GenericFile {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct MaterialBlock {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; i++){
+            struct Terrain {
+                local TerrainTile name<hidden=true>;
+                name = i;
+                local string s;
+                s = EnumToString(name);
+                
+                byte unk<bgcolor=cGreen>;
+                byte unk<bgcolor=cGreen>;
+                ushort unkShort<bgcolor=cGreen>;
+                //s = s + Str("\t%d",unkShort);
+                byte Def<name="Protection+",bgcolor=cRed>;
+                byte Res<name="Resilence+",bgcolor=cBlue>;
+                byte Avoid<name="Avoid Bonus",bgcolor=cYellow>;
+                byte Heal<name="Healing %",bgcolor=cPurple>;
+                byte BreakableWallHP<bgcolor=cGreen>;
+                byte UnusedByte<bgcolor=cGreen>;
+                Restriction restrict<name="Movement Cost", bgcolor=cYellow>;
+                struct terrainFlags_Struct{
+                    ubyte flag0:1;    
+                    ubyte flag1:1;
+                    ubyte flag2:1;
+                    ubyte flag3:1;
+                    ubyte flag4:1;    
+                    ubyte flag5:1;
+                    ubyte flag6:1;
+                    ubyte flag7:1;
+                    
+                    ubyte flag8:1;    
+                    ubyte flag9:1;
+                    ubyte flag10:1;
+                    ubyte flag11:1;
+                    ubyte flag12:1;    
+                    ubyte flag13:1;
+                    ubyte flag14:1;
+                    ubyte flag15:1;
+                    
+                    ubyte flag16:1;    
+                    ubyte flag17:1;
+                    ubyte flag18:1;
+                    ubyte flag19:1;
+                    ubyte flag20:1;    
+                    ubyte flag21:1;
+                    ubyte flag22:1;
+                    ubyte flag23:1;
+                    
+                    
+                }terrainFlags<bgcolor=cBlue>;    
+                local string display;
+                display = Str(" %d ",terrainFlags.flag0);
+                display += Str("%d ",terrainFlags.flag1);
+                display += Str("%d ",terrainFlags.flag2);
+                display += Str("%d ",terrainFlags.flag3);
+                display += Str("%d ",terrainFlags.flag4);
+                display += Str("%d ",terrainFlags.flag5);
+                display += Str("%d ",terrainFlags.flag6);
+                display += Str("%d ",terrainFlags.flag7);
+                
+                display += Str("%d ",terrainFlags.flag8);
+                display += Str("%d ",terrainFlags.flag9);
+                display += Str("%d ",terrainFlags.flag10);
+                display += Str("%d ",terrainFlags.flag11);
+                display += Str("%d ",terrainFlags.flag12);
+                display += Str("%d ",terrainFlags.flag13);
+                display += Str("%d ",terrainFlags.flag14);
+                display += Str("%d ",terrainFlags.flag15);
+                
+                display += Str("%d ",terrainFlags.flag16);
+                display += Str("%d ",terrainFlags.flag17);
+                display += Str("%d ",terrainFlags.flag18);
+                display += Str("%d ",terrainFlags.flag19);
+                display += Str("%d ",terrainFlags.flag20);
+                display += Str("%d ",terrainFlags.flag21);
+                display += Str("%d ",terrainFlags.flag22);
+                display += Str("%d ",terrainFlags.flag23);
+                s += display;
+            }terrain<read=s>;
+        };
+    }TerrainData;
+    FSeek(Sections.SectionPointers[1].Ptr);
+    
+    struct TileTypeMoveCostsTable{
+        DataSection Header;
+        for (i=0; i<Header.NumEntries; i++){
+            struct MoveCostsPerTileTypeEntry{
+                local MoveType MoveTypeName<hidden=true>;
+                MoveTypeName = i;   
+                ubyte Impassible;
+                ubyte FlierOnly;
+                ubyte NormalCost;
+                ubyte Forest;
+                
+                ubyte DesertBeach;
+                ubyte ThicketElement;
+                ubyte ShoalSnow;
+                ubyte uNoCav3Inf;
+                
+                ubyte uThief3NoCavInf;
+                ubyte FlameSwampCrater;
+                ubyte SpecialTiles;
+                ubyte Stairs;
+                
+                ubyte Wasteland;
+                ubyte uInvalid13;
+                ubyte uInvalid14;
+                ubyte uInvalid15;
+                
+            }MoveCostsPerTileType<read=EnumToString(MoveTypeName)>;
+        }
+    }TileTypeMoveCostsT;
+    
+    FSeek(Sections.SectionPointers[2].Ptr);
+    
+    //GenericSection UnknownScenarioIndexedCoordinatesQ;
+    struct UnkScenarioIndexedWeirdCoordinatesThingTable{
+        DataSection Header;
+        for(i=0; i<Header.NumEntries; i++){
+            struct UnkScenIndexedWeirdCoordsThingEntry{
+                local MapList MapName<hidden=true>;
+                MapName=i;
+                struct XCoord{
+                    for(x=0; x<10; x++){
+                        ubyte XCoord;
+                    }    
+                }XCoords;
+                struct YCoord{
+                    for(y=0; y<10; y++){
+                        ubyte YCoord;
+                    }    
+                }YCoords;
+            }UnkScenIndexedWeirdCoordsThingE<read=EnumToString(MapName)>;
+        }   
+    }UnkCoordinatesPerScenario;
+}File<open=true>;

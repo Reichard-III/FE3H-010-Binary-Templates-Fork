@@ -1,0 +1,70 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: fixed_warpdata.bin
+//   Authors: Reichard
+//   Version: 1.0
+//   Purpose: parse warpdata
+//  Category: Reichard
+// File Mask: *fixed_warpdata.bin
+//  ID Bytes: 
+//   History: 
+//   1.1    09/04/25 ReichardTheThird: Added "Character Spottability" to Table2
+//   1.0    06/10/25 ReichardTheThird: started this
+//------------------------------------------------
+#include "Structs.bt"
+LittleEndian();
+local int i;
+
+enum<ubyte> Spottable{
+    CanBeSpotted,
+    UnknownUnplayableAnnaAlsoUnspottable,
+    CannotBeSpotted,
+};
+
+struct GenericFile {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct sunkTable0{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry0{
+                ushort unkShort2Float0x0;
+                byte unkUnused0x2;
+                byte unkUnused0x3;   
+                ushort unkShort2Float0x4;
+                ushort unkShort2Float0x6;
+                ushort unkShort2Float0x8;   
+                ushort unkShort2Float0xa;
+                ushort unkShort2Float0xc;
+                byte unkByte0xe;   
+                byte unkByte0xf;
+                byte unkByte0x10;
+                byte unkByte0x11;
+                byte unkByte0x12;
+                byte unkByte0x13;   
+                byte unkByte0x14;
+                byte unkPadding0x15;
+            }unkEntry0;   
+        };
+    }unkTable0;
+    struct sunkTable1{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry1{
+                ushort unkShort2Float0x0;   
+                ushort unkShort2Float0x2;   
+            }unkEntry1;   
+        };
+    }unkTable1;
+    struct sunkTable2{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sunkEntry2{
+                CharID unkShort0x0;   
+                Spottable unk0x2<name="Spotability?", comment="Shows a message when you see this character in monastery, but there are a lot of various other conditions">;
+                byte unk0x3<name="padding?">;
+            }unkEntry2;
+        };
+    }unkTable2;
+}File<open=true>;

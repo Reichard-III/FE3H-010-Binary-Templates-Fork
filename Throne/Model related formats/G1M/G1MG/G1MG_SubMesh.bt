@@ -1,0 +1,41 @@
+//------------------------------------------------
+//--- 010 Editor v9.0.2 Binary Template
+//
+//      File: G1MG_SubMesh.bt
+//   Authors: HealingBrew, Raywto
+//   Version: 1.0
+//   Purpose: Outlines Submesh format found in G1MG sections
+//  Category: Game File
+// File Mask: 
+//  ID Bytes:
+//   History:
+//  1.0 2019-11-06  HealingBrew: Created the file
+//------------------------------------------------
+
+#ifndef G1M_GEOMETRY_SUBMESH
+#define G1M_GEOMETRY_SUBMESH
+
+typedef enum G1MGEOMETRYSUBMESHFACETYPE {
+    Quad = 1,
+    Triangle = 3,
+    TriangleStrip = 4
+} G1MGeometrySubMeshFaceType;
+
+typedef struct G1MGEOMETRYSUBMESH {
+    int unknown1<name="Flags">;
+    int VBOindex<name="VBO index", comment="Not 100% sure">;
+    int bone_table_index<name="BoneBinds Table Index">;
+    int bone_index<name="Bone Index">;
+    int unknown3<name="Unknown 3">;
+    int material_index<name="ShaderParam Index">;
+    int texture_index<name="Material Index">;
+    int buffer_index<name="IBO Index">;
+    int unknown5<name="Unknown 5">;
+    G1MGeometrySubMeshFaceType face_type<name="Face Type">;
+    int vertex_offset<name="Vertex Offset">;
+    int vertex_count<name="Vertex Count">;
+    int face_offset<name="Index Offset">;
+    int face_count<name="Index Count">;
+} G1MGeometrySubMesh;
+
+#endif // G1M_GEOMETRY_SUBMESH

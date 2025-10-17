@@ -1,0 +1,67 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: fixed_AIData.bt
+//   Authors: ReichardTheThird, Triabolical
+//   Version: 1.0
+//   Purpose: Parse through the v1.0 data "14.bin" that stores AI data
+//  Category: Reichard
+// File Mask: *14.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    5/12/25 Triabolical: Discovered
+//------------------------------------------------
+
+LittleEndian();
+local int i,x,y = 0;
+#include "Structs.bt"
+
+enum<ubyte> AIMode{
+    idk0,
+    idk1,
+    QuakeMode2,
+    SomeCoordsMode3,
+    TurnCountMode,
+    QuakeMode5,
+    idk6,
+    SomeCoordsMode7,
+       
+};
+
+enum<byte> MoveMode{
+    noMove0=0,
+    noMove2=2,    
+};
+
+struct GenericFile {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct sAIData {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; i++){
+            struct sAIDataE {
+                  byte unkByte0x0;
+                  byte unkByte0x1;
+                  AIMode Mode;
+                  byte unkByte0x3;
+                  MoveMode unkByte0x4;
+                  byte unkByte0x5;
+                  byte XCoordA;
+                  byte YCoordA;
+                  byte XCoordB;
+                  byte YCoordB;
+                  byte unkByte0xa;
+                  byte unkByte0xb;
+                  byte unkByte0xc;
+                  byte BAIIndex;
+                  byte unkByte0xe;
+                  byte unkByte0xf;
+                  byte unkByte0x10;
+                  byte unkByte0x11;
+                  byte unkByte0x12;
+                  byte unkByte0x13;
+            }AIDataEntry;
+        };
+    }AIData<open=true>;
+    
+}File<open=true>;

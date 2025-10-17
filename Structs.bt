@@ -1,0 +1,238 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: Structs.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Structs for a variety of data
+//  Category: ReichardEnum
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+#include "include_Enums.bt"
+
+//Generic Data Section
+local int j = 0;
+struct DataSection {
+    int magic<bgcolor=cRed>;
+    int NumEntries<bgcolor=cBlue>;
+    int size<bgcolor=cGreen>;
+    int padding[13]<hidden=false>;
+};
+struct GenericSection {
+    int magic<bgcolor=cRed>;
+    int NumEntries<bgcolor=cBlue>;
+    int size<bgcolor=cGreen>;
+    int padding[13]<hidden=false>;
+     struct Entry {
+       ubyte entry[size];
+    }Entries[NumEntries]<bgcolor=cLtGreen,optimize=false>;
+};
+struct FileSections {
+    int Number_of_Sections;
+    struct {
+        int Ptr;
+        int SectionSize;
+    } SectionPointers[Number_of_Sections];
+};
+enum<ubyte> Stat {
+    Str_Stat,
+    Mag_Stat,
+    Dex_Stat,
+    Spd_Stat,
+    Luck_Stat,
+    Def_Stat,
+    Res_Stat,
+    Move_Stat,
+    Cha_Stat,
+    No_Stat_Requirement,
+};
+struct Stats {
+    byte Str;
+    byte Mag;
+    byte Dex;
+    byte Spd;
+    byte Luck;
+    byte Def;
+    byte Res;
+    byte Move;
+    byte Cha;
+};
+struct uStats {
+    ubyte Str;
+    ubyte Mag;
+    ubyte Dex;
+    ubyte Spd;
+    ubyte Luck;
+    ubyte Def;
+    ubyte Res;
+    ubyte Move;
+    ubyte Cha;
+};
+//Class Data Structs
+struct EnemyAbilities {
+    AbilityID ability1<name="Generic Enemy Ability 1">;
+    AbilityID ability2<name="Generic Enemy Ability 2">;
+    AbilityID ability3<name="Generic Enemy Ability 3">;
+    AbilityID ability4<name="Generic Enemy Ability 4">;
+    AbilityID ability5<name="Generic Enemy Ability 5">;
+};
+
+struct ClassProperty{
+	ubyte bit0 : 1<name="Mounted">;
+    ubyte bit1 : 1<name="Gauntlet Active">;
+    ubyte bit2 : 1<name="Gaunlet Use Dismounted">;
+    ubyte bit3 : 1<name="Magic Usage">;
+    ubyte bit4 : 1<name="Triabolical: Half Magic Uses">;
+    ubyte bit5 : 1<name="Triabolical: No Weapon Lock">;
+    ubyte bit6 : 1<name="Triabolical: Reason Magic Only">;
+    ubyte bit7 : 1<name="Triabolical: Faith Magic Only">;
+};
+
+struct ClassClassification{
+    ubyte bit0 : 1<name="Infantry">;
+    ubyte bit1 : 1<name="Armored">;
+    ubyte bit2 : 1<name="Cavalry">;
+    ubyte bit3 : 1<name="Flying">;
+    ubyte bit4 : 1<name="Dragon">;
+    ubyte bit5 : 1<name="Monster">;
+    ubyte bit6 : 1<name="Unused6", hidden=false>;
+    ubyte bit7 : 1<name="Unused7",hidden=false>;
+};
+//PersonData Structs
+enum<byte> PersonGender {
+    Male_,
+    Female,
+    Monster,
+
+};
+struct Person{
+    struct ModelScale{
+        float Scale04<name="Chest Band/Width modifier">;
+        float Scale02<name="Female Chest Size modifier (pre time skip)">;
+        float Scale01<name="Model Size Scale">;
+        float Scale03<name="Female Chest Size modifier (post time skip)">;
+    }modelscale<name="Model Scale Values">;
+    int16 Head;
+    NameID Name<name="Name ID">;
+    int16 unk_0x14<bgcolor=cBlack>;
+    uint16 CharacterID<name="Voice ID">;
+    uint16 AssetsID<name="Asset ID">;
+    ClassID Class<name="Default Class">;
+    ubyte Age<name="Age">;
+    Month BirthMonth<name="Birthday: Month">;
+    ubyte StartingLevel<name="Starting Level", comment="Changes the level the unit starts out with. Does not affect base stats.">;
+    ubyte Birthday<name="Birthday: Day">;
+    byte unk_0x1F<bgcolor=cBlack, comment="Might be a padding byte", hidden=true>;
+    byte saveDataID<name="Save Data ID">;
+    byte unk_0x21<bgcolor=cBlack>;
+    ubyte HPCap<name="Max HP", bgcolor=cYellow>;
+    byte unk_0x23<bgcolor=cBlack>;
+    AllegianceID Allegiance<name="Allegiance", bgcolor=cDkPurple, comment="Affects recruitment when choosing a house for non-DLC playable Units">;
+    byte unk_0x25<bgcolor=cBlack>;
+    PersonGender GenderFlag;
+    //GenderFlag Gender<name="Gender">;
+    byte BodyType<name="Body Type">;
+    BattalionID BaseBattalion<name="Base Battalion">;
+    ubyte HPGrowth<name="HP Growth", bgcolor=cGreen>;
+    byte AnimSet<name="Non Combat Animation Set">;
+    ubyte BaseHP<name="Base HP", bgcolor=cBlue>;
+    CrestID Crest1<name="Primary Crest", bgcolor=cWhite>;
+    CrestID Crest2<name="Secondary Crest", bgcolor=cWhite>;
+    struct Flags {
+        ubyte bit0 : 1<name="Dragon", comment="Add the Dragon Type to the character">;
+        ubyte bit1 : 1<name="Monster", comment="Add the Monster Type to the character">;
+        ubyte bit2 : 1<name="Unknown", comment="Seems like all characters have this flag on">;
+        ubyte bit3 : 1<name="'Mastered' Default Class", comment="Rhea, Nemesis, Flame Emperor">;
+        ubyte bit4 : 1<name="Unknown", comment="Seems like all characters have this flag on">;
+        ubyte bit5 : 1<name="Unknown">;
+        ubyte bit6 : 1<name="Unknown">;
+        ubyte bit7 : 1<name="Unknown">;
+    }flags<name="Character Flags", bgcolor=cBlack>;
+    ubyte PreTimeSkipHeight<name="Pre-Time Skip Height (cm)">;
+    ubyte PostTimeSkipHeight<name="Post-Time Skip Height (cm)">;
+    uint16 unknown<name="Unknown Value", hidden=true>;
+    uStats BaseStats<bgcolor=cBlue,name="Base Stats">;
+    //ubyte growths[9];
+    uStats GrowthRates<bgcolor=cGreen,name="Growths Rates">;
+    uStats MaxStat<bgcolor=cYellow,name="Stat Caps">;
+    byte padding[2]<name="Padding", bgcolor=cWhite>;
+};
+
+struct UnitGoals {
+    Goal goal<name="Goal">;
+    RankStats Skill<name="Skill?">;
+    MinRanks RequiredRank<name="SkillRank",comment="Goal">;
+};
+struct StartingRanks{
+    MinRanks rank0<name="Starting Sword Rank">;
+    MinRanks rank1<name="Starting Lances Rank">;
+    MinRanks rank2<name="Starting Axes Rank">;
+    MinRanks rank3<name="Starting Bows Rank">;
+    MinRanks rank4<name="Starting Brawling Rank">;
+    MinRanks rank5<name="Starting Reason Rank">;
+    MinRanks rank6<name="Starting Faith Rank">;
+    MinRanks rank7<name="Starting Authority Rank">;
+    MinRanks rank8<name="Starting Armor Rank">;
+    MinRanks rank9<name="Starting Riding Rank">;
+    MinRanks rank10<name="Starting Flying Rank">;
+};
+
+
+struct WpnProficiency{
+    Proficiency rank0<name="Sword Proficiency">;
+    Proficiency rank1<name="Lances Proficiency">;
+    Proficiency rank2<name="Axes Proficiency">;
+    Proficiency rank3<name="Bows Proficiency">;
+    Proficiency rank4<name="Brawling Proficiency">;
+    Proficiency rank5<name="Reason Proficiency">;
+    Proficiency rank6<name="Faith Proficiency">;
+    Proficiency rank7<name="Authority Proficiency">;
+    Proficiency rank8<name="Armor Proficiency">;
+    Proficiency rank9<name="Riding Proficiency">;
+    Proficiency rank10<name="Flying Proficiency">;
+};
+
+struct StatBits{
+    ubyte bit0 : 1<name="Sword">;
+    ubyte bit1 : 1<name="Lances">;
+    ubyte bit2 : 1<name="Axes">;
+    ubyte bit3 : 1<name="Bows">;
+    ubyte bit4 : 1<name="Brawling">;
+    ubyte bit5 : 1<name="Reason">;
+    ubyte bit6 : 1<name="Faith">;
+    ubyte bit7 : 1<name="Authority">;
+    ubyte bit8 : 1<name="Armor">;
+    ubyte bit9 : 1<name="Riding">;
+    ubyte bit10 : 1<name="Flying">;
+};
+struct bf8 {
+    ubyte bit: 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+};
+struct b16f {
+    ubyte bit: 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+    ubyte bit : 1<name="Reserve">;
+};

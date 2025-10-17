@@ -1,0 +1,380 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: fixed_lobby_activity.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Determines parameters for monastery activities like Gardening and arena
+//  Category: Reichard
+// File Mask: *fixed_lobby_activity.bin
+//  ID Bytes: 
+//   History: 
+//   1.3    09/19/25 ReichardTheThird: Added AdviceBoxAvailability to table3
+//                      Added ShareAMeal-SeatingZCoordModifier to table14
+//                      Added SaunaCharacter Model/AnimationData to table15
+//                      Added SaunaSupportBonuses to table16
+//                      Clarified Fishing Roll Thresholds
+//   1.2    09/14/25 ReichardTheThird: Added FishingRollThresholds to table6
+//                      Clarified Fishing Rewards in table7
+//                      Added Fish Tier Roll Thresholds to table5
+//                      Restructued parsing logic to halve template parsing time
+//                      Clarified Gardening Seed Score Thresholds
+//                      Clarified Fishing
+//   1.1    03/09/25 ReichardTheThird: Added Optimize false to Entry1 struct
+//   1.0    02/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+LittleEndian();
+#include "Structs.bt"
+
+enum<int> Seeds {
+    Mixed_Herb_S,
+    Western_Foldlan_S,
+    Root_Vegetable_S,
+    Magical_Herb_S,
+    Noah_Fruit_S,
+    Albinean_Nut_S,
+    Vegetable_S,
+    Northern_Foldlan_S,
+    Verona_S,
+    Morfis_Plum_S,
+    Southern_Fodlan_S,
+    Morfis_S,
+    Nordsalat_S,
+    Boa_Fruit_S,
+    Albinean_S,
+    Eastern_Fodlan_S,
+    Magdred_Kirsch_S,
+    Angelica_S,
+    Mixed_Fruit_S,
+    Albinean_Berry_S,
+    Red_Flower_S,
+    White_Flowers_S,
+    Blue_Flowers_S,
+    Purple_Flowers_S,
+    Yellow_Flowers_S,
+    Green_Flowers_S,
+    Pale_Blue_Flower_S,
+    Seed27,
+    Seed28,
+    Seed29,
+    Seed30,
+    Dedues_S,
+};
+
+enum<ubyte> FishTier{
+    SmallFishShadow,
+	LargeFishShadow,
+	GiantFishShadow,
+	GlimmeringFishShadow,
+    StrangeFishShadow,
+    SparklingFishShadow,
+    InvalidFT6,
+    InvalidFT7,
+    InvalidFT8,
+    InvalidFT9,  
+};
+
+enum<ubyte> FactionMealPreference{
+      FlameEmperorArmy_FMP,
+      Thieves_FMP,
+      RebelArmy_FMP,
+      Rogues_FMP,
+      Citizens_FMP,
+      ChildrenOfTheGoddess_FMP,
+};
+
+struct File {
+    FileSections Sections;
+    local int j = 0;
+    local int i = 0;
+	
+	struct UnitPreferences{//0
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Unit {
+				CharID character<bgcolor=cRed>;
+				Preferences Choir<name="Choir Preference", bgcolor=cSilver>;
+				Preferences Cooking<name="Cooking Preference", bgcolor=cLtBlue>;
+				short unkShort0x4;
+			}preferences<name="Unit", read=Str("%d %s",unkShort0x4,EnumToString(character))>;
+		}
+	}unitpreferences<name="Activity Preferences">;
+	
+	struct sShareAMeal{//1
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct sShareAMealData {
+				local Meal name=i;
+				
+				MiscItemShort Ingredients[3];
+				ubyte unkByte0x6;
+				ubyte unkByte0x7;
+				
+				ubyte unkByte0x8;
+				ubyte unkByte0x9;
+				FactionMealPreference Faction;
+				ubyte unkByte0xb;
+				
+				ubyte unkByte0xc;
+				ubyte unkByte0xd;
+				ubyte IngredientsCost[3];
+				ubyte Padding;
+			}mealPreferences<name="Meals", bgcolor=cSilver, read = EnumToString(name)>;
+		}
+	}mealStuffBlock<name="Meals">;
+	
+	struct Meals{//2
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct MealPreferences {
+				local Meal name=i;
+				for(j =0; j<45;j++){
+					struct sCharacterPreference{
+						local SaveBlockID SaveID=j;
+						Preferences Preference;
+					}CharacterPreference<read=Str("%s - %s",EnumToString(Preference), EnumToString(SaveID))>;
+				}
+			}mealPreferences<name="Meal Preferences", bgcolor=cSilver, read = EnumToString(name)>;
+		}
+	}mealBlock<name="Meal Preferences">;
+	
+	struct Block3{//3
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Block3_Entry{
+				sWhiteCloudsEnabledChaptersBitMask WhiteCloudsAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d  %d %d %d %d  %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6,bit7, bit8,bit9,bit10,bit11, bit12)>;
+				CharID character<bgcolor=cRed>;
+                sVerdantWindEnabledChaptersBitMask VerdantWindsAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6,bit7)>;
+                sSilverSnowEnabledChaptersBitMask SilverSnowAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6)>;
+                sCrimsonFlowerEnabledChaptersBitMask CrimsonFlowerAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d",bit0,bit1,bit2,bit3, bit4,bit5)>;
+                sAzureMoonEnabledChaptersBitMask AzureMoonAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6,bit7)>;
+			}entry<read=EnumToString(character), bgcolor=cLtBlue>;
+		}
+	}block3<name="Advice Box Availability">;
+	
+	struct TourneyBlock{//4
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct TourneyData{
+				CharID unk1<bgcolor=cBlue,name="ReplacementCharacter">;
+				CharID unk2<bgcolor=cBlue,name="Character Base (CharID)", comment="See Person Data">;
+				EquipID unk4<bgcolor=cBlue,name="Accessory (EquipID)", comment="Some like Shield of Seiros may get downgraded if the player has obtained one">;
+				ClassID unk5<bgcolor=cBlue,name="Class", comment="Opponent Class">;
+				ItemByte weapon;
+				SpellID unk7<bgcolor=cBlue,name="Magic", comment="Spell list may be elsewhere & may have spell list / skill requirement. Weapon needs to be 255">;
+				AbilityID unk8<bgcolor=cBlue,name="Ability 1", comment="Ability slots #4 & #5 location unknown">;
+				AbilityID unk9<bgcolor=cBlue,name="Ability 2", comment="Ability slots #4 & #5 location unknown">;
+				AbilityID unk10<bgcolor=cBlue,name="Ability 3", comment="Ability slots #4 & #5 location unknown">;
+				byte unk11<bgcolor=cBlue,name="Padding">;
+			}Tourney<read=EnumToString(unk2)>;
+		}
+	}tourneyBlock<name="Tournaments">;
+	
+	struct sLobbyActivity5{//5
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct sLobbyActivity5Entry {
+                local FishTier FT=i;
+                
+				byte RollPoolSize<comment="Seems to have multiple purposes so idk">;
+                struct sLA5RollThresholds{
+                    byte Standard_FET;
+	                byte FishOfMystery_FET;
+	                byte GoldenFish_FET;
+	                byte LotsOfLargeFish_FET;
+                }LA5Thresholds<name="Marginal Roll Thresholds">;
+				byte unk[6]<name="Unused?">;
+			}LobbyActivity5Entry<name="Fish Tier Roll Thresholds",read=EnumToString(FT)>;
+		}
+        byte padding2[2];
+	}LobbyActivity5<name="Fish Tier Roll Thresholds">;
+	
+	struct sFishingRollThresholds {//6
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Entries {
+				struct sFishThresholds{
+					byte RollThreshold0;
+					byte RollThreshold1;
+					byte RollThreshold2;
+				};		
+				sFishThresholds LargeFishThresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds StrangeFishThresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds GlimmeringFishThresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds SmallFishThresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds SparklingFishThresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds GiantFishThresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds Invalid6Thresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds Invalid7Thresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds Invalid8Thresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+				sFishThresholds Invalid9Thresholds<read=Str("%d %d %d",RollThreshold0,RollThreshold1,RollThreshold2)>;
+			}RollThresholds;
+		}
+        byte padding2[2];
+	}FishingRollThresholds<name="Fishing Roll Thresholds",comment="Entries are indexed by Bait quality and optionally +2 for some reason">;
+	
+	struct Fishing{//7
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct FishEntry {
+				local Item Bait = 1400 + i;
+					struct FishRewards{
+						Item FishReward0;  
+						Item FishReward1;  
+						Item FishReward2;  
+					};
+					FishRewards FishReward<read="LargeFishShadow">;
+                    FishRewards FishReward<read="StrangeFishShadow">;
+                    FishRewards FishReward<read="GlimmeringFishShadow">;
+                    FishRewards FishReward<read="SmallFishShadow">;
+                    
+                    FishRewards FishReward<read="SparklingFishShadow">;
+                    FishRewards FishReward<read="GiantFishShadow">;
+                    FishRewards FishReward<read="Unused6FishShadow">;
+                    FishRewards FishReward<read="Unused7FishShadow">;
+                    
+                    FishRewards FishReward<read="Unused8FishShadow">;
+                    FishRewards FishReward<read="Unused9FishShadow">;
+			}fish<name="Fishing Rewards", read=EnumToString(Bait)>;;
+		}
+	}fishingBlock<name="Fishing Rewards">;
+	
+	struct Gardening{//8
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct GardeningEntry {
+				struct Yield {
+					 Item gardeningItem0;
+                     Item gardeningItem1;
+                     Item gardeningItem2;
+                     Item gardeningItem3;
+                     Item gardeningItem4;
+				};
+				local Seeds seed = i;
+				Item StatBoosterSlot<name="Stat Booster Slot", name="Stat Booster">;
+				Yield yield1_low<read="Yield Level 1 Low", name="Yield">;
+				Yield yield1_high<read="Yield Level 1 High", name="Yield">;
+				Yield yield2_low<read="Yield Level 2 Low", name="Yield">;
+				Yield yield2_high<read="Yield Level 2 High", name="Yield">;
+				Yield yield3_low<read="Yield Level 3 Low", name="Yield">;
+				Yield yield3_high<read="Yield Level 3 High", name="Yield">;
+			}gardeningYield<name="Seed Yield", read=EnumToString(seed)>;;
+		}
+	}GardeningBlock<name="Gardening Yields">;
+	
+	struct SeedRank{//9
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct seedRank {
+				local Seeds seed = i;
+				ubyte rank;
+			}rank<name="Rank", read=EnumToString(seed)>;
+		}
+	}seedrankBlock<name="Gardening Seed Ranks">;
+
+	struct sGardeningScoreThresholds{//10
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct sScoreThresholds {
+				ubyte MinThreshold<comment="value >= MinT">;
+				ubyte MaxThreshold<comment="value <= MaxT">;
+				ubyte ScoreModifier;
+				ubyte LowYields_MaxIndex;
+				
+				ubyte HighYields_MaxIndex;
+				ubyte LowYields_MinIndex;
+				ubyte HighYields_MinIndex;
+				ubyte LowYieldsChance<comment="not actually used since L+H=100, always calcs with HighYieldsChance instead">;
+				
+				ubyte HighYieldsChance<comment="grants HighYields if roll is less than this value">;
+			}ScoreThresholds<name="Thresholds",read = MinThreshold>;
+		}
+        byte padding2[2];
+	}GardeningScoreThresholds<name="Gardening Seed Score Thresholds">;
+
+	struct CultivationCost{//11
+		DataSection SectionHeader;
+		uint CultivatePrice[SectionHeader.NumEntries];
+	}CultivationBlock<name="Cultivation Costs">;
+
+	struct ProfessorLevel{//12
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct ProfessorRank {
+				local MinRanks r=i;
+				short expNeed<name="Lecture Question Exp", bgcolor=cDkGreen>;
+				ushort CumExp<name="Total Exp Needed", bgcolor=cLtGreen>;
+				ushort Salary<name="Monthly Church Salary", bgcolor=cYellow>;
+				ubyte TeachingPoints<name="Lecture Points", bgcolor=cGreen>;
+				ubyte BattlePoints<name="Battle Points", bgcolor=cRed>;
+				ubyte unk<name="Cook Book Flag?", bgcolor=cBlack>;
+				ubyte adjutantCount<name="Adjutants", bgcolor=cBlack>;
+				ubyte ActivityPoints<name="Activity Points", bgcolor=cBlue>;
+				ubyte MasterClass<name="Master Classes Unlocked", bgcolor=cPurple>;
+				byte unk;
+				byte unk;
+				byte unk;
+				byte unk;
+				byte unk;
+				byte unk;
+				byte unk;
+				byte padding;
+			}perks<name="Professor Rank Perks", read=EnumToString(r)>;
+		}
+	} professorBlock<name="Professor Rank Stats">;
+
+	struct Block13{//13
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Entry13 {
+				CharID character<bgcolor=cRed>;
+				byte ZCoordOffsetModifier;
+				byte padding;
+			}entry13<read=EnumToString(character)>;
+		}
+	}block13<name="ShareAMeal-Seating Z Coordinate modifier",comment="Used to adjust the Z axis of characters sitting down in Share A Meal activities">;
+
+	struct Block14{//14
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Entry14 {
+				int unk;
+				CharID character<bgcolor=cRed>;
+				short AnimationID_Warmed;
+				short AnimationID_Overheated<comment="also used for 'getting dizzy' state">;
+				short AnimationID_Neutral;
+				byte Warmed_SkinReddeningLevel;
+				byte unkByte0xd<name="Unused? 0xd">;
+				byte HeatResistance;
+				byte Overheat_SkinReddeningLevel;
+			}entry14<read=EnumToString(character),name="Character Entry">;
+		}
+	}block14<name="Sauna Character Model/Animation Data">;
+
+	struct Block15{//15
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Entry15 {
+                local SupportMinorRank SMR=i;
+                
+				short SeatingDistanceModifier<comment="Subtracts this position from Byleth's seat pos and Adds to Sauna Partner's seat pos, modifier of 71 will give them the save position">;
+				byte WarmupBarSize;
+				byte SaveChance;
+			}entry15<name="Sauna Support Bonuses",read=EnumToString(SMR)>;
+		}
+	}block15<name="Sauna Support Bonuses">;
+
+	struct Block16{//16
+		DataSection SectionHeader;
+		for (i = 0; i < SectionHeader.NumEntries; i++){
+			struct Entry16 {
+				float B2;
+				float B0;
+				float B1;
+				float A2;
+				float A0;
+				float A1;
+			}entry16<name="Camera position?",comment="Entry is selected randomly?">;
+		}
+	}block16<name="Sauna Random Camera Positions">;
+} file<open=true>;

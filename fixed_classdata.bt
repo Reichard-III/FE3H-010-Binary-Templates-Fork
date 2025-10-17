@@ -1,0 +1,354 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: fixed_classdata.bt
+//   Authors: RayTwo?, DeathChaos?, TildeHat, Moonling, Puddles, Triabolical, ReichardTheThird
+//   Version: 1.07
+//   Purpose: Parameters for classes
+//  Category: Reichard
+// File Mask: *fixed_classdata.bin
+//  ID Bytes: 
+//   History: 
+//   1.07    3/9/25 ReichardTheThird: Changed Unk_Short[17] to MonsterHPBarScaling_Short[15] + Unk_Short[2]
+//   1.06    3/2/25 ReichardTheThird: Rearranged MonsterClass in struct order as it is written in memory
+//                                  {Item[5], Other Data, Drop Quantity[5], Drop Chance[5]}
+//                                  rather than logical order
+//                                  {Item[0] = {Item[0], Drop Quantity[0], Drop Chance[0]}, ..., Item[4], Other Data}
+//   1.05    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//   1.04    2019-09-14  Puddles - added mapping to class arts
+//   1.03    2019-09-13  Moonling - added reclassing item
+//   1.02    2019-09-11  TildeHat - added mapping to class data and abilities
+//   1.01    2019-08-28  DeathChaos - added class names to struct indices
+//   1.00    2019-08-28  DeathChaos - started this
+//------------------------------------------------
+
+//---------------------------------------------
+// Includes
+//---------------------------------------------
+#include "Structs.bt"
+enum<ubyte> GenderFlags {
+    Only_Males = 0,
+    Only_Females,
+    Both_Genders,
+
+};
+enum<ubyte> CertificationFlag {
+    Cannot_Cert = 0,
+    Can_Cert = 1,
+    Byleth_Maybe = 2,
+    Dance_Mayber = 3,
+};
+LittleEndian();
+struct File{
+	struct SectionPointers{
+		uint32 NumberOfSectionPointers;
+		uint32 ClassDataPointer<bgcolor=cRed>;
+		uint32 UnkSize<bgcolor=cRed>;
+		uint32 PointerToGenderLock<bgcolor=cPurple>;
+		uint32 GenderLockSize<bgcolor=cPurple>;
+		uint32 TierLevelPointer<bgcolor=cBlue>;
+		uint32 TierLevelSize<bgcolor=cBlue>;
+		uint32 ClassAbilityPointer<bgcolor=cDkYellow>;
+		uint32 ClassAbilitySize<bgcolor=cDkYellow>;
+		uint32 MonasterBlockPtr<bgcolor=cDkBlue>;
+		uint32 MonasterBlockSize<bgcolor=cDkBlue>;
+		uint32 UnkPointer<bgcolor=cBlack>;
+		uint32 UnkSize<bgcolor=cBlack>;
+		uint32 UnkPointer<bgcolor=cGreen>;
+		uint32 UnkSize<bgcolor=cGreen>;
+		uint32 UnkPointer<bgcolor=cDkRed>;
+		uint32 UnkSize<bgcolor=cDkRed>;
+		uint32 UnkPointer<bgcolor=cDkPurple>;
+		uint32 UnkSize<bgcolor=cDkPurple>;
+		uint32 UnkPointer<bgcolor=cDkGreen>;
+		uint32 UnkSize<bgcolor=cDkGreen>;
+	}sectionpointers<name="Section Pointers">;
+
+    FSeek(sectionpointers.ClassDataPointer);
+	struct ClassData{
+		uint32 ClassDataMagic;
+		uint32 numClassData;
+		uint32 SizeOfClassData;
+		struct ClassDataHeaderPadding{
+			byte Padding[0x34];
+		}classdataheaderpadding<name="Padding">;
+		local int i;
+        for( i = 0; i < numClassData; i++ )
+            struct ClassBlock{
+                local ClassID Class<hidden=true>;
+                Class = i;
+                short CameraFrame[4];
+                AID MaleAID;
+                AID FemaleAID;
+                uint16 Zoo;
+                uint16 UnknownValue;
+                byte HPBonus;
+                MountID mount<name="Mount ID?">;
+                Adjutant adjutantType<name="Adjutant Type">;
+                byte EnemyHPGrowth<name="Enemy HP Growth">;
+                struct PlayerGrowths{  
+                    byte HPGrowth<name="HP Growth">;
+                    byte StrGrowth<name="Str Growth">;
+	                byte MagGrowth<name="Mag Growth">;
+		            byte DexGrowth<name="Dex  Growth">;
+		            byte SpdGrowth<name="Spd Growth">;
+		            byte LckGrowth<name="Lck Growth">;
+		            byte DefGrowth<name="Def Growth">;
+		            byte ResGrowth<name="Res Growth">;
+		            byte MovGrowth<name="Mov Growth">;
+		            byte CharmGrowth<name="Cha Growth">;
+	             }playergrowths<bgcolor=cDkYellow>;
+               // byte PG[10];
+	             Stats EnemyGrowths<name="Enemy Growth Rates">;
+	             Stats Class_Modifiers<name="Class Modifiers">;
+	             Stats Mounted_Modifiers<name="Mounted Stat Modifiers">;
+               // byte rankBonus[11];
+	             struct RankBonus{
+		              byte SwordExp<name="Sword Exp">;
+		              byte LanceExp<name="Lance Exp">;
+		              byte AxeExp<name="Axe Exp">;
+		              byte BowExp<name="Bow Exp">;
+		              byte BrawlingExp<name="Brawling Exp">;
+		              byte ReasonExp<name="Reason Exp">;
+		              byte FaithExp<name="Faith Exp">;
+		              byte AuthorityExp<name="Authority Exp">;
+		              byte ArmorExp<name="Heavy Armor Exp">;
+		              byte RidingExp<name="Riding Exp">;
+		              byte FlyingExp<name="Flying Exp">;
+	             }rankbonus<name="Rank Bonus">;
+	             EquipID ShieldID<name="Class Equipped Item">;
+	             ClassTier tier<name="Class Certification Tier">;
+	             byte MountMapScale<name="Mount Map Scale">;
+	             byte UnitMapScale<name="Unit Map Scale">;
+	             ubyte UnknownValue;
+	             byte monsterID<name="Monster Index in Monster Block">;
+	             ubyte classMastery<name="Class Exp Requirement">;
+	             byte BaseHP<name="Base HP">;
+	             ubyte expcCoeff<name="Exp Yield Coeff">;
+	             MoveType Movement1<name="Movement Restricted">;
+	             MoveType Movement2<name="Movement Restricted Dismounted">;
+	             WeaponType weapon1<name="Enemy Weapon Type 1">;
+	             WeaponType weapon2<name="Enemy Weapon Type 2">;
+	             ClassClassification effectiveness<name="Class Effectiveness">;
+	             ClassProperty classproperty<name="Class Property", bgcolor=cYellow>;
+	             SpellID Spell1<name="Enemy Spell 1">;
+	             SpellID Spell2<name="Enemy Spell 2">;
+	             Stats BaseStats<name="Class Base Stats">;
+                 CombatArtID RandomlyAssignedCombatArt[4]<bgcolor=cWhite,comment="randomly assigns unit one of these combat arts, Hard mode selects from the first 2 entries, Maddening selects from all 4 entries, Hard mode only assigns CAs 50% of the time even if all 2 slots filled">;
+	             EnemyAbilities Cindered_Shadows_Normal<name="Cindered Shadows Normal?", bgcolor=cLtGreen>;
+	             EnemyAbilities Cindered_Shadows_Hard<name="Cindered Shadows Hard?", bgcolor=cDkRed>;
+	             EnemyAbilities Hard_Mode<name="Hard Mode Abilities", bgcolor=cLtRed>;
+	             EnemyAbilities Maddening_Mode<name="Maddening Mode Abilities", bgcolor=cPurple>;
+        }classdata<bgcolor=cDkBlue,name="Class Data",read=EnumToString(Class)>;
+    }classBlock<bgcolor=cDkBlue,name="Class Block">;
+//    file.classBlock.classdata[i].PG[j] = 0;
+	FSeek(sectionpointers.PointerToGenderLock);
+	struct GenderLock
+	{
+		uint32 GenderLockMagic;
+		uint32 numGenderLock;
+		uint32 SizeOfGenderLock;
+		struct GenderLockHeaderPadding{
+			byte Padding[0x34];
+		}genderlockheaderpadding<name="Padding">;
+		local int i;
+		struct Requirements{
+			for( i = 0; i < numGenderLock; i++ )
+				struct GenderLockID{
+					local ClassID Class<hidden=true>;
+					Class = i; // keeping a localvar so we can add classname to the struct indices
+                    ubyte examScaling<name="Certifcation Scaling Factor", bgcolor=cLtRed, comment="Pass% = 100 - Certifcation Scaling Factor x N Missing Ranks">;
+					ConsumablesByte RequiredItem<name="Item Need for Certification", bgcolor=cLtBlue>;
+					CertificationFlag certifiable<name="Certification Flag", bgcolor=cBlack, comment="Some classes cannot be able to cert regardless of flag">;
+					GenderFlags flag<name="Gender Flags", bgcolor=cBlack>;
+					MinRanks rank0<name="Minimum Sword Requirement", comment="Default Ranks in class">;
+					MinRanks rank1<name="Minimum Lances Requirement", comment="Default Ranks in class">;
+					MinRanks rank2<name="Minimum Axes Requirement", comment="Default Ranks in class">;
+					MinRanks rank3<name="Minimum Bows Requirement", comment="Default Ranks in class">;
+					MinRanks rank4<name="Minimum Brawling Requirement", comment="Default Ranks in class">;
+					MinRanks rank5<name="Minimum Reason Requirement", comment="Default Ranks in class">;
+					MinRanks rank6<name="Minimum Faith Requirement", comment="Default Ranks in class">;
+					MinRanks rank7<name="Minimum Authority Requirement", comment="Default Ranks in class">;
+					MinRanks rank8<name="Minimum Armor Requirement", comment="Default Ranks in class">;
+					MinRanks rank9<name="Minimum Riding Requirement", comment="Default Ranks in class">;
+					MinRanks rank10<name="Minimum Flying Requirement", comment="Default Ranks in class">;
+				}genderlockid<name="Class Requirements",read=EnumToString(Class)>;
+		}requirements<name="Class Requirements">;
+	}classReqs<bgcolor=cDkGreen,name="Certification Requirements", comment="Default Ranks. Only 3 of them can be used. Rest of the ranks will be ignored.">;
+    FSeek(sectionpointers.TierLevelPointer);
+	struct TierLevel{
+		uint32 TierLevelMagic;
+		uint32 numTierLevel;
+		uint32 SizeOfTierLevel;
+		struct TierLevelHeaderPadding{ byte Padding[0x34]; }tierlevelheaderpadding<name="Padding">;
+        ubyte Zero<bgcolor=cWhite>;
+        ubyte Beginner<bgcolor=cWhite>;
+        ubyte Intermediate<bgcolor=cWhite>;
+        ubyte Advanced<bgcolor=cWhite>;
+        ubyte Master<bgcolor=cWhite>;
+        ubyte Special<bgcolor=cWhite>;
+        ubyte Unique<bgcolor=cWhite>;
+        byte padding<hidden=true>;
+    }tierlevel<bgcolor=cDkRed,name="Tier Level Requirements">;
+    FSeek(sectionpointers.ClassAbilityPointer);
+	struct ClassAbility{
+		uint32 ClassAbilityMagic;
+		uint32 numClassAbility;
+		uint32 SizeOfClassAbility;
+		struct ClassAbilityHeaderPadding{
+			byte Padding[0x34];
+		}classabilityheaderpadding<name="Padding">;
+		local int i;
+        for( i = 0; i < numClassAbility; i++ )
+		    struct AbilityBlock{
+                local ClassID Class<hidden=true>;
+				Class = i; // keeping a localvar so we can add classname to the struct indice
+		        AbilityID MasteredAbility<name="Mastered Ability", bgcolor=cBlue>;
+                CombatArtID MasterArt<name="Mastered Combart Art", bgcolor=cBlue>;
+                AbilityID ClassAbility1<name="Class Ability", bgcolor=cGreen>;
+                AbilityID ClassAbility2<name="Class Ability", bgcolor=cGreen>;
+                AbilityID ClassAbility3<name="Class Ability", bgcolor=cGreen>;
+		}classblock<name="Ability Block",read=MyStructToStringA>;
+	}classabilities<bgcolor=cDkBlue,name="Class Abilities">;
+        FSeek(sectionpointers.MonasterBlockPtr);
+                
+        struct MonsterBlock {
+            int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+            int MonsterClassCount<bgcolor=cLtGreen>;
+            int sizeMonsterClass<bgcolor=cLtGreen>;
+            int Padding[13]<bgcolor=cYellow>;
+            local int i;
+            local int j;
+            local int k;
+            local int l;
+            for (j = 0; j < MonsterClassCount; ++j){
+                FSeek(sectionpointers.MonasterBlockPtr + 64 +  j*sizeMonsterClass);
+                struct MonsterClassData {
+                    local MonsterName name<hidden=true>;
+                    name = j;
+                    ushort unk<bgcolor=cBlack>;
+                    ushort unk<bgcolor=cBlack>;
+                    WeaponID weapon<name="Monster's Equipped Weapon", bgcolor=cBlue>;
+                    struct BarrierDrops {
+                        for (k = 0; k < 5; ++k){
+                            struct BarrierItem{
+                                MiscItem barrierDrop<name="Item", bgcolor=cLtGreen>;
+                                ubyte padding<hidden=false, name="unknown padding?",bgcolor=cLtGreen>;
+                            }Bitem<name="Barrier Item", name=ReadBarrierItem, bgcolor=cLtGreen>;
+                        };
+                    }barrierItems<name="Barrier Items">;
+                    struct MonsterHPBarScalingByDifficulty {
+                        for(l=0; l<3;l++){
+                            struct MonsterHPBarScaling { 
+                                local Difficulty diff;
+                                local string diffName;
+                                diff = l;
+                                diffName = EnumToString(diff);
+                                diffName = StrDel(diffName, Strlen(diffName)-2, 2);
+                                short a0<name="0 missing HP bars">;
+                                short a1<name="1 missing HP bars">;
+                                short a2<name="2 missing HP bars">;
+                                short a3<name="3 missing HP bars">;
+                                short a4<name="4 missing HP bars">;
+                            }monsterHPScaling<name="Difficulty Level", read=diffName, open=true>;
+                        }
+                    }monsterHPScalingByDiff<name="Monster HP Bar Scaling">;
+                    short unknown[2];
+                    ubyte barrierDamageReductionk<name="Barrier Damage Reduction %", bgcolor=cWhite>;
+                    BarrierStatus bstatus<name="Default Barrier Status", bgcolor=cBlue>;
+                    ubyte numberHP<name="Number of HP bars", bgcolor=cDkGreen>;
+                    ubyte BarrierText<name="Barrier Text Index", bgcolor=cDkYellow>;
+                    StaggeringBlow Staggering<name="Staggering Blow", bgcolor=cRed>;
+                    ubyte MonsterScale<name="Monster Scale">;
+                    MonsterSize size<name="Monster Tile Size">;
+                    ubyte unk;
+                    ubyte AllowLatentAbilities<comment="When enabled, this allows Monsters to gain Latent Abilities">;
+                    ubyte unk2<comment="This data was not actually covered by the original BT, need to investigate">;
+                    struct LatentAbilityBlock {
+                        ubyte latent[4]<name="Activation HP Bar", bgcolor=cDkYellow>;
+                        AbilityID latentAbility[4]<name="Latent Ability", bgcolor=cDkYellow>;
+                    }latentBlock<name="Latent Ability Data">;
+                    struct BarrierAbilities {
+                        AbilityID barrierAbility<name="Barrier Ability", bgcolor=cBlack>;
+                        AbilityID barrierAbility<name="Barrier Ability", bgcolor=cBlack>;
+                    }barrier<name="Barrier Ability List">;
+                    
+                    ubyte n_item[5]<name="BarrierItem Drop Quantity", bgcolor=cLtGreen>;
+                    ubyte rate_item[5]<name="BarrierItem Drop chance">;
+                }monsterClass<read=EnumToString(name), name="Monster Class Data">;
+            };
+        }monsterBlock<name="Monster Class Block">;
+        
+    local int i;
+    FSeek(sectionpointers.UnkPointer[0]);
+    GenericSection UnkSection1<name="Camera-Related">;
+    FSeek(sectionpointers.UnkPointer[1]);
+    GenericSection UnkSection2<name="Camera-Related">;
+    FSeek(sectionpointers.UnkPointer[2]);
+    //GenericSection UnkSection3;
+    
+    struct sClassPreviews{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sClassPreview{
+                //ubyte unk[2];
+                ubyte CameraAngleOffset<comment="Clockwise: degrees offset from the Quadrant line">;
+                ubyte CameraQuadrant<comment="0 = North +0 deg, 1 = East +90 deg, 2 = South +180 deg, 3 = West +270 deg">;
+                CharID Character;
+                ushort Rotation<comment="determines the angle the unit is facing on the map">;
+                ScenarioName Scenario;
+                ClassID DefaultClass<name="Default Class?">;
+                MapList map;
+                ClassID Class<name="TimeSkip Class?">;
+                MinRanks ReasonRank<name="Reason Rank">;
+                byte X;
+                byte Y;
+                MinRanks FaithRank<name="Faith Rank">;
+            }ClassPreview<name="Class Preview">;
+        
+        }    
+    }ClassPreviews<name="Class Previews",comment="Determines the showcase of unit/classes when idling in the main menu">;
+    
+    FSeek(sectionpointers.UnkPointer[3]);  
+    struct sSection9{
+        DataSection Header;
+        local int i;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sdata9{
+                ushort unkshort0x0;
+                ushort unkshort0x2;
+            }data9;
+        }
+    }UnknownSection8;
+    
+    
+    FSeek(sectionpointers.UnkPointer[4]);
+    struct Section10{
+        DataSection Header;
+        local int k;
+        for (k = 0; k < Header.NumEntries; ++k){
+            struct Data10{
+                local ClassID Class<hidden=true>;
+                Class = k;
+                ClassID class1;
+                ClassID class2;
+                ClassID class3;
+                ClassID class4;
+            }someEntry<read=EnumToString(Class)>;
+        };
+    }UnKnownSection9<bgcolor=cLtBlue>;
+}file<open=true>;
+string MyStructToStringA(AbilityBlock& value)
+{
+    return EnumToString(value.Class);
+}
+
+string MyStructToStringC(ClassBlock& value)
+{
+    return EnumToString(value.Class);
+}
+string ReadBarrierItem(BarrierItem& v){
+    string str;
+    SPrintf(str, "%s", EnumToString(v.barrierDrop));
+    return str;
+};

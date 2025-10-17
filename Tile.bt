@@ -1,0 +1,158 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: Tile.bt
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Version: 1.0
+//   Purpose: Enums and toString function for Terrains
+//  Category: ReichardEnum
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
+//------------------------------------------------
+
+enum<ubyte> TerrainTile {
+    Impassable = 0,
+    Grassland,
+    Plains,
+    Forest,
+    Woods,
+    Desert,
+    River,
+    Waterfall,
+    Rock,
+    Mountain,
+    Bridge,
+    Sea,
+    Floor,
+    Wall_13,
+    Fence,
+    Stairs,
+    Rampart,
+    Door,
+    Heal_Tile,
+    Rubble,
+    Wall_20,
+    Lava_21,
+    Stronghold,
+    Peak_23,
+    Thicket_24 = 24,
+    Thicket_25 = 25,
+    Flier_26,
+    Tile_27,
+    Swamp_28,
+    Cavity_29,
+    Stones_30,
+    Railing_31,
+    Bonfire_32,
+    Flames_33,
+    Pillar_34,
+    Throne_35,
+    Sky_36,
+    Cliff_37,
+    Wall_38,
+    Snowfield_39,
+    Heal_Title_Plus = 40,
+    Tower_41,
+    House_42,
+    Valley_43,
+    Grave_44,
+    Coffin_45,
+    Chest_46 = 46,
+    HolyTomb_47,
+    Deck_48,
+    Ship_49,
+    Floor_Trap_50,
+    Lever_51,
+    Fiery_Floor_52,
+    Healstone_53,
+    Crater_54,
+    Crater_55,
+    Wardwood_56,
+    Cover_57,
+    Avo_Floor_58,
+    Pray_Stone_59,
+    Ballista = 60,
+    Fire_Orb_61 = 61,
+    Healstone_62,
+    Altar_63,
+    Vistam_64 = 64,
+    Edifice_65,
+    Question_66,
+    Onager_67 = 67,
+    Iron_Fence_68,
+    Warp_Floor_69,
+    Shoal_70,
+    Lake_71,
+    Bridge_72,
+    Beach_73,
+    Ruin_74,
+    Statue_75,
+    Flame_76,
+    Trench_77,
+    Crest_Stone_78,
+    Floor_79,
+    Poison_80,
+    Door_81,
+    Stair_82,
+    Pond_83,
+    Church_84,
+    Opera_Hall_85,
+    Channel_86,
+    Alter_87,
+    Hedge_88,
+    Gate_89,
+    Low_wall_90,
+    Question_Floor_91,
+    Floor_92,
+    Windmill_93,
+    unused_94,
+    Wall_95,
+    unused_96,
+    unused_97,
+    Odd_item_98,
+    Odd_door_99,
+    Mast_100,
+    Bow_101,
+    Pillar_102,
+    Wasteland_106 = 106,
+    Abyss_Gate_107,
+    Magic_Seal_108,
+    Statue_109,
+    Statue_110,
+    Statue_111,
+    Statue_112,
+    Statue_113,
+    Vortex_114,
+};
+
+local int i;
+local int j;
+
+
+struct TileFile {
+    struct Header {
+        int magic;
+        byte unknown[4];
+    }header<bgcolor=cGreen>;
+    for (i = 0; i < 32; ++i){
+        struct Row {
+            for (j = 0; j < 32; ++j){  
+                struct Tile{ 
+                    local int y = i; 
+                    local int x = j;
+                    TerrainTile default_tile<bgcolor=cBlue>;
+                    TerrainTile alt_tile<bgcolor=cRed>;
+                }tile<read=readTile>;
+                }
+           }row;
+    }
+} file;
+string readTile(Tile& c){
+    string out;
+    
+    SPrintf(out, "(%d, %d)", c.x, c.y);
+    
+  return EnumToString(c.default_tile) + " " + out;
+}

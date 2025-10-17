@@ -1,0 +1,76 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: fixed_lobby_quest.bt
+//   Authors: ReichardTheThird
+//   Version: 1.0
+//   Purpose: idk
+//  Category: Reichard
+// File Mask: *fixed_lobby_quest.bin
+//  ID Bytes: 
+//   History: 
+//   1.0    5/26/25 ReichardTheThird:   Started this Template
+//------------------------------------------------
+#include "structs.bt"
+
+
+
+LittleEndian();
+local int i = 0;
+
+struct sFile{
+    FileSections Sections;
+    struct sTable0{
+        DataSection SectionHeader;
+        
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sData0{
+                 local QuestID Name;
+                 Name=i;
+                 ushort GivesRenown;
+                 ushort GivesMoney;
+                 CharID charasdf;
+                 ushort unkShortArray0x6[7];
+                 CharID TargetCharacter0;
+                 CharID TargetCharacter1;
+                 CharID TargetCharacter2;
+                 BattalionIDShort Battalion0;
+                 BattalionIDShort Battalion1;
+                 BattalionIDShort Battalion2;
+                 Item_Adjusted Items[4];
+                 ubyte unkByte[3];
+                 byte RedOrMandatoryQuestMaybe;
+                 ubyte unkByte0[2];
+                 byte unkByte0x2e;
+                 byte BaseRecommendedLevel;
+                 ubyte Aux;
+                 AuxUnitBin EnemyBin;
+                 ubyte AuxUnitIndex;
+                 ScenarioName Scenario;
+            }data0<read=EnumToString(Name)>;   
+        }
+    }Table0<name="Table0">;
+    
+    struct sTable1{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sdata1{
+                byte unkByte[40];
+            }data1;
+        };
+    }Table1<name="", comment="">;
+    
+    struct sTable2{
+        DataSection SectionHeader;
+        for(i=0;i<SectionHeader.NumEntries;i++){
+            struct sdata2{
+                ushort GivesRenown;
+                ushort GivesMoney;
+                Item Item0;
+                Item Item1;
+                Item Item2;
+            }data2;
+        };
+    }Table2<name="", comment="">;
+    
+}File<open=true>;
