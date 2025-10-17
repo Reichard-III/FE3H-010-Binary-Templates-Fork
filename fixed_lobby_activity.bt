@@ -268,7 +268,7 @@ struct File {
 			struct seedRank {
 				local Seeds seed = i;
 				ubyte rank;
-			}rank<name="Rank", read=EnumToString(seed)>;
+			}rank<name="Rank", read=Str("%2d - %s",rank, EnumToString(seed))>;
 		}
 	}seedrankBlock<name="Gardening Seed Ranks">;
 
