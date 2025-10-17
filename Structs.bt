@@ -22,13 +22,10 @@ struct DataSection {
     int padding[13]<hidden=false>;
 };
 struct GenericSection {
-    int magic<bgcolor=cRed>;
-    int NumEntries<bgcolor=cBlue>;
-    int size<bgcolor=cGreen>;
-    int padding[13]<hidden=false>;
-     struct Entry {
-       ubyte entry[size];
-    }Entries[NumEntries]<bgcolor=cLtGreen,optimize=false>;
+    DataSection sectionHeader<name="Section Header">;
+    struct Entry {
+        ubyte entry[sectionHeader.size];
+    }Entries[sectionHeader.NumEntries]<bgcolor=cLtGreen,optimize=false>;
 };
 struct FileSections {
     int Number_of_Sections;
