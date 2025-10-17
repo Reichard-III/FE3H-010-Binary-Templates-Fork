@@ -363,8 +363,8 @@ struct File{
                 CharID character<name="Character ID">;
                 ubyte level<name="Required Exp">;
                 RankStats requiredStat<name="Required Stat">;
-                CombatArtID Art<name="Combat Art Learned">;
-                AbilityID Ability<name="Ability Learned">;
+                CombatArtID Art<name="Combat Art Learnt">;
+                AbilityID Skill<name="Skill Learnt">;
             }hiddentalentdata[numHdnTal]<name="Hidden Talent Data", read=GetTalentNames>;
     }hiddentalentstruct<name="Hidden Talent Table", bgcolor=cYellow>;
 	

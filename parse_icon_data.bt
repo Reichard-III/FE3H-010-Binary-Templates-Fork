@@ -1,0 +1,57 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+local int i<hidden=true>, filesize<hidden=true>;
+uint32 entrycount<name="Number of Entries">;
+struct SectionHeaders
+{
+	struct BinGzSectionHeader
+	{
+		uint32 SectionPointer;
+		uint32 SectionSize;
+	}bingzsectionheader[entrycount]<optimize=false>;
+}sectionheaders;
+
+
+struct TextureIconData {
+    uint32 global_id<bgcolor=cRed>;   //4 
+    uint16 texture_index<bgcolor=cBlue>;
+    uint16 icon_index;
+    uint16 icon_position_x;
+    uint16 icon_position_y;
+    uint16 icon_size_x;
+    uint16 icon_size_y;
+    uint16 texture_width;
+    uint16 texture_height;
+};
+
+struct Sections
+{
+	for(i = 0; i < entrycount; i++)
+	{
+		filesize = sectionheaders.bingzsectionheader[i].SectionSize;
+		if (filesize != 0)
+		{
+			FSeek(sectionheaders.bingzsectionheader[i].SectionPointer);
+			struct TextureIconDataSection
+			{
+				TextureIconData entries[ filesize/20 ]<read=Display>;
+			}bingzsection;
+		}
+	}
+}sections;
+
+string Display(TextureIconData &l)
+{
+     return Str("Icon #%d (%d-%d) at %d, %d, Size %d, %d", l.global_id, l.texture_index, l.icon_index, l.icon_position_x, l.icon_position_y, l.icon_size_x, l.icon_size_y);
+}

@@ -383,20 +383,8 @@ struct FILE {
                     ubyte bit5 : 1<name="???">;
                     ubyte bit6 : 1<name="???">;
                     ubyte bit7 : 1<name="???">;
-                    
-                    //uncomment the block below to get display flags on value column
-                    /*output = output + Str("%d",bit0);
-                    output = output + Str(" %d",bit1);
-                    output = output + Str(" %d",bit2);
-                    output = output + Str(" %d",bit3);
-                    
-                    output = output + Str(" %d",bit4);
-                    output = output + Str(" %d",bit5);
-                    output = output + Str(" %d",bit6);
-                    output = output + Str(" %d     ",bit7);*/
-                    output+=EnumToString(NameOfGambit);
                 }wep01flags01<name="Additional Flags 1", bgcolor=cBlack, open=true>;
-            }Item09<name="Gambit Data", read=output, open=false>;
+            }Item09<name="Gambit Data", read=EnumToString(NameOfGambit), open=false>;
         }
     }itemstructure09<name="Gambit Targeting/Use Block", bgcolor=cYellow>;
 
@@ -510,7 +498,7 @@ struct FILE {
 			        ubyte unknown<name="BattalionShop Index",comment="200 = invalid">;
                     WeaponRanks BRanks<name="Rank">;
                     GambitType BGambit<name="Gambit">;
-			        WepFlag02 Effectiveness<name="EffectivenessFlags">;
+			        byte BattalionAttackSpeed<name="Attack Speed">;
 			        byte BattalionModelIndex<name="Battalion Model Index?">;
 			        byte Model01<name="Model Table Entry 1">;
 			        byte Model02<name="Model Table Entry 2">;

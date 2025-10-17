@@ -317,7 +317,6 @@ struct FILE {
             float PositionX<name="Position X">;
             float PositionY<name="Position Y">;
             EquipIDShort EquipmentID<name="Equipment">;
-            //ubyte padding;
             ubyte Unk;
 			ubyte Unk;
             ubyte Unk;

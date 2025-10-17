@@ -1,0 +1,66 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+#include "Structs.bt"
+local int n = 0;
+enum<byte> Field0x0 {
+    DoNotAttack,
+    Unknown1,
+    Unknown2,
+    DoNotTargetCharacters,
+    TargetHasClass = 4,
+    DoNotTargetByleth = 5,
+};
+
+enum<byte> Field0x4 {
+    NoMovement_0,
+    Unk1,
+    NoMovement_2,    
+    Byleth_Related = 5,
+};
+
+struct AIDataEntry {
+    Field0x0 unk0<bgcolor=cBlue>;
+    ubyte unk1;
+    ubyte unk2<bgcolor=cDkGreen>;
+    ubyte HealthRelated<name="Heal when below HP%", bgcolor=cGreen>;
+    Field0x4 unk4<bgcolor=cGray>;
+    ubyte unk5<name="Avoid Damage", bgcolor=cBlack>;
+    ubyte ParameterSet1[4]<bgcolor=cYellow>;
+    ubyte unka;
+    if (unk0 == 3 || unk0 == 5) {
+        ubyte Characters[3];
+    }
+    else if (unk0 == 4) {
+        ubyte Class;
+        ubyte padding[2];    
+    }
+    else if (unk0 == 1) {
+      ubyte unkd[3];
+    }
+    else {
+      ubyte unkb;
+      ubyte unkc;
+      ubyte unkd;
+    };
+    ubyte ParameterSet[4]<bgcolor=cRed>; 
+    ubyte unk12;
+    ubyte unk13;
+};
+struct AIDataFile {
+    FileSections Section;
+    FSeek(Section.SectionPointers[0].Ptr);
+    DataSection header;
+    for (n = 0; n < header.NumEntries; ++n) {
+        AIDataEntry AIEntry;
+    }
+}File;

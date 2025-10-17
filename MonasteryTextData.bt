@@ -1,0 +1,27 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: Starts at 9051.bin
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+#include "include_Enums.bt"
+struct MonasteryDialogueData {
+    short ConversationIndex<bgcolor=cGreen>;
+    short unk0;
+    short unk1;
+    short unk2;
+    CharID ID<bgcolor=cBlue>;
+    ushort Voice<bgcolor=cRed>;
+    short Expression;
+    short animation<name="Possible Animation?">;
+};
+local int nblocks = FileSize() / 16;
+
+
+MonasteryDialogueData data[nblocks];

@@ -23,12 +23,12 @@ struct sFile{
         struct sGimmicks{
             for(i=0;i<SectionHeader.NumEntries;i++){
                 struct sGimmick{
-                    byte    Y0<comment="YCoordinate of Tile 0">;
-                    byte    X0<comment="XCoordinate of Tile 0">;
+                    byte Y0<comment="YCoordinate of Tile 0">;
+                    byte X0<comment="XCoordinate of Tile 0">;
                     MapList MapName<name="Map Name">;
                     enum GimmickEffect GimmickType;
-                    byte    Y1<comment="YCoordinate of Tile 1">;
-                    byte    X1<comment="XCoordinate of Tile 1">;
+                    byte Y1<comment="YCoordinate of Tile 1">;
+                    byte X1<comment="XCoordinate of Tile 1">;
                     struct sFlags0x7{
                         ubyte bit0 : 1<name="TerrainEffects",comment="Activates the alternative terrain mode i.e. Bernie Hill fire, Lonato Fog, etc.">;
                         ubyte bit1 : 1<name="unkF0B1">;

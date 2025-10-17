@@ -13,7 +13,7 @@
 //------------------------------------------------
 
 enum<ubyte> TerrainTile {
-    Impassable = 0,
+    Impassible = 0,
     Grassland,
     Plains,
     Forest,

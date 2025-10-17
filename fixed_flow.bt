@@ -2,7 +2,7 @@
 //--- 010 Editor v14.0 Binary Template
 //
 //      File: fixed_flow.bt
-//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
+//   Authors: Triabolical, ReichardTheThird
 //   Version: 1.1
 //   Purpose: Parses fixed_flow.bin, a file that seems to control chapter to chapter progression. File that controls cutscenes, map, labels of a chapter. Can be used to add more chapters if there's room
 //  Category: Reichard
@@ -15,6 +15,8 @@
 
 LittleEndian();
 #include "Enum/flow_enums.bt"
+#include "include_Enums.bt"
+
 local int m = 0;
 local int o = 0;
 struct ParalogueBlock {
@@ -25,21 +27,15 @@ struct ParalogueBlock {
     for (m = 0; m < EntryCount; ++m){
         struct ParalogueEvent {
         Event postBattleCutscene<bgcolor=cYellow, name="Post Battle Cutscene">;
-        Names ParalogueCharacter1<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
-        Names ParalogueCharacter2<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
+        NameID ParalogueCharacter1<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
+        NameID ParalogueCharacter2<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
         Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene">;
         ScenarioName map<bgcolor=cGreen, name="Map ID">;
         byte Padding<hidden=false>;
         }paralogue<read=EnumToString(map), name="Paralogue">;
     }
 };
-/*
-for (i = 0; i < file.paralogues.EntryCount; ++i){
-    file.paralogues.paralogue[i].preBattleCutscene = -1;
 
-}
-
-*/
 struct RouteFlow {
     int magic<bgcolor=cRed>;
     int EntryCount<bgcolor=cRed>;
@@ -63,25 +59,19 @@ struct RouteFlow {
             // Added file index for quick reference, DLC files in DATA1 from the DLC.
             bsi monastery<bgcolor=cBlue, name="Monastery Script", comment="Monastery BSI scripts in order, Skips the monastery if this is -1">;
             ubyte unk2;
-            ubyte unk3;
+            BGM default_battle_bgm<name="Default Battle BGM">;
             ChapterNames chapterLabel<bgcolor=cBlue,name="Chapter String Index", comment="Number is msgdata index in table 2">;
             Month MonthLabel<bgcolor=cBlue, name="Month", comment="Month on the calander">;
             ScenarioName map<bgcolor=cGreen, name="Map ID", comment="Matches Scenario Index in fixed_scenario">;
             ubyte unk4<name="Day of Mission?">;
             RouteName route<bgcolor=cRed, name="Route Label">;
             // Seems to be calander related
-            //ubyte unk5;
-            struct sFlags0x21{
-                ubyte bit0 : 1<name="Unk", comment="">;
-                ubyte bit1 : 1<name="Unk?", comment="">;
-                ubyte bit2 : 1<name="Unk", comment="">;
-                ubyte bit3 : 1<name="Unk", comment="">;
-                ubyte bit4 : 1<name="Unk", comment="">;
-                ubyte bit5 : 1<name="Unk", comment="">;
-                ubyte bit6 : 1<name="Unk", comment="">;
-                ubyte bit7 : 1<name="Unk", comment="">;
-            }Flags0x21;
-            b8f unk6;
+            struct FlowFlags {
+                ubyte Ending:1;
+                ubyte AngryDimitri:1;
+                
+            }flags;
+            ubyte unk6;
             ubyte unk7;
             ubyte unk8;
             ubyte unk9;

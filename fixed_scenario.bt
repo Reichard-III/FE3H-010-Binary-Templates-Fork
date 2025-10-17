@@ -98,7 +98,7 @@ struct GenericEnemyWeapons{
     DataSection Header;
     for (i = 0; i < Header.NumEntries; i++){
         struct EnemyWeapons{  
-            ItemByte weapon[Header.size]<comment="The game code adjusts this value by adding 10, so these indexes have been preadjusted by -10 for easy editing (i.e.: IronSword16 -> IronSword6">;
+            ItemByte weapon[Header.size];
         }weapon;
     };
 };

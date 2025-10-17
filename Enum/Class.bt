@@ -35,7 +35,7 @@ enum<ubyte> ClassID{
     Assassin,
     Fortress_Knight,
     Paladin,
-    Enemy_PegKnight,
+    Advanced_Pegasus_Knight,
     Wyvern_Rider,
     Warrior,
     Sniper,

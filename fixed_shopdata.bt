@@ -13,7 +13,7 @@
 //   1.0    Moonling - Basic Table mapping
 //------------------------------------------------
 #include "Structs.bt"
-LittleEndian();
+
 enum<ubyte> MerchantType {
   Southern_Merchant = 0x0,
   Eastern_Merchant = 0x1,
@@ -31,7 +31,7 @@ enum<ubyte> Statue {
 enum<byte> AccumulationType {
     IDK_0_AT =0,
     EqualToShopAvailability,
-    AccumulatesCurrentPurchasableReserveWithShopAvailability,
+    AccumulatesCurrentPurchasableReserveWithShopAvailability, //TODO clarify purpose
     IDK_255_AT=255 
 };
 
@@ -227,7 +227,6 @@ struct FILE {
         ubyte ClassMasteryPlus_Intermediate<name="ClassMasteryPlus_Intermediate", bgcolor=cDkBlue>;
         ubyte ActivityPointsBonus;
         ubyte expBonus<name="Exp +%">;
-        //ubyte unk[4]<bgcolor=cBlack>;
         ubyte ClassMasteryPlus_BeginnerOrNone<bgcolor=cBlack>;
         ubyte HPPlus<bgcolor=cLtBlue, name="Max HP Increase">;
         ubyte ClassMasteryPlus_Advanced;
@@ -241,8 +240,6 @@ struct FILE {
         ubyte ResPlus<bgcolor=cLtBlue, name="Res Cap Increase">;
         ubyte MovePlus<bgcolor=cLtBlue, name="Move Cap Increase?">;
         ubyte CharmPlus<bgcolor=cLtBlue, name="Charm Cap Increase">;
-        ubyte ranks[11];
-/*
         ubyte Sword<name="Sword Bonus">;
         ubyte Lance<name="Lance Bonus">;
         ubyte Axe<name="Axe Bonus">;
@@ -254,7 +251,6 @@ struct FILE {
         ubyte HvyArmr<name="Heavy Armor Bonus">;
         ubyte Riding<name="Riding Bonus">;
         ubyte Flying<name="Flying Bonus">;
-*/  
   } saint[NumofTable06]<name = "Saint Statue", read=GetSaintStatue>;
   } itemstructure06<name = "Saint Statues", bgcolor = cLtBlue>;
 

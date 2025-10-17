@@ -822,16 +822,3 @@ enum<uint16> CharID
 	Anna_Playable = 1046,
     NoCharacter = 65535,
 };
-
-enum<ubyte> FishingEventName{
-    FlaynsFishingTournament_FEN,
-    FishingForTheBigOne_FEN,
-    FishOfMystery_FEN,
-    FistfulsOfFish_FEN,
-    GoldenFish_FEN,
-    LotsOfLargeFish_FEN
-};
-
-enum<ubyte> GardeningEventName{
-    Blessing_Of_The_Land_GEN  
-};

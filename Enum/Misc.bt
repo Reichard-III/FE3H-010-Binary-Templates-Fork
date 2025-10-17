@@ -5,6 +5,35 @@
 //   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
 //   Version: 1.0
 //   Purpose: Contains the following enums
+/*
+	TrueFalse
+    Proficiency
+    MinRanks
+    ProfessorRanks
+    RankStats
+    SupportRank
+    SupportRankByte
+    SupportMinorRank
+    MonsterName
+    CharID_Goals
+    Goal
+    StaggeringBlow
+    BGM
+    PaletteID
+    QuestStatus
+    AllegianceID
+    MountID
+	BarrierStatus
+	MonsterSize
+	ClassTier
+	WeaponType
+	Adjutant
+	TerrainTile
+	MoveType
+	AID aka AssetID
+	Difficulty
+	Preferences
+*/
 //  Category: ReichardEnum
 // File Mask: 
 //  ID Bytes: 
@@ -763,9 +792,3 @@ enum<byte> Preferences {
 
 };
 
-enum<ubyte> FishingEventType{
-    Standard_FET,
-	FishOfMystery_FET,
-	GoldenFish_FET,
-	LotsOfLargeFish_FET,
-};

@@ -41,10 +41,10 @@ enum<byte> Restriction {
 
 };
 
-struct GenericFile {
+struct StageData {
     FileSections Sections;
     FSeek(Sections.SectionPointers[0].Ptr);
-    struct MaterialBlock {
+    struct TileData {
         DataSection Header;
         for (i = 0; i < Header.NumEntries; i++){
             struct Terrain {
@@ -56,7 +56,6 @@ struct GenericFile {
                 byte unk<bgcolor=cGreen>;
                 byte unk<bgcolor=cGreen>;
                 ushort unkShort<bgcolor=cGreen>;
-                //s = s + Str("\t%d",unkShort);
                 byte Def<name="Protection+",bgcolor=cRed>;
                 byte Res<name="Resilence+",bgcolor=cBlue>;
                 byte Avoid<name="Avoid Bonus",bgcolor=cYellow>;
@@ -91,38 +90,8 @@ struct GenericFile {
                     ubyte flag21:1;
                     ubyte flag22:1;
                     ubyte flag23:1;
-                    
-                    
                 }terrainFlags<bgcolor=cBlue>;    
-                local string display;
-                display = Str(" %d ",terrainFlags.flag0);
-                display += Str("%d ",terrainFlags.flag1);
-                display += Str("%d ",terrainFlags.flag2);
-                display += Str("%d ",terrainFlags.flag3);
-                display += Str("%d ",terrainFlags.flag4);
-                display += Str("%d ",terrainFlags.flag5);
-                display += Str("%d ",terrainFlags.flag6);
-                display += Str("%d ",terrainFlags.flag7);
-                
-                display += Str("%d ",terrainFlags.flag8);
-                display += Str("%d ",terrainFlags.flag9);
-                display += Str("%d ",terrainFlags.flag10);
-                display += Str("%d ",terrainFlags.flag11);
-                display += Str("%d ",terrainFlags.flag12);
-                display += Str("%d ",terrainFlags.flag13);
-                display += Str("%d ",terrainFlags.flag14);
-                display += Str("%d ",terrainFlags.flag15);
-                
-                display += Str("%d ",terrainFlags.flag16);
-                display += Str("%d ",terrainFlags.flag17);
-                display += Str("%d ",terrainFlags.flag18);
-                display += Str("%d ",terrainFlags.flag19);
-                display += Str("%d ",terrainFlags.flag20);
-                display += Str("%d ",terrainFlags.flag21);
-                display += Str("%d ",terrainFlags.flag22);
-                display += Str("%d ",terrainFlags.flag23);
-                s += display;
-            }terrain<read=s>;
+            }terrain<read=EnumToString(name)>;
         };
     }TerrainData;
     FSeek(Sections.SectionPointers[1].Ptr);
@@ -159,7 +128,6 @@ struct GenericFile {
     
     FSeek(Sections.SectionPointers[2].Ptr);
     
-    //GenericSection UnknownScenarioIndexedCoordinatesQ;
     struct UnkScenarioIndexedWeirdCoordinatesThingTable{
         DataSection Header;
         for(i=0; i<Header.NumEntries; i++){

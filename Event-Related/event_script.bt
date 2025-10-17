@@ -27,6 +27,12 @@ for(i = 0; i < nblocks; i++){
         magicFunction = ReadInt();
     switch(magicFunction){
         case(0x0):{ StructCubeScene cubeScene<name="Cube Scene", read=readCubeScene>; break; }
+        case(0x9a): {
+            struct{
+                int args[12]<hidden=true>;  
+            }Dimitri0x9a<name="Unflag Angry Dimirti">;
+            break; 
+        }
         case(0x1):
         {
             StructCharacterList characterList<name="Character List", read=readCharacterList>;

@@ -176,3 +176,24 @@ enum<ubyte> CalendarEvent {
     ConstancesBirthday,
     HapisBirthday
 };
+
+enum<ubyte> FishingEventType{
+    Standard_FET,
+	FishOfMystery_FET,
+	GoldenFish_FET,
+	LotsOfLargeFish_FET,
+};
+
+
+enum<ubyte> FishingEventName{
+    FlaynsFishingTournament_FEN,
+    FishingForTheBigOne_FEN,
+    FishOfMystery_FEN,
+    FistfulsOfFish_FEN,
+    GoldenFish_FEN,
+    LotsOfLargeFish_FEN
+};
+
+enum<ubyte> GardeningEventName{
+    Blessing_Of_The_Land_GEN  
+};
