@@ -178,10 +178,10 @@ struct File {
                 
 				byte RollPoolSize<comment="Seems to have multiple purposes so idk">;
                 struct sLA5RollThresholds{
-                    byte Standard_FET;
-	                byte FishOfMystery_FET;
-	                byte GoldenFish_FET;
-	                byte LotsOfLargeFish_FET;
+                    byte Standard_FET<name="No Fish Event">;
+	                byte FishOfMystery_FET<name="Fish of Mystery Event">;
+	                byte GoldenFish_FET<name="Golden Fish Event">;
+	                byte LotsOfLargeFish_FET<name="Lots of Large Fish Event">;
                 }LA5Thresholds<name="Marginal Roll Thresholds">;
 				byte unk[6]<name="Unused?">;
 			}LobbyActivity5Entry<name="Fish Tier Roll Thresholds",read=EnumToString(FT)>;
