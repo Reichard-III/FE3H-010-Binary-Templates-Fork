@@ -171,7 +171,7 @@ enum<ubyte> WeapAnimType {
 enum<ubyte> EffectFlag
 {
 	Anyone = 0,
-	Right_Crest = 5,
+	Matching_Crest = 5,
 	Any_Crest1 = 6,
 	Any_Crest2 = 7,
 	Byleth = 8,
