@@ -284,7 +284,7 @@ struct File {
 				ubyte HighYields_MaxIndex;
 				ubyte LowYields_MinIndex;
 				ubyte HighYields_MinIndex;
-				ubyte LowYieldsChance<comment="not actually used since L+H=100, always calcs with HighYieldsChance instead">;
+				ubyte LowYieldsChance<comment="not actually used since L+H=100, always calcs with HighYieldsChance instead. Note: I can't remember how I determined this so idk">;
 				
 				ubyte HighYieldsChance<comment="grants HighYields if roll is less than this value">;
 			}ScoreThresholds<name="Thresholds",read = MinThreshold>;
@@ -294,7 +294,12 @@ struct File {
 
 	struct CultivationCost{//11
 		DataSection SectionHeader;
-		uint CultivatePrice[SectionHeader.NumEntries];
+		uint Infuse_With_Magic;
+        uint Pour_Airmid_Water;
+        uint Prune;
+        uint Scatter_Bonemeal;
+        uint Use_Caledonian_Soil;
+        uint Spread_Pegasus_Blessings;
 	}CultivationBlock<name="Cultivation Costs">;
 
 	struct ProfessorLevel{//12
@@ -330,7 +335,7 @@ struct File {
 				CharID character<bgcolor=cRed>;
 				byte ZCoordOffsetModifier;
 				byte padding;
-			}entry13<read=EnumToString(character)>;
+			}entry13<read=EnumToString(character),name="Character Entry">;
 		}
 	}block13<name="ShareAMeal-Seating Z Coordinate modifier",comment="Used to adjust the Z axis of characters sitting down in Share A Meal activities">;
 
@@ -357,7 +362,7 @@ struct File {
 			struct Entry15 {
                 local SupportMinorRank SMR=i;
                 
-				short SeatingDistanceModifier<comment="Subtracts this position from Byleth's seat pos and Adds to Sauna Partner's seat pos, modifier of 71 will give them the save position">;
+				short SeatingDistanceModifier<comment="Subtracts this position from Byleth's seat pos and Adds to Sauna Partner's seat pos, modifier of 71 will give them the same position">;
 				byte WarmupBarSize;
 				byte SaveChance;
 			}entry15<name="Sauna Support Bonuses",read=EnumToString(SMR)>;
