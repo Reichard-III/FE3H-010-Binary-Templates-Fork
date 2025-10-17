@@ -368,12 +368,12 @@ struct File {
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entry16 {
-				float B2;
-				float B0;
-				float B1;
-				float A2;
-				float A0;
-				float A1;
+				float CameraPosY;
+				float CameraPosX;
+				float CameraPosZ;
+				float CameraTargetY;
+				float CameraTargetX;
+				float CameraTargetZ;
 			}entry16<name="Camera position?",comment="Entry is selected randomly?">;
 		}
 	}block16<name="Sauna Random Camera Positions">;
