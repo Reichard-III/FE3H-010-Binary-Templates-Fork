@@ -394,8 +394,8 @@ struct sCrimsonFlowerEnabledChaptersBitMask{
 	ubyte bit7 : 1<name="Does nothing",comment="handled in anoth1er data field">;
 };
 struct sWhiteCloudsEnabledChaptersBitMask{
-	ubyte bit0 : 1<name="Chapter 1",comment="MonasteryScriptID = 0">;
-	ubyte bit1 : 1<name="Unused",comment="MonasteryScriptID = 1">;
+	ubyte bit0 : 1<name="Chapter 0",comment="MonasteryScriptID = 0">;
+	ubyte bit1 : 1<name="Chapter 1",comment="MonasteryScriptID = 1">;
 	ubyte bit2 : 1<name="Chapter 2",comment="MonasteryScriptID = 2">;
 	ubyte bit3 : 1<name="Chapter 3",comment="MonasteryScriptID = 3">;
 	ubyte bit4 : 1<name="Chapter 4",comment="MonasteryScriptID = 4">;
