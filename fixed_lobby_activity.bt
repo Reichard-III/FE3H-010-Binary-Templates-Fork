@@ -166,7 +166,7 @@ struct File {
 				AbilityID unk9<bgcolor=cBlue,name="Ability 2", comment="Ability slots #4 & #5 location unknown">;
 				AbilityID unk10<bgcolor=cBlue,name="Ability 3", comment="Ability slots #4 & #5 location unknown">;
 				byte unk11<bgcolor=cBlue,name="Padding">;
-			}Tourney<read=EnumToString(unk2)>;
+			}Tourney<read=Str("%s - %s",EnumToString(unk2),EnumToString(weapon))>;
 		}
 	}tourneyBlock<name="Tournaments">;
 	
@@ -178,10 +178,10 @@ struct File {
                 
 				byte RollPoolSize<comment="Seems to have multiple purposes so idk">;
                 struct sLA5RollThresholds{
-                    byte Standard_FET;
-	                byte FishOfMystery_FET;
-	                byte GoldenFish_FET;
-	                byte LotsOfLargeFish_FET;
+                    byte Standard_FET<name="No Fish Event">;
+	                byte FishOfMystery_FET<name="Fish of Mystery Event">;
+	                byte GoldenFish_FET<name="Golden Fish Event">;
+	                byte LotsOfLargeFish_FET<name="Lots of Large Fish Event">;
                 }LA5Thresholds<name="Marginal Roll Thresholds">;
 				byte unk[6]<name="Unused?">;
 			}LobbyActivity5Entry<name="Fish Tier Roll Thresholds",read=EnumToString(FT)>;
@@ -223,13 +223,13 @@ struct File {
 						Item FishReward1;  
 						Item FishReward2;  
 					};
-					FishRewards FishReward<read="LargeFishShadow">;
-                    FishRewards FishReward<read="StrangeFishShadow">;
-                    FishRewards FishReward<read="GlimmeringFishShadow">;
-                    FishRewards FishReward<read="SmallFishShadow">;
+					FishRewards FishReward<read="Large Fish Shadow">;
+                    FishRewards FishReward<read="Strange Fish Shadow">;
+                    FishRewards FishReward<read="Glimmering Fish Shadow">;
+                    FishRewards FishReward<read="Small Fish Shadow">;
                     
-                    FishRewards FishReward<read="SparklingFishShadow">;
-                    FishRewards FishReward<read="GiantFishShadow">;
+                    FishRewards FishReward<read="Sparkling Fish Shadow">;
+                    FishRewards FishReward<read="Giant Fish Shadow">;
                     FishRewards FishReward<read="Unused6FishShadow">;
                     FishRewards FishReward<read="Unused7FishShadow">;
                     
@@ -268,7 +268,7 @@ struct File {
 			struct seedRank {
 				local Seeds seed = i;
 				ubyte rank;
-			}rank<name="Rank", read=EnumToString(seed)>;
+			}rank<name="Rank", read=Str("%2d - %s",rank, EnumToString(seed))>;
 		}
 	}seedrankBlock<name="Gardening Seed Ranks">;
 
@@ -284,7 +284,7 @@ struct File {
 				ubyte HighYields_MaxIndex;
 				ubyte LowYields_MinIndex;
 				ubyte HighYields_MinIndex;
-				ubyte LowYieldsChance<comment="not actually used since L+H=100, always calcs with HighYieldsChance instead">;
+				ubyte LowYieldsChance<comment="not actually used since L+H=100, always calcs with HighYieldsChance instead. Note: I can't remember how I determined this so idk">;
 				
 				ubyte HighYieldsChance<comment="grants HighYields if roll is less than this value">;
 			}ScoreThresholds<name="Thresholds",read = MinThreshold>;
@@ -294,7 +294,12 @@ struct File {
 
 	struct CultivationCost{//11
 		DataSection SectionHeader;
-		uint CultivatePrice[SectionHeader.NumEntries];
+		uint Infuse_With_Magic;
+        uint Pour_Airmid_Water;
+        uint Prune;
+        uint Scatter_Bonemeal;
+        uint Use_Caledonian_Soil;
+        uint Spread_Pegasus_Blessings;
 	}CultivationBlock<name="Cultivation Costs">;
 
 	struct ProfessorLevel{//12
@@ -330,7 +335,7 @@ struct File {
 				CharID character<bgcolor=cRed>;
 				byte ZCoordOffsetModifier;
 				byte padding;
-			}entry13<read=EnumToString(character)>;
+			}entry13<read=EnumToString(character),name="Character Entry">;
 		}
 	}block13<name="ShareAMeal-Seating Z Coordinate modifier",comment="Used to adjust the Z axis of characters sitting down in Share A Meal activities">;
 
@@ -357,7 +362,7 @@ struct File {
 			struct Entry15 {
                 local SupportMinorRank SMR=i;
                 
-				short SeatingDistanceModifier<comment="Subtracts this position from Byleth's seat pos and Adds to Sauna Partner's seat pos, modifier of 71 will give them the save position">;
+				short SeatingDistanceModifier<comment="Subtracts this position from Byleth's seat pos and Adds to Sauna Partner's seat pos, modifier of 71 will give them the same position">;
 				byte WarmupBarSize;
 				byte SaveChance;
 			}entry15<name="Sauna Support Bonuses",read=EnumToString(SMR)>;
@@ -368,12 +373,12 @@ struct File {
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entry16 {
-				float B2;
-				float B0;
-				float B1;
-				float A2;
-				float A0;
-				float A1;
+				float CameraPosY;
+				float CameraPosX;
+				float CameraPosZ;
+				float CameraTargetY;
+				float CameraTargetX;
+				float CameraTargetZ;
 			}entry16<name="Camera position?",comment="Entry is selected randomly?">;
 		}
 	}block16<name="Sauna Random Camera Positions">;
