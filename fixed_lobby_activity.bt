@@ -166,7 +166,7 @@ struct File {
 				AbilityID unk9<bgcolor=cBlue,name="Ability 2", comment="Ability slots #4 & #5 location unknown">;
 				AbilityID unk10<bgcolor=cBlue,name="Ability 3", comment="Ability slots #4 & #5 location unknown">;
 				byte unk11<bgcolor=cBlue,name="Padding">;
-			}Tourney<read=EnumToString(unk2)>;
+			}Tourney<read=Str("%s - %s",EnumToString(unk2),EnumToString(weapon))>;
 		}
 	}tourneyBlock<name="Tournaments">;
 	
