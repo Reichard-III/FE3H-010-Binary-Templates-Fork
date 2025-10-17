@@ -1,0 +1,55 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: Magic_Enum.bt
+//   Authors: 
+//   Version: 
+//   Purpose: Default Magic Enum for Fire Emblem: Three Houses
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+enum<ubyte> SpellID{
+    Fire = 0,
+    Bolganone = 1,
+    Ragnarok = 2,
+    Thunder = 3,
+    Thoron = 4,
+    Bolting = 5,
+    Wind = 6,
+    Cutting_Gale = 7,
+    Excalibur = 8,
+    Blizzard = 9,
+    Fimbulvetr = 10,
+    Sagittae = 11,
+    Meteor = 12,
+    Agneas_Arrow = 13,
+    Miasma_Δ = 14,
+    Mire_Β = 15,
+    Swarm_Ζ = 16,
+    Banshee_Θ = 17,
+    Death_Γ = 18,
+    Luna_Λ = 19,
+    Dark_Spikes_Τ = 20,
+    Hades_Ω = 21,
+    Bohr_Χ = 22,
+    Quake_Σ = 23,
+    Heal = 24,
+    Recover = 25,
+    Physic = 26,
+    Fortify = 27,
+    Nosferatu = 28,
+    Seraphim = 29,
+    Aura = 30,
+    Abraxas = 31,
+    Torch_Spell = 32,
+    Restore = 33,
+    Ward = 34,
+    Silence = 35,
+    Rescue = 36,
+    Warp = 37,
+    No_Spell = 38,
+    No_Spell_ = 255,
+};

@@ -1,0 +1,23 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: 6160
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+struct Entry6160 {
+    short some_data[4];
+    byte data[12];    
+};
+struct File6160 {
+    int32 n_entries;
+    int32 padding[3]<hidden=true>;
+    Entry6160 entries[n_entries];
+}file;
+

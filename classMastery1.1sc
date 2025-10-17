@@ -1,0 +1,113 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Script File
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+//   History: 
+//------------------------------------------------
+local int i = 0;
+local int j = 0;
+
+local int numAdd = 1;
+local int add = numAdd*12;
+        //File.Block1.sectionHeader.NumEntries += numAdd;
+        //File.Header.Size01 += add;
+        //File.Header.ClassUniAniP += add;
+        File.Header.ClassUniAniS += add;
+        File.classunianim.sectionHeader.NumEntries += numAdd;
+        File.Header.ClassBaseAniP += add;
+        File.Header.Pointer04 += add;
+        File.Header.Pointer05 += add;
+        File.Header.Pointer06 += add;
+        File.Header.Pointer07 += add;
+        File.Header.Pointer08 += add;
+        File.Header.Pointer09 += add;
+        File.Header.Pointer10 += add;
+        File.Header.Pointer11 += add;
+        File.Header.Pointer12 += add;
+        File.Header.Pointer13 += add;
+        File.Header.Pointer14 += add;
+        File.Header.Pointer15 += add;
+        File.Header.WeaponAnimP += add;
+        File.Header.Pointer17 += add;
+        File.Header.Pointer18 += add;
+        File.Header.Pointer19 += add;
+        File.Header.Pointer20 += add;
+        File.Header.WeaponPointer += add;
+        File.Header.EquipmentPointer += add;
+		File.Header.WeaponAuraPointer += add;
+		File.Header.Pointer24 += add;
+		File.Header.Pointer25 += add;
+		File.Header.WeaponBulletPointer += add;
+		File.Header.Pointer27 += add;
+		File.Header.Pointer28 += add;
+		File.Header.Pointer29 += add;
+//RunTemplate("fixed_actdata.bt");
+
+/*
+for (i = 0; i < 45; ++i){
+    for (j = 0; j < 11; ++j){
+        //if (file.wpnrankstructure.wpnrank.wpnrankdata[i].startingRanks[j] == 0){
+            file.wpnrankstructure.wpnrank.wpnrankdata[i].startingRanks[j] = 11;
+      //  }
+        //file.wpnrankstructure.wpnrank.wpnrankdata[i].weaponProf[j] = 0;
+    }
+}
+*/
+//RunTemplate("fixed_persondata.bt");
+/*
+		file.sectionpointers.NumberOfSectionPointers;
+		file.sectionpointers.CharBlockStructSize += 160;
+		file.sectionpointers.PointerToAssetID += 160;
+		file.sectionpointers.PointerToVoiceID+= 160;
+		file.sectionpointers.PointerToWpnRanks+= 160;
+		file.sectionpointers.PointerToSpellLearnset+= 160;
+		file.sectionpointers.PointerToSkillLearnset+= 160;
+		file.sectionpointers.PointerToStartingWeapons+= 160;
+		file.sectionpointers.PointerToArtLearnset+= 160;
+		file.sectionpointers.LinkedAttackPtr+= 160;
+		file.sectionpointers.LinkedAttackSpecialPtr+= 160;
+		file.sectionpointers.SupportListPointer+= 160;
+		file.sectionpointers.PointerToHiddenTalent+= 160;
+		file.sectionpointers.UnkPointer04+= 160;
+		file.sectionpointers.PointerToFacultyTraining+= 160;
+		file.sectionpointers.PointerToSeminar+= 160;
+		file.sectionpointers.Size3Pointer+= 160;
+		file.sectionpointers.PortraitsPointer+= 160;
+		file.sectionpointers.SizeFourPointer+= 160;
+*/
+/*
+for (i = 0; i < 100; ++i){
+    for (j = 0; j < 10; ++j)
+        file.classBlock.classdata[i].PG[j] = 0;
+
+}
+*/
+/*
+for (i = 0; i < 1201; ++i){
+    file.personstructure.person[i].HPGrowth = 100;
+    file.personstructure.person[i].MaxStat.Move = 99;
+    for (j = 0; j < 9; ++j){
+        file.personstructure.person[i].growths[j] = 100;
+    }
+}
+*/
+/*
+RunTemplate("fixed_persondata.bt");
+
+for (i = 0; i < 45; ++i){
+    for (j = 0; j < 11; ++j){
+        if (file.wpnrankstructure.wpnrank.wpnrankdata[i].startingRanks[j] == 0){
+            file.wpnrankstructure.wpnrank.wpnrankdata[i].startingRanks[j] = 1;
+        }
+        //file.wpnrankstructure.wpnrank.wpnrankdata[i].weaponProf[j] = 0;
+    }
+}
+RunTemplate("fixed_shopdata.bt");
+for (i = 0; i < 40; ++i){
+    File.itemstructure06.saint[i].DP += 0x2;
+}
+*/

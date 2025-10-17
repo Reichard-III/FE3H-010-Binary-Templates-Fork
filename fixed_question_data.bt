@@ -1,0 +1,67 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+#include "Structs.bt"
+local int i = 0;
+enum<byte> Response {
+    Bad_ = -1,
+    Neutral_ = 0,
+    Good_ = 1,
+};
+
+FileSections Sections;
+FSeek(Sections.SectionPointers[0].Ptr);
+struct Q1 {
+    int magic<bgcolor=cRed>;
+    int NumEntries<bgcolor=cBlue>;
+    int size<bgcolor=cGreen>;
+    int padding[13]<hidden=true>;
+     struct Question1 {
+        CharID Character<bgcolor=cRed>;
+        CharID Side_Character1<name="Side Character 1", bgcolor=cGreen>;
+        CharID Side_Character2<name="Side Character 2", bgcolor=cGreen>;
+        Response Side_Character2_1<name="Side Character 2's Response to Answer 1">;
+        Response Side_Character2_2<name="Side Character 2's Response to Answer 2">;
+        Response Side_Character2_3<name="Side Character 2's Response to Answer 3">;
+        Response Side_Character1_1<name="Side Character 1's Response to Answer 1">;
+        Response Side_Character1_2<name="Side Character 1's Response to Answer 2">;
+        Response Side_Character1_3<name="Side Character 1's Response to Answer 3">;
+        Response Character_1<name="Character's Response to Answer 1">;
+        Response Character_2<name="Character's Response to Answer 2">;
+        Response Character_3<name="Character's Response to Answer 3">;
+        byte padding<bgcolor=cBlack, hidden=true>;
+    }Entries[NumEntries]<read=EnumToString(Character)>;
+}Section1<name="Pre Timeskip Questions?">;
+
+
+FSeek(Sections.SectionPointers[1].Ptr);
+struct Q2 {
+    int magic<bgcolor=cRed>;
+    int NumEntries<bgcolor=cBlue>;
+    int size<bgcolor=cGreen>;
+    int padding[13]<hidden=true>;
+     struct Question2 {
+        CharID Character<bgcolor=cRed>;
+        CharID Side_Character1<name="Side Character 1", bgcolor=cGreen>;
+        CharID Side_Character2<name="Side Character 2", bgcolor=cGreen>;
+        Response Side_Character2_1<name="Side Character 2's Response to Answer 1">;
+        Response Side_Character2_2<name="Side Character 2's Response to Answer 2">;
+        Response Side_Character2_3<name="Side Character 2's Response to Answer 3">;
+        Response Side_Character1_1<name="Side Character 1's Response to Answer 1">;
+        Response Side_Character1_2<name="Side Character 1's Response to Answer 2">;
+        Response Side_Character1_3<name="Side Character 1's Response to Answer 3">;
+        Response Character_1<name="Character's Response to Answer 1">;
+        Response Character_2<name="Character's Response to Answer 2">;
+        Response Character_3<name="Character's Response to Answer 3">;
+        byte padding<bgcolor=cBlack, hidden=true>;
+    }Entries[NumEntries]<read=EnumToString(Character)>;
+}Section2<name="Post Timeskip Questions?">;

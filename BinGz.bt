@@ -1,0 +1,41 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+#include "Structs.bt"
+local int64 position = 0;
+local int32 n = 0;
+local int32 i = 0;
+struct KTGzHeader {
+    int32 PartitionSize<bgcolor=cRed>;
+    int32 PartitionCount<bgcolor=cGreen>;
+    int32 FileSize<bgcolor=cBlue>;
+    int32 PartitionValues[PartitionCount]<bgcolor=cGreen>;
+};
+
+struct KTGz {
+    KTGzHeader header;
+    for (i = 0; i < header.PartitionCount; ++i) {
+        position = (FTell() + 0x7F) & ~0x7F;
+        FSeek(position);
+        struct Partition {
+            int32 size<bgcolor=cSilver>;
+            byte data[ header.PartitionValues[i] - 4]<bgcolor=cRed>;
+        }partition;
+    }
+};
+struct BinGz {
+    FileSections sections;
+    for (n = 0; n < sections.Number_of_Sections; ++n) {
+        FSeek(sections.SectionPointers[n].Ptr);
+        KTGz CompressedFile;
+    }
+}file;

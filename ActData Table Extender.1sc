@@ -1,0 +1,77 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Script File
+//
+//      File: Act Data Extender.1sc
+//   Authors: 
+//   Version: 
+//   Purpose: To Easily extend data table 1 and 2
+//  Category: 
+//   History: 
+//------------------------------------------------
+
+/*
+1. Usage, after applying fixed_actdata.bt template
+2. Copy an entry in either block to the end of the table, making sure the 010 Editor is in 'INS' mode. Copy it X times to add X entries
+3. Edit 'Section' for 0 for the Character Act Set or '1' for the Unique Act Set in this script
+3. Run this script on your actdata file
+4. Edit your added entries
+5. Update your INFO0.bin (File Index 13) to adjust for the new size: +(20 or 12 ) x EntryAdded
+
+*/
+
+//Section Selection:
+// Section = 0 for Character Animation
+// Section = 1 for Unique Class
+local int Section = 1;
+
+//Number of Entries added and copy/pasted (make sure the new total is not over 100)
+local int numAdd = 1;
+
+//Do not edit anything below this line
+
+local int sectionSize = 20;
+local int add = numAdd*sectionSize;
+
+if (Section == 0){
+    sectionSize = 20;
+    add = numAdd*sectionSize;
+    File.Header.Size01 += add;
+    File.Block1.sectionHeader.NumEntries += numAdd;
+    File.Header.ClassUniAniP += add;
+}
+else if (Section == 1){
+    sectionSize = 12;
+    File.classunianim.sectionHeader.NumEntries += numAdd;
+    add = numAdd*sectionSize;
+    File.Header.ClassUniAniS += add;
+    File.classunianim.sectionHeader.NumEntries += numAdd;
+}
+File.Header.ClassBaseAniP += add;
+File.Header.Pointer04 += add;
+File.Header.Pointer05 += add;
+File.Header.Pointer06 += add;
+File.Header.Pointer07 += add;
+File.Header.Pointer08 += add;
+File.Header.Pointer09 += add;
+File.Header.Pointer10 += add;
+File.Header.Pointer11 += add;
+File.Header.Pointer12 += add;
+File.Header.Pointer13 += add;
+File.Header.Pointer14 += add;
+File.Header.Pointer15 += add;
+File.Header.WeaponAnimP += add;
+File.Header.Pointer17 += add;
+File.Header.Pointer18 += add;
+File.Header.Pointer19 += add;
+File.Header.Pointer20 += add;
+File.Header.WeaponPointer += add;
+File.Header.EquipmentPointer += add;
+File.Header.WeaponAuraPointer += add;
+File.Header.Pointer24 += add;
+File.Header.Pointer25 += add;
+File.Header.WeaponBulletPointer += add;
+File.Header.Pointer27 += add;
+File.Header.Pointer28 += add;
+File.Header.Pointer29 += add;
+
+RunTemplate("fixed actdata.bt");

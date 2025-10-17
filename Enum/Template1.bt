@@ -1,0 +1,24 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+int nEntries;
+int unk[3];
+local int nEntrySize = (FileSize() - 16) / nEntries;
+local int i;
+for (i = 0; i < nEntries; ++i){
+    struct Entry {
+        byte unk[nEntrySize];
+    }entry;
+
+
+}

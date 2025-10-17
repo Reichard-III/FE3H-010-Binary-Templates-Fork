@@ -1,0 +1,287 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+#include "Structs.bt"
+enum<byte> Preferences {
+    Netural = 0,
+    Like = 1,
+    Dislike = -1,
+
+};
+struct Yield {
+     Item gardeningItems[5]<name="Item">;
+};
+enum<int> Seeds {
+    Mixed_Herb_S,
+    Western_Foldlan_S,
+    Root_Vegetable_S,
+    Magical_Herb_S,
+    Noah_Fruit_S,
+    Albinean_Nut_S,
+    Vegetable_S,
+    Northern_Foldlan_S,
+    Verona_S,
+    Morfis_Plum_S,
+    Southern_Fodlan_S,
+    Morfis_S,
+    Nordsalat_S,
+    Boa_Fruit_S,
+    Albinean_S,
+    Eastern_Fodlan_S,
+    Magdred_Kirsch_S,
+    Angelica_S,
+    Mixed_Fruit_S,
+    Albinean_Berry_S,
+    Red_Flower_S,
+    White_Flowers_S,
+    Blue_Flowers_S,
+    Purple_Flowers_S,
+    Yellow_Flowers_S,
+    Green_Flowers_S,
+    Pale_Blue_Flower_S,
+    Seed27,
+    Seed28,
+    Seed29,
+    Seed30,
+    Dedues_S,
+
+};
+struct File {
+    int count<bgcolor=cBlack>;
+    struct PointerPair {
+        int start<format=hex>;
+        int length<format=hex>;
+    } pointertable[count]<bgcolor=cRed>;
+    local int j = 0;
+    local int i = 0;
+    for (i = 0; i < count; ++i){
+        FSeek(pointertable[i].start);
+        if (i == 0){
+            struct UnitPreferences{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct Unit {
+                        CharID character<bgcolor=cRed>;
+                        Preferences Choir<name="Choir Preference", bgcolor=cSilver>;
+                         Preferences Cooking<name="Cooking Preference", bgcolor=cLtBlue>;
+                        short unk;
+                    }preferences<name="Unit", read=EnumToString(character)>;
+                }
+            }unitpreferences<name="Activity Preferences">;
+        }
+        else if (i == 2){
+            struct Meals{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct MealPreferences {
+                        Preferences meal[Size];
+                    }mealPreferences<name="Meal Preferences", bgcolor=cSilver>;
+                }
+            }mealBlock<name="Block2, i = 2">;
+        }
+        else if (i == 3){
+            struct Block3{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct Block3_Entry{
+                        byte unk[2];
+                        CharID character1<bgcolor=cRed>;
+                        byte unknown[4];
+                    }entry<read=EnumToString(character1), bgcolor=cLtBlue>;
+                }
+            }block3<name="Block3, i = 3">;
+
+        }
+        else if (i == 4){
+            struct TourneyBlock{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct TourneyData{
+                        ubyte unk0<bgcolor=cGreen,name="For Replacement slot", comment="Set to 255 for no replacement(allow a clone.). Match this to specify an alternative character slot if Character Base is recruited to the player's party.">;
+                        byte unk1<bgcolor=cBlue,name="Possibly gender", comment="put a comment here">;
+                        CharID unk2<bgcolor=cBlue,name="Character Base (CharID)", comment="See Person Data">;
+                        EquipID unk4<bgcolor=cBlue,name="Accessory (EquipID)", comment="Some like Shield of Seiros may get downgraded if the player has obtained one">;
+                        ClassID unk5<bgcolor=cBlue,name="Class", comment="Opponent Class">;
+                        ubyte weapon;
+                        //WeaponID funk6<bgcolor=cBlue,name="Weapon, add 10", comment="Some like (+) get downgraded">;
+                        SpellID unk7<bgcolor=cBlue,name="Magic", comment="Spell list may be elsewhere & may have spell list / skill requirement. Weapon needs to be 255">;
+                        AbilityID unk8<bgcolor=cBlue,name="Ability 1", comment="Ability slots #4 & #5 location unknown">;
+                        AbilityID unk9<bgcolor=cBlue,name="Ability 2", comment="Ability slots #4 & #5 location unknown">;
+                        AbilityID unk10<bgcolor=cBlue,name="Ability 3", comment="Ability slots #4 & #5 location unknown">;
+                        byte unk11<bgcolor=cBlue,name="unk0", comment="A total mystery">;
+                    }Tourney<read=EnumToString(unk2)>;
+                }
+            }tourneyBlock;
+        }
+        else if (i == 7){
+            struct Fishing{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct FishEntry {
+                        local Item Bait = 1400 + j;
+                        Item FishingRewards[30];
+                    }fish<name="Fishing Reward", read=EnumToString(Bait)>;
+                }
+            }fishingBlock;
+        }
+        else if (i == 8){
+            struct Gardening{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct GardeningEntry {
+                        local Seeds seed = j;
+                        Item StatBoosterSlot<name="Stat Booster Slot", name="Stat Booster">;
+                        Yield yield1_low<read="Yield Level 1 Low", name="Yield">;
+Yield yield1_high<read="Yield Level 1 High", name="Yield">;
+Yield yield2_low<read="Yield Level 2 Low", name="Yield">;
+Yield yield2_high<read="Yield Level 2 High", name="Yield">;
+Yield yield3_low<read="Yield Level 3 Low", name="Yield">;
+Yield yield3_high<read="Yield Level 3 High", name="Yield">;
+                    }gardeningYield<name="Seed Yield", read=EnumToString(seed)>;
+                }
+            }GardeningBlock<name="Gardening Yields">;
+        }
+        else if (i == 9){
+            struct SeedRank{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct seedRank {
+                        local Seeds seed = j;
+                        ubyte rank;
+                    }rank<name="Rank", read=EnumToString(seed)>;
+                }
+            }seedrankBlock<name="Gardening Seed Rank">;
+        }
+        else if (i == 11){
+           struct CultivationCost{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                uint CultivatePrice[EntryCount];
+            }CultivationBlock<name="Cultivation Cost Block">;
+        }
+        else if (i == 12){
+            struct ProfessorLevel{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+
+                for (j = 0; j < EntryCount; ++j){
+                    struct ProfessorRank {
+                        local MinRanks r<hidden=true>;
+                        r = j;
+                        short expNeed<name="Lecture Question Exp", bgcolor=cDkGreen>;
+                        ushort CumExp<name="Total Exp Needed", bgcolor=cLtGreen>;
+                        ushort Salary<name="Monthly Church Salary", bgcolor=cYellow>;
+                        ubyte TeachingPoints<name="Lecture Points", bgcolor=cGreen>;
+                        ubyte BattlePoints<name="Battle Points", bgcolor=cRed>;
+                        ubyte unk<name="Cook Book Flag?", bgcolor=cBlack>;
+                        ubyte adjutantCount<name="Adjutants", bgcolor=cBlack>;
+                        ubyte ActivityPoints<name="Activity Points", bgcolor=cBlue>;
+                        ubyte MasterClass<name="Master Classes Unlocked", bgcolor=cPurple>;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte padding<hidden=true>;
+                    } perks<name="Professor Rank Perks", read=EnumToString(r)>;
+                }
+            } professorBlock<name="Professor Rank, i = 12">;
+        }
+        else if (i == 13){
+            struct Block13{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct Entry13 {
+                        CharID character<bgcolor=cRed>;
+                        byte unk;
+                        byte unk;
+                    }entry13<read=EnumToString(character)>;
+                }
+            }block13<name="Block 13">;
+        }
+        else if (i == 14){
+            struct Block14{
+                int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+                if (magic != 0x16121900) Exit(-1);
+                int EntryCount<bgcolor=cLtGreen>;
+                int Size<bgcolor=cLtGreen>;
+                int Padding[13]<bgcolor=cYellow, hidden=true>;
+                for (j = 0; j < EntryCount; ++j){
+                    struct Entry14 {
+                        int unk;
+                        CharID character<bgcolor=cRed>;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        byte unk;
+                        short unk;
+                        byte unk;
+                        byte unk;
+                    }entry14<read=EnumToString(character)>;
+                }
+            }block14<name="Block 14">;
+        }
+        else {
+        struct Entry1 {
+            int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
+            if (magic != 0x16121900) Exit(-1);
+            int EntryCount<bgcolor=cLtGreen>;
+            int Size<bgcolor=cLtGreen>;
+            int Padding[13]<bgcolor=cYellow>;
+            struct Entires {
+                byte unk[Size];
+            }entires[EntryCount];
+        }UnknownBlock<name="Block i:">;
+        }
+    }
+} file;

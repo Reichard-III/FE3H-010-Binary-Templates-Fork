@@ -1,0 +1,27 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+#include "Structs.bt"
+
+local int i = 0;
+local int n;
+
+
+struct GenericFile {
+    FileSections Sections;
+    for (i = 0; i < Sections.Number_of_Sections; ++i){
+        FSeek(Sections.SectionPointers[i].Ptr);
+        GenericSection UnknownSection;
+    
+    };
+}File;

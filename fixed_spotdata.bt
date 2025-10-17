@@ -1,0 +1,37 @@
+
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: fixed_spotdata
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+/*
+Item Slot appears at these location (need more research)
+
+    Battalion Guild Right: 0    Battalion Guild Left: 27, 26    Officer Academy L (box): 21, 22    Officer Academy R (bags): 24, 28, 30    Outside Dining Hall (sacks): 20    Outside Dining Hall 2: 33    Tea Patio (box): 53, 54, 50    Tea Patio (sacks): 55    Blacksmith: 21, 22    Cooking Cabanets: 23, 28    Fishing Dock: 42 47    Fish Stall: 37, 31    Food Stall 1: 42, 41, 41, 45, 47    Food Stall 2: 44, 46    Itemshop bags: 35, 36    Fishing Lake Barrels: 1, 2
+
+*/
+#include "Structs.bt"
+local int i = 0;
+struct GenericFile {
+    FileSections Sections;
+    for (i = 0; i < Sections.Number_of_Sections; ++i){
+        FSeek(Sections.SectionPointers[i].Ptr);
+       if (i == 2){
+            struct MonasteryItem {
+                DataSection SectionHeader;
+                struct RNG_Item{
+                    ubyte location<name="Possibe Location">;
+                    MiscItem unk;
+                }items[SectionHeader.NumEntries]<read=EnumToString(unk)>;
+            }itemList;
+        }
+        else GenericSection UnknownSection;
+    };
+}File;

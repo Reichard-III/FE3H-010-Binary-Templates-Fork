@@ -1,0 +1,63 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+local int i = 0;
+#include "Structs.bt"
+enum<byte> Quality {
+    One_Star,
+    Two_Star,
+    Three_Star,
+    Four_Star,
+    Five_Star,
+};
+enum<byte> Icon {
+    Bait,
+    Seed,
+    Ore,
+    Fish,
+    Crop,
+    Meat,
+    Tea,
+};
+struct GenericFile {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct MaterialBlock {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; ++i){
+            struct Material {
+                local MiscItem name<hidden=true>;
+                name = i;
+                int price<bgcolor=cDkGreen>;
+                ushort renown<name="Renown from Altar", bgcolor=cPurple>;
+                short exp<name="Professor EXP", bgcolor=cRed>;
+                Quality stars<name="Grade of the Material">;
+                Icon materialIcon<name="Icon">;
+                short unk;
+            }item<read=EnumToString(name)>;
+        };
+    }MiscItemBlock;
+    FSeek(Sections.SectionPointers[1].Ptr);
+    struct CookingBlock {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; ++i){
+            struct LOL{
+                ushort exp<name="Professor EXP">;
+                short item[3]<name="Ingredients">;
+                byte unk[2]<bgcolor=cGreen>;
+                byte hp<name="HP Boost">;
+                Stats boost<name="Stat Boosts">;   
+                byte amount_required[4]<name="Ingredient Cost", bgcolor=cBlue>;
+            }cook;
+        };
+    } CookingBlockd;
+}File;

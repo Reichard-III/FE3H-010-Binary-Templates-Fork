@@ -1,0 +1,66 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+#include "Structs.bt"
+
+local int i = 0;
+local int n;
+enum<ubyte> GiftQuality {
+    One_Star,
+    Two_Star,
+    Three_Star,
+    Four_Star,
+    Five_Star,    
+};
+
+
+struct GenericFile {
+    FileSections Sections;
+    for (i = 0; i < Sections.Number_of_Sections; ++i){
+        FSeek(Sections.SectionPointers[i].Ptr);
+        if ( i == 0 ){
+            struct GiftData {
+                DataSection Header;
+                for (n = 0; n < Header.NumEntries; ++n)
+                struct GiftEntry {
+                    local Gifts gift = n;
+                    uint price<name="Price", bgcolor=cGreen>;
+                    GiftQuality star<name="Quality", bgcolor=cYellow>;
+                    TrueFalse Cannot_Gift<name="Cannot Gift", bgcolor=cBlack>;
+                    TrueFalse Flower<name="Is Flower", bgcolor=cBlue>;
+                    TrueFalse liked<name="Liked by Everyone", bgcolor=cRed>;
+                    TrueFalse isLostItem<name="Lost Item", bgcolor=cGreen>;
+                    ubyte data[3]<bgcolor=cBlue>;
+                } item<read=EnumToString(gift)>;  
+            }section1;
+        
+        }
+        else if (i == 1){
+            struct CharacterGiftList {
+                 DataSection Header;
+                for (n = 0; n < Header.NumEntries; ++n)
+                struct CharList {
+                    local CharID id = n;
+                    Gifts flower<name="Favorite Flower?", bgcolor=cYellow>;
+                    Gifts LostItems[3]<name="Lost Items", bgcolor=cBlue>;
+                    Gifts Disliked[3]<name="Disliked Gifts", bgcolor=cRed>;
+                    Gifts Liked[10]<name="Liked Gifts", bgcolor=cGreen>;
+                } item<read=EnumToString(id)>;
+            }list;
+            }
+        else
+            GenericSection UnknownSection;
+    
+    };
+}File;
+

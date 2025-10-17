@@ -1,0 +1,48 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+// Class Name Enums
+#include "Enum/Class.bt"
+
+// Character Name Enums
+#include "Enum/Names.bt"
+
+// Magic Enums
+#include "Enum/Magic.bt"
+
+// Ability Enums
+#include "Enum/Ability.bt"
+
+// Combat Art Enums
+#include "Enum/Combat Art.bt"
+
+// Battalion Enums
+#include "Enum/Battalion.bt"
+
+#include "Enum/Crest.bt"
+
+// Item Enums
+#include "Enum/Item.bt"
+#include "Enum/ItemData.bt"
+
+// Misc Enums: 
+#include "Enum/Misc.bt"
+
+// Skill Enums:
+#include "Enum/Skill.bt"
+
+//Scenario Enums:
+#include "Enum/Scenario.bt"
+
+//Act Enums:
+#include "Enum/Act.bt"

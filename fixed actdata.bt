@@ -1,0 +1,494 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+#include "Structs.bt"
+struct CharacterAnimations {
+    DataSection sectionHeader<name="Section Header">;
+    struct CharacterActBlock{
+        ModelID character<name="Character/Mount", bgcolor=cDkGreen>;
+        short padding<hidden=true>;
+        ModelID character2<name="Character", bgcolor=cDkGreen>;
+        short padding<hidden=true>;
+        Animation act1<name="Animation Set", bgcolor=cLtRed>;
+        Animation act2<name="Animation Set", bgcolor=cLtRed>;
+        TrueFalse EnableClass<name="Enable for Class">; 
+        ClassID class<name="Class">;
+        TrueFalse Enabled<name="Enabled with Weapon">;
+        ClassType classType<name="Class Type", bgcolor=cBlack>;
+        MountAnimation mount1<name="Mount-Related", bgcolor=cDkBlue>;   
+        MountAnimation mount2<name="Mount-Related", bgcolor=cDkBlue>;        
+        WeapAnimType Weapon<name="Weapon Type", bgcolor=cBlack>; 
+        byte unk<hidden=true>;
+    }unkData[sectionHeader.NumEntries]<name="Character Animation", bgcolor=cLtBlue, read=GetSection1Name>;
+};
+struct Block5{
+    DataSection sectionHeader<name="Section Header">;
+    struct Entry5{
+        Animation animation<bgcolor=cBlack, name="Animation Set">;
+        Animation animation<bgcolor=cBlack, name="Animation Set">;
+        Gender gender<name="Gender">;
+        ClassType classType<name="Class Type", bgcolor=cBlack>;
+        MountAnimation mount1<name="Mount-Related", bgcolor=cDkBlue>;   
+        MountAnimation mount2<name="Mount-Related", bgcolor=cDkBlue>;        
+    }unkData[sectionHeader.NumEntries]<name="Reaction Animation", bgcolor=cLtBlue>;
+};
+struct ClassActSet{
+    DataSection sectionHeader<name="Section Header">;
+    for( i = 0; i < sectionHeader.NumEntries; i++ )
+    struct AnimationSet{
+        local ClassID Class<hidden=true>;
+        Class = i;
+        ClassType Mounted<name="Animation Set Mounted", bgcolor=cDkBlue>;
+        ClassType Dismount<name="Animation Set Dismounted", bgcolor=cDkGreen>;
+    }actSet<name="Class Animation Set", bgcolor=cLtRed, read=EnumToString(Class)>;
+};
+struct ClassBaseAnim{
+    DataSection sectionHeader<name="Section Header">;
+    struct ClassBaseAnimData {
+        Animation animation<bgcolor=cBlack, name="Animation Set">;
+        short unknown<bgcolor=cRed, name="Index?">;
+        Gender gender<name="Gender">;
+        ClassType classType<name="Class Type", bgcolor=cBlack>;
+        TrueFalse Enabled<name="Is Enable">;
+        WeapAnimType Weapon<name="Weapon Type", bgcolor=cGreen>; 
+        MountAnimation mount1<name="Mount Animation", bgcolor=cBlue>;
+        ubyte mount2<name="Mount Animation", bgcolor=cBlue>;
+    }classbaseanimdata[sectionHeader.NumEntries]<name="Base Animations", read=BaseAnimationName, bgcolor=cLtBlue>;
+};
+struct Block12 {
+        DataSection sectionHeader<name="Section Header">;
+
+    for( i = 0; i < sectionHeader.NumEntries; i++ )
+            struct Data12{
+                local Animation act<hidden=true>;
+                act = i;
+                AnimationType ActType<bgcolor=cRed>;
+                ubyte unk;
+                ubyte unk;
+    }data<read=EnumToString(act), bgcolor=cLtBlue>;
+};
+struct Block13 {
+        DataSection sectionHeader<name="Section Header">;
+
+    for( i = 0; i < sectionHeader.NumEntries; i++ )
+            struct Data13{
+                local MountAnimation act<hidden=true>;
+                act = i;
+                AnimationType ActType<bgcolor=cRed>;
+                ubyte unk;
+                ubyte unk;
+    }data<read=EnumToString(act), bgcolor=cLtBlue>;
+};
+LittleEndian();
+local int i<hidden=true>;
+       local int m = 0;
+struct FILE {
+    struct HEADER{
+        uint NumOfSections<fgcolor=cGray>;
+        uint Pointer01; uint Size01;
+        uint ClassUniAniP; uint ClassUniAniS;
+        uint ClassBaseAniP; uint ClassBaseAniS;
+        uint Pointer04; uint Size04;
+        uint Pointer05; uint Size05;
+        uint Pointer06; uint Size06;
+        uint Pointer07; uint Size07;
+        uint Pointer08; uint Size08;
+        uint Pointer09; uint Size09;
+        uint Pointer10; uint Size10;
+        uint Pointer11; uint Size11;
+        uint Pointer12; uint Size12;
+        uint Pointer13; uint Size13;
+        uint Pointer14; uint Size14;
+        uint Pointer15; uint Size15;
+        uint WeaponAnimP; uint WeaponAnimS;
+        uint Pointer17; uint Size17;
+        uint Pointer18; uint Size18;
+        uint Pointer19; uint Size19;
+        uint Pointer20; uint Size20;
+        uint WeaponPointer; uint WeaponSize;
+        uint EquipmentPointer; uint EquipmentSize;
+		uint WeaponAuraPointer; uint WeaponAuraSize;
+		uint Pointer24; uint Size24;
+		uint Pointer25; uint Size25;
+		uint WeaponBulletPointer; uint WeaponBulletSize;
+		uint Pointer27;  uint Size27;
+		uint Pointer28; uint Size28;
+		uint Pointer29; uint Size29;
+    }Header<name="Header", fgcolor=cLtBlue>;
+	FSeek(Header.Pointer01); CharacterAnimations Block1<name="Character Animation Block">;
+	FSeek(Header.ClassUniAniP);
+	struct ClassUniAnim{
+        DataSection sectionHeader<name="Section Header">;
+		struct ClassUniAnimData{
+			Animation AnimSet1<name="Unknown Animations", bgcolor=cDkGreen>;
+			Animation MainAnim<name="Main Animations", bgcolor=cDkGreen>;
+        MountAnimation mount1<name="Mount Animation", bgcolor=cBlue>;
+        ubyte mount2<name="Mount Animation", bgcolor=cBlue>;
+			ClassID Class<name="Class", bgcolor=cLtBlue>;
+			ClassType type<name="Class Type", bgcolor=cBlack>;
+			TrueFalse Enabled<name="Is Enable?", bgcolor=cRed>;
+			WeapAnimType Weapon<name="Weapon Type", bgcolor=cGreen>; 
+			Gender gender<name="Gender">;
+			byte unk<hidden=true>;
+		}classunianimdata[sectionHeader.NumEntries]<name="Class Unique Animations",bgcolor=cLtBlue, read=GetClassNamesUni>;
+	}classunianim<name="Class Unique Animation Block">;
+	FSeek(Header.ClassBaseAniP);
+    ClassBaseAnim BaseAnimation<name="Base Animation Block">;
+    FSeek(Header.Pointer04);
+    ClassBaseAnim BaseAnimation2<name="Base Animation Block 2?">;
+    FSeek(Header.Pointer05);     
+    Block5 block5<name="Reaction Animation Block?">;
+    FSeek(Header.Pointer06);    
+    Block5 block6<name="Reaction Animation Block 2?">;  
+    struct MonsterAnimation{
+        DataSection sectionHeader<name="Section Header">;
+ 
+        
+        for (m = 0; m < sectionHeader.NumEntries; m++){
+            struct MonsterEntry{
+                local MonsterName monster;
+                monster = m;
+                Animation attack<name="Attack Animation">;
+            }monsterAttack<name="Monster Attack Animation", read=EnumToString(monster), bgcolor=cDkYellow>;
+        }
+    }monsterBlock<name="Monster Attack Block">;
+    FSeek(Header.Pointer08);
+    struct Block8 {
+        DataSection sectionHeader<name="Section Header">;
+        for (m = 0; m < sectionHeader.NumEntries; m++){
+            struct Entry8{
+                ModelID character<name="Character">;
+                Animation attack<name="Animation">;
+            }entry<name="Idle Animation", read=EnumToString(character), bgcolor=cDkYellow>;
+        };
+    }block8<name="Character Specific Idle Set">;
+	FSeek(Header.Pointer09);
+   struct Block9 {
+        DataSection sectionHeader<name="Section Header">;
+        for (m = 0; m < sectionHeader.NumEntries; m++){
+                Animation attack<name="Animation">;
+        };
+    }block9<name="Default Idle Animation Set">;
+	FSeek(Header.Pointer10);    Block9 block10<name="Byleth Idle?">;
+	FSeek(Header.Pointer11);
+    ClassActSet block11<name="Class Animation Sets Block">;
+	FSeek(Header.Pointer12); GenericSection block12;
+	FSeek(Header.Pointer13); Block12 block13<comment="Removing this section, removes models and movement">;
+	FSeek(Header.Pointer14); Block13 block14<name="Mount Related">;
+	FSeek(Header.Pointer15); GenericSection block15<name="Head Animation Related">;
+	FSeek(Header.WeaponAnimP);
+	struct WEAPANIM {
+		uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint NumOfWeapAnim<bgcolor=cRed, name="Number of Entires">;
+        uint SizeOfWeapAnim<bgcolor=cRed, name="Size of Entires">;
+		ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+		struct WeapAnimData{
+			for( i = 0; i < NumOfWeapAnim; i++ )
+			{
+				struct WeapAnimData01 {
+					local Item NameOfWeapon<hidden=true>;
+				    NameOfWeapon = i;  
+					BulletEffectEnum BowEffect;
+					WeapAnimType animationSet;
+					BulletEffectEnum Effect;
+					BulletEffectEnum BowEffectRelic;
+					BulletEffectEnum EffectRelic;
+				}weapanimdata01<bgcolor=cLtBlue, read=GetWeaponAnimName>;
+			}
+		}weapanimdata;
+	}WeapAnim;
+    FSeek(Header.Pointer17); GenericSection block17;
+    FSeek(Header.Pointer18); GenericSection block18;
+    FSeek(Header.Pointer19); GenericSection block19;
+    FSeek(Header.Pointer20);
+    struct WEAPEFFECTS1 {
+        uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint NumOfWeap<bgcolor=cRed, name="Number of Entires">;
+        uint SizeOfWeap<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        struct WEAPEFFECTDATA1{
+			local int WeapStringStart<hidden=true> =((Header.WeaponPointer+64) + (NumOfWeap*SizeOfWeap));
+            uint WeapEffectPointer;
+			local string WeaponEffect<name="Weapon Effect">;
+			WeaponEffect = ReadString(WeapStringStart+WeapEffectPointer);
+            float Scale<name="Scale">;
+            float RotationZ<name="Rotation Z">;
+            float RotationY<name="Rotation Y">;
+            float PositionZ<name="Position Z">;
+            float RotationX<name="Rotation X">;
+            float PositionX<name="Position X">;
+            float PositionY<name="Position Y">;
+            short index;
+            ubyte Unk;
+			ubyte Unk;
+            ubyte Unk;
+			EffectFlag Flag<name="Effect Flags">;
+			ubyte ModelIndex;
+			ubyte Padding;
+        }WeapEffectData[NumOfWeap]<bgcolor=cYellow, name="Effect Data", optimize=false>;
+		struct WEAPEFFECTSTRING1{
+			for( i = 0; i < NumOfWeap; i++ )
+			struct WEAPEFFECTNAME1{
+				char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+			}WeapEffectName<read=GetWeapEffectName1, name="Effect Name">;
+		}WeapEffectString<name="Effect Strings">;
+    }WeapEffects<name="Monster Effect Block?">;
+
+    FSeek(Header.WeaponPointer);
+    struct WEAPEFFECTS {
+        uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint NumOfWeap<bgcolor=cRed, name="Number of Entires">;
+        uint SizeOfWeap<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        struct WEAPEFFECTDATA{
+			local int WeapStringStart<hidden=true> =((Header.WeaponPointer+64) + (NumOfWeap*SizeOfWeap));
+            uint WeapEffectPointer;
+			local string WeaponEffect<name="Weapon Effect">;
+			WeaponEffect = ReadString(WeapStringStart+WeapEffectPointer);
+            float Scale<name="Scale">;
+            float RotationZ<name="Rotation Z">;
+            float RotationY<name="Rotation Y">;
+            float PositionZ<name="Position Z">;
+            float RotationX<name="Rotation X">;
+            float PositionX<name="Position X">;
+            float PositionY<name="Position Y">;
+            Item Weapon<name="Weapon">;
+            ubyte Unk;
+			ubyte Unk;
+            ubyte Unk;
+			EffectFlag Flag<name="Effect Flags">;
+			ubyte ModelIndex;
+			ubyte Padding;
+        }WeapEffectData[NumOfWeap]<bgcolor=cYellow, read=GetWeapNames, name="Effect Data", optimize=false>;
+		struct WEAPEFFECTSTRING{
+			for( i = 0; i < NumOfWeap; i++ )
+			struct WEAPEFFECTNAME{
+				char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+			}WeapEffectName<read=GetWeapEffectName, name="Effect Name">;
+		}WeapEffectString<name="Effect Strings">;
+    }WeapEffects<name="Weapon Effect Table">;
+	
+    FSeek(Header.EquipmentPointer);
+    struct EQUIPMENTEFFECTS {
+        uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint NumOfEquip<bgcolor=cRed, name="Number of Entires">;
+        uint SizeOfEquip<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        struct EQUIPMENTEFFECTDATA{
+			local int EquipmentStringStart<hidden=false> =((Header.EquipmentPointer+64) + (NumOfEquip*SizeOfEquip));
+            uint EquipEffectPointer;
+			local string EquipmentEffect<name="Equipment Effect">;
+			EquipmentEffect = ReadString(EquipmentStringStart+EquipEffectPointer);
+            float Scale<name="Scale">;
+            float RotationZ<name="Rotation Z">;
+            float RotationY<name="Rotation Y">;
+            float PositionZ<name="Position Z">;
+            float RotationX<name="Rotation X">;
+            float PositionX<name="Position X">;
+            float PositionY<name="Position Y">;
+            EquipID EquipmentID<name="Equipment">;
+            ubyte padding;
+            ubyte Unk;
+			ubyte Unk;
+            ubyte Unk;
+			EffectFlag Flag<name="Effect Flags">;
+			ubyte ModelIndex;
+			ubyte Padding;
+        }EquipmentEffectData[NumOfEquip]<bgcolor=cYellow, read=GetEquipNames, name="Effect Data", optimize=false>;
+		struct EQUIPMENTEFFECTSTRING{
+			for( i = 0; i < NumOfEquip; i++ )
+			struct EQUIPMENTEFFECTNAME{
+				char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+			}EquipmentEffectName<read=GetEquipEffectName, name="Effect Name">;
+		}EquipmentEffectString<name="Effect Strings">;
+    }EquipmentEffects<name="Equipment Effect Table">;
+	    FSeek(Header.WeaponAuraPointer);
+    struct WEAPAURAEFFECTS {
+        uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint NumOfAura<bgcolor=cRed, name="Number of Entires">;
+        uint SizeOfAura<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        struct WEAPAURAEFFECTDATA{
+			local int WeapAuraStringStart<hidden=true> =((Header.WeaponAuraPointer+64) + (NumOfAura*SizeOfAura));
+            uint AuraEffectPointer;
+			local string WeapAuraEffect<name="WeapAura Effect">;
+			WeapAuraEffect = ReadString(WeapAuraStringStart+AuraEffectPointer);
+            float Scale<name="Scale">;
+            float RotationZ<name="Rotation Z">;
+            float RotationY<name="Rotation Y">;
+            float PositionZ<name="Position Z">;
+            float RotationX<name="Rotation X">;
+            float PositionX<name="Position X">;
+            float PositionY<name="Position Y">;
+            Item Weapon<name="Weapon">;
+            ubyte Unk;
+			ubyte Unk;
+            ubyte Unk;
+			EffectFlag Flag<name="Effect Flags">;
+			ubyte ModelIndex;
+			ubyte Padding;
+        }WeapAuraEffectData[NumOfAura]<bgcolor=cYellow, read=GetAuraNames, name="Effect Data", optimize=false>;
+		struct WEAPAURAEFFECTSTRING{
+			for( i = 0; i < NumOfAura; i++ )
+			struct WEAPAURAEFFECTNAME{
+				char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+			}WeapAuraEffectName<read=GetAuraEffectName, name="Effect Name">;
+		}WeapAuraEffectString<name="Effect Strings">;
+    }WeapAuraEffects<name="Weapon Aura Effect Table">;
+	 FSeek(Header.Pointer24);
+    GenericSection block24;
+    FSeek(Header.Pointer25);
+   struct Block25 {
+        uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint numEntry<bgcolor=cRed, name="Number of Entires">;
+        uint SizeofEntry<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        struct Block25_Data {
+                  int entry[30];
+        }data25[numEntry];
+        for (i = 0; i < 30*numEntry; ++i){
+            struct Block25String{
+            char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+            } block27_entry<name="Effect Name",read=EffectName>;
+        }
+    }block25;
+	FSeek(Header.WeaponBulletPointer);
+	struct BULLETTABLE 
+    {
+		uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint NumOfBullet<bgcolor=cRed, name="Number of Entires">;
+        uint SizeOfBullet<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        local int ptrStart = Header.WeaponBulletPointer + 64;
+		struct BULLETDATA {
+            uint ptr[9];
+            uint unk;
+            local string effect1 = ReadString(ptrStart+40*16+ptr[0]);
+            local string effect2 = ReadString(ptrStart+40*16+ptr[1]);
+local string effect3 = ReadString(ptrStart+40*16+ptr[2]);
+local string effect4 = ReadString(ptrStart+40*16+ptr[3]);
+local string effect5 = ReadString(ptrStart+40*16+ptr[4]);
+local string effect6 = ReadString(ptrStart+40*16+ptr[5]);
+local string effect7 = ReadString(ptrStart+40*16+ptr[6]);
+local string effect8 = ReadString(ptrStart+40*16+ptr[7]);
+local string effect9 = ReadString(ptrStart+40*16+ptr[8]);
+
+		}BulletData[NumOfBullet]<bgcolor=cYellow, optimize=false>;
+		struct WEAPBULLETSTRINGS
+        {
+			for( i = 0; i < 9*NumOfBullet; i++ )
+            {
+                struct BulletEffectName
+                {
+				    char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+                }WeapBulletName<read=EffectName, name="Effect Name">;
+            }
+        }WeapBulletStrings05<name="Effect Strings">;
+	}BulletTable;
+FSeek(Header.Pointer27);
+   struct Block27 {
+        uint Unk_Magic<bgcolor=cRed, name="Magic">;
+        uint numEntry<bgcolor=cRed, name="Number of Entires">;
+        uint SizeofEntry<bgcolor=cRed, name="Size of Entires">;
+        ubyte Padding[0x34]<bgcolor=cBlue, name="Padding">;
+        uint ptr[numEntry];
+        for (i = 0; i < numEntry; ++i){
+            struct Block27String{
+            char EffectName[ReadStringLength(FTell())]<bgcolor=cLtGreen>;
+            } block27_entry<name="Effect Name", read=EffectName>;
+        }
+    }block27<name="Another Effect Block">;
+    FSeek(Header.Pointer28);
+    GenericSection block28<name="Movement-Related Monastery?">;
+    FSeek(Header.Pointer29);
+    GenericSection block29<name="Battle Animation-Related", comment="Seems to control Death and hit reaction animations">;
+}File<name="Act_Data File">;
+
+string GetWeapNames(WEAPEFFECTDATA &q)
+{
+	return EnumToString(q.Weapon);
+}
+string GetWeapEffectName(WEAPEFFECTNAME &q)
+{
+	return StringToWString(q.EffectName, CHARSET_UTF8);
+}
+string GetWeapEffectName1(WEAPEFFECTNAME1 &q)
+{
+	return StringToWString(q.EffectName, CHARSET_UTF8);
+}
+string GetEquipNames(EQUIPMENTEFFECTDATA &q)
+{
+	return EnumToString(q.EquipmentID);
+}
+string GetEquipEffectName(EQUIPMENTEFFECTNAME &q)
+{
+	return StringToWString(q.EffectName, CHARSET_UTF8);
+}
+string GetAuraNames(WEAPAURAEFFECTDATA &q)
+{
+	return EnumToString(q.Weapon);
+}
+string GetAuraEffectName(WEAPAURAEFFECTNAME &q)
+{
+	return StringToWString(q.EffectName, CHARSET_UTF8);
+}
+string GetBulletEffectName(BulletEffectName &q){
+    return StringToWString(q.EffectName, CHARSET_UTF8);
+};
+string GetClassNamesUni(ClassUniAnimData &i)
+{
+	return EnumToString(i.Class);
+}
+string GetClassNames(ClassActSet &i)
+{
+	return EnumToString(i.Class);
+}
+string GetWeaponAnimName(WeapAnimData01 &q)
+{
+    return EnumToString(q.NameOfWeapon);
+}
+string GetSection1Name(CharacterActBlock& q){
+string str;
+    if (q.Enabled == 0){
+        return EnumToString(q.character) + " Unequipped";
+    }
+    if (q.EnableClass){
+            if (q.character2  != -1){
+             str =  EnumToString(q.character2) + " " + EnumToString(q.character);
+            }
+        else return EnumToString(q.character) + " " + EnumToString(q.class) + " " + EnumToString(q.Weapon);
+
+    }
+    if (q.character2  != -1){
+        str =  EnumToString(q.character2) + " " + EnumToString(q.character);
+
+    }
+    else str = EnumToString(q.character);
+    return str + ": " + EnumToString(q.Weapon);
+
+}
+string BaseAnimationName(ClassBaseAnimData& q){
+
+    string gender = EnumToString(q.gender);
+    if (gender == "Both") gender = "";
+    else gender += " ";
+    string str = gender + EnumToString(q.classType);
+    if (q.Enabled == 0) str += " Unequipped";
+    else {
+        str +=  " " + EnumToString(q.Weapon) + ": " + EnumToString(q.animation);
+    }
+    return str;
+
+
+
+};

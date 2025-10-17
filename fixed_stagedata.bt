@@ -1,0 +1,81 @@
+//------------------------------------------------
+//--- 010 Editor v13.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+local int i = 0;
+#include "Structs.bt"
+
+struct TileFlags {
+    byte unk;
+    byte bit0:1<name="Cursed Power">;    
+};
+
+enum<byte> Restriction {
+    Not_Passable = 0,
+    Flier_Only = 1,
+    Normal_Movement = 2,
+    Forest_Type = 3,
+    Desert_Type = 4,
+    Wild_Thicket = 5,
+    
+    // 2 Infantry, 3 Cav, 2 - Mage, Flier - 1
+    Type_6 = 6,
+
+    // 3 Infantry, No Cav
+    NoCav_3Infantry = 7,
+    
+    // 3 Thief, No Cav,Infantry, Mage, Flier 1
+    Thief3_NoCav_Infantry = 8,
+    
+    Type_9 = 9,
+    Type_10 = 10,
+    // 3 Cav
+    Cav3 = 11,
+    // 2 Cav
+    Cav2 = 12,
+    NoMovementCost = 13,
+
+};
+struct MovementCostEntry {
+    byte Cost[16];
+};
+struct StageData {
+    FileSections Sections;
+    FSeek(Sections.SectionPointers[0].Ptr);
+    struct TileData {
+        DataSection Header;
+        for (i = 0; i < Header.NumEntries; ++i){
+            struct Terrain {
+                local TerrainTile name<hidden=true>;
+                name = i;
+                byte unk;
+                byte unk;
+                short unk;
+                byte Def<name="Protection+">;
+                byte Res<name="Resilence+">;
+                byte Avoid<name="Avoid Bonus">;
+                byte Heal<name="Damage / Healing %">;
+                byte unk<name="UI-Related">;
+                byte unk;
+                Restriction restrict<name="Movement Cost", bgcolor=cYellow>;
+                byte unk;
+                TileFlags flags;     
+            }terrain<read=EnumToString(name)>;
+        };
+    }TileDataBlock;
+    FSeek(Sections.SectionPointers[1].Ptr);
+    struct MovementCostData {
+       DataSection header;
+       MovementCostEntry Entries[header.NumEntries];
+    }Cost;
+    FSeek(Sections.SectionPointers[2].Ptr);
+    GenericSection UnknownSection;
+}File;
