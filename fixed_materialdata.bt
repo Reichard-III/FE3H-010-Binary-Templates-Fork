@@ -6,7 +6,7 @@
 //   Version: 1.0
 //   Purpose: Items that go into the storehouse (ores, fish, flowers, seeds, etc)
 //  Category: Reichard
-// File Mask: fixed_materialdata.bin
+// File Mask: *fixed_materialdata.bin
 //  ID Bytes: 
 //   History: 
 //   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
