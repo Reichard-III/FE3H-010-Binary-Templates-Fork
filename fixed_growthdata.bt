@@ -35,25 +35,22 @@ struct sWhiteMagicTurnExpMultiplierTable {
         struct sWhiteMagicTurnExpMultiplierData {
             ubyte TurnCount;
             byte ExpPercentMultiplier;
-            local string s;
-            s = Str("Turn %d - %d%% Exp ",TurnCount, ExpPercentMultiplier);
+            local string s = Str("Turn %d - %d%% Exp ",TurnCount, ExpPercentMultiplier);
         } WhiteMagicTurnExpMultiplierData<read=s>;
     }
 };
 
 struct PointsCap {
-    local MinRanks skillLevelName;
+    local MinRanks skillLevelName = i;
     local string levelString;
-    skillLevelName = i;
     SPrintf(levelString, "%d", (int)i + 1);
     ushort pointsCap<name="Points Needed for Next Level">;
 };
 
 struct SkillPointCapSection {
     DataSection SectionHeader;
-    for (i = 0; i < SectionHeader.NumEntries; i++) {
+    for (i = 0; i < SectionHeader.NumEntries; i++)
         PointsCap skillPointCap<name="Skill Point Requirement",read=getRankName>;
-    }
 };
 
 // 40, 60, 100, 0. Based on the numbers, not likely to be related to
@@ -67,16 +64,14 @@ struct UnknownSection4 {
 
 struct SupportPointCapSection {
     DataSection SectionHeader;
-    for (i = 3; i < SectionHeader.NumEntries + 3; i++) {
+    for (i = 3; i < SectionHeader.NumEntries + 3; i++)
         PointsCap supportPointCap<name="Support Point Requirement",read=getRankName>;
-    }
 };
 
 struct ExperiencePointsCapSection {
     DataSection SectionHeader;
-    for (i = 0; i < SectionHeader.NumEntries; i++) {
+    for (i = 0; i < SectionHeader.NumEntries; i++)
         PointsCap experiencePointsCap<name="EXP Requirements",read=getLevelString>;
-    };
 };
 
 // All bytes are 0 until entry 24.
@@ -149,14 +144,6 @@ struct File {
         name="SkillGoalPairs">;
 } pointRequirementData<name="Point Multipliers and Caps",open=true>;
 
-string getRankName(PointsCap & q) {
-    return EnumToString(q.skillLevelName);
-};
-
-string getLevelString(PointsCap & q) {
-    return "Level " + q.levelString;
-};
-
-string getSpellName(sMagicExpCoefficientData &i) {
-    return EnumToString(i.SpellName);
-};
+string getRankName(PointsCap & q) {                return EnumToString(q.skillLevelName); };
+string getLevelString(PointsCap & q) {             return "Level " + q.levelString; };
+string getSpellName(sMagicExpCoefficientData &i) { return EnumToString(i.SpellName); };
