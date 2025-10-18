@@ -18,22 +18,21 @@ LittleEndian();
 local int i =0;
 
 struct sBModelPositions{
-    short defaultX;
-    short defaultY;
-    short XOffset[16];
-    short YOffset[16];
+	short defaultX;
+	short defaultY;
+	short XOffset[16];
+	short YOffset[16];
 };
 
-
-
-struct sBModelPositionEntry{
-    DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
-        sBModelPositions BModel;
-    }
+struct sBModelPositionsEntry{
+	DataSection Header;
+	for(i=0; i<Header.NumEntries;i++)
+		sBModelPositions BModel;
 };
 
 struct sFile {
-    FileSections Sections;
-    sBModelPositionsEntry BModels;
+	FileSections Sections;
+    
+	FSeekNextSection(Sections);
+	sBModelPositionsEntry BModels;
 }File<open=true>;
