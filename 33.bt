@@ -18,71 +18,74 @@ LittleEndian();
 local int i =0;
 
 struct sEntry0{
-    float unkFloat0x0;
-    float unkFloat0x0;
-    float unkFloat0x0;
-    float unkFloat0x0;
-    float unkFloat0x0;
-    byte unkByte0x14;
-    byte unk[3];
+	float unkFloat0x0;
+	float unkFloat0x0;
+	float unkFloat0x0;
+	float unkFloat0x0;
+	float unkFloat0x0;
+	byte unkByte0x14;
+	byte unk[3];
 };
 
 struct sEntry1{
-    byte unkbyte0x0;
-    byte unkbyte0x1;
-    byte unkbyte0x2;
-    byte unkbyte0x3;
-    
-    byte unkbyte0x4;
-    byte unkbyte0x5;
-    byte unkbyte0x6;
-    byte unkbyte0x7;
-    
-    byte unkbyte0x8;
-    byte unkbyte0x9;
-    byte unkbyte0xa;
-    byte unkbyte0xb;
-    
-    byte unkbyte0xc;
-    byte unkbyte0xd;
-    byte unkbyte0xe;
-    byte unkbyte0xf;
+	byte unkbyte0x0;
+	byte unkbyte0x1;
+	byte unkbyte0x2;
+	byte unkbyte0x3;
+	
+	byte unkbyte0x4;
+	byte unkbyte0x5;
+	byte unkbyte0x6;
+	byte unkbyte0x7;
+	
+	byte unkbyte0x8;
+	byte unkbyte0x9;
+	byte unkbyte0xa;
+	byte unkbyte0xb;
+	
+	byte unkbyte0xc;
+	byte unkbyte0xd;
+	byte unkbyte0xe;
+	byte unkbyte0xf;
 };
 
 struct sEntry2{
-    float unkbyte0x0;
-    float unkbyte0x4;
-    float unkbyte0x8;
-    float unkbyte0xc;
-    float unkbyte0x10;
-    float unkbyte0x14;
-    float unkbyte0x18;
+	float unkbyte0x0;
+	float unkbyte0x4;
+	float unkbyte0x8;
+	float unkbyte0xc;
+	float unkbyte0x10;
+	float unkbyte0x14;
+	float unkbyte0x18;
 };
 
 struct sEntry0s{
-    DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
-        sEntry0 E;
-    }
+	DataSection Header;
+	for(i=0; i<Header.NumEntries;i++)
+		sEntry0 E;
 };
 
 struct sEntry1s{
-    DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
-        sEntry1 e;
-    }
+	DataSection Header;
+	for(i=0; i<Header.NumEntries;i++)
+		sEntry1 e;
 };
 
 struct sEntry2s{
-    DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
-        sEntry2 e;
-    }
+	DataSection Header;
+	for(i=0; i<Header.NumEntries;i++)
+		sEntry2 e;
 };
 
 struct sFile {
-    FileSections Sections;
-    sEntry0s E0s;
-    sEntry1s E1s;
-    sEntry2s E2s;
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	sEntry0s E0s;
+	
+	FSeekNextSection(Sections);
+	sEntry1s E1s;
+	
+	FSeekNextSection(Sections);
+	sEntry2s E2s;
 }File<open=true>;
