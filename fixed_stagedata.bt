@@ -35,7 +35,8 @@ enum<byte> TileType {
 
 struct StageData {
 	FileSections Sections;
-	FSeek(Sections.SectionPointers[0].Ptr);
+    
+	FSeekNextSection(Sections);
 	struct TileData {
 		DataSection Header;
 		for (i = 0; i < Header.NumEntries; i++){
@@ -86,8 +87,8 @@ struct StageData {
 			}terrain<read=EnumToString(name)>;
 		};
 	}TerrainData;
-	FSeek(Sections.SectionPointers[1].Ptr);
 	
+    FSeekNextSection(Sections);
 	struct TileTypeMoveCostsTable{
 		DataSection Header;
 		for (i=0; i<Header.NumEntries; i++){
@@ -118,8 +119,8 @@ struct StageData {
 		}
 	}TileTypeMoveCostsT;
 	
-	FSeek(Sections.SectionPointers[2].Ptr);
-	
+    
+	FSeekNextSection(Sections);
 	struct UnkScenarioIndexedWeirdCoordinatesThingTable{
 		DataSection Header;
 		for(i=0; i<Header.NumEntries; i++){
