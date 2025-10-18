@@ -12,33 +12,25 @@
 //   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
 //------------------------------------------------
 LittleEndian();
-local int i,x,y = 0;
+local int i, j = 0;
 #include "Structs.bt"
-enum<byte> Restriction {
+enum<byte> TileType {
     Not_Passable = 0,
     Flier_Only = 1,
-    Normal_Movement = 2,
-    Forest_Type = 3,
-    Desert_Type = 4,
-    Wild_Thicket = 5,
-    
-    // 2 Infantry, 3 Cav, 2 - Mage, Flier - 1
-    Type_6 = 6,
-
-    // 3 Infantry, No Cav
-    NoCav_3Infantry = 7,
-    
-    // 3 Thief, No Cav,Infantry, Mage, Flier 1
-    Thief3_NoCav_Infantry = 8,
-    
-    Type_9 = 9,
-    Type_10 = 10,
-    // 3 Cav
-    Cav3 = 11,
-    // 2 Cav
-    Cav2 = 12,
-    NoMovementCost = 13,
-
+    Normal_Cost = 2,
+    Forest_TT = 3,
+    Sand_TT = 4,
+    Thicket_TT = 5,
+    ShoalSnow_TT = 6,
+    Unused_NoCav_3Infantry_TT = 7,
+    Unused_Thief3_NoCav_Infantry_TT = 8,
+    FlameSwampCrater_TT = 9,
+    SpecialTiles_TT = 10,
+    Stairs_TT = 11,
+    Wasteland_TT = 12,
+    Invalid13_TT = 13,
+	Invalid14_TT = 14,
+    Invalid15_TT = 15,
 };
 
 struct StageData {
@@ -62,7 +54,7 @@ struct StageData {
                 byte Heal<name="Healing %",bgcolor=cPurple>;
                 byte BreakableWallHP<bgcolor=cGreen>;
                 byte UnusedByte<bgcolor=cGreen>;
-                Restriction restrict<name="Movement Cost", bgcolor=cYellow>;
+                TileType restrict<name="Movement Cost", bgcolor=cYellow>;
                 struct terrainFlags_Struct{
                     ubyte flag0:1;    
                     ubyte flag1:1;
@@ -135,12 +127,12 @@ struct StageData {
                 local MapList MapName<hidden=true>;
                 MapName=i;
                 struct XCoord{
-                    for(x=0; x<10; x++){
+                    for(j=0; j<10; j++){
                         ubyte XCoord;
                     }    
                 }XCoords;
                 struct YCoord{
-                    for(y=0; y<10; y++){
+                    for(j=0; j<10; j++){
                         ubyte YCoord;
                     }    
                 }YCoords;
