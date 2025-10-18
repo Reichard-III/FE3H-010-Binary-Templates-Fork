@@ -13,24 +13,17 @@
 //   0.81   11/18/20 [FF7] Sephiroth: Added tournament data to UnknownData5 / Unknown30Byte
 //   0.80   08/14/20 NellsRelo: Start
 //------------------------------------------------
-#include "include_Enums.bt"
+#include "Structs.bt"
 
 LittleEndian();
 local int i<hidden=true>;
-struct HeaderPadding {
-    byte Padding[0x34]<bgcolor=cDkYellow>;
-};
 
 // Birthdays and Holidays (and something else)
 struct CelebrationData {
-    int celebrationMagic<bgcolor=cLtGreen>;
-    int celebrationCount<bgcolor=cLtGreen>;
-    int celebrationSize<bgcolor=cLtGreen>;
-	HeaderPadding eventHeaderPadding<name="Padding">;
-    for( i = 0; i < celebrationCount; i++ ) {
+    DataSection Header;
+    for( i = 0; i < Header.NumEntries; i++ ) {
         struct Celebration {
-            local CalendarEvent celebrationName;
-            celebrationName = i;
+            local CalendarEvent celebrationName = i;
 
             //Determines who's birthday on Birthdays, unknown use on Type-3 events
             CharID relatedCharID<bgcolor=cDkGreen,name="Related Unit">;
@@ -120,43 +113,28 @@ struct Schedule {
 };
 
 struct AcademyScheduleData {
-    int scheduleMagic<bgcolor=cLtGreen>;
-    int scheduleCount<bgcolor=cLtGreen>;
-    int scheduleSize<bgcolor=cLtGreen>;
-	HeaderPadding scheduleHeaderPadding<name="Padding">;
-    Schedule schedule[scheduleCount]<read=getScheduleName,optimize=false,bgcolor=cPurple>;
+    DataSection Header;
+    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cPurple>;
 };
 
 struct ChurchScheduleData {
-    int scheduleMagic<bgcolor=cLtGreen>;
-    int scheduleCount<bgcolor=cLtGreen>;
-    int scheduleSize<bgcolor=cLtGreen>;
-	HeaderPadding scheduleHeaderPadding<name="Padding">;
-    Schedule schedule[scheduleCount]<read=getScheduleName,optimize=false,bgcolor=cSilver>;
+    DataSection Header;
+    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cSilver>;
 };
 
 struct LionsScheduleData {
-    int scheduleMagic<bgcolor=cLtGreen>;
-    int scheduleCount<bgcolor=cLtGreen>;
-    int scheduleSize<bgcolor=cLtGreen>;
-	HeaderPadding scheduleHeaderPadding<name="Padding">;
-    Schedule schedule[scheduleCount]<read=getScheduleName,optimize=false,bgcolor=cBlue>;
+    DataSection Header;
+    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cBlue>;
 };
 
 struct DeerScheduleData {
-    int scheduleMagic<bgcolor=cLtGreen>;
-    int scheduleCount<bgcolor=cLtGreen>;
-    int scheduleSize<bgcolor=cLtGreen>;
-	HeaderPadding scheduleHeaderPadding<name="Padding">;
-    Schedule schedule[scheduleCount]<read=getScheduleName,optimize=false,bgcolor=cDkGreen>;
+    DataSection Header;
+    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cDkGreen>;
 };
 
 struct EaglesScheduleData {
-    int scheduleMagic<bgcolor=cLtGreen>;
-    int scheduleCount<bgcolor=cLtGreen>;
-    int scheduleSize<bgcolor=cLtGreen>;
-	HeaderPadding scheduleHeaderPadding<name="Padding">;
-    Schedule schedule[scheduleCount]<read=getScheduleName,optimize=false,bgcolor=cRed>;
+    DataSection Header;
+    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cRed>;
 };
 
 struct Unknown10Byte {
@@ -192,26 +170,18 @@ struct sGardeningEvent{
 };
 
 struct sFishingEvents {
-    int Magic<bgcolor=cLtGreen>;
-    int EntriesCount<bgcolor=cLtGreen>;
-    int EntriesSize<bgcolor=cLtGreen>;
-	HeaderPadding classdataheaderpadding<name="Padding">;
+    DataSection Header;
     struct sFishingEventData{
-        for(i=0;i<EntriesCount;i++){
+        for(i=0;i<Header.NumEntries;i++)
             sFishingEvent FishingEvent<read=EnumToString(FEN)>;
-        };
     }FishingEvents;
 };
 
 struct sGardeningEvents {
-    int Magic<bgcolor=cLtGreen>;
-    int EntriesCount<bgcolor=cLtGreen>;
-    int EntriesSize<bgcolor=cLtGreen>;
-	HeaderPadding classdataheaderpadding<name="Padding">;
+    DataSection Header;
     struct sGardeningEventData{
-        for(i = 0; i<EntriesCount;i++){
+        for(i = 0; i<Header.NumEntries;i++)
             sGardeningEvent GardeningEvent<read=EnumToString(GEN)>;
-        };
     }GardeningEvents;
 };
 
@@ -231,24 +201,18 @@ struct sFoodEvent {
 };
 
 struct sFoodEvents {
-    int Magic<bgcolor=cLtGreen>;
-    int EntriesCount<bgcolor=cLtGreen>;
-    int EntriesSize<bgcolor=cLtGreen>;
-	HeaderPadding classdataheaderpadding<name="Padding">;
-    sFoodEvent FoodEvent[EntriesCount];
+    DataSection Header;
+    sFoodEvent FoodEvent[Header.NumEntries];
 };
 
 struct sChoirEvents {
-    int Magic<bgcolor=cLtGreen>;
-    int EntriesCount<bgcolor=cLtGreen>;
-    int EntriesSize<bgcolor=cLtGreen>;
-	HeaderPadding classdataheaderpadding<name="Padding">;
-    Unknown10Byte unknown[EntriesCount];
+    DataSection Header;
+    Unknown10Byte unknown[Header.NumEntries];
 };
 
 struct sTournamentEvent {
     ushort EntryFee<bgcolor=cBlue>;
-    Item unk1<name="Prize Item", comment="put a comment here">;
+    Item unk1<name="Prize Item">;
     short unk2<name="Gold reward #1">;
     short unk3<name="Gold reward #2">;
     short unk4<name="Gold reward #3">;
@@ -273,39 +237,12 @@ struct sTournamentEvent {
 };
 
 struct sTournamentEvents {
-    int unkMagic<bgcolor=cLtGreen>;
-    int unkCount<bgcolor=cLtGreen>;
-    int unkSize<bgcolor=cLtGreen>;
-	HeaderPadding classdataheaderpadding<name="Padding">;
-    sTournamentEvent TournamentEvent[unkCount];
+	DataSection Header;
+    sTournamentEvent TournamentEvent[Header.NumEntries];
 };
 
 struct File {
-    struct SectionPointer {
-        int header<bgcolor=cBlue>;
-        int celebrationDataPointer<bgcolor=cAqua>;
-        int celebrationDataSize<bgcolor=cAqua>;
-        int academyScheduleDataPointer<bgcolor=cPurple>;
-        int academyScheduleDataSize<bgcolor=cPurple>;
-        int churchScheduleDataPointer<bgcolor=cSilver>;
-        int churchScheduleDataSize<bgcolor=cSilver>;
-        int lionsScheduleDataPointer<bgcolor=cBlue>;
-        int lionsScheduleDataSize<bgcolor=cBlue>;
-        int deerScheduleDataPointer<bgcolor=cDkGreen>;
-        int deerScheduleDataSize<bgcolor=cDkGreen>;
-        int eaglesScheduleDataPointer<bgcolor=cRed>;
-        int eaglesScheduleDataSize<bgcolor=cRed>;
-        int unkDataPointer6<bgcolor=cRed>;
-        int unkDataSize6<bgcolor=cRed>;
-        int unkDataPointer7<bgcolor=cRed>;
-        int unkDataSize7<bgcolor=cRed>;
-        int unkDataPointer8<bgcolor=cRed>;
-        int unkDataSize8<bgcolor=cRed>;
-        int unkDataPointer9<bgcolor=cRed>;
-        int unkDataSize9<bgcolor=cRed>;
-        int unkDataPointer10<bgcolor=cRed>;
-        int unkDataSize10<bgcolor=cRed>;
-    } sectionPointers;
+    FileSections Sections;
     CelebrationData celebrationData<name="Celebration Event Table">;
     AcademyScheduleData academyScheduleData<name="White Clouds Calendar">;
     ChurchScheduleData churchScheduleData<name="Silver Snow Calendar">;
@@ -321,10 +258,5 @@ struct File {
 
 } file<open=true>;
 
-string getCelebrationName(Celebration & q) {
-    return EnumToString(q.celebrationName);
-};
-
-string getScheduleName(Schedule & q) {
-    return q.scheduleName;
-};
+string getCelebrationName(Celebration & q) { return EnumToString(q.celebrationName); }
+string getScheduleName(Schedule & q) {       return q.scheduleName; }
