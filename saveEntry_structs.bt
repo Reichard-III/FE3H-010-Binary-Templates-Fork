@@ -596,3 +596,475 @@ struct sAnnaSecretShopStock{
 		}AnnaSecretShopStockEntry<read = display>;
 	}
 };
+
+struct sWeaponShopStock{
+	for(i=0;i<200;i++){
+		struct sWeaponShopStockEntry{
+			local Item name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}WeaponShopStockEntry<read=display>;
+	}
+};
+
+struct sEquipmentShopStock{
+	for(i=0;i<50;i++){
+		struct sEquipmentShopStockEntry{
+			local EquipID name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}EquipmentShopStockEntry<read=display>;
+	}
+};
+
+struct sItemShopStock{
+	for(i=0;i<200;i++){
+		struct sItemShopStockEntry{
+			local Consumables name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}ItemShopStockEntry<read=display>;
+	}
+};
+
+struct sQuestStatuses{
+	for(i=0;i<151;i++){
+		struct sQuestStatusesEntry{
+			local QuestID name = i;
+			
+			QuestStatus QS<name="Quest Status">;
+			local string display = Str("%s - %s", EnumToString(QS), EnumToString(name));
+		}QuestStatusesEntry<read=display>;
+	}
+};
+
+struct sPreTimeSkipQuestionsAsked{
+	ubyte PTS0:1<name="">;
+	ubyte PTS1:1<name="">;
+	ubyte PTS2:1<name="">;
+	ubyte PTS3:1<name="">;
+	ubyte PTS4:1<name="">;
+	ubyte PTS5:1<name="">;
+	ubyte PTS6:1<name="">;
+	ubyte PTS7:1<name="">;
+	ubyte PTS8:1<name="">;
+	ubyte PTS9:1<name="">;
+	ubyte PTS10:1<name="">;
+	ubyte PTS11:1<name="">;
+	ubyte PTS12:1<name="">;
+	ubyte PTS13:1<name="">;
+	ubyte PTS14:1<name="">;
+	ubyte PTS15:1<name="">;
+	ubyte PTS16:1<name="">;
+	ubyte PTS17:1<name="">;
+	ubyte PTS18:1<name="">;
+	ubyte PTS19:1<name="">;
+	ubyte PTS20:1<name="">;
+	ubyte PTS21:1<name="">;
+	ubyte PTS22:1<name="">;
+	ubyte PTS23:1<name="">;
+	ubyte PTS24:1<name="">;
+	ubyte PTS25:1<name="">;
+	ubyte PTS26:1<name="">;
+	ubyte PTS27:1<name="">;
+	ubyte PTS28:1<name="">;
+	ubyte PTS29:1<name="">;
+	ubyte PTS30:1<name="">;
+	ubyte PTS31:1<name="">;
+	ubyte PTS32:1<name="">;
+	ubyte PTS33:1<name="">;
+	ubyte PTS34:1<name="">;
+	ubyte PTS35:1<name="">;
+	ubyte PTS36:1<name="">;
+	ubyte PTS37:1<name="">;
+	ubyte PTS38:1<name="">;
+	ubyte PTS39:1<name="">;
+	ubyte PTS40:1<name="">;
+	ubyte PTS41:1<name="">;
+	ubyte PTS42:1<name="">;
+	ubyte PTS43:1<name="">;
+	ubyte PTS44:1<name="">;
+	ubyte PTS45:1<name="">;
+	ubyte PTS46:1<name="">;
+	ubyte PTS47:1<name="">;
+	ubyte PTS48:1<name="">;
+	ubyte PTS49:1<name="">;
+	ubyte PTS50:1<name="">;
+	ubyte PTS51:1<name="">;
+	ubyte PTS52:1<name="">;
+	ubyte PTS53:1<name="">;
+	ubyte PTS54:1<name="">;
+	ubyte PTS55:1<name="">;
+	ubyte PTS56:1<name="">;
+	ubyte PTS57:1<name="">;
+	ubyte PTS58:1<name="">;
+	ubyte PTS59:1<name="">;
+	ubyte PTS60:1<name="">;
+	ubyte PTS61:1<name="">;
+	ubyte PTS62:1<name="">;
+	ubyte PTS63:1<name="">;
+	ubyte PTS64:1<name="">;
+	ubyte PTS65:1<name="">;
+	ubyte PTS66:1<name="">;
+	ubyte PTS67:1<name="">;
+	ubyte PTS68:1<name="">;
+	ubyte PTS69:1<name="">;
+	ubyte PTS70:1<name="">;
+	ubyte PTS71:1<name="">;
+	ubyte PTS72:1<name="">;
+	ubyte PTS73:1<name="">;
+	ubyte PTS74:1<name="">;
+	ubyte PTS75:1<name="">;
+	ubyte PTS76:1<name="">;
+	ubyte PTS77:1<name="">;
+	ubyte PTS78:1<name="">;
+	ubyte PTS79:1<name="">;
+	ubyte PTS80:1<name="">;
+	ubyte PTS81:1<name="">;
+	ubyte PTS82:1<name="">;
+	ubyte PTS83:1<name="">;
+	ubyte PTS84:1<name="">;
+	ubyte PTS85:1<name="">;
+	ubyte PTS86:1<name="">;
+	ubyte PTS87:1<name="">;
+	ubyte PTS88:1<name="">;
+	ubyte PTS89:1<name="">;
+	ubyte PTS90:1<name="">;
+	ubyte PTS91:1<name="">;
+	ubyte PTS92:1<name="">;
+	ubyte PTS93:1<name="">;
+	ubyte PTS94:1<name="">;
+	ubyte PTS95:1<name="">;
+	ubyte PTS96:1<name="">;
+	ubyte PTS97:1<name="">;
+	ubyte PTS98:1<name="">;
+	ubyte PTS99:1<name="">;
+};             
+
+struct sPostTimeSkipQuestionsAsked{
+	ubyte TS0:1<name="">;
+	ubyte TS1:1<name="">;
+	ubyte TS2:1<name="">;
+	ubyte TS3:1<name="">;
+	ubyte TS4:1<name="">;
+	ubyte TS5:1<name="">;
+	ubyte TS6:1<name="">;
+	ubyte TS7:1<name="">;
+	ubyte TS8:1<name="">;
+	ubyte TS9:1<name="">;
+	ubyte TS10:1<name="">;
+	ubyte TS11:1<name="">;
+	ubyte TS12:1<name="">;
+	ubyte TS13:1<name="">;
+	ubyte TS14:1<name="">;
+	ubyte TS15:1<name="">;
+	ubyte TS16:1<name="">;
+	ubyte TS17:1<name="">;
+	ubyte TS18:1<name="">;
+	ubyte TS19:1<name="">;
+	ubyte TS20:1<name="">;
+	ubyte TS21:1<name="">;
+	ubyte TS22:1<name="">;
+	ubyte TS23:1<name="">;
+	ubyte TS24:1<name="">;
+	ubyte TS25:1<name="">;
+	ubyte TS26:1<name="">;
+	ubyte TS27:1<name="">;
+	ubyte TS28:1<name="">;
+	ubyte TS29:1<name="">;
+	ubyte TS30:1<name="">;
+	ubyte TS31:1<name="">;
+	ubyte TS32:1<name="">;
+	ubyte TS33:1<name="">;
+	ubyte TS34:1<name="">;
+	ubyte TS35:1<name="">;
+	ubyte TS36:1<name="">;
+	ubyte TS37:1<name="">;
+	ubyte TS38:1<name="">;
+	ubyte TS39:1<name="">;
+	ubyte TS40:1<name="">;
+	ubyte TS41:1<name="">;
+	ubyte TS42:1<name="">;
+	ubyte TS43:1<name="">;
+	ubyte TS44:1<name="">;
+	ubyte TS45:1<name="">;
+	ubyte TS46:1<name="">;
+	ubyte TS47:1<name="">;
+	ubyte TS48:1<name="">;
+	ubyte TS49:1<name="">;
+	ubyte TS50:1<name="">;
+	ubyte TS51:1<name="">;
+	ubyte TS52:1<name="">;
+	ubyte TS53:1<name="">;
+	ubyte TS54:1<name="">;
+	ubyte TS55:1<name="">;
+	ubyte TS56:1<name="">;
+	ubyte TS57:1<name="">;
+	ubyte TS58:1<name="">;
+	ubyte TS59:1<name="">;
+	ubyte TS60:1<name="">;
+	ubyte TS61:1<name="">;
+	ubyte TS62:1<name="">;
+	ubyte TS63:1<name="">;
+	ubyte TS64:1<name="">;
+	ubyte TS65:1<name="">;
+	ubyte TS66:1<name="">;
+	ubyte TS67:1<name="">;
+	ubyte TS68:1<name="">;
+	ubyte TS69:1<name="">;
+	ubyte TS70:1<name="">;
+	ubyte TS71:1<name="">;
+	ubyte TS72:1<name="">;
+	ubyte TS73:1<name="">;
+	ubyte TS74:1<name="">;
+	ubyte TS75:1<name="">;
+	ubyte TS76:1<name="">;
+	ubyte TS77:1<name="">;
+	ubyte TS78:1<name="">;
+	ubyte TS79:1<name="">;
+	ubyte TS80:1<name="">;
+	ubyte TS81:1<name="">;
+	ubyte TS82:1<name="">;
+	ubyte TS83:1<name="">;
+	ubyte TS84:1<name="">;
+	ubyte TS85:1<name="">;
+	ubyte TS86:1<name="">;
+	ubyte TS87:1<name="">;
+	ubyte TS88:1<name="">;
+	ubyte TS89:1<name="">;
+	ubyte TS90:1<name="">;
+	ubyte TS91:1<name="">;
+	ubyte TS92:1<name="">;
+	ubyte TS93:1<name="">;
+	ubyte TS94:1<name="">;
+	ubyte TS95:1<name="">;
+	ubyte TS96:1<name="">;
+	ubyte TS97:1<name="">;
+	ubyte TS98:1<name="">;
+	ubyte TS99:1<name="">;
+};             
+
+struct sFacultyTrainingCompleted{
+	ubyte FTC0:1<name="Edelgard">;
+	ubyte FTC1:1<name="Dimitri">;
+	ubyte FTC2:1<name="Claude">;
+	ubyte FTC3:1<name="Hubert">;
+	ubyte FTC4:1<name="Ferdinand">;
+	ubyte FTC5:1<name="Linhardt">;
+	ubyte FTC6:1<name="Caspar">;
+	ubyte FTC7:1<name="Bernadetta">;
+	ubyte FTC8:1<name="Dorothea">;
+	ubyte FTC9:1<name="Petra">;
+	ubyte FTC10:1<name="Dedue">;
+	ubyte FTC11:1<name="Felix">;
+	ubyte FTC12:1<name="Ashe">;
+	ubyte FTC13:1<name="Sylvain">;
+	ubyte FTC14:1<name="Mercedes">;
+	ubyte FTC15:1<name="Annette">;
+	ubyte FTC16:1<name="Ingrid">;
+	ubyte FTC17:1<name="Lorenz">;
+	ubyte FTC18:1<name="Raphael">;
+	ubyte FTC19:1<name="Ignatz">;
+	ubyte FTC20:1<name="Lysithea">;
+	ubyte FTC21:1<name="Marianne">;
+	ubyte FTC22:1<name="Hilda">;
+	ubyte FTC23:1<name="Leonie">;
+	ubyte FTC24:1<name="Seteth">;
+	ubyte FTC25:1<name="Flayn">;
+	ubyte FTC26:1<name="Hanneman">;
+	ubyte FTC27:1<name="Manuela">;
+	ubyte FTC28:1<name="Gilbert">;
+	ubyte FTC29:1<name="Alois">;
+	ubyte FTC30:1<name="Catherine">;
+	ubyte FTC31:1<name="Shamir">;
+	ubyte FTC32:1<name="Cyril">;
+	ubyte FTC33:1<name="Jeralt">;
+	ubyte FTC34:1<name="Rhea">;
+    ubyte FTC35:1<name="Yuri">;
+	ubyte FTC36:1<name="Balthus">;
+	ubyte FTC37:1<name="Constance">;
+	ubyte FTC38:1<name="Hapi">;
+	ubyte FTC39:1<name="Aelfric">;
+	ubyte FTC40:1<name="Jeritza Playable">;
+	ubyte FTC41:1<name="Anna Playable">;
+	ubyte FTC42:1<name="Jeritza">;
+	ubyte FTC43:1<name="">;
+	ubyte FTC44:1<name="">;
+	ubyte FTC45:1<name="">;
+	ubyte FTC46:1<name="">;
+	ubyte FTC47:1<name="">;
+	ubyte FTC48:1<name="">;
+	ubyte FTC49:1<name="">;
+	ubyte FTC50:1<name="">;
+	ubyte FTC51:1<name="">;
+	ubyte FTC52:1<name="">;
+	ubyte FTC53:1<name="">;
+	ubyte FTC54:1<name="">;
+	ubyte FTC55:1<name="">;
+};   
+
+enum<ubyte> sPaganAltarWeaponItemList{
+	Brave_Sword_0,
+	Killing_Edge_1,
+	Brave_Lance_2,
+	Killer_Lance_3,
+	Brave_Axe_4,
+	Killer_Axe_5,
+	Brave_Bow_6,
+	Killer_Bow_7,
+	Levin_Sword_8,
+	Bolt_Axe_9,
+	Magic_Bow_10,
+	Spear_11,
+	Tomahawk_12,
+	Longbow_13,
+	Rapier_14,
+	Blessed_Lance_15,
+	Blessed_Bow_16,
+	Devil_Sword_17,
+	Devil_Axe_18,
+	Wo_Dao_19,
+	Dragon_Claw_20,
+	Venin_Edge_21,
+	Venin_Lance_22,
+	Venin_Axe_23,
+	Vinen_Bow_24,
+	Killer_Knuckles_25,
+	Aura_Knuckles_26,
+	Iron_Sword_Plus_27,
+	Steel_Sword_Plus_28,
+	Silver_Sword_Plus_29,
+	Training_Sword_Plus_30,
+	Iron_Lance_Plus_31,
+	Steel_Lance_Plus_32,
+	Silver_Lance_Plus_33,
+	Training_Lance_Plus_34,
+	Iron_Axe_Plus_35,
+	Steel_Axe_Plus_36,
+	Silver_Axe_Plus_37,
+	Training_Axe_Plus_38,
+	Iron_Bow_Plus_39,
+	Steel_Bow_Plus_40,
+	Silver_Bow_Plus_41,
+	Training_Bow_Plus_42,
+	Iron_Gauntlets_Plus_43,
+	Steel_Gauntlets_Plus_44,
+	Silver_Gauntlets_Plus_45,
+	Training_Gauntlets_Plus_46,
+	No_Item_47_PAW,
+	No_Item_48_PAW,
+	No_Item_49_PAW,
+};
+
+struct sPaganAltarWeaponShopStock{
+	for(i=0;i<50;i++){
+		struct sPaganAltarWeaponShopStockEntry{
+        	local sPaganAltarWeaponItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}PaganAltarWeaponShopStockEntry<read = display>;
+	}
+};
+
+enum<ubyte> sPaganAltarEquipItemList{
+	Equip_Talisman_Shield_IL,
+	Equip_Hexlock_Shield_IL,
+	Equip_Accuracy_Ring_IL,
+	Equip_Critical_Ring_IL,
+	Equip_Evasion_Ring_IL,
+	Equip_Speed_Ring_IL,
+	Equip_March_Ring_IL,
+	Equip_Goddess_Ring_IL,
+	Equip_Prayer_Ring_IL,
+	Equip_Magic_Staff_IL,
+	Equip_Healing_Staff_IL,
+
+};
+
+struct sPaganAltarEquipShopStock{
+	for(i=0;i<30;i++){
+		struct sPaganAltarEquipShopStockEntry{
+			local sPaganAltarEquipItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}PaganAltarEquipShopStockEntry<read=display>;
+	}
+};
+
+enum<ubyte> sPaganAltarItemList{
+	Item_Beginner_Seal_IL,
+	Item_Intermediate_Seal_IL,
+	Item_Advanced_Seal_IL,
+	Item_Master_Seal_IL,
+	Item_Door_Key_IL,
+	Item_Chest_Key_IL,
+	Item_Master_Key_IL,
+	Item_Abyssian_Exam_Pass_IL,
+};
+
+struct sPaganAltarItemShopStock{
+	for(i=0;i<20;i++){
+		struct sPaganAltarItemShopStockEntry{
+			local sPaganAltarItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}PaganAltarItemShopStockEntry<read=display>;
+	}
+};
+
+enum<ubyte> sMiscItemShopItemList{
+	Poultry_,
+	Wild_Game_,
+	Mixed_Herb_Seeds_,
+	Root_Vegetable_Seeds_,
+	Vegetable_Seeds_,
+	Western_Fodlan_Seeds_,
+	Eastern_Fodlan_Seeds_,
+	Southern_Fodlan_Seeds_,
+	Northern_Foldlan_Seeds_,
+	Red_Flower_Seeds_,
+	White_Flowers_Seeds_,
+	Blue_Flowers_Seeds_,
+	Purple_Flowers_Seeds_,
+	Yellow_Flowers_Seeds_,
+	Green_Flowers_Seeds_,
+	Pale_Blue_Flower_Seeds_,
+	Floral_Adornment_,
+	Tasty_Baked_Treat_,
+	Smoked_Meat_,
+	Watering_Can_,
+	Dapper_Handkerchief_,
+	Armored_Bear_Stuffy_,
+	Riding_Boots_,
+	Legends_of_Chivalry_,
+	Goddess_Statuette_,
+	Ceremonial_Sword_,
+	Coffee_Beans_,
+	Insect_Larva_,
+	Pond_Snail_,
+	Earthworm_,
+};
+
+struct sMiscItemShopStock{
+	for(i=0;i<30;i++){
+		struct sMiscItemShopStockEntry{
+			local sMiscItemShopItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}MiscItemShopStockEntry<read = display>;
+	}
+};

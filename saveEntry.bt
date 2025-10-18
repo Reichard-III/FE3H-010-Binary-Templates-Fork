@@ -151,18 +151,12 @@ struct sPlayerData{
 	ubyte Route;
 	ubyte Timeskip;
 	ubyte MoreFlags_UnsureDueToRandom39BytesBelow[234];
-	
-	
 	ubyte wtf[39];
-	
-	
 	struct sStorehouseItems{
 		for(i=0;i<223;i++){
 			struct sStorehouseItemsEntry{
 				local string display;
-				local MiscItem Name;
-				Name= i;
-				
+				local MiscItem Name = i;
 				ubyte StorehouseItems;
 				display+=Str("%d - ",StorehouseItems);
 				display += EnumToString(Name);
@@ -174,30 +168,23 @@ struct sPlayerData{
 		for(i=0;i<225;i++){
 			struct sLostItemsCountEntry{
 				local string display;
-				local Gifts Name;
-				Name= i;
-				
+				local Gifts Name = i;
 				ubyte StorehouseItems;
 				display+=Str("%d - ",StorehouseItems);
 				display += EnumToString(Name);
 			}LostItemsCountEntry<read = display>;
 		};
 	}LostItemsCount;
-	
 	byte unk0x1571[0x25f];
 	byte GameCompletionCount;
 	byte unk0x15d1[3];
 	byte mapRngSeed_;
 	byte unk0x17d5[0x5be];
-	
-	
 	struct sLostItemsCount2{
 		for(i=0;i<245;i++){
 			struct sLostItemsCountEntry2{
 				local string display;
-				local Gifts Name;
-				Name= i;
-				
+				local Gifts Name = i;
 				ubyte StorehouseItems;
 				display+=Str("%d - ",StorehouseItems);
 				display += EnumToString(Name);
@@ -205,9 +192,6 @@ struct sPlayerData{
 		};
 	}LostItemsCount2;
 }PlayerData;
-
-
-
 
 FSeek(0x250c8-0x1b);
 struct sActivities{
@@ -228,46 +212,10 @@ struct sActivities{
 	sMonasteryMerchantStock MonasteryMerchantStock;
 	sAnnaSecretShopStock AnnaSecretShopStock;
 	byte WeaponShopLevel;
-	struct sWeaponShopStock{
-		for(i=0;i<200;i++){
-			struct sWeaponShopStockEntry{
-				local Item Name;
-				Name = i;
-				local string display;
-				ubyte Count;
-				display += Str("%d - ",Count);
-				display += EnumToString(Name);
-				display += Str("_%d",i);
-			}WeaponShopStockEntry<read=display>;
-		}
-	}WeaponShopStock;
+	sWeaponShopStock WeaponShopStock;
 	byte ItemShopLevel;
-	struct sEquipmentShopStock{
-		for(i=0;i<50;i++){
-			struct sEquipmentShopStockEntry{
-				local EquipID Name;
-				Name = i;
-				local string display;
-				ubyte Count;
-				display += Str("%d - ",Count);
-				display += EnumToString(Name);
-				display += Str("_%d",i);
-			}EquipmentShopStockEntry<read=display>;
-		}
-	}EquipmentShopStock;
-	struct sItemShopStock{
-		for(i=0;i<200;i++){
-			struct sItemShopStockEntry{
-				local Consumables Name;
-				Name = i;
-				local string display;
-				ubyte Count;
-				display += Str("%d - ",Count);
-				display += EnumToString(Name);
-				display += Str("_%d",i);
-			}ItemShopStockEntry<read=display>;
-		}
-	}ItemShopStock;
+	sEquipmentShopStock EquipmentShopStock;
+	sItemShopStock ItemShopStock;
 	ubyte unk10ByteArray0[10];
 	ubyte unk10ByteArray1[10];
 	ubyte unk100ByteArray[100];
@@ -277,23 +225,11 @@ struct sActivities{
 	ubyte Calendar7Index;
 	ubyte ComparedTo3d3;
 	ubyte ComparedTo3d2;
-	ubyte unk0x3d4[19];
+	ubyte unk0x3d4[13]<name="AdviceBoxEntriesCompleted">;
+    ubyte unk0x3e1[6];
 	ubyte unk5Byte[5];
 	ubyte unk0x3ec[8];
-	struct sQuestStatuses{
-		for(i=0;i<151;i++){
-			struct sQuestStatusesEntry{
-				local QuestID Name;
-				Name = i;
-				local string display;
-				
-				QuestStatus QS<name="Quest Status">;
-				
-				display = Str("%d - ", QS);
-				display += EnumToString(Name);
-			}QuestStatusesEntry<read=display>;
-		};
-	}QuestStatuses;
+	sQuestStatuses QuestStatuses;
 	struct sAuxBattles{
 		ScenarioName NormalAuxBattle0;
 		ScenarioName NormalAuxBattle1;
@@ -302,21 +238,21 @@ struct sActivities{
 	ubyte MatchesSomethingInFreeScenario0[3];
 	ubyte unk0x491[6];
 	ubyte FixedLobbyQuestTable0_Index;
-	ubyte PreTimeSkipQuestionsAsked[13];
-	ubyte PostTimeSkipQuestionsAsked[13];
-	ubyte SeminarEnabledBits_[7];
+	sPreTimeSkipQuestionsAsked PreTimeSkipQuestionsAsked;
+	sPostTimeSkipQuestionsAsked PostTimeSkipQuestionsAsked;
+	sFacultyTrainingCompleted FacultyTrainingCompleted;
 	ubyte unk0x4b9[26];
 	ubyte SpotDataEnabledFlagsA_[38];
 	ubyte SpotDataEnabledFlagsB_[38];
 	ubyte SpotDataEnabledFlagsC_[38];
-	ubyte unk0x545[3];
+	ubyte unk0x545[3]<name="ActiveParalogueFlags?">;
 	MiscItem MiscItemsToRemove[2];
 	ubyte MiscItemAmountToRemove[2];
 	ubyte BitFlagArray0x54c[13];
 	ubyte unkByte0x559_RelatedToCharArray;
 	ubyte unkByte0x55a_RelatedToCharArray;
 	ubyte ProfessorRankRelated;
-	ubyte unk0x55c;
+	ubyte unk0x55c<name="ShopUpdateFlags?">;
 	ubyte PlayLog_Wark;
 	ubyte PlayLog_Lecture;
 	ubyte PlayLog_ToBattle;
@@ -330,32 +266,8 @@ struct sActivities{
 	ubyte PlayLog_Scout;
 	ubyte unk0x568[4];
 	ubyte InfluencerUpgradeLevel;
-	struct sPaganAltarWeaponShopStock{
-		for(i=0;i<50;i++){
-			struct sPaganAltarWeaponShopStockEntry{
-				ubyte Count;
-			}PaganAltarWeaponShopStockEntry;
-		}
-	}PaganAltarWeaponShopStock;
-	struct sPaganAltarEquipShopStock{
-		for(i=0;i<30;i++){
-			struct sPaganAltarEquipShopStockEntry{
-				ubyte Count;
-			}PaganAltarEquipShopStockEntry;
-		}
-	}PaganAltarEquipShopStock;
-	struct sPaganAltarItemShopStock{
-		for(i=0;i<20;i++){
-			struct sPaganAltarItemShopStockEntry{
-				ubyte Count;
-			}PaganAltarItemShopStockEntry;
-		}
-	}PaganAltarItemShopStock;
-	struct sMiscItemShopStock{
-		for(i=0;i<30;i++){
-			struct sMiscItemShopStockEntry{
-				ubyte Count;
-			}MiscItemShopStockEntry;
-		}
-	}MiscItemShopStock;
+	sPaganAltarWeaponShopStock PaganAltarWeaponShopStock;
+	sPaganAltarEquipShopStock PaganAltarEquipShopStock;
+	sPaganAltarItemShopStock PaganAltarItemShopStock;
+	sMiscItemShopStock MiscItemShopStock;
 }Activities;
