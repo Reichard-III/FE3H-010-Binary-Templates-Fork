@@ -562,3 +562,37 @@ enum<ubyte> AnnaShopItemList{
 	No_Item_48,
 	No_Item_49,
 };
+
+struct sBattalionShopStock{
+	for(i=0;i<200;i++){
+		struct sBattalionShopStockEntry{
+			local BattalionID Name = i;
+			ubyte Count;
+			local string display = Str("%d - %s",Count,EnumToString(Name));
+		}BattEntry<read = display>;
+	}
+};
+
+struct sMonasteryMerchantStock{
+	for(i=0;i<100;i++){
+		struct sMonasteryMerchantStockEntry{
+            local MonasteryMerchantItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}MonasteryMerchantStockEntry<read=display>;
+	}
+};
+
+struct sAnnaSecretShopStock{
+	for(i=0;i<50;i++){
+		struct sAnnaSecretShopStockEntry{
+			local AnnaShopItemList name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}AnnaSecretShopStockEntry<read = display>;
+	}
+};
