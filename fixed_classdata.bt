@@ -66,9 +66,9 @@ struct File{
 
     FSeek(sectionpointers.ClassDataPointer);
 	struct ClassData{
-		DataSection Header;
+		DataSection SectionHeader;
 		local int i;
-        for( i = 0; i < numClassData; i++ )
+        for( i = 0; i < SectionHeader.NumEntries; i++ )
             struct ClassBlock{
                 local ClassID Class<hidden=true>;
                 Class = i;
@@ -140,10 +140,10 @@ struct File{
 	FSeek(sectionpointers.PointerToGenderLock);
 	struct GenderLock
 	{
-		DataSection Header;
+		DataSection SectionHeader;
 		local int i;
 		struct Requirements{
-			for( i = 0; i < numGenderLock; i++ )
+			for( i = 0; i < SectionHeader.NumEntries; i++ )
 				struct GenderLockID{
 					local ClassID Class<hidden=true>;
 					Class = i; // keeping a localvar so we can add classname to the struct indices
@@ -203,13 +203,13 @@ struct File{
         FSeek(sectionpointers.MonasterBlockPtr);
                 
         struct MonsterBlock {
-            DataSection Header;
+            DataSection SectionHeader;
             local int i;
             local int j;
             local int k;
             local int l;
-            for (j = 0; j < MonsterClassCount; ++j){
-                FSeek(sectionpointers.MonasterBlockPtr + 64 +  j*sizeMonsterClass);
+            for (j = 0; j < SectionHeader.NumEntries; ++j){
+                FSeek(sectionpointers.MonasterBlockPtr + 64 +  j*SectionHeader.size);
                 struct MonsterClassData {
                     local MonsterName name<hidden=true>;
                     name = j;
@@ -298,9 +298,9 @@ struct File{
     
     FSeek(sectionpointers.UnkPointer[3]);  
     struct sSection9{
-        DataSection Header;
+        DataSection SectionHeader;
         local int i;
-        for(i=0;i<Header.NumEntries;i++){
+        for(i=0;i<SectionHeader.NumEntries;i++){
             struct sdata9{
                 ushort unkshort0x0;
                 ushort unkshort0x2;
@@ -311,9 +311,9 @@ struct File{
     
     FSeek(sectionpointers.UnkPointer[4]);
     struct Section10{
-        DataSection Header;
+        DataSection SectionHeader;
         local int k;
-        for (k = 0; k < Header.NumEntries; ++k){
+        for (k = 0; k < SectionHeader.NumEntries; ++k){
             struct Data10{
                 local ClassID Class<hidden=true>;
                 Class = k;
