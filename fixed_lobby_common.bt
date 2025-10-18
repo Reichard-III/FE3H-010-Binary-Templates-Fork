@@ -34,7 +34,7 @@ struct File{
 	FileSections Sections;
 	
 	FSeekNextSection(Sections);
-	struct Unk1{
+	struct Unk1{ //0
 		DataSection SectionHeader;
 		struct UnknownSection1{
 			struct sNPCFlags0x0{
@@ -59,13 +59,10 @@ struct File{
 				byte bit6:1;
 				byte bit7:1;
 			}NPCflags0x1;
-			
 			byte unk0x2;
 			byte unk0x3;
-			
 			byte unk0x4;
 			byte Sunlight;
-			
 			struct sNPCFlags0x6{
 				byte Gatekeeper317:1;
 				byte bit1:1;
@@ -78,7 +75,6 @@ struct File{
 				byte bit7:1;
 			}NPCflags0x6;
 			byte ShopLevel_Item;
-			
 			struct sExplorationFlags0x8{
 				byte bit0:1;
 				byte bit1:1;
@@ -91,14 +87,13 @@ struct File{
 				byte bit7:1;
 			}Explorationflags0x8;
 			byte ShopLevel_Weapon;
-			
 			BGM music;
 			byte ShopLevel_Battalion;
 		}unknownsection1[SectionHeader.NumEntries]<name="Unknown Section1">;
 	}unk1<name="Unknown Section 0",bgcolor=cRed>;
 	
 	FSeekNextSection(Sections);
-	struct Unk2{
+	struct Unk2{ //1
 		DataSection Header;
 		struct UnknownSection2{
 			uint16 unk;
@@ -110,7 +105,7 @@ struct File{
 	}unk2<name="Unknown Section 1",bgcolor=cBlue>;
 	
 	FSeekNextSection(Sections);
-	struct Unk3{
+	struct Unk3{ //2
 		DataSection Header;
 		struct UnknownSection3{
 			uint16 unk;
@@ -167,7 +162,7 @@ struct File{
 	}unk3<name="Unknown Section 2",bgcolor=cPurple>;
 	
 	FSeekNextSection(Sections);
-	struct Unk4{
+	struct Unk4{ //3
 		DataSection Header;
 		struct UnknownSection4{
 			uint16 unk;
@@ -179,7 +174,7 @@ struct File{
 	}unk4<name="Unknown Section 3",bgcolor=cDkBlue>;
 	
 	FSeekNextSection(Sections);
-	struct RecruitRanks{
+	struct RecruitRanks{ //4
 		DataSection Header;
 		struct RecruitRank{
 			CharID charID<name="Character", bgcolor=cRed>;
@@ -194,11 +189,11 @@ struct File{
 			TrueFalse SylvainFlag<name="The Sylvain Flag", bgcolor=cLtRed>;
 			ubyte StatReq1<name="Stat Amount Required">;
 		}recruitrank[Header.NumEntries]<name="Recruit Conditions",read=GetName>;
-		byte padding[2];
+		byte padding[2]<hidden=true>;
 	}recruitranks<name="Recruit Conditions",bgcolor=cDkYellow>;
 	
 	FSeekNextSection(Sections);
-	struct Unk5{
+	struct Unk5{ //5
 		DataSection Header;
 		struct UnknownSection5{
 			uint16 unkShort0x0;
@@ -209,7 +204,7 @@ struct File{
 	}unk5<name="Unknown Section 5",bgcolor=cBlack>;
 	
 	FSeekNextSection(Sections);
-	struct sItemSpotAltItems{
+	struct sItemSpotAltItems{ //6
 		DataSection SectionHeader;
 		struct sItemSpotAltDropItem{
 			Item MiscellaneousItem<name="Miscellaneous Item">;
@@ -221,12 +216,11 @@ struct File{
 	}ItemSpotAltItems<name="ItemSpot Alt Drop Items",bgcolor=cGreen, comment="If ItemSpots are configured to drop random items, they have a chance to drop these items">;
 	
 	FSeekNextSection(Sections);
-	struct UnknownSection7{
+	struct UnknownSection7{ //7
 		DataSection Header;
 		struct Unk7{
 			ushort unkShort0x0<name="Story Flags?">;
 			NameID charID<name="Character">;
-			//Gifts unk[20];
 			ushort unkShort0x4;
 			ushort unkShort0x6;
 			ushort unkShort0x8;
@@ -248,7 +242,7 @@ struct File{
 	}unknownsection7<name="Recruit Conditions 2",bgcolor=cDkRed>;
 	
 	FSeekNextSection(Sections);
-	struct Unk8{
+	struct Unk8{ //8
 		DataSection Header;
 		struct UnknownSection8{
 			float unkFloat0x0;
@@ -301,7 +295,7 @@ struct File{
 	}unk8<name="Unknown Section 8",bgcolor=cDkPurple>;
 		
 	FSeekNextSection(Sections);
-	struct Unk9{
+	struct Unk9{ //9
 		DataSection Header;
 		struct UnknownSection9{
 			uint16 unk;
@@ -342,7 +336,7 @@ struct File{
 	}unk9<name="Unknown Section 9",bgcolor=cDkGreen>;
 	
 	FSeekNextSection(Sections);
-	struct FavoriteTeaLeaves{
+	struct FavoriteTeaLeaves{ //10
 		DataSection Header;
 		struct FavoriteTea{
 			CharID CharacterID;
@@ -352,11 +346,11 @@ struct File{
 			MiscItem tea<name="Favorite Tea">;
 			MiscItem tea<name="Favorite Tea">;
 		}favoritetea[Header.NumEntries]<name="Favorite Tea Leaves",read=GetName3>;
-		byte padding[2];
+		byte padding[2]<hidden=true>;
 	}favoritelealeaves<name="Favorite Tea Leaves",bgcolor=cLtGreen>;
 	
 	FSeekNextSection(Sections);
-	struct FinalComment{
+	struct FinalComment{ //11
 		DataSection Header;
 		struct FinalTeaComment{
 			CharID CharacterID;
@@ -376,35 +370,21 @@ struct File{
 	}finalcomment<name="Final Comment",bgcolor=cLtRed>;
 	
 	FSeekNextSection(Sections);
-	struct TeaTopics{
+	struct TeaTopics{ //12
 		DataSection Header;
 		for (i = 0; i < Header.NumEntries; ++i){
 			struct TeaResponse {
 				byte response[Header.size];
 			}answer;
 		}
-		byte padding__[2];
+		byte padding[2]<hidden=true>;
 	}tea;
 	
 	FSeekNextSection(Sections);
-	TeaTopics Tea2<name="Tea Time Topic Responses 2",bgcolor=cLtRed>;
+	TeaTopics Tea2<name="Tea Time Topic Responses 2",bgcolor=cLtRed>; //13
 }file<open=true>;
-string GetName(RecruitRank& value)
-{
-	return EnumToString(value.charID);
-}
 
-string GetName2(Unk7& value)
-{
-	return EnumToString(value.charID);
-}
-
-string GetName4(FinalTeaComment& value)
-{
-	return EnumToString(value.CharacterID);
-}
-
-string GetName3(FavoriteTea& value)
-{
-	return EnumToString(value.CharacterID);
-}
+string GetName(RecruitRank& value){      return EnumToString(value.charID); }
+string GetName2(Unk7& value){            return EnumToString(value.charID); }
+string GetName4(FinalTeaComment& value){ return EnumToString(value.CharacterID); }
+string GetName3(FavoriteTea& value){     return EnumToString(value.CharacterID); }
