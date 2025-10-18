@@ -14,17 +14,12 @@
 //------------------------------------------------
 
 LittleEndian();
-#include "Enum/flow_enums.bt"
-#include "include_Enums.bt"
+#include "Structs.bt"
 
-local int m = 0;
-local int o = 0;
+local int i = 0;
 struct ParalogueBlock {
-    int magic<bgcolor=cRed>; 
-    int EntryCount<bgcolor=cRed>;
-    int Size<bgcolor=cRed>;
-    int Padding[13]<hidden=true>;
-    for (m = 0; m < EntryCount; ++m){
+    DataSection Header;
+    for (i = 0; i < Header.NumEntries; i++){
         struct ParalogueEvent {
         Event postBattleCutscene<bgcolor=cYellow, name="Post Battle Cutscene">;
         NameID ParalogueCharacter1<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
@@ -37,11 +32,8 @@ struct ParalogueBlock {
 };
 
 struct RouteFlow {
-    int magic<bgcolor=cRed>;
-    int EntryCount<bgcolor=cRed>;
-    int Size<bgcolor=cRed>;
-    int Padding[13]<hidden=true>;
-    for (o = 0; o < EntryCount; ++o){
+    DataSection Header;
+    for (i = 0; i < Header.NumEntries; i++){
         struct Chapter {
             Event cutscene1<bgcolor=cBlue, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
             Event cutscene2<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
@@ -86,7 +78,7 @@ struct File {
         int start<format=hex>;
         int length<format=hex>;
     } pointertable[count]<bgcolor=cRed>;
-    local int i = 0;
+    
         FSeek(pointertable[0].start);
         RouteFlow route<name="Route", read="Silver Snow">;
         FSeek(pointertable[1].start);
