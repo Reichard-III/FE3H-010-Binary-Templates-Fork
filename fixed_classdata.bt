@@ -39,6 +39,8 @@ enum<ubyte> CertificationFlag {
     Dance_Mayber = 3,
 };
 LittleEndian();
+local int i;
+local int j;
 struct File{
 	struct SectionPointers{
 		uint32 NumberOfSectionPointers;
@@ -67,7 +69,7 @@ struct File{
     FSeek(sectionpointers.ClassDataPointer);
 	struct ClassData{
 		DataSection SectionHeader;
-		local int i;
+		
         for( i = 0; i < SectionHeader.NumEntries; i++ )
             struct ClassBlock{
                 local ClassID Class<hidden=true>;
@@ -140,8 +142,7 @@ struct File{
 	FSeek(sectionpointers.PointerToGenderLock);
 	struct GenderLock
 	{
-		DataSection SectionHeader;
-		local int i;
+		DataSection SectionHeader;		
 		struct Requirements{
 			for( i = 0; i < SectionHeader.NumEntries; i++ )
 				struct GenderLockID{
@@ -188,7 +189,6 @@ struct File{
 		struct ClassAbilityHeaderPadding{
 			byte Padding[0x34];
 		}classabilityheaderpadding<name="Padding">;
-		local int i;
         for( i = 0; i < numClassAbility; i++ )
 		    struct AbilityBlock{
                 local ClassID Class<hidden=true>;
@@ -204,20 +204,15 @@ struct File{
                 
         struct MonsterBlock {
             DataSection SectionHeader;
-            local int i;
-            local int j;
-            local int k;
-            local int l;
-            for (j = 0; j < SectionHeader.NumEntries; ++j){
-                FSeek(sectionpointers.MonasterBlockPtr + 64 +  j*SectionHeader.size);
+            for (i = 0; i < SectionHeader.NumEntries; ++i){
+                FSeek(sectionpointers.MonasterBlockPtr + 64 +  i*SectionHeader.size);
                 struct MonsterClassData {
-                    local MonsterName name<hidden=true>;
-                    name = j;
+                    local MonsterName name<hidden=true> = i;
                     ushort unk<bgcolor=cBlack>;
                     ushort unk<bgcolor=cBlack>;
                     WeaponID weapon<name="Monster's Equipped Weapon", bgcolor=cBlue>;
                     struct BarrierDrops {
-                        for (k = 0; k < 5; ++k){
+                        for (j = 0; j < 5; j++){
                             struct BarrierItem{
                                 MiscItem barrierDrop<name="Item", bgcolor=cLtGreen>;
                                 ubyte padding<hidden=false, name="unknown padding?",bgcolor=cLtGreen>;
@@ -225,12 +220,11 @@ struct File{
                         };
                     }barrierItems<name="Barrier Items">;
                     struct MonsterHPBarScalingByDifficulty {
-                        for(l=0; l<3;l++){
+                        for(j = 0; j<3;++j){
                             struct MonsterHPBarScaling { 
                                 local Difficulty diff;
-                                local string diffName;
-                                diff = l;
-                                diffName = EnumToString(diff);
+                                diff=j;
+                                local string diffName = EnumToString(diff);
                                 diffName = StrDel(diffName, Strlen(diffName)-2, 2);
                                 short a0<name="0 missing HP bars">;
                                 short a1<name="1 missing HP bars">;
@@ -265,8 +259,6 @@ struct File{
                 }monsterClass<read=EnumToString(name), name="Monster Class Data">;
             };
         }monsterBlock<name="Monster Class Block">;
-        
-    local int i;
     FSeek(sectionpointers.UnkPointer[0]);
     GenericSection UnkSection1<name="Camera-Related">;
     FSeek(sectionpointers.UnkPointer[1]);
@@ -299,7 +291,6 @@ struct File{
     FSeek(sectionpointers.UnkPointer[3]);  
     struct sSection9{
         DataSection SectionHeader;
-        local int i;
         for(i=0;i<SectionHeader.NumEntries;i++){
             struct sdata9{
                 ushort unkshort0x0;
@@ -312,11 +303,10 @@ struct File{
     FSeek(sectionpointers.UnkPointer[4]);
     struct Section10{
         DataSection SectionHeader;
-        local int k;
-        for (k = 0; k < SectionHeader.NumEntries; ++k){
+        for (i = 0; i < SectionHeader.NumEntries; ++i){
             struct Data10{
                 local ClassID Class<hidden=true>;
-                Class = k;
+                Class = i;
                 ClassID class1;
                 ClassID class2;
                 ClassID class3;
