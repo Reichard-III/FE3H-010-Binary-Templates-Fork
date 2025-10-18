@@ -88,7 +88,8 @@ struct File {
     local int j = 0;
     local int i = 0;
 	
-	struct UnitPreferences{//0
+    FSeekNextSection(Sections);
+	struct UnitPreferences{ //0
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Unit {
@@ -100,7 +101,8 @@ struct File {
 		}
 	}unitpreferences<name="Activity Preferences">;
 	
-	struct sShareAMeal{//1
+    FSeekNextSection(Sections);
+	struct sShareAMeal{ //1
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct sShareAMealData {
@@ -123,7 +125,8 @@ struct File {
 		}
 	}mealStuffBlock<name="Meals">;
 	
-	struct Meals{//2
+    FSeekNextSection(Sections);
+	struct Meals{ //2
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct MealPreferences {
@@ -138,7 +141,8 @@ struct File {
 		}
 	}mealBlock<name="Meal Preferences">;
 	
-	struct Block3{//3
+    FSeekNextSection(Sections);
+	struct Block3{ //3
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Block3_Entry{
@@ -152,7 +156,8 @@ struct File {
 		}
 	}block3<name="Advice Box Availability">;
 	
-	struct TourneyBlock{//4
+    FSeekNextSection(Sections);
+	struct TourneyBlock{ //4
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct TourneyData{
@@ -170,7 +175,8 @@ struct File {
 		}
 	}tourneyBlock<name="Tournaments">;
 	
-	struct sLobbyActivity5{//5
+    FSeekNextSection(Sections);
+	struct sLobbyActivity5{ //5
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct sLobbyActivity5Entry {
@@ -189,7 +195,8 @@ struct File {
         byte padding2[2];
 	}LobbyActivity5<name="Fish Tier Roll Thresholds">;
 	
-	struct sFishingRollThresholds {//6
+    FSeekNextSection(Sections);
+	struct sFishingRollThresholds { //6
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entries {
@@ -213,7 +220,8 @@ struct File {
         byte padding2[2];
 	}FishingRollThresholds<name="Fishing Roll Thresholds",comment="Entries are indexed by Bait quality and optionally +2 for some reason">;
 	
-	struct Fishing{//7
+    FSeekNextSection(Sections);
+	struct Fishing{ //7
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct FishEntry {
@@ -239,7 +247,8 @@ struct File {
 		}
 	}fishingBlock<name="Fishing Rewards">;
 	
-	struct Gardening{//8
+    FSeekNextSection(Sections);
+	struct Gardening{ //8
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct GardeningEntry {
@@ -262,7 +271,8 @@ struct File {
 		}
 	}GardeningBlock<name="Gardening Yields">;
 	
-	struct SeedRank{//9
+    FSeekNextSection(Sections);
+	struct SeedRank{ //9
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct seedRank {
@@ -271,8 +281,9 @@ struct File {
 			}rank<name="Rank", read=Str("%2d - %s",rank, EnumToString(seed))>;
 		}
 	}seedrankBlock<name="Gardening Seed Ranks">;
-
-	struct sGardeningScoreThresholds{//10
+    
+    FSeekNextSection(Sections);
+	struct sGardeningScoreThresholds{ //10
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct sScoreThresholds {
@@ -292,7 +303,8 @@ struct File {
         byte padding2[2];
 	}GardeningScoreThresholds<name="Gardening Seed Score Thresholds">;
 
-	struct CultivationCost{//11
+    FSeekNextSection(Sections);
+	struct CultivationCost{ //11
 		DataSection SectionHeader;
 		uint Infuse_With_Magic;
         uint Pour_Airmid_Water;
@@ -302,7 +314,8 @@ struct File {
         uint Spread_Pegasus_Blessings;
 	}CultivationBlock<name="Cultivation Costs">;
 
-	struct ProfessorLevel{//12
+    FSeekNextSection(Sections);
+	struct ProfessorLevel{ //12
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct ProfessorRank {
@@ -328,7 +341,8 @@ struct File {
 		}
 	} professorBlock<name="Professor Rank Stats">;
 
-	struct Block13{//13
+    FSeekNextSection(Sections);
+	struct Block13{ //13
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entry13 {
@@ -339,7 +353,8 @@ struct File {
 		}
 	}block13<name="ShareAMeal-Seating Z Coordinate modifier",comment="Used to adjust the Z axis of characters sitting down in Share A Meal activities">;
 
-	struct Block14{//14
+    FSeekNextSection(Sections);
+	struct Block14{ //14
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entry14 {
@@ -356,7 +371,8 @@ struct File {
 		}
 	}block14<name="Sauna Character Model/Animation Data">;
 
-	struct Block15{//15
+    FSeekNextSection(Sections);
+	struct Block15{ //15
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entry15 {
@@ -369,7 +385,8 @@ struct File {
 		}
 	}block15<name="Sauna Support Bonuses">;
 
-	struct Block16{//16
+    FSeekNextSection(Sections);
+	struct Block16{ //16
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Entry16 {
