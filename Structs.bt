@@ -18,7 +18,7 @@ struct DataSection {
     int magic<bgcolor=cRed>;
     int NumEntries<bgcolor=cBlue>;
     int size<bgcolor=cGreen>;
-    int padding[13]<hidden=false>;
+    int padding[13]<hidden=false,open=suppress>;
     if(magic != 0x16121900){
         Printf(Str("found magic ID of 0x%x - Expecting 0x16121900\n",magic));
         Printf("Parsing may have been broken by incorrect data formatting, incorrect file or file version, etc.\n");
