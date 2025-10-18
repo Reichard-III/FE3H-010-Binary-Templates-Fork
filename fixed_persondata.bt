@@ -313,7 +313,7 @@ struct File{
 			CharID CharacterID<name="Character ID">;
 			TrueFalse IsTeacher<name="IsTeacher">;
 			byte padding;
-		}facultyid[Header.NumEntries]<name="Faculty Training Stuff", read=EnumToString(CharacterID),open=true>;
+		}facultyid[Header.NumEntries]<name="Faculty Training Stuff", read=EnumToString(CharacterID)>;
 	}facultytraining<bgcolor=cBlack,name="Faculty ID">;
 	
 	FSeekNextSection(Sections);
@@ -341,7 +341,7 @@ struct File{
 			CharID CharacterID<name="Character ID">;
 			TrueFalse IsTeacher<name="IsTeacher">;
 			byte padding;
-		}seminarid[Header.NumEntries]<name="Seminar Stuff", read=EnumToString(CharacterID),open=true>;
+		}seminarid[Header.NumEntries]<name="Seminar Stuff", read=EnumToString(CharacterID)>;
 	}seminartraining<bgcolor=cGreen,name="Seminar ID">;
 	
 	FSeekNextSection(Sections);
