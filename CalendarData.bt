@@ -57,7 +57,7 @@ struct CelebrationData {
 };
 
 // Covers Free days, missions, and beginning of the month
-struct Schedule {
+struct ScheduleData {
     RewardBinType rareMonsterSighting<name="Rare Monster Sighting">;
 
     // When enabling Battle during Chapter 1, the Battles list will
@@ -77,10 +77,6 @@ struct Schedule {
     } freeDayOptions<name="Free Day Options">;
     Month month<name="Month">;
     byte day<name="Day">;
-
-    // Sets the chosen day to be a specific day of the week (0-6)
-    // Uncertain which schedule's offset will take precedence with
-    // multiple Schedules in a month touching this.
     byte weekDay<name="Weekday">;
 
     FoodEvents foodEvent<name="Food Event">;
@@ -112,29 +108,9 @@ struct Schedule {
     local string scheduleName = EnumToString(month);
 };
 
-struct AcademyScheduleData {
+struct ScheduleTable {
     DataSection Header;
-    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cPurple>;
-};
-
-struct ChurchScheduleData {
-    DataSection Header;
-    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cSilver>;
-};
-
-struct LionsScheduleData {
-    DataSection Header;
-    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cBlue>;
-};
-
-struct DeerScheduleData {
-    DataSection Header;
-    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cDkGreen>;
-};
-
-struct EaglesScheduleData {
-    DataSection Header;
-    Schedule schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cRed>;
+    ScheduleData schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cPurple>;
 };
 
 struct Unknown10Byte {
@@ -149,6 +125,7 @@ struct Unknown10Byte {
 
 struct sFishingEvent{
     local FishingEventName FEN=i;
+    
     byte unkByte0x0[2];
     FishingEventType FishingGimmick<comment="used to index LobbyActivityTable5_0x1 data ">;
     byte unkByte0x3[7];
@@ -244,19 +221,17 @@ struct sTournamentEvents {
 struct File {
     FileSections Sections;
     CelebrationData celebrationData<name="Celebration Event Table">;
-    AcademyScheduleData academyScheduleData<name="White Clouds Calendar">;
-    ChurchScheduleData churchScheduleData<name="Silver Snow Calendar">;
-    LionsScheduleData lionsScheduleData<name="Azure Moon Calendar">;
-    DeerScheduleData deerScheduleData<name="Verdant Wind Calendar">;
-    EaglesScheduleData eaglesScheduleData<name="Crimson Flower Calendar">;
+    ScheduleTable academyScheduleData<name="White Clouds Calendar">;
+    ScheduleTable churchScheduleData<name="Silver Snow Calendar">;
+    ScheduleTable lionsScheduleData<name="Azure Moon Calendar">;
+    ScheduleTable deerScheduleData<name="Verdant Wind Calendar">;
+    ScheduleTable eaglesScheduleData<name="Crimson Flower Calendar">;
     sFishingEvents FishingEventTable<name="Fishing Event Table">;
     sGardeningEvents GardeningEventTable<name="Gardening Event Table">;
     sFoodEvents unkData8<name="Food Event Table">;
     sChoirEvents ChoirEventTable<name="Choir Event Table">;
     sTournamentEvents TournamentEventTable<name="Tournament Event Table">;
-    
-
 } file<open=true>;
 
 string getCelebrationName(Celebration & q) { return EnumToString(q.celebrationName); }
-string getScheduleName(Schedule & q) {       return q.scheduleName; }
+string getScheduleName(ScheduleData & q) {   return q.scheduleName; }
