@@ -16,8 +16,9 @@ LittleEndian();
 local int i;
 struct GenericFile {
     FileSections Sections;
-    FSeek(Sections.SectionPointers[0].Ptr);
-    struct sunkTable0{
+    
+    FSeekNextSection(Sections);
+    struct sunkTable0{ //0
         DataSection Header;
         for(i=0;i<Header.NumEntries;i++){
             struct sunkEntry0{
@@ -34,10 +35,11 @@ struct GenericFile {
                 ubyte unkByte0x9;
             }unkEntry0;   
         };
-        byte padding[2];
+        byte padding[2]<hidden=true>;
     }unkTable0;
     
-    struct sunkTable1{
+    FSeekNextSection(Sections);
+    struct sunkTable1{ //1
         DataSection Header;
         for(i=0;i<Header.NumEntries;i++){
             struct sunkEntry1{
@@ -54,7 +56,8 @@ struct GenericFile {
         };
     }unkTable1;
     
-    struct sunkTable2{
+    FSeekNextSection(Sections);
+    struct sunkTable2{ //2
         DataSection Header;
         for(i=0;i<Header.NumEntries;i++){
             struct sunkEntry2{
@@ -73,7 +76,8 @@ struct GenericFile {
         };
     }unkTable2;
     
-    struct sunkTable3{
+    FSeekNextSection(Sections);
+    struct sunkTable3{ //3
         DataSection Header;
         for(i=0;i<Header.NumEntries;i++){
             struct sunkEntry3{
