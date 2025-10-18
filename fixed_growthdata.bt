@@ -19,129 +19,120 @@ LittleEndian();
 local int i<hidden=true>;
 
 struct ExperienceMultiplierSection {
-    DataSection SectionHeader;
-    struct experienceMultiplier {
-        ubyte normalMultiplier<name="XP Multiplier (Normal)">;
-        ubyte hardMultiplier<name="XP Multiplier (Hard)">;
-        ubyte maddeningMultiplier<name="XP Multiplier (Maddening)">;
-    } experienceMultiplierSection[SectionHeader.NumEntries]<name="EXP Multiplier",
-        comment="Percentage Multiplier of EXP based on difficulty">;
+	DataSection SectionHeader;
+	struct experienceMultiplier {
+		ubyte normalMultiplier<name="XP Multiplier (Normal)">;
+		ubyte hardMultiplier<name="XP Multiplier (Hard)">;
+		ubyte maddeningMultiplier<name="XP Multiplier (Maddening)">;
+	} experienceMultiplierSection[SectionHeader.NumEntries]<name="EXP Multiplier", comment="Bonus% Exp based on difficulty">;
 };
 
 // Likely a multiplier - Current Amount and % gain. Needs further research
 struct sWhiteMagicTurnExpMultiplierTable {
-    DataSection SectionHeader;
-    for(i=0;i<SectionHeader.NumEntries;i++){
-        struct sWhiteMagicTurnExpMultiplierData {
-            ubyte TurnCount;
-            byte ExpPercentMultiplier;
-            local string s = Str("Turn %d - %d%% Exp ",TurnCount, ExpPercentMultiplier);
-        } WhiteMagicTurnExpMultiplierData<read=s>;
-    }
+	DataSection SectionHeader;
+	for(i=0;i<SectionHeader.NumEntries;i++){
+		struct sWhiteMagicTurnExpMultiplierData {
+			ubyte TurnCount;
+			byte ExpPercentMultiplier;
+			local string s = Str("Turn %d - %d%% Exp ",TurnCount, ExpPercentMultiplier);
+		} WhiteMagicTurnExpMultiplierData<read=s>;
+	}
 };
 
 struct PointsCap {
-    local MinRanks skillLevelName = i;
-    local string levelString;
-    SPrintf(levelString, "%d", (int)i + 1);
-    ushort pointsCap<name="Points Needed for Next Level">;
+	local MinRanks skillLevelName = i;
+	local string levelString;
+	SPrintf(levelString, "%d", (int)i + 1);
+	ushort pointsCap<name="Points Needed for Next Level">;
 };
 
 struct SkillPointCapSection {
-    DataSection SectionHeader;
-    for (i = 0; i < SectionHeader.NumEntries; i++)
-        PointsCap skillPointCap<name="Skill Point Requirement",read=getRankName>;
+	DataSection SectionHeader;
+	for (i = 0; i < SectionHeader.NumEntries; i++)
+		PointsCap skillPointCap<name="Skill Point Requirement",read=getRankName>;
 };
 
 // 40, 60, 100, 0. Based on the numbers, not likely to be related to
 // Battalion EXP. Comes close to matching Renown NG+ rewards based on difficulty.
 struct UnknownSection4 {
-    DataSection SectionHeader;
-    struct UnkBlock4 {
-        byte unkVal;
-    } unkBlock4[SectionHeader.NumEntries];
+	DataSection SectionHeader;
+	struct UnkBlock4 {
+		byte unkVal;
+	} unkBlock4[SectionHeader.NumEntries];
 };
 
 struct SupportPointCapSection {
-    DataSection SectionHeader;
-    for (i = 3; i < SectionHeader.NumEntries + 3; i++)
-        PointsCap supportPointCap<name="Support Point Requirement",read=getRankName>;
+	DataSection SectionHeader;
+	for (i = 3; i < SectionHeader.NumEntries + 3; i++)
+		PointsCap supportPointCap<name="Support Point Requirement",read=getRankName>;
 };
 
 struct ExperiencePointsCapSection {
-    DataSection SectionHeader;
-    for (i = 0; i < SectionHeader.NumEntries; i++)
-        PointsCap experiencePointsCap<name="EXP Requirements",read=getLevelString>;
+	DataSection SectionHeader;
+	for (i = 0; i < SectionHeader.NumEntries; i++)
+		PointsCap experiencePointsCap<name="EXP Requirements",read=getLevelString>;
 };
 
 // All bytes are 0 until entry 24.
 struct sMagicExpCoefficientTable {
-    DataSection SectionHeader;
-    for(i=0;i<SectionHeader.NumEntries; i++){
-        struct sMagicExpCoefficientData {
-            local SpellID SpellName;
-            SpellName = i;
-            byte PercentBonusExp<name="Percent Bonus Exp">;
-        } MagicExpCoefficientData<read=getSpellName>;
-    }
+	DataSection SectionHeader;
+	for(i=0;i<SectionHeader.NumEntries; i++){
+		struct sMagicExpCoefficientData {
+			local SpellID SpellName;
+			SpellName = i;
+			byte PercentBonusExp<name="Percent Bonus Exp">;
+		} MagicExpCoefficientData<read=getSpellName>;
+	}
 };
 
 struct sSkillGoalPairsTable {
-    DataSection SectionHeader;
-    struct sSkillGoalPairsData {
-        byte Sword:1;
-        byte Lance:1;
-        byte Axe:1;
-        byte Bow:1;
-        
-        byte Brawl:1;
-        byte Authority:1;
-        byte Reason:1;
-        byte Faith:1;
-        
-        byte HeavyArmor:1;
-        byte Riding:1;
-        byte Flying:1;
-    } unkBlock8[SectionHeader.NumEntries];
+	DataSection SectionHeader;
+	struct sSkillGoalPairsData {
+		byte Sword:1;
+		byte Lance:1;
+		byte Axe:1;
+		byte Bow:1;
+		
+		byte Brawl:1;
+		byte Authority:1;
+		byte Reason:1;
+		byte Faith:1;
+		
+		byte HeavyArmor:1;
+		byte Riding:1;
+		byte Flying:1;
+	} unkBlock8[SectionHeader.NumEntries];
 };
 
 struct File {
-    FileSections Sections;
-    
-    FSeekNextSection(Sections);
-    ExperienceMultiplierSection experienceMultiplierSection<bgcolor=cDkGreen,
-        name="EXP/Difficulty Multiplier">;
-    byte padding<bgcolor=cDkYellow,name="Padding",hidden=true>;
-    
-    FSeekNextSection(Sections);
-    sWhiteMagicTurnExpMultiplierTable WhiteMagicTurnExpMultiplierTable<bgcolor=cBlue,
-        name="White Magic Turn Exp Multiplier">;
-        
-    FSeekNextSection(Sections);
-    SkillPointCapSection skillPointCapSection<bgcolor=cPurple,
-        name="Skill Point Requirements">;
-       
+	FileSections Sections;
+	
 	FSeekNextSection(Sections);
-    UnknownSection4 unknownSection4<bgcolor=cDkRed,
-        name="Unknown Block 3 Unused?", comment="apparently not loaded into the game">;
-    
-    FSeekNextSection(Sections);
-    SupportPointCapSection supportPointsCapSection<bgcolor=cYellow,
-        name="Support Point Requirements">;
-    short padding<bgcolor=cDkYellow,name="Padding",hidden=true>;
-    
-    FSeekNextSection(Sections);
-    ExperiencePointsCapSection experiencePointsCapSection<bgcolor=cAqua,
-        name="Experience Requirements">;
-       
-    FSeekNextSection(Sections);
-    sMagicExpCoefficientTable magicExpCoefficientTable<bgcolor=cGreen,
-        name="Magic Exp Coefficient">;
-    short padding<bgcolor=cDkYellow,name="Padding",hidden=true>;
-    
-    FSeekNextSection(Sections);
-    sSkillGoalPairsTable SkillGoalPairsTable<bgcolor=cBlack,
-        name="SkillGoalPairs">;
+	ExperienceMultiplierSection experienceMultiplierSection<bgcolor=cDkGreen,name="EXP/Difficulty Multiplier">;
+	byte padding<bgcolor=cDkYellow,name="Padding",hidden=true>;
+	
+	FSeekNextSection(Sections);
+	sWhiteMagicTurnExpMultiplierTable WhiteMagicTurnExpMultiplierTable<bgcolor=cBlue,name="White Magic Turn Exp Multiplier">;
+		
+	FSeekNextSection(Sections);
+	SkillPointCapSection skillPointCapSection<bgcolor=cPurple,name="Skill Point Requirements">;
+	   
+	FSeekNextSection(Sections);
+	UnknownSection4 unknownSection4<bgcolor=cDkRed, name="Unknown Block 3 Unused?", comment="apparently not loaded into the game">;
+	
+	FSeekNextSection(Sections);
+	SupportPointCapSection supportPointsCapSection<bgcolor=cYellow, name="Support Point Requirements">;
+	short padding<bgcolor=cDkYellow,name="Padding",hidden=true>;
+	
+	FSeekNextSection(Sections);
+	ExperiencePointsCapSection experiencePointsCapSection<bgcolor=cAqua, name="Experience Requirements">;
+	   
+	FSeekNextSection(Sections);
+	sMagicExpCoefficientTable magicExpCoefficientTable<bgcolor=cGreen, name="Magic Exp Coefficient">;
+	short padding<bgcolor=cDkYellow,name="Padding",hidden=true>;
+	
+	FSeekNextSection(Sections);
+	sSkillGoalPairsTable SkillGoalPairsTable<bgcolor=cBlack, name="SkillGoalPairs">;
 } pointRequirementData<name="Point Multipliers and Caps",open=true>;
 
 string getRankName(PointsCap & q) {                return EnumToString(q.skillLevelName); };
