@@ -247,14 +247,12 @@ struct sActivities{
 	struct sAnnaSecretShopStock{
 		for(i=0;i<50;i++){
 			struct sAnnaSecretShopStockEntry{
-				//local MiscItem Name;
-				//Name = i;
-				//local string display;
+				local AnnaShopItemList name = i;
 				ubyte Count;
-				//display += Str("%d - ",Count);
-				//display += EnumToString(Name);
-				//display += Str("_%d",i);
-			}AnnaSecretShopStockEntry<comment="refer to Shopdata Anna secret shop table for items, 255 means infinite">;
+				local string display;
+                if(Count==255) display = Str("infinite - %s",EnumToString(name));
+                else           display = Str("%d - %s", Count, EnumToString(name));
+			}AnnaSecretShopStockEntry<read = display>;
 		}
 	}AnnaSecretShopStock;
 	byte WeaponShopLevel;
