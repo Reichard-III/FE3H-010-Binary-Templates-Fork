@@ -96,62 +96,67 @@ struct sAuxYellowMonsterUnit{
 };
 
 struct sAuxMoneyReward{
-    ushort BaseMoney;
-    
     local int chapter=i;
+    
+    ushort BaseMoney;
 };
 
 //loop
 struct sAuxItemRewards{
     DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
+    for(i=0; i<Header.NumEntries;i++)
         sAuxItemReward AuxItemReward<read= Str("%s - %d%% %d%% %d%% - %s - %d",EnumToString(RewardBin),RollThreshold[0], RollThreshold[1],RollThreshold[2] ,EnumToString(RewardItem),RewardCount)>;
-    }
 };
 
 struct sAuxSpawnLimits{
     DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
+    for(i=0; i<Header.NumEntries;i++)
         sAuxSpawnLimit AuxSpawnLimit<read=EnumToString(AuxI)>;
-    }
 };
 
 struct sAuxUnits{
     DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
+    for(i=0; i<Header.NumEntries;i++)
         sAuxUnit AuxUnit<read=Str("Chapter %2d-%2d: %s %s",MinimumChapter,MaximumChapter,EnumToString(RedEnemyBin),EnumToString(Class))>;
-    }
 };
 
 struct sMonsterDroppableWeapons{
     DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
+    for(i=0; i<Header.NumEntries;i++)
         sMonsterDroppableWeaponsEntry Entries<read=Str("%2d %2d %2d %2d - %s",RollCosts[0],RollCosts[1],RollCosts[2],RollCosts[3],EnumToString(MonsterDroppableWeapon))>;
-    }
 };
 
 struct sAuxYellowMonsterUnits{
     DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
+    for(i=0; i<Header.NumEntries;i++)
         sAuxYellowMonsterUnit AuxYellowMonsterUnit<read=Str("%d%% %s",EncounterChance,EnumToString(Class))>;
-    }
 };
 
 struct sAuxMoneyRewardRewards{
     DataSection Header;
-    for(i=0; i<Header.NumEntries;i++){
+    for(i=0; i<Header.NumEntries;i++)
         sAuxMoneyReward AuxMoneyReward<read=Str("Chapter %d",chapter)>;
-    }
 };
 
 struct freeScenario {
     FileSections Sections;
+    
+    FSeekNextSection(Sections);
     sAuxItemRewards AuxItemRewards;
+    
+    FSeekNextSection(Sections);
     sAuxSpawnLimits AuxSpawnLimits;
+        
+    FSeekNextSection(Sections);
     sAuxUnits AuxUnits;
+        
+    FSeekNextSection(Sections);
     sMonsterDroppableWeapons MonsterDroppableWeapons;
+        
+    FSeekNextSection(Sections);
     sAuxYellowMonsterUnits AuxYellowMonsterUnits<comment="Unknown if you can put nonMonsters here">;
+        
+    FSeekNextSection(Sections);
     sAuxMoneyRewardRewards AuxMoneyRewards<comment="This gets multiplied by reward multipliers">;
     byte padding[2];
-
 }File<open=true>;
