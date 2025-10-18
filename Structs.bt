@@ -19,13 +19,20 @@ struct DataSection {
     int NumEntries<bgcolor=cBlue>;
     int size<bgcolor=cGreen>;
     int padding[13]<hidden=false>;
+    if(magic != 0x16121900){
+        Printf(Str("found magic ID of 0x%x - Expecting 0x16121900\n",magic));
+        Printf("Parsing may have been broken by incorrect data formatting, incorrect file or file version, etc.\n");
+        Exit(-1);
+    }
 };
+
 struct GenericSection {
     DataSection sectionHeader<name="Section Header">;
     struct Entry {
         ubyte entry[sectionHeader.size];
     }Entries[sectionHeader.NumEntries]<bgcolor=cLtGreen,optimize=false>;
 };
+
 struct FileSections {
     int Number_of_Sections;
     struct {
@@ -33,6 +40,7 @@ struct FileSections {
         int SectionSize;
     } SectionPointers[Number_of_Sections];
 };
+
 enum<ubyte> Stat {
     Str_Stat,
     Mag_Stat,
@@ -45,6 +53,7 @@ enum<ubyte> Stat {
     Cha_Stat,
     No_Stat_Requirement,
 };
+
 struct Stats {
     byte Str;
     byte Mag;
@@ -56,6 +65,7 @@ struct Stats {
     byte Move;
     byte Cha;
 };
+
 struct uStats {
     ubyte Str;
     ubyte Mag;
@@ -67,6 +77,7 @@ struct uStats {
     ubyte Move;
     ubyte Cha;
 };
+
 //Class Data Structs
 struct EnemyAbilities {
     AbilityID ability1<name="Generic Enemy Ability 1">;
@@ -97,13 +108,14 @@ struct ClassClassification{
     ubyte bit6 : 1<name="Unused6", hidden=false>;
     ubyte bit7 : 1<name="Unused7",hidden=false>;
 };
+
 //PersonData Structs
 enum<byte> PersonGender {
     Male_,
     Female,
     Monster,
-
 };
+
 struct Person{
     struct ModelScale{
         float Scale04<name="Chest Band/Width modifier">;
@@ -129,7 +141,6 @@ struct Person{
     AllegianceID Allegiance<name="Allegiance", bgcolor=cDkPurple, comment="Affects recruitment when choosing a house for non-DLC playable Units">;
     byte unk_0x25<bgcolor=cBlack>;
     PersonGender GenderFlag;
-    //GenderFlag Gender<name="Gender">;
     byte BodyType<name="Body Type">;
     BattalionID BaseBattalion<name="Base Battalion">;
     ubyte HPGrowth<name="HP Growth", bgcolor=cGreen>;
@@ -151,7 +162,6 @@ struct Person{
     ubyte PostTimeSkipHeight<name="Post-Time Skip Height (cm)">;
     uint16 unknown<name="Unknown Value", hidden=true>;
     uStats BaseStats<bgcolor=cBlue,name="Base Stats">;
-    //ubyte growths[9];
     uStats GrowthRates<bgcolor=cGreen,name="Growths Rates">;
     uStats MaxStat<bgcolor=cYellow,name="Stat Caps">;
     byte padding[2]<name="Padding", bgcolor=cWhite>;
@@ -175,7 +185,6 @@ struct StartingRanks{
     MinRanks rank9<name="Starting Riding Rank">;
     MinRanks rank10<name="Starting Flying Rank">;
 };
-
 
 struct WpnProficiency{
     Proficiency rank0<name="Sword Proficiency">;
@@ -232,3 +241,12 @@ struct b16f {
     ubyte bit : 1<name="Reserve">;
     ubyte bit : 1<name="Reserve">;
 };
+
+local int SectionIter=0;
+int GetSectionPtr(FileSections& FS, int index){
+   return FS.SectionPointers[index].Ptr;
+}
+void FSeekNextSection(FileSections& FS){
+    FSeek(GetSectionPtr(FS,SectionIter++));
+}
+
