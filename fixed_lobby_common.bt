@@ -22,12 +22,12 @@ LittleEndian();
 local int i<hidden=true>;
 local int k;
 enum<ubyte> LvlRequired {
-    No_Level_Requirement = 255,
+	No_Level_Requirement = 255,
 };
 
 enum<ubyte> ConstanceSunShadeMode{
-    Shaded_Mode,
-    Sun_Mode
+	Shaded_Mode,
+	Sun_Mode
 };
 
 struct File{
@@ -66,63 +66,63 @@ struct File{
 	struct Unk1{
 		DataSection SectionHeader;
 		struct UnknownSection1{
-            struct sNPCFlags0x0{
-                byte Headchef:1;
-                byte DiningHallNPC:1;
-                byte Counselor:1;
-                byte ChoirCoordinator:1;
-                
-                byte bit4:1;
-                byte bit5:1;
-                byte Fishkeeper:1;
-                byte GreenhouseKeeper:1;
-            }NPCflags0x0;
-            struct sNPCFlags0x1{
-                byte TournamentOrganizer:1;
-                byte bit1:1;
-                byte bit2:1;
-                byte bit3:1;
-                
-                byte bit4:1;
-                byte VariousNPCsIncludingGateKeeper318:1;
-                byte bit6:1;
-                byte bit7:1;
-            }NPCflags0x1;
-            
-            byte unk0x2;
-            byte unk0x3;
-            
-            byte unk0x4;
-            byte Sunlight;
-            
-            struct sNPCFlags0x6{
-                byte Gatekeeper317:1;
-                byte bit1:1;
-                byte bit2:1;
-                byte SaintStatueNPC:1;
-                
-                byte bit4:1;
-                byte bit5:1;
-                byte bit6:1;
-                byte bit7:1;
-            }NPCflags0x6;
-            byte ShopLevel_Item;
-            
-            struct sExplorationFlags0x8{
-                byte bit0:1;
-                byte bit1:1;
-                byte bit2:1;
-                byte bit3:1;
-                
-                byte bit4:1;
-                byte bit5:1;
-                byte bit6:1;
-                byte bit7:1;
-            }Explorationflags0x8;
-            byte ShopLevel_Weapon;
-            
+			struct sNPCFlags0x0{
+				byte Headchef:1;
+				byte DiningHallNPC:1;
+				byte Counselor:1;
+				byte ChoirCoordinator:1;
+				
+				byte bit4:1;
+				byte bit5:1;
+				byte Fishkeeper:1;
+				byte GreenhouseKeeper:1;
+			}NPCflags0x0;
+			struct sNPCFlags0x1{
+				byte TournamentOrganizer:1;
+				byte bit1:1;
+				byte bit2:1;
+				byte bit3:1;
+				
+				byte bit4:1;
+				byte VariousNPCsIncludingGateKeeper318:1;
+				byte bit6:1;
+				byte bit7:1;
+			}NPCflags0x1;
+			
+			byte unk0x2;
+			byte unk0x3;
+			
+			byte unk0x4;
+			byte Sunlight;
+			
+			struct sNPCFlags0x6{
+				byte Gatekeeper317:1;
+				byte bit1:1;
+				byte bit2:1;
+				byte SaintStatueNPC:1;
+				
+				byte bit4:1;
+				byte bit5:1;
+				byte bit6:1;
+				byte bit7:1;
+			}NPCflags0x6;
+			byte ShopLevel_Item;
+			
+			struct sExplorationFlags0x8{
+				byte bit0:1;
+				byte bit1:1;
+				byte bit2:1;
+				byte bit3:1;
+				
+				byte bit4:1;
+				byte bit5:1;
+				byte bit6:1;
+				byte bit7:1;
+			}Explorationflags0x8;
+			byte ShopLevel_Weapon;
+			
 			BGM music;
-            byte ShopLevel_Battalion;
+			byte ShopLevel_Battalion;
 		}unknownsection1[SectionHeader.NumEntries]<name="Unknown Section1">;
 	}unk1<name="Unknown Section 0",bgcolor=cRed>;
 	
@@ -243,7 +243,7 @@ struct File{
 			TrueFalse SylvainFlag<name="The Sylvain Flag", bgcolor=cLtRed>;
 			ubyte StatReq1<name="Stat Amount Required">;
 		}recruitrank[numRecruitRanks]<name="Recruit Conditions",read=GetName>;
-        byte padding[2];
+		byte padding[2];
 	}recruitranks<name="Recruit Conditions",bgcolor=cDkYellow>;
 	
 	FSeek(sectionpointers.PointerToUnk5);
@@ -283,27 +283,27 @@ struct File{
 			byte Padding[0x34];
 		}unk7padding<name="Padding">;
 		struct Unk7{
-            ushort unkShort0x0<name="Story Flags?">;
+			ushort unkShort0x0<name="Story Flags?">;
 			NameID charID<name="Character">;
-            //Gifts unk[20];
-            ushort unkShort0x4;
-            ushort unkShort0x6;
-            ushort unkShort0x8;
-            ubyte unkByte0xa;
-            ubyte unkByte0xb;
-            ubyte RotationOctant;
-            ubyte unkByte0xd;
-            ubyte unkByte0xe;
-            ubyte unkByte0xf;
-            ubyte unkByte0x10;
-            ubyte unkByte0x11;
-            ubyte unkByte0x12;
-            ubyte unkByte0x13;
-            ubyte unkByte0x14;
-            ubyte unkByte0x15;
-            ubyte unkByte0x16;
-            ubyte RotationOctant_TS;
-            
+			//Gifts unk[20];
+			ushort unkShort0x4;
+			ushort unkShort0x6;
+			ushort unkShort0x8;
+			ubyte unkByte0xa;
+			ubyte unkByte0xb;
+			ubyte RotationOctant;
+			ubyte unkByte0xd;
+			ubyte unkByte0xe;
+			ubyte unkByte0xf;
+			ubyte unkByte0x10;
+			ubyte unkByte0x11;
+			ubyte unkByte0x12;
+			ubyte unkByte0x13;
+			ubyte unkByte0x14;
+			ubyte unkByte0x15;
+			ubyte unkByte0x16;
+			ubyte RotationOctant_TS;
+			
 		}unk7[numunk7]<name="Recruit Conditions 2",read=GetName2>;
 	}unknownsection7<name="Recruit Conditions 2",bgcolor=cDkRed>;
 	
@@ -411,7 +411,7 @@ struct File{
 			uint16 unk;
 			uint16 unk;*/
 		}unknownsection9[numunk9]<name="Unknown Section9">;
-        byte unknownExtra[16];
+		byte unknownExtra[16];
 	}unk9<name="Unknown Section 9",bgcolor=cDkGreen>;
 	
 	FSeek(sectionpointers.PointerToFavTeaLeaves);
@@ -424,15 +424,15 @@ struct File{
 		}teapadding<name="Padding">;
 		struct FavoriteTea{
 			CharID CharacterID;
-            Gifts disliked[4];
+			Gifts disliked[4];
 			MiscItem tea<name="Favorite Tea">;
 			MiscItem tea<name="Favorite Tea">;
 			MiscItem tea<name="Favorite Tea">;
 			MiscItem tea<name="Favorite Tea">;
 		}favoritetea[numFavoriteTea]<name="Favorite Tea Leaves",read=GetName3>;
-        byte padding[2];
+		byte padding[2];
 	}favoritelealeaves<name="Favorite Tea Leaves",bgcolor=cLtGreen>;
-    
+	
 	FSeek(sectionpointers.PointerToFinalComment);
 	struct FinalComment{
 		uint32 TeaMagic;
@@ -443,7 +443,7 @@ struct File{
 		}commentpadding<name="Padding">;
 		struct FinalTeaComment{
 			CharID CharacterID;
-            ConstanceSunShadeMode ConstanceMode<comment="If in Shaded Mode, ">;
+			ConstanceSunShadeMode ConstanceMode<comment="If in Shaded Mode, ">;
 			ubyte CommentID;
 			TrueFalse Nod;
 			TrueFalse Laugh;
@@ -465,33 +465,33 @@ struct File{
 		struct padding{
 			byte Padding[0x34];
 		}commentpadding<name="Padding", hidden=true>;
-        for (k = 0; k < numFinalComment; ++k){
-            struct TeaResponse {
-                byte response[Size];
-            }answer;
-        }
-        byte padding__[2];
-    }tea;
-    
-    FSeek(sectionpointers.PointerToTeaAnswers2);
+		for (k = 0; k < numFinalComment; ++k){
+			struct TeaResponse {
+				byte response[Size];
+			}answer;
+		}
+		byte padding__[2];
+	}tea;
+	
+	FSeek(sectionpointers.PointerToTeaAnswers2);
 	TeaTopics Tea2<name="Tea Time Topic Responses 2",bgcolor=cLtRed>;
 }file<open=true>;
 string GetName(RecruitRank& value)
 {
-    return EnumToString(value.charID);
+	return EnumToString(value.charID);
 }
 
 string GetName2(Unk7& value)
 {
-    return EnumToString(value.charID);
+	return EnumToString(value.charID);
 }
 
 string GetName4(FinalTeaComment& value)
 {
-    return EnumToString(value.CharacterID);
+	return EnumToString(value.CharacterID);
 }
 
 string GetName3(FavoriteTea& value)
 {
-    return EnumToString(value.CharacterID);
+	return EnumToString(value.CharacterID);
 }
