@@ -14,7 +14,6 @@
 #include "include_Enums.bt"
 
 //Generic Data Section
-local int j = 0;
 struct DataSection {
     int magic<bgcolor=cRed>;
     int NumEntries<bgcolor=cBlue>;
