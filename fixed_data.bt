@@ -19,459 +19,341 @@
 LittleEndian();
 local int i<hidden=true>;
 enum<byte> BattalionGender {
-    Both_Genders = -1,
-    Only_Males_ = 0,
-    Only_Female_ = 1,
+	Both_Genders = -1,
+	Only_Males_ = 0,
+	Only_Female_ = 1,
+};
 
-};
 struct WepFlags03{
-    ubyte bit0 : 1<name="Magic">;
-    ubyte bit1 : 1<name="Ignores Prt/Rsl">;
-    ubyte bit2 : 1<name="Foe Left With 1 HP">;
-    ubyte bit3 : 1<name="Doesn't Effect Flying">;
-    ubyte bit4 : 1<name="Cannot Trigger Follow Up Attacks">;
-    ubyte bit5 : 1<name="Attack Twice">;
-    ubyte bit6 : 1<name="Cannot Steal">;
-    ubyte bit7 : 1<name="Hero Relic">;
+	ubyte bit0 : 1<name="Magic">;
+	ubyte bit1 : 1<name="Ignores Prt/Rsl">;
+	ubyte bit2 : 1<name="Foe Left With 1 HP">;
+	ubyte bit3 : 1<name="Doesn't Effect Flying">;
+	ubyte bit4 : 1<name="Cannot Trigger Follow Up Attacks">;
+	ubyte bit5 : 1<name="Attack Twice">;
+	ubyte bit6 : 1<name="Cannot Steal">;
+	ubyte bit7 : 1<name="Hero Relic">;
 };
+
 struct WepFlag02{
-    ubyte bit0 : 1<name="Infantry 3x">;
-    ubyte bit1 : 1<name="Armor 3x">;
-    ubyte bit2 : 1<name="Cavalry 3x">;
-    ubyte bit3 : 1<name="Flier 3x">;
-    ubyte bit4 : 1<name="Dragon 3x">;
-    ubyte bit5 : 1<name="Monster 3x">;
+	ubyte bit0 : 1<name="Infantry 3x">;
+	ubyte bit1 : 1<name="Armor 3x">;
+	ubyte bit2 : 1<name="Cavalry 3x">;
+	ubyte bit3 : 1<name="Flier 3x">;
+	ubyte bit4 : 1<name="Dragon 3x">;
+	ubyte bit5 : 1<name="Monster 3x">;
 };
+
 struct WepFlag01{
-    ubyte bit0 : 1<name="Infantry 3x">;
-    ubyte bit1 : 1<name="Armor 3x">;
-    ubyte bit2 : 1<name="Cavalry 3x">;
-    ubyte bit3 : 1<name="Flier 3x">;
-    ubyte bit4 : 1<name="Dragon 3x">;
-    ubyte bit5 : 1<name="Monster 3x">;
-    ubyte bit6 : 1<name="???">;
-    ubyte bit7 : 1<name="Cannot double at 1-Range", comment="Seen in Mini Bow">;
-    ubyte bit8 : 1<name="Infantry 2x">;
-    ubyte bit9 : 1<name="Armor 2x">;
-    ubyte bit10 : 1<name="Cavalry 2x">;
-    ubyte bit11 : 1<name="Flier 2x">;
-    ubyte bit12 : 1<name="Dragon 2x">;
-    ubyte bit13 : 1<name="Monster 2x">;
-    ubyte bit14 : 1<name="Broken Weapon">;
-    ubyte bit15 : 1<name="Stone Weapon">;
+	ubyte bit0 : 1<name="Infantry 3x">;
+	ubyte bit1 : 1<name="Armor 3x">;
+	ubyte bit2 : 1<name="Cavalry 3x">;
+	ubyte bit3 : 1<name="Flier 3x">;
+	ubyte bit4 : 1<name="Dragon 3x">;
+	ubyte bit5 : 1<name="Monster 3x">;
+	ubyte bit6 : 1<name="???">;
+	ubyte bit7 : 1<name="Cannot double at 1-Range", comment="Seen in Mini Bow">;
+	ubyte bit8 : 1<name="Infantry 2x">;
+	ubyte bit9 : 1<name="Armor 2x">;
+	ubyte bit10 : 1<name="Cavalry 2x">;
+	ubyte bit11 : 1<name="Flier 2x">;
+	ubyte bit12 : 1<name="Dragon 2x">;
+	ubyte bit13 : 1<name="Monster 2x">;
+	ubyte bit14 : 1<name="Broken Weapon">;
+	ubyte bit15 : 1<name="Stone Weapon">;
 };
 
 struct ItemData {
-    Item BrokenItem<name="When Broken (Weapons Only)">;
-    byte Property1Value<name="Skill Property 1 Value">;
-    byte Property2Value<name="Skill Property 2 Value">;
-    ExtraMagEffect MagEff<name="Effect">;
-    WeaponTypes Type<name="Type">;
-    WeaponRanks WeaponRank<name="Rank">;
-    Range MaximumRange<name="Maximum Range">;
-    WeaponModel WModel<name="Model">;
-    CrestID RequiredCrest<name="Crest">;
-    byte MinimumRange<name="Minimum Range">;
-    ubyte Durability<name="Durability/Uses">;
-    Status WepEff<name="Status Effect", comment="Pairs with 'Status Effect Block'">;
-    ItemTypes ItemType<name="Icon">;
-    WepFlag01 Flags1<name="Weapon Flags">;
-    if (Type == 9){
-        byte Amount<name="Amount/Value">;
-        if (MagEff == 21 || MagEff == 22){
-           
-             Stat_Booster Statss<name="Stat">;
-        }
-        else {
-            byte unused<name="Not used for this Effect",hidden=false>;
-        }
-        ubyte itemIndex<name="Item Index">;
-        ubyte Weight<name="Weight">;
-    }
-    else if (Type != 8){
-        byte MT<name="MT">;
-        byte Hit<name="Hit">;
-        byte Crit<name="Crit">;
-        byte WT<name="Weight">;
-    }
-    else {
-        byte Prt<name="Prt">;
-        short unused<name="Unused", hidden=true>;
-        byte Weight<name="Weight">;
-    };
-    SkillProperty Property1<name="Skill Property 1">;
-    SkillProperty Property2<name="Skill Property 2">;
-    WepFlags03 wepflags03<name="Item Flags 3", bgcolor=cBlack>;
-    byte Padding<name="Padding">;
+	Item BrokenItem<name="When Broken (Weapons Only)">;
+	byte Property1Value<name="Skill Property 1 Value">;
+	byte Property2Value<name="Skill Property 2 Value">;
+	ExtraMagEffect MagEff<name="Effect">;
+	WeaponTypes Type<name="Type">;
+	WeaponRanks WeaponRank<name="Rank">;
+	Range MaximumRange<name="Maximum Range">;
+	WeaponModel WModel<name="Model">;
+	CrestID RequiredCrest<name="Crest">;
+	byte MinimumRange<name="Minimum Range">;
+	ubyte Durability<name="Durability/Uses">;
+	Status WepEff<name="Status Effect", comment="Pairs with 'Status Effect Block'">;
+	ItemTypes ItemType<name="Icon">;
+	WepFlag01 Flags1<name="Weapon Flags">;
+	if (Type == 9){
+		byte Amount<name="Amount/Value">;
+		if (MagEff == 21 || MagEff == 22)
+			Stat_Booster Statss<name="Stat">;
+		else 
+			byte unused<hidden=true>;
+		ubyte itemIndex<name="Item Index">;
+		ubyte Weight<name="Weight">;
+	}
+	else if (Type != 8){
+		byte MT<name="MT">;
+		byte Hit<name="Hit">;
+		byte Crit<name="Crit">;
+		byte WT<name="Weight">;
+	}
+	else {
+		byte Prt<name="Prt">;
+		short unused<name="Unused", hidden=true>;
+		byte Weight<name="Weight">;
+	};
+	SkillProperty Property1<name="Skill Property 1">;
+	SkillProperty Property2<name="Skill Property 2">;
+	WepFlags03 wepflags03<name="Item Flags 3", bgcolor=cBlack>;
+	byte Padding<name="Padding">;
 };
+
 struct FILE {
-    struct SECTIONPOINTERS {
-        uint header<name="Header">;
-        uint PointerToItemBlock01<bgcolor=cRed>;
-        uint ItemBlockStructSize01<bgcolor=cRed>;
-        uint PointerToItemBlock02<bgcolor=cRed>;
-        uint ItemBlockStructSize02<bgcolor=cRed>;
-        uint PointerToItemBlock03<bgcolor=cRed>;
-        uint ItemBlockStructSize03<bgcolor=cRed>;
-        uint PointerToItemBlock04<bgcolor=cRed>;
-        uint ItemBlockStructSize04<bgcolor=cRed>;
-        uint PointerToItemBlock05<bgcolor=cRed>;
-        uint ItemBlockStructSize05<bgcolor=cRed>;
-        uint PointerToItemBlock06<bgcolor=cRed>;
-        uint ItemBlockStructSize06<bgcolor=cRed>;
-        uint PointerToItemBlock07<bgcolor=cRed>;
-        uint ItemBlockStructSize07<bgcolor=cRed>;
-        uint PointerToItemBlock08<bgcolor=cRed>;
-        uint ItemBlockStructSize08<bgcolor=cRed>;
-        uint PointerToItemBlock09<bgcolor=cRed>;
-        uint ItemBlockStructSize09<bgcolor=cRed>;
-        uint PointerToItemBlock10<bgcolor=cRed>;
-        uint ItemBlockStructSize10<bgcolor=cRed>;
-        uint PointerToItemBlock11<bgcolor=cRed>;
-        uint ItemBlockStructSize11<bgcolor=cRed>;
-        uint PointerToItemBlock12<bgcolor=cRed>;
-        uint ItemBlockStructSize12<bgcolor=cRed>;
-        uint PointerToItemBlock13<bgcolor=cRed>;
-        uint ItemBlockStructSize13<bgcolor=cRed>;
-        uint PointerToItemBlock14<bgcolor=cRed>;
-        uint ItemBlockStructSize14<bgcolor=cRed>;
-        uint PointerToItemBlock15<bgcolor=cRed>;
-        uint ItemBlockStructSize15<bgcolor=cRed>;
-        uint PointerToItemBlock16<bgcolor=cRed>;
-        uint ItemBlockStructSize16<bgcolor=cRed>;
-    }SectionPointers<name="Section pointers">;
+	FileSections Sections;
 
-    // Table 1
-    FSeek(SectionPointers.PointerToItemBlock01);
-    struct ItemStructure01 {
-        uint ItemMagic01<bgcolor=cRed>;
-        uint numItem01<bgcolor=cRed>;
-        uint SizeOfItemBlock01<bgcolor=cRed>;
-        struct ItemHeaderPadding01 {
-            byte Padding[0x34];
-        }itemheaderpadding01<name="Padding", bgcolor=cBlue>;
-        struct ITEM01{
-            for( i = 0; i < numItem01; i++ ){
-                struct WeaponData {
-				    local Item NameOfWeapon<hidden=true>;
-				    NameOfWeapon = i;
-                    ItemData wep<open=true>;
-                }Weap01Data<name="Weapon Data", read=EnumToString(NameOfWeapon)>;
-            }
-        }Item01<name="Weapons">;            
-    }itemstructure01<name="Weapon Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure01 { //0
+		DataSection Header;
+		struct ITEM01{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct WeaponData {
+					local Item NameOfWeapon<hidden=true> = i;
+					ItemData wep<open=true>;
+				}Weap01Data<name="Weapon Data", read=EnumToString(NameOfWeapon)>;
+			}
+		}Item01<name="Weapons">;			
+	}itemstructure01<name="Weapon Block", bgcolor=cYellow>;
 
-    // Table 2
-    FSeek(SectionPointers.PointerToItemBlock02);
-    struct ItemStructure02 {
-        uint ItemMagic02<bgcolor=cRed>;
-        uint numItem02<bgcolor=cRed>;
-        uint SizeOfItemBlock02<bgcolor=cRed>;
-        struct ItemHeaderPadding02 {
-            byte Padding[0x34];
-        }itemheaderpadding02<name="Padding", bgcolor=cBlue>;
-        struct ITEM02{
-            for( i = 0; i < numItem02; i++ )
-            {
-                struct MAGICDATA {
-                    local SpellID NameOfMagic<hidden=true>;
-					NameOfMagic = i;
-                    ItemData magic;
-                }MagicData<name="Magic Data", read=EnumToString(NameOfMagic)>;
-            }
-        }Item02<name="Magic">;            
-    }itemstructure02<name="Magic Block", bgcolor=cLtGreen>;
+	FSeekNextSection(Sections);
+	struct ItemStructure02 { //1
+		DataSection Header;
+		struct ITEM02{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct MAGICDATA {
+					local SpellID NameOfMagic<hidden=true> = i;
+					ItemData magic;
+				}MagicData<name="Magic Data", read=EnumToString(NameOfMagic)>;
+			}
+		}Item02<name="Magic">;			
+	}itemstructure02<name="Magic Block", bgcolor=cLtGreen>;
 
-    //Table 3
-    FSeek(SectionPointers.PointerToItemBlock03);
-    struct ItemStructure03 {
-        uint ItemMagic03<bgcolor=cRed>;
-        uint numItem03<bgcolor=cRed>;
-        uint SizeOfItemBlock03<bgcolor=cRed>;
-        struct ItemHeaderPadding03 {
-            byte Padding[0x34];
-        }itemheaderpadding03<name="Padding", bgcolor=cBlue>;
-           ItemData turretData<name="Turret", read="Onager">;
-           ItemData turretData<name="Turret", read="Ballista">;
-           ItemData turretData<name="Turret", read="Fire Orb">;
-    }itemstructure03<name="Turret Block", bgcolor=cLtBlue>;
+	FSeekNextSection(Sections);
+	struct ItemStructure03 { //2
+		DataSection Header;
+		ItemData turretData<name="Turret", read="Onager">;
+		ItemData turretData<name="Turret", read="Ballista">;
+		ItemData turretData<name="Turret", read="Fire Orb">;
+	}itemstructure03<name="Turret Block", bgcolor=cLtBlue>;
 
-    //Table 04
-    FSeek(SectionPointers.PointerToItemBlock04);
-    struct ItemStructure04 {
-        uint ItemMagic04<bgcolor=cRed>;
-        uint numItem04<bgcolor=cRed>;
-        uint SizeOfItemBlock04<bgcolor=cRed>;
-        struct ItemHeaderPadding04 {
-            byte Padding[0x34];
-        }itemheaderpadding04<name="Padding", bgcolor=cBlue>;
-        struct ITEM04{
-			for( i = 0; i < numItem04; i++ )
-            {
-                struct GAMBITDATA {
-					local GambitType NameOfGambit<hidden=true>;
-					NameOfGambit = i;
-                    ItemData gambit;
-                }GambitData<name="Gambit Data", read=EnumToString(NameOfGambit)>;
-            }
-        }Item04<name="Gambit">;            
-    }itemstructure04<name="Gambit Block", bgcolor=cLtRed>;
-    //Table 5
-    FSeek(SectionPointers.PointerToItemBlock05);
-    struct ItemStructure05 {
-        uint ItemMagic05<bgcolor=cRed>;
-        uint numItem05<bgcolor=cRed>;
-        uint SizeOfItemBlock05<bgcolor=cRed>;
-        struct ItemHeaderPadding05 {
-            byte Padding[0x34];
-        }itemheaderpadding05<name="Padding", bgcolor=cBlue>;
-        for (i = 0; i < numItem05; ++i){
-        struct ITEM05{
-            local StaggeringBlow S<hidden=true>;
-            S = i;
-            ItemData MonsterAOE;
-        }Item05<name="Monster Staggering Blow", read=EnumToString(S)>;
-}
-    }itemstructure05<name="Monster AOE Attack Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure04 { //3
+		DataSection Header;
+		struct ITEM04{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct GAMBITDATA {
+					local GambitType NameOfGambit<hidden=true> = i;
+					ItemData gambit;
+				}GambitData<name="Gambit Data", read=EnumToString(NameOfGambit)>;
+			}
+		}Item04<name="Gambit">;			
+	}itemstructure04<name="Gambit Block", bgcolor=cLtRed>;
+	
+	FSeekNextSection(Sections);
+	struct ItemStructure05 { //4
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; ++i){
+			struct ITEM05{
+				local StaggeringBlow S<hidden=true> = i;
+				ItemData MonsterAOE;
+			}Item05<name="Monster Staggering Blow", read=EnumToString(S)>;
+		}
+	}itemstructure05<name="Monster AOE Attack Block", bgcolor=cYellow>;
 
-    //Table 6
-    FSeek(SectionPointers.PointerToItemBlock06);
-    struct ItemStructure06 {
-        uint ItemMagic06<bgcolor=cRed>;
-        uint numItem06<bgcolor=cRed>;
-        uint SizeOfItemBlock06<bgcolor=cRed>;
-        struct ItemHeaderPadding06 {
-            byte Padding[0x34];
-        }itemheaderpadding06<name="Padding", bgcolor=cBlue>;
-        struct ITEM06{
-			for( i = 0; i < numItem06; i++ )
-            {
-                struct EQUIPDATA {
-					local EquipID NameOfEquipment<hidden=true>;
-					NameOfEquipment = i;         
-                    ItemData Equipment;
-                    }EquipData<name="Equipment Data", read=EnumToString(NameOfEquipment)>;
-            }
-        }Item06<name="Equipment">;
-    }itemstructure06<name="Equipment Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure06 { //5
+		DataSection Header;
+		struct ITEM06{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct EQUIPDATA {
+					local EquipID NameOfEquipment<hidden=true> = i;
+					ItemData Equipment;
+					}EquipData<name="Equipment Data", read=EnumToString(NameOfEquipment)>;
+			}
+		}Item06<name="Equipment">;
+	}itemstructure06<name="Equipment Block", bgcolor=cYellow>;
 
-    //Table 7
-    FSeek(SectionPointers.PointerToItemBlock07);
-    struct ItemStructure07 {
-        uint ItemMagic07<bgcolor=cRed>;
-        uint numItem07<bgcolor=cRed>;
-        uint SizeOfItemBlock07<bgcolor=cRed>;
-        struct ItemHeaderPadding07 {
-            byte Padding[0x34];
-        }itemheaderpadding07<name="Padding", bgcolor=cBlue>;
-        struct ITEM07{
-            for( i = 0; i < numItem07; i++ )
-            {
-                struct ITEMDATA {
-					local Consumables NameOfItem<hidden=true>;
-					NameOfItem = i;                
-                    ItemData item;
-                }Consumable<name="Item Data", read=EnumToString(NameOfItem)>;
-            }
-        }Item07<name="Items">;
-    }itemstructure07<name="Items Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure07 { //6
+		DataSection Header;
+		struct ITEM07{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct ITEMDATA {
+					local Consumables NameOfItem<hidden=true> = i;
+					ItemData item;
+				}Consumable<name="Item Data", read=EnumToString(NameOfItem)>;
+			}
+		}Item07<name="Items">;
+	}itemstructure07<name="Items Block", bgcolor=cYellow>;
 
-    //Table 8
-    FSeek(SectionPointers.PointerToItemBlock08);
-    struct ItemStructure08 {
-        uint ItemMagic08<bgcolor=cRed>;
-        uint numItem08<bgcolor=cRed>;
-        uint SizeOfItemBlock08<bgcolor=cRed>;
-        struct ItemHeaderPadding08 {
-            byte Padding[0x34];
-        }itemheaderpadding08<name="Padding", bgcolor=cBlue>;
-        struct ITEM08{
-			for( i = 0; i < numItem08; i++ )
-            {
-                struct ARTSDATA {
-					local CombatArtID NameOfArt<hidden=true>;
-					NameOfArt = i;  
-                    AnotherWeapIDEnumForArtsBecauseFuckingWhyNot RequiredWeap<name="Required Weapon">;
-                    byte CAAvoid<name="Avoid">;
-                    ubyte CAMight<name="Might">;
-                    byte CACrit<name="Crit">;
-                    byte CAHit<name="Hit">;
-                    byte CAAvoid2<name="Avoid 2", comment="Always the same as Avoid">;
-                    CAEffect CAEffectdata<name="Effect">;
-                    ClassID CARequiredClass<name="Required Class">;
-                    byte Unk<bgcolor=cBlack>;
-                    ubyte CADurCost<name="Durability Cost">;
-                    ubyte CAMaxRange<name="Maximum Range">;
-                    ubyte CAMinRange<name="Minimum Range">;
-                    struct CAWeaponTypeBits{
-                        ubyte bit0 : 1<name="Sword">;
-                        ubyte bit1 : 1<name="Lance">;
-                        ubyte bit2 : 1<name="Axe">;
-                        ubyte bit3 : 1<name="Bow">;
-                        ubyte bit4 : 1<name="Gauntlet">;
-                        ubyte bit5 : 1<name="Tome">;
-                        ubyte bit6 : 1<name="???", comment="Unseen">;
-                        ubyte bit7 : 1<name="???", comment="Unseen">;
-                    }caweapontypebits<name="Usable Weapons">;
-                    struct CAEffectivenessBits{
-                        ubyte bit0 : 1<name="Infantry 3x">;
-                        ubyte bit1 : 1<name="Armor 3x">;
-                        ubyte bit2 : 1<name="Cavalry 3x">;
-                        ubyte bit3 : 1<name="Flier 3x">;
-                        ubyte bit4 : 1<name="Dragon 3x">;
-                        ubyte bit5 : 1<name="Monster 3x">;
-                        ubyte bit6 : 1<name="???", comment="Unseen">;
-                        ubyte bit7 : 1<name="???", comment="Unseen">;
-                        ubyte bit8 : 1<name="Infantry 2x">;
-                        ubyte bit9 : 1<name="Armor 2x">;
-                        ubyte bit10 : 1<name="Cavalry 2x">;
-                        ubyte bit11 : 1<name="Flier 2x">;
-                        ubyte bit12 : 1<name="Dragon 2x">;
-                        ubyte bit13 : 1<name="Monster 2x">;
-                        ubyte bit14 : 1<name="???", comment="Unseen">;
-                        ubyte bit15 : 1<name="???", comment="Unseen">;
-                    }caeffectivenessbits<name="Effectiveness">;
-                    struct CAFlags{
-                        ubyte bit0 : 1<name="Magic">;
-                        ubyte bit1 : 1<name="???">;
-                        ubyte bit2 : 1<name="???">;
-                        ubyte bit3 : 1<name="Prevent Counterattack">;
-                        ubyte bit4 : 1<name="Learned by All">;
-                        ubyte bit5 : 1<name="???">;
-                        ubyte bit6 : 1<name="Target Self">;
-                        ubyte bit7 : 1<name="Target Ally">;
-                    }caflags<name="Flags",bgcolor=cGreen>;
-                    ubyte CAPadding;
-                }ArtsData<name="Combat Arts Data", read=GetArtsName>;
-            }
-        }Item08<name="Combat Arts">;
-    }itemstructure08<name="Combat Arts Table", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure08 { //7
+		DataSection Header;
+		struct ITEM08{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct ARTSDATA {
+					local CombatArtID NameOfArt<hidden=true> = i;  
+					AnotherWeapIDEnumForArtsBecauseFuckingWhyNot RequiredWeap<name="Required Weapon">;
+					byte CAAvoid<name="Avoid">;
+					ubyte CAMight<name="Might">;
+					byte CACrit<name="Crit">;
+					byte CAHit<name="Hit">;
+					byte CAAvoid2<name="Avoid 2", comment="Always the same as Avoid">;
+					CAEffect CAEffectdata<name="Effect">;
+					ClassID CARequiredClass<name="Required Class">;
+					byte Unk<bgcolor=cBlack>;
+					ubyte CADurCost<name="Durability Cost">;
+					ubyte CAMaxRange<name="Maximum Range">;
+					ubyte CAMinRange<name="Minimum Range">;
+					struct CAWeaponTypeBits{
+						ubyte bit0 : 1<name="Sword">;
+						ubyte bit1 : 1<name="Lance">;
+						ubyte bit2 : 1<name="Axe">;
+						ubyte bit3 : 1<name="Bow">;
+						ubyte bit4 : 1<name="Gauntlet">;
+						ubyte bit5 : 1<name="Tome">;
+						ubyte bit6 : 1<name="???", comment="Unseen">;
+						ubyte bit7 : 1<name="???", comment="Unseen">;
+					}caweapontypebits<name="Usable Weapons">;
+					struct CAEffectivenessBits{
+						ubyte bit0 : 1<name="Infantry 3x">;
+						ubyte bit1 : 1<name="Armor 3x">;
+						ubyte bit2 : 1<name="Cavalry 3x">;
+						ubyte bit3 : 1<name="Flier 3x">;
+						ubyte bit4 : 1<name="Dragon 3x">;
+						ubyte bit5 : 1<name="Monster 3x">;
+						ubyte bit6 : 1<name="???", comment="Unseen">;
+						ubyte bit7 : 1<name="???", comment="Unseen">;
+						ubyte bit8 : 1<name="Infantry 2x">;
+						ubyte bit9 : 1<name="Armor 2x">;
+						ubyte bit10 : 1<name="Cavalry 2x">;
+						ubyte bit11 : 1<name="Flier 2x">;
+						ubyte bit12 : 1<name="Dragon 2x">;
+						ubyte bit13 : 1<name="Monster 2x">;
+						ubyte bit14 : 1<name="???", comment="Unseen">;
+						ubyte bit15 : 1<name="???", comment="Unseen">;
+					}caeffectivenessbits<name="Effectiveness">;
+					struct CAFlags{
+						ubyte bit0 : 1<name="Magic">;
+						ubyte bit1 : 1<name="???">;
+						ubyte bit2 : 1<name="???">;
+						ubyte bit3 : 1<name="Prevent Counterattack">;
+						ubyte bit4 : 1<name="Learned by All">;
+						ubyte bit5 : 1<name="???">;
+						ubyte bit6 : 1<name="Target Self">;
+						ubyte bit7 : 1<name="Target Ally">;
+					}caflags<name="Flags",bgcolor=cGreen>;
+					ubyte CAPadding;
+				}ArtsData<name="Combat Arts Data", read=GetArtsName>;
+			}
+		}Item08<name="Combat Arts">;
+	}itemstructure08<name="Combat Arts Table", bgcolor=cYellow>;
 
-    //Table 09
-    FSeek(SectionPointers.PointerToItemBlock09);
-    struct ItemStructure09 {
-        uint ItemMagic09<bgcolor=cRed>;
-        uint numItem09<bgcolor=cRed>;
-        uint SizeOfItemBlock09<bgcolor=cRed>;
-        struct ItemHeaderPadding09 {
-            byte Padding[0x34];
-        }itemheaderpadding09<name="Padding", bgcolor=cBlue>;
-        for (i = 0; i < numItem09; ++i){
-            struct ITEM09{
-	            local GambitType NameOfGambit<hidden=true>;
-			    NameOfGambit = i;
-                ubyte unk;
-                ubyte unk;
-                ubyte unk;
-                ubyte unk;
-                ubyte unk;
-                ubyte unk;
-                GambitAnimation act<name="Gambit Attack Animation", bgcolor=cBlue>;
-                byte GambitUses<name="Number of Gambit Uses", bgcolor=cRed>;
-                GambitMovement movemnt<name="Gambit Movement Effects">;
-                ubyte unk;
-                GambitTargeting target<name="Target Area">;
-                GambitEffects visual<name="Visual Effect">;
-                local string output;
-                struct GambitFlags{
-                    ubyte bit0 : 1<name="Apply Area of Effect">;
-                    ubyte bit1 : 1<name="Fire Terrian">;
-                    ubyte bit2 : 1<name="Maybe Used in Targeting Eligilibility?">;
-                    ubyte bit3 : 1<name="???">;
-                    
-                    ubyte bit4 : 1<name="???">;
-                    ubyte bit5 : 1<name="???">;
-                    ubyte bit6 : 1<name="???">;
-                    ubyte bit7 : 1<name="???">;
-                }wep01flags01<name="Additional Flags 1", bgcolor=cBlack, open=true>;
-            }Item09<name="Gambit Data", read=EnumToString(NameOfGambit), open=false>;
-        }
-    }itemstructure09<name="Gambit Targeting/Use Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure09 { //8
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; ++i){
+			struct ITEM09{
+				local GambitType NameOfGambit<hidden=true>;
+				NameOfGambit = i;
+				ubyte unk;
+				ubyte unk;
+				ubyte unk;
+				ubyte unk;
+				ubyte unk;
+				ubyte unk;
+				GambitAnimation act<name="Gambit Attack Animation", bgcolor=cBlue>;
+				byte GambitUses<name="Number of Gambit Uses", bgcolor=cRed>;
+				GambitMovement movemnt<name="Gambit Movement Effects">;
+				ubyte unk;
+				GambitTargeting target<name="Target Area">;
+				GambitEffects visual<name="Visual Effect">;
+				local string output;
+				struct GambitFlags{
+					ubyte bit0 : 1<name="Apply Area of Effect">;
+					ubyte bit1 : 1<name="Fire Terrian">;
+					ubyte bit2 : 1<name="Maybe Used in Targeting Eligilibility?">;
+					ubyte bit3 : 1<name="???">;
+					
+					ubyte bit4 : 1<name="???">;
+					ubyte bit5 : 1<name="???">;
+					ubyte bit6 : 1<name="???">;
+					ubyte bit7 : 1<name="???">;
+					output+=EnumToString(NameOfGambit);
+				}wep01flags01<name="Additional Flags 1", bgcolor=cBlack, open=true>;
+			}Item09<name="Gambit Data", read=output, open=false>;
+		}
+	}itemstructure09<name="Gambit Targeting/Use Block", bgcolor=cYellow>;
 
-    //Table 10
-    FSeek(SectionPointers.PointerToItemBlock10);
-    struct ItemStructure10 {
-        uint ItemMagic10<bgcolor=cRed>;
-        uint numItem10<bgcolor=cRed>;
-        uint SizeOfItemBlock10<bgcolor=cRed>;
-        struct ItemHeaderPadding10 {
-            byte Padding[0x34];
-        }itemheaderpadding10<name="Padding", bgcolor=cBlue>;
-        for(i=0; i<numItem10; i++){
-            struct ITEM10{
-                local StaggeringBlow StaggeringBlowName;
-                StaggeringBlowName = i;
-                GambitTargeting a1<name="AoE Dimensions Type">;
-                byte Unk;
-                struct StaggeringBlowFlags{
-                    ubyte Flame : 1<name="Applies Flame to AoE Tiles">;
-                    ubyte Rattle : 1<name="Applies Rattle">;
-                    ubyte DisableFriendlyFire : 1<name="Does not deal damage to allies">;
-                    ubyte HealAllies : 1<name="Heals allies hit", comment="Uses normal heal formula (no heal+5/+10 or heal staff/crest)">;
-                }staggerinblowflag<name="Flags", bgcolor=cBlack>;
-            }Item10<name="Item Data", read = EnumToString(StaggeringBlowName), optimize=false>;
-        }
-    }itemstructure10<name="Monster Staggering Blow Targeting", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure10 { //9
+		DataSection Header;
+		for(i=0; i< Header.NumEntries; i++){
+			struct ITEM10{
+				local StaggeringBlow StaggeringBlowName;
+				StaggeringBlowName = i;
+				GambitTargeting a1<name="AoE Dimensions Type">;
+				byte Unk;
+				struct StaggeringBlowFlags{
+					ubyte Flame : 1<name="Applies Flame to AoE Tiles">;
+					ubyte Rattle : 1<name="Applies Rattle">;
+					ubyte DisableFriendlyFire : 1<name="Does not deal damage to allies">;
+					ubyte HealAllies : 1<name="Heals allies hit", comment="Uses normal heal formula (no heal+5/+10 or heal staff/crest)">;
+				}staggerinblowflag<name="Flags", bgcolor=cBlack>;
+			}Item10<name="Item Data", read = EnumToString(StaggeringBlowName), optimize=false>;
+		}
+	}itemstructure10<name="Monster Staggering Blow Targeting", bgcolor=cYellow>;
 
-    //Table 11
-    FSeek(SectionPointers.PointerToItemBlock11);
-    struct ItemStructure11 {
-        uint ItemMagic11<bgcolor=cRed>;
-        uint numItem11<bgcolor=cRed>;
-        uint SizeOfItemBlock11<bgcolor=cRed>;
-        struct ItemHeaderPadding11 {
-            byte Padding[0x34];
-        }itemheaderpadding11<name="Padding", bgcolor=cBlue>;
-        struct ITEM11{
-            for( i = 0; i < numItem11; i++ )
-            {
-                struct STATUSDATA {
-                    local Status NameOfStatus<hidden=true>;
-                    NameOfStatus = i;
-                    byte StatusAmount<name="Amount">;
-                    byte unk1<name="Lifetime", bgcolor=cBlack>;
-                    //StatusVFX SVFX<name="VFX">;
-                    struct StatusFlags {
-                        byte bit1:1<name="Debuff">;
-                        byte bit2:1<name="Flag 1">;
-                        byte bit3:1<name="Flag 2">;
-                        byte bit4:1<name="Rattle">;
-                        byte bit5:1<name="Buff">;
-                    }flags;
-                    StatusEffect SEffect<name="Status Effect",bgcolor=cGreen>;
-                }StatusData<name="Status Effect Data", read=GetStatusName>;
-            }
-        }Item11<name="Status Effects">;
-    }itemstructure11<name="Status Effect Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure11 { //10
+		DataSection Header;
+		struct ITEM11{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct STATUSDATA {
+					local Status NameOfStatus<hidden=true>;
+					NameOfStatus = i;
+					byte StatusAmount<name="Amount">;
+					byte unk1<name="Lifetime", bgcolor=cBlack>;
+					//StatusVFX SVFX<name="VFX">;
+					struct StatusFlags {
+						byte bit1:1<name="Debuff">;
+						byte bit2:1<name="Flag 1">;
+						byte bit3:1<name="Flag 2">;
+						byte bit4:1<name="Rattle">;
+						byte bit5:1<name="Buff">;
+					}flags;
+					StatusEffect SEffect<name="Status Effect",bgcolor=cGreen>;
+				}StatusData<name="Status Effect Data", read=GetStatusName>;
+			}
+		}Item11<name="Status Effects">;
+	}itemstructure11<name="Status Effect Block", bgcolor=cYellow>;
 
-    //Table 12
-    FSeek(SectionPointers.PointerToItemBlock12);
-    struct ItemStructure12 {
-        uint ItemMagic12<bgcolor=cRed>;
-        uint numItem12<bgcolor=cRed>;
-        uint SizeOfItemBlock12<bgcolor=cRed>;
-        struct ItemHeaderPadding12 {
-            byte Padding[0x34];
-        }itemheaderpadding12<name="Padding", bgcolor=cBlue>;
-        struct ITEM12{
-			for( i = 0; i < numItem12; i++ )
-            {
-                struct BATTALIONDATA {
+	FSeekNextSection(Sections);
+	struct ItemStructure12 { //1
+		DataSection Header;
+		struct ITEM12{
+			for( i = 0; i < Header.NumEntries; i++ ){
+				struct BATTALIONDATA {
 					local BattalionID NameOfBatta<hidden=true>;
 					NameOfBatta = i;
 					uint StringPointer;
-			        Item weapon<name="Battalion Weapon">;
-                    ushort BEndur<name="Endurance">;
-                    byte BMag<name="Base Magical">;
-			        byte BMagGrowth<name="Magical Growth">;
-                    byte BPhys<name="Base Physical">;
-                    ubyte BHit<name="Base Hit">;
-                    ubyte BCrit<name="Base Crit">;
-                    byte BAvo<name="Base Avoid">;
-			        byte BAvo2<name="Base Magic Avoid">;
-                    ubyte BPrt<name="Base Protection">;
-                    ubyte BRsl<name="Base Resilience">;
-                    struct BattalionGrowth{
+					Item weapon<name="Battalion Weapon">;
+					ushort BEndur<name="Endurance">;
+					byte BMag<name="Base Magical">;
+					byte BMagGrowth<name="Magical Growth">;
+					byte BPhys<name="Base Physical">;
+					ubyte BHit<name="Base Hit">;
+					ubyte BCrit<name="Base Crit">;
+					byte BAvo<name="Base Avoid">;
+					byte BAvo2<name="Base Magic Avoid">;
+					ubyte BPrt<name="Base Protection">;
+					ubyte BRsl<name="Base Resilience">;
+					struct BattalionGrowth{
 						ubyte BCritAvoid<name="Base Crit Avoid">;
 						ubyte BAttackSpeed<name="Base Attack Speed">;
 						ubyte BPhysGrowth<name="Phys Growth">;
@@ -484,107 +366,68 @@ struct FILE {
 						ubyte CritAvoidGrowth<name="Crit Avoid Growth", comment="10 gives 1 critAvo per level gained">;
 						ubyte AttackSpeedGrowth<name="Attack Speed Growth">;
 					}battalionboost<name="Battalion Stat Growths">;
-                    struct BattalionBoost{
-                        ubyte BStrBoost<name="Str Boost">;
-                        ubyte BMagBoost<name="Mag Boost">;
-                        ubyte BDexBoost<name="Dex Boost">;
-                        ubyte BSpdBoost<name="Spd Boost">;
-                        ubyte BLckBoost<name="Lck Boost">;
-                        ubyte BDefBoost<name="Def Boost">;
-                        ubyte BResBoost<name="Res Boost">;
-			            ubyte BMovBoost<name="Mov Boost">;
-                        ubyte BCha<name="Cha Boost">;
-                    }battalionboost<name="Battalion Stat Boosts">;
-			        ubyte unknown<name="BattalionShop Index",comment="200 = invalid">;
-                    WeaponRanks BRanks<name="Rank">;
-                    GambitType BGambit<name="Gambit">;
-			        byte BattalionAttackSpeed<name="Attack Speed">;
-			        byte BattalionModelIndex<name="Battalion Model Index?">;
-			        byte Model01<name="Model Table Entry 1">;
-			        byte Model02<name="Model Table Entry 2">;
-                }BattalionData<name="Battalion Data", read=GetBattalionName>;
-            }
-        }Item12<name="Battalion">;
-    }itemstructure12<name="Battalion Block", bgcolor=cYellow>;
+					struct BattalionBoost{
+						ubyte BStrBoost<name="Str Boost">;
+						ubyte BMagBoost<name="Mag Boost">;
+						ubyte BDexBoost<name="Dex Boost">;
+						ubyte BSpdBoost<name="Spd Boost">;
+						ubyte BLckBoost<name="Lck Boost">;
+						ubyte BDefBoost<name="Def Boost">;
+						ubyte BResBoost<name="Res Boost">;
+						ubyte BMovBoost<name="Mov Boost">;
+						ubyte BCha<name="Cha Boost">;
+					}battalionboost<name="Battalion Stat Boosts">;
+					ubyte unknown<name="BattalionShop Index",comment="200 = invalid">;
+					WeaponRanks BRanks<name="Rank">;
+					GambitType BGambit<name="Gambit">;
+					WepFlag02 Effectiveness<name="EffectivenessFlags">;
+					byte BattalionModelIndex<name="Battalion Model Index?">;
+					byte Model01<name="Model Table Entry 1">;
+					byte Model02<name="Model Table Entry 2">;
+				}BattalionData<name="Battalion Data", read=GetBattalionName>;
+			}
+		}Item12<name="Battalion">;
+	}itemstructure12<name="Battalion Block", bgcolor=cYellow>;
 
-    //Table 13
-    FSeek(SectionPointers.PointerToItemBlock13);
-    struct ItemStructure13 {
-        uint ItemMagic13<bgcolor=cRed>;
-        uint numItem13<bgcolor=cRed>;
-        uint SizeOfItemBlock13<bgcolor=cRed>;
-        struct ItemHeaderPadding13 {
-            byte Padding[0x34];
-        }itemheaderpadding13<name="Padding", bgcolor=cBlue>;
-        struct ITEM13{
-            short unk1;
-            short unk2;
-        }Item13[numItem13]<name="Item Data">;
-    }itemstructure13<name="Other Block 06", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure13 { //12
+		DataSection Header;
+		struct ITEM13{
+			short unk1;
+			short unk2;
+		}Item13[Header.NumEntries]<name="Item Data">;
+	}itemstructure13<name="Other Block 06", bgcolor=cYellow>;
 
-    //Table 14
-    FSeek(SectionPointers.PointerToItemBlock14);
-    struct ItemStructure14 {
-        uint ItemMagic14<bgcolor=cRed>;
-        uint numItem14<bgcolor=cRed>;
-        uint SizeOfItemBlock14<bgcolor=cRed>;
-        struct ItemHeaderPadding14 {
-            byte Padding[0x34];
-        }itemheaderpadding14<name="Padding", bgcolor=cBlue>;
-        struct ITEM14{
-            AID MaleAID;
-            AID FemaleAID;
-          //  Names Model01;
-          //  Names Model02;
-               BattalionGender gender;
-            ClassID class;
-        }Item14[numItem14]<name="Battalion Model Data">;
-    }itemstructure14<name="Battalion Model Block", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure14 { //13
+		DataSection Header;
+		struct ITEM14{
+			AID MaleAID;
+			AID FemaleAID;
+			BattalionGender gender;
+			ClassID class;
+		}Item14[Header.NumEntries]<name="Battalion Model Data">;
+	}itemstructure14<name="Battalion Model Block", bgcolor=cYellow>;
 
-    //Table 15
-    FSeek(SectionPointers.PointerToItemBlock15);
-    struct ItemStructure15 {
-        uint ItemMagic15<bgcolor=cRed>;
-        uint numItem15<bgcolor=cRed>;
-        uint SizeOfItemBlock15<bgcolor=cRed>;
-        struct ItemHeaderPadding15 {
-            byte Padding[0x34];
-        }itemheaderpadding15<name="Padding", bgcolor=cBlue>;
-        struct ITEM15{
-            byte Item15Size[SizeOfItemBlock15];
-        }Item15[numItem15]<name="Item Data", optimize=false>;
-    }itemstructure15<name="Other Block 08", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure15 { //14
+		DataSection Header;
+		struct ITEM15{
+			byte Item15Size[Header.size];
+		}Item15[Header.NumEntries]<name="Item Data", optimize=false>;
+	}itemstructure15<name="Other Block 08", bgcolor=cYellow>;
 
-    //Table 16
-    FSeek(SectionPointers.PointerToItemBlock16);
-    struct ItemStructure16 {
-        uint ItemMagic16<bgcolor=cRed>;
-        uint numItem16<bgcolor=cRed>;
-        uint SizeOfItemBlock16<bgcolor=cRed>;
-        struct ItemHeaderPadding16 {
-            byte Padding[0x34];
-        }itemheaderpadding16<name="Padding", bgcolor=cBlue>;
-        struct ITEM16{
-            ubyte someModelID[SizeOfItemBlock16]<comment="unsure">;
-        }Item16[numItem16]<name="Item Data", optimize=false>;
-    }itemstructure16<name="Other Block 09", bgcolor=cYellow>;
+	FSeekNextSection(Sections);
+	struct ItemStructure16 { //15
+		DataSection Header;
+		struct ITEM16{
+			ubyte someModelID[Header.size]<comment="unsure">;
+		}Item16[Header.NumEntries]<name="Item Data", optimize=false>;
+	}itemstructure16<name="Other Block 09", bgcolor=cYellow>;
 
 }File<name="Item.bin File",open=true>;
 
-
-string GetArtsName(ARTSDATA &q)
-{
-    return EnumToString(q.NameOfArt);
-}
-string GetStatusName(STATUSDATA &q)
-{
-    return EnumToString(q.NameOfStatus);
-}
-string GetBattalionName(BATTALIONDATA &q)
-{
-    return EnumToString(q.NameOfBatta);
-}
-string GetGambitName(GAMBITDATA &q)
-{
-    return EnumToString(q.NameOfGambit);
-}
+string GetArtsName(ARTSDATA &q){           return EnumToString(q.NameOfArt); }
+string GetStatusName(STATUSDATA &q){       return EnumToString(q.NameOfStatus); }
+string GetBattalionName(BATTALIONDATA &q){ return EnumToString(q.NameOfBatta); }
+string GetGambitName(GAMBITDATA &q){       return EnumToString(q.NameOfGambit); }
