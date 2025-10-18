@@ -28,6 +28,8 @@ local int i = 0;
 
 struct sFile{
     FileSections Sections;
+    
+    FSeekNextSection(Sections);
     struct sItemSpotTable{
         DataSection SectionHeader;
         
@@ -132,6 +134,7 @@ struct sFile{
         }UntrackedStuffInSect0<name="Item Location Type",comment="Section isn't tracked by Section header">;
     }ItemSpotTable<name="ItemSpots">;
     
+    FSeekNextSection(Sections);
     struct SpotDataTable1{
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
@@ -145,6 +148,7 @@ struct sFile{
         };
     }RandomItemSpots<name="Random ItemSpots", comment="Picks a random item from various pools of items, ">;
     
+    FSeekNextSection(Sections);
     struct SpotDataTable2 {
         DataSection SectionHeader;
         struct RNG_Item{
@@ -153,6 +157,7 @@ struct sFile{
         }RandomItems[SectionHeader.NumEntries]<read=EnumToString(MiscellaneousItem), open=false>;
     }RandomItemPools<name="Random Item Pools">;
     
+    FSeekNextSection(Sections);
     struct sItemSpotAltDropMiscItems{
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
@@ -165,7 +170,7 @@ struct sFile{
         }Padding<comment="likely padding">;
     }ItemSpotAltDropMiscItems<name="ItemSpot Alt Drop MiscItems">;
     
-    
+    FSeekNextSection(Sections);
     struct sAbyssLostAndFoundItems{
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
@@ -180,6 +185,7 @@ struct sFile{
         };
     }AbyssLostAndFoundItems<name="Abyss Lost and Found - Items">;
     
+    FSeekNextSection(Sections);
     struct sAbyssLostAndFoundItemPoolTiers{
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
