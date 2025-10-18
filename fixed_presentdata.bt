@@ -15,69 +15,71 @@
 #include "Structs.bt"
 
 local int i = 0;
-local int n;
 enum<ubyte> GiftQuality {
-    One_Star,
-    Two_Star,
-    Three_Star,
-    Four_Star,
-    Five_Star,    
+	One_Star,
+	Two_Star,
+	Three_Star,
+	Four_Star,
+	Five_Star,	
 };
 
-
 struct GenericFile {
-    FileSections Sections;
-    
-    struct GiftData {
-        DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
-        struct GiftEntry {
-            local Gifts gift = n;
-            uint price<name="Price", bgcolor=cGreen>;
-            GiftQuality star<name="Quality", bgcolor=cYellow>;
-            TrueFalse Cannot_Gift<name="Cannot Gift", bgcolor=cBlack>;
-            TrueFalse Flower<name="Is Flower", bgcolor=cBlue>;
-            TrueFalse liked<name="Liked by Everyone", bgcolor=cRed>;
-            TrueFalse isLostItem<name="Lost Item", bgcolor=cGreen>;
-            ubyte padding[3]<bgcolor=cBlue>;
-        } item<read=EnumToString(gift)>;  
-    }section1<name="Gift/LostItem Data">;
-    
-    struct sCharacterGiftList {
-        DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
-        struct CharList {
-            local CharID id = n;
-            Gifts flower<name="Favorite Flower?", bgcolor=cYellow>;
-            Gifts LostItems[3]<name="Lost Items", bgcolor=cBlue>;
-            Gifts Disliked[3]<name="Disliked Gifts", bgcolor=cRed>;
-            Gifts Liked[10]<name="Liked Gifts", bgcolor=cGreen>;
-        } item<read=EnumToString(id)>;
-        ubyte padding[3];
-    }CharacterGiftList;
-                
-    struct sunkTable2 {
-        DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
-        struct sunkEntry2 {
-            CharID Character;
-            ushort unkShort2FloatArray0x2[5];
-            ushort unkShort2FloatArray0xc[5];
-            ushort unkShort2FloatArray0x16[5];
-            ushort unkShort2FloatArray0x20[5];
-            ubyte indexes[5];
-            ubyte unkByte0x2f;
-        } unkEntry2<read=EnumToString(Character)>;
-    }unkTable2;
-    
-    struct sunkTable3 {
-        DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
-        struct sunkEntry3 {
-            byte unkByte0x0;
-            byte unkByte0x1;
-        } unkEntry3<>;
-    }unkTable3;
-    
+	FileSections Sections;
+	
+	struct GiftData {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; i++){
+			struct GiftEntry {
+				local Gifts gift = i;
+				uint price<name="Price", bgcolor=cGreen>;
+				GiftQuality star<name="Quality", bgcolor=cYellow>;
+				TrueFalse Cannot_Gift<name="Cannot Gift", bgcolor=cBlack>;
+				TrueFalse Flower<name="Is Flower", bgcolor=cBlue>;
+				TrueFalse liked<name="Liked by Everyone", bgcolor=cRed>;
+				TrueFalse isLostItem<name="Lost Item", bgcolor=cGreen>;
+				ubyte padding[3]<bgcolor=cBlue>;
+			} item<read=EnumToString(gift)>;  
+		}
+	}section1<name="Gift/LostItem Data">;
+	
+	struct sCharacterGiftList {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; i++){
+			struct CharList {
+				local CharID id = i;
+				Gifts flower<name="Favorite Flower?", bgcolor=cYellow>;
+				Gifts LostItems[3]<name="Lost Items", bgcolor=cBlue>;
+				Gifts Disliked[3]<name="Disliked Gifts", bgcolor=cRed>;
+				Gifts Liked[10]<name="Liked Gifts", bgcolor=cGreen>;
+			} item<read=EnumToString(id)>;
+		}
+		ubyte padding[3];
+	}CharacterGiftList;
+				
+	struct sunkTable2 {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; i++){
+			struct sunkEntry2 {
+				CharID Character;
+				ushort unkShort2FloatArray0x2[5];
+				ushort unkShort2FloatArray0xc[5];
+				ushort unkShort2FloatArray0x16[5];
+				ushort unkShort2FloatArray0x20[5];
+				ubyte indexes[5];
+				ubyte unkByte0x2f;
+			} unkEntry2<read=EnumToString(Character)>;
+		}
+	}unkTable2;
+	
+	struct sunkTable3 {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; i++){
+			struct sunkEntry3 {
+				byte unkByte0x0;
+				byte unkByte0x1;
+			} unkEntry3;
+		}
+	}unkTable3;
+	
 }File<open=true>;
 
