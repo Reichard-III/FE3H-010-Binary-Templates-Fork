@@ -14,89 +14,82 @@
 //------------------------------------------------
 
 LittleEndian();
-#include "Enum/flow_enums.bt"
-#include "include_Enums.bt"
+#include "Structs.bt"
 
-local int m = 0;
-local int o = 0;
+local int i = 0;
 struct ParalogueBlock {
-    int magic<bgcolor=cRed>; 
-    int EntryCount<bgcolor=cRed>;
-    int Size<bgcolor=cRed>;
-    int Padding[13]<hidden=true>;
-    for (m = 0; m < EntryCount; ++m){
-        struct ParalogueEvent {
-        Event postBattleCutscene<bgcolor=cYellow, name="Post Battle Cutscene">;
-        NameID ParalogueCharacter1<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
-        NameID ParalogueCharacter2<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
-        Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene">;
-        ScenarioName map<bgcolor=cGreen, name="Map ID">;
-        byte Padding<hidden=false>;
-        }paralogue<read=EnumToString(map), name="Paralogue">;
-    }
+	DataSection Header;
+	for (i = 0; i < Header.NumEntries; i++){
+		struct ParalogueEvent {
+		Event postBattleCutscene<bgcolor=cYellow, name="Post Battle Cutscene">;
+		NameID ParalogueCharacter1<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
+		NameID ParalogueCharacter2<name="Paralogue Character", comment="Required to be Avaliable to Unlock the Paralogue">;
+		Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene">;
+		ScenarioName map<bgcolor=cGreen, name="Map ID">;
+		byte Padding<hidden=false>;
+		}paralogue<read=EnumToString(map), name="Paralogue">;
+	}
 };
 
 struct RouteFlow {
-    int magic<bgcolor=cRed>;
-    int EntryCount<bgcolor=cRed>;
-    int Size<bgcolor=cRed>;
-    int Padding[13]<hidden=true>;
-    for (o = 0; o < EntryCount; ++o){
-        struct Chapter {
-            Event cutscene1<bgcolor=cBlue, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event cutscene2<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event cutscene3<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event cutscene4<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event preChapterNarration<bgcolor=cGreen, name="Pre Battle Narration/Opening/Cutscene",comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event cutscene<bgcolor=cYellow, name="Pre Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event preBattleNarration<bgcolor=cGreen, name="Chapter Narration/Opening/Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event CutScene1<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event CutScene2<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event CutScene3<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            Event CutScene4<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
-            ubyte unk1;
-            // Added file index for quick reference, DLC files in DATA1 from the DLC.
-            bsi monastery<bgcolor=cBlue, name="Monastery Script", comment="Monastery BSI scripts in order, Skips the monastery if this is -1">;
-            ubyte unk2;
-            BGM default_battle_bgm<name="Default Battle BGM">;
-            ChapterNames chapterLabel<bgcolor=cBlue,name="Chapter String Index", comment="Number is msgdata index in table 2">;
-            Month MonthLabel<bgcolor=cBlue, name="Month", comment="Month on the calander">;
-            ScenarioName map<bgcolor=cGreen, name="Map ID", comment="Matches Scenario Index in fixed_scenario">;
-            ubyte unk4<name="Day of Mission?">;
-            RouteName route<bgcolor=cRed, name="Route Label">;
-            // Seems to be calander related
-            struct FlowFlags {
-                ubyte Ending:1;
-                ubyte AngryDimitri:1;
-                
-            }flags;
-            ubyte unk6;
-            ubyte unk7;
-            ubyte unk8;
-            ubyte unk9;
-            short padding<hidden=false>;
-        }chapter<name="Chapter", read=EnumToString(map)>;
-    };
+	DataSection Header;
+	for (i = 0; i < Header.NumEntries; i++){
+		struct Chapter {
+			Event cutscene1<bgcolor=cBlue, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event cutscene2<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event cutscene3<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event cutscene4<bgcolor=cYellow, name="Post Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event preChapterNarration<bgcolor=cGreen, name="Pre Battle Narration/Opening/Cutscene",comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event preBattleCutscene<bgcolor=cYellow, name="Pre Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event cutscene<bgcolor=cYellow, name="Pre Battle Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event preBattleNarration<bgcolor=cGreen, name="Chapter Narration/Opening/Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event CutScene1<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event CutScene2<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event CutScene3<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			Event CutScene4<bgcolor=cGreen, name="Chapter Cutscene", comment="Movies: 0-29, Narrations at 30, Cutscenes start at 120, Cindered Shadows occurs after support events">;
+			ubyte unk1;
+			// Added file index for quick reference, DLC files in DATA1 from the DLC.
+			bsi monastery<bgcolor=cBlue, name="Monastery Script", comment="Monastery BSI scripts in order, Skips the monastery if this is -1">;
+			ubyte unk2;
+			BGM default_battle_bgm<name="Default Battle BGM">;
+			ChapterNames chapterLabel<bgcolor=cBlue,name="Chapter String Index", comment="Number is msgdata index in table 2">;
+			Month MonthLabel<bgcolor=cBlue, name="Month", comment="Month on the calander">;
+			ScenarioName map<bgcolor=cGreen, name="Map ID", comment="Matches Scenario Index in fixed_scenario">;
+			ubyte unk4<name="Day of Mission?">;
+			RouteName route<bgcolor=cRed, name="Route Label">;
+			// Seems to be calander related
+			struct FlowFlags {
+				ubyte Ending:1;
+				ubyte AngryDimitri:1;
+				
+			}flags;
+			ubyte unk6;
+			ubyte unk7;
+			ubyte unk8;
+			ubyte unk9;
+			short padding<hidden=false>;
+		}chapter<name="Chapter", read=EnumToString(map)>;
+	};
 };
 
 struct File {
-    int count<bgcolor=cBlack>;
-    struct PointerPair {
-        int start<format=hex>;
-        int length<format=hex>;
-    } pointertable[count]<bgcolor=cRed>;
-    local int i = 0;
-        FSeek(pointertable[0].start);
-        RouteFlow route<name="Route", read="Silver Snow">;
-        FSeek(pointertable[1].start);
-        RouteFlow route<name="Route",read="Azure Moon">;
-        FSeek(pointertable[2].start);
-        RouteFlow route<name="Route", read="Verdant Wind">;
-        FSeek(pointertable[3].start);
-        RouteFlow route<name="Route",read="Crimson Flower">;
-        FSeek(pointertable[4].start);
-        ParalogueBlock paralogues<name="Paralogues", read="Paralogue Block">;
-        FSeek(pointertable[5].start);
-        RouteFlow route<name="Route", read="Cindered Shadows">;
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	RouteFlow route<name="Route", read="Silver Snow">;
+	
+	FSeekNextSection(Sections);
+	RouteFlow route<name="Route",read="Azure Moon">;
+	
+	FSeekNextSection(Sections);
+	RouteFlow route<name="Route", read="Verdant Wind">;
+	
+	FSeekNextSection(Sections);
+	RouteFlow route<name="Route",read="Crimson Flower">;
+	
+	FSeekNextSection(Sections);
+	ParalogueBlock paralogues<name="Paralogues", read="Paralogue Block">;
+	
+	FSeekNextSection(Sections);
+	RouteFlow route<name="Route", read="Cindered Shadows">;
 } file<open=true>;
