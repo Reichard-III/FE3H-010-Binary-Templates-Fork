@@ -105,14 +105,12 @@ struct GenericEnemyWeapons{
 
 
 struct File {
-    struct SectionPointer {
-        uint32 header<bgcolor=cBlue>;
-        uint32 scenarioDataPointer<bgcolor=cDkGreen>;
-        uint32 scenarioDataSize<bgcolor=cDkGreen>;
-        uint32 unkDataPointer<bgcolor=cPurple>;
-        uint32 unkDataSize<bgcolor=cPurple>;
-    }sectionPointer<name="Section Pointers">;
+    FileSections Sections;
+    
+    FSeekNextSection(Sections);
     ScenarioData scenarioData<name="Scenario Data">;
+    
+    FSeekNextSection(Sections);
     GenericEnemyWeapons EnemyWeapon<name="Generic Enemy Weapons">;
 }file<open=true>;
 
