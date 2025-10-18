@@ -17,34 +17,34 @@ LittleEndian();
 local int i=0;
 
 struct sUnkD{
-    ushort unkShort2F0x0_A;
-    ushort unkShort2F0x2_B;
-    ushort unkShort2F0x4_B;
-    ushort unkShort2F0x6_A;
-    ushort unkShort2F0x8_A_Z;
-    ushort unkShort2F0xa_B;
-    ushort unkShort2F0xc_C;
-    ushort unkShort2F0xe_C;
-    ushort unkShort2F0x10_D;
-    ushort unkShort2F0x12_E;
-    ushort unkShort2F0x14_D;
-    ushort unkShort2F0x16_E;    
-    TrueFalse enabled<name="enabled?">;
-    byte unkByte2F0x19_Rotation<name="Rotation Octant">;
-    byte unkByte2F0x1a;
-    byte unkByte0x1b;
-    short unkShort0x1c;
+	ushort unkShort2F0x0_A;
+	ushort unkShort2F0x2_B;
+	ushort unkShort2F0x4_B;
+	ushort unkShort2F0x6_A;
+	ushort unkShort2F0x8_A_Z;
+	ushort unkShort2F0xa_B;
+	ushort unkShort2F0xc_C;
+	ushort unkShort2F0xe_C;
+	ushort unkShort2F0x10_D;
+	ushort unkShort2F0x12_E;
+	ushort unkShort2F0x14_D;
+	ushort unkShort2F0x16_E;	
+	TrueFalse enabled<name="enabled?">;
+	byte unkByte2F0x19_Rotation<name="Rotation Octant">;
+	byte unkByte2F0x1a;
+	byte unkByte0x1b;
+	short unkShort0x1c;
 };
 
 struct sUnkE{
-    DataSection Header;
-    for(i=0;i<Header.NumEntries;i++){
-        sUnkD asdf;
-    }
+	DataSection Header;
+	for(i=0;i<Header.NumEntries;i++)
+		sUnkD asdf;
 };
 
-
 struct freeScenario {
-    FileSections Sections;
-    sUnkE Unk;    
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	sUnkE Unk;    
 }File<open=true>;
