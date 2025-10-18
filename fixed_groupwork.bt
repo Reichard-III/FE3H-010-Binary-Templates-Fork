@@ -17,174 +17,176 @@
 //------------------------------------------------
 #include "Structs.bt"
 
-//#include "misc_util.bt";
-//#include "3H_Enums.bt";
-
 LittleEndian();
 local int i=0;
 
 struct GroupTaskSection {
-    DataSection SectionHeader;
-    struct GroupTask {
-        short goodGoldReward<name="Gold Reward (Good)">;
-        short perfectGoldReward<name="Gold Reward (Perfect)">;
-        RankStats raisedSkill<name="Skill to Improve">;
-        MiscItem goodReward<name="Item Reward (Good)">;
-        MiscItem perfectReward<name="Item Reward (Perfect)">;
-        byte goodRewardAmount<name="Reward Amount (Good)">;
-        byte perfectRewardAmount<name="Reward Amount (Perfect)">;
-        byte Padding<bgcolor=cDkYellow,name="Padding">;
-    } groupTasks[SectionHeader.NumEntries];
+	DataSection SectionHeader;
+	struct GroupTask {
+		short goodGoldReward<name="Gold Reward (Good)">;
+		short perfectGoldReward<name="Gold Reward (Perfect)">;
+		RankStats raisedSkill<name="Skill to Improve">;
+		MiscItem goodReward<name="Item Reward (Good)">;
+		MiscItem perfectReward<name="Item Reward (Perfect)">;
+		byte goodRewardAmount<name="Reward Amount (Good)">;
+		byte perfectRewardAmount<name="Reward Amount (Perfect)">;
+		byte Padding<bgcolor=cDkYellow,name="Padding">;
+	} groupTasks[SectionHeader.NumEntries];
 };
 
 // These all affect what dialog is shown during group
 // tasks. Unfortunately, it is inconsistent in terms of
 // which byte affects which task for each duo.
 struct GroupTaskDialog {
-    TrueFalse DialogC;
-    TrueFalse DialogB;
-    TrueFalse DialogA;
-    TrueFalse DialogWeed;
-    TrueFalse FoodC;
-    TrueFalse FoodB;
-    TrueFalse FoodA;
-    TrueFalse Rubble;
+	TrueFalse DialogC;
+	TrueFalse DialogB;
+	TrueFalse DialogA;
+	TrueFalse DialogWeed;
+	TrueFalse FoodC;
+	TrueFalse FoodB;
+	TrueFalse FoodA;
+	TrueFalse Rubble;
 };
 
 struct ActivityConversationSection {
-    DataSection SectionHeader;
-    struct ActivityConversationData {
-        CharID charID1<name="Character ID">;
-        CharID charID2<name="Character ID">;
+	DataSection SectionHeader;
+	struct ActivityConversationData {
+		CharID charID1<name="Character ID">;
+		CharID charID2<name="Character ID">;
 
-        // These next 4 bytes may be route related.
-        byte ChapterC<name="Minimum Chapter for C">;
-        // Related to timeskip Dmitri being a person again(Chapter 
-        // 18)? Value is 0 in each instance except for Dmitri/Gilber
-        // and Dmitri/Dedue.
-        byte ChapterB<name="Minimum Chapter for B">;
-        byte ChapterA<name="Minimum Chapter for A">;
-        byte ChapterMisc<name="Minimum Chapter for rubble/weed">;
+		// These next 4 bytes may be route related.
+		byte ChapterC<name="Minimum Chapter for C">;
+		// Related to timeskip Dmitri being a person again(Chapter 
+		// 18)? Value is 0 in each instance except for Dmitri/Gilber
+		// and Dmitri/Dedue.
+		byte ChapterB<name="Minimum Chapter for B">;
+		byte ChapterA<name="Minimum Chapter for A">;
+		byte ChapterMisc<name="Minimum Chapter for rubble/weed">;
 
-        // 0 = None, 1 = C, 2 = B, 3 = A
-        byte mealDialogueSupportC<name="Unique Dining C - Major Support Rank Req">;
-        byte mealDialogSupportB<name="Unique Dining B - Major Support Rank Req">;
-        byte mealDialogASupportA<name="Unique Dining A - Major Support Rank Req">;
+		// 0 = None, 1 = C, 2 = B, 3 = A
+		byte mealDialogueSupportC<name="Unique Dining C - Major Support Rank Req">;
+		byte mealDialogSupportB<name="Unique Dining B - Major Support Rank Req">;
+		byte mealDialogASupportA<name="Unique Dining A - Major Support Rank Req">;
 
-        GroupTaskDialog groupTasks<name="Group Task Dialog Options">;
-        TrueFalse unkVal;
-    } activityConversations[SectionHeader.NumEntries]<read=getActivityConvoName>;
+		GroupTaskDialog groupTasks<name="Group Task Dialog Options">;
+		TrueFalse unkVal;
+	} activityConversations[SectionHeader.NumEntries]<read=getActivityConvoName>;
 };
 
 struct GroupTaskPreferenceEntry {
-    DataSection SectionHeader;
-    struct GroupTaskPreferenceData {
-        local SaveBlockID Char = i;
-        Preferences StableDuty;
-        Preferences UnusedGroupTask1;
-        Preferences UnusedGroupTask2;
-        Preferences Weeding;
-        Preferences Rubble;
-        Preferences UnusedGroupTask5;
-        Preferences SkyWatch;
-        Preferences UnusedGroupTask7<bgcolor=cDkYellow>;
-    };
-    for(i=0;i<SectionHeader.NumEntries;i++){
-        GroupTaskPreferenceData GroupTaskPreference<read=EnumToString(Char)>;
-    }
+	DataSection SectionHeader;
+	struct GroupTaskPreferenceData {
+		local SaveBlockID Char = i;
+		Preferences StableDuty;
+		Preferences UnusedGroupTask1;
+		Preferences UnusedGroupTask2;
+		Preferences Weeding;
+		Preferences Rubble;
+		Preferences UnusedGroupTask5;
+		Preferences SkyWatch;
+		Preferences UnusedGroupTask7<bgcolor=cDkYellow>;
+	};
+	for(i=0;i<SectionHeader.NumEntries;i++){
+		GroupTaskPreferenceData GroupTaskPreference<read=EnumToString(Char)>;
+	}
 };
 
 struct UnknownSection4 {
-    DataSection SectionHeader;
-    struct UnknownData4 {
-        local SaveBlockID Char = i;
-        TrueFalse MByleth;
-        TrueFalse FByleth;
-        TrueFalse Edelgard;
-        TrueFalse Dimitri;
-        
-        TrueFalse Claude;
-        TrueFalse Hubert;
-        TrueFalse Ferdinand;
-        TrueFalse Linhardt;
-        
-        TrueFalse Caspar;
-        TrueFalse Bernadetta;
-        TrueFalse Dorothea;
-        TrueFalse Petra;
-        
-        TrueFalse Dedue;
-        TrueFalse Felix;
-        TrueFalse Ashe;
-        TrueFalse Sylvain;
-        
-        TrueFalse Mercedes;
-        TrueFalse Annette;
-        TrueFalse Ingrid;
-        TrueFalse Lorenz;
-        
-        TrueFalse Raphael;
-        TrueFalse Ignatz;
-        TrueFalse Lysithea;
-        TrueFalse Marianne;
-        
-        TrueFalse Hilda;
-        TrueFalse Leonie;
-        TrueFalse Seteth;
-        TrueFalse Flayn;
-        
-        TrueFalse Hanneman;
-        TrueFalse Manuela;
-        TrueFalse Gilbert;
-        TrueFalse Alois;
-        
-        TrueFalse Catherine;
-        TrueFalse Shamir;
-        TrueFalse Cyril;
-        TrueFalse Jeralt;
-        
-        TrueFalse Rhea;
-        TrueFalse Sothis;
-        TrueFalse Yuri;
-        TrueFalse Balthus;
-        
-        TrueFalse Constance;
-        TrueFalse Hapi;
-        TrueFalse Aelfric;
-        TrueFalse Jeritza;
-        
-        TrueFalse Anna;
-    };
-    for(i=0;i<SectionHeader.NumEntries;i++){
-        UnknownData4 unkDat<read=EnumToString(Char)>;
-    }
+	DataSection SectionHeader;
+	struct UnknownData4 {
+		local SaveBlockID Char = i;
+		TrueFalse MByleth;
+		TrueFalse FByleth;
+		TrueFalse Edelgard;
+		TrueFalse Dimitri;
+		
+		TrueFalse Claude;
+		TrueFalse Hubert;
+		TrueFalse Ferdinand;
+		TrueFalse Linhardt;
+		
+		TrueFalse Caspar;
+		TrueFalse Bernadetta;
+		TrueFalse Dorothea;
+		TrueFalse Petra;
+		
+		TrueFalse Dedue;
+		TrueFalse Felix;
+		TrueFalse Ashe;
+		TrueFalse Sylvain;
+		
+		TrueFalse Mercedes;
+		TrueFalse Annette;
+		TrueFalse Ingrid;
+		TrueFalse Lorenz;
+		
+		TrueFalse Raphael;
+		TrueFalse Ignatz;
+		TrueFalse Lysithea;
+		TrueFalse Marianne;
+		
+		TrueFalse Hilda;
+		TrueFalse Leonie;
+		TrueFalse Seteth;
+		TrueFalse Flayn;
+		
+		TrueFalse Hanneman;
+		TrueFalse Manuela;
+		TrueFalse Gilbert;
+		TrueFalse Alois;
+		
+		TrueFalse Catherine;
+		TrueFalse Shamir;
+		TrueFalse Cyril;
+		TrueFalse Jeralt;
+		
+		TrueFalse Rhea;
+		TrueFalse Sothis;
+		TrueFalse Yuri;
+		TrueFalse Balthus;
+		
+		TrueFalse Constance;
+		TrueFalse Hapi;
+		TrueFalse Aelfric;
+		TrueFalse Jeritza;
+		
+		TrueFalse Anna;
+	};
+	for(i=0;i<SectionHeader.NumEntries;i++){
+		UnknownData4 unkDat<read=EnumToString(Char)>;
+	}
 };
 
 // Not present prior to DLC waves. Possibly Sauna-related?
+// usually house student and route specific characters?
 struct UnknownSection5 {
-    DataSection SectionHeader;
-    struct UnknownData5 {
-        CharID B;
-        CharID A;
-        TrueFalse IsEnabled;
-        byte uncPadding<name="Padding?",bgcolor=cDkYellow>;
-    } unknownData5[SectionHeader.NumEntries];
+	DataSection SectionHeader;
+	struct UnknownData5 {
+		CharID B;
+		CharID A;
+		TrueFalse IsEnabled;
+		byte uncPadding<name="Padding?",bgcolor=cDkYellow>;
+	} unknownData5[SectionHeader.NumEntries];
 };
 
 struct File {
-    FileSections Sections;
-    GroupTaskSection groupTasks<bgcolor=cDkGreen>;
-    
-    ActivityConversationSection activityConversations<bgcolor=cBlue>;
-    
-    GroupTaskPreferenceEntry GroupTaskPreferences<bgcolor=cPurple>;
-    
-    UnknownSection4 unknownSect3<bgcolor=cDkRed>;
-    byte padding[3]<bgcolor=cDkYellow>;
-    
-    UnknownSection5 unknownSection4<bgcolor=cYellow>;
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	GroupTaskSection groupTasks<bgcolor=cDkGreen>;
+	
+	FSeekNextSection(Sections);
+	ActivityConversationSection activityConversations<bgcolor=cBlue>;
+	
+	FSeekNextSection(Sections);
+	GroupTaskPreferenceEntry GroupTaskPreferences<bgcolor=cPurple>;
+	
+	FSeekNextSection(Sections);
+	UnknownSection4 unknownSect3<bgcolor=cDkRed>;
+	byte padding[3]<bgcolor=cDkYellow, hidden=true>;
+	
+	FSeekNextSection(Sections);
+	UnknownSection5 unknownSection4<bgcolor=cYellow>;
 } file<open=true>;
 
-string getActivityConvoName(ActivityConversationData & q) {
-    return EnumToString(q.charID1) + " & " + EnumToString(q.charID2);
-}
+string getActivityConvoName(ActivityConversationData & q) { return EnumToString(q.charID1) + " & " + EnumToString(q.charID2); }
