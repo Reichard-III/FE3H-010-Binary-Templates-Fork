@@ -45,37 +45,14 @@ local int i;
 local int j;
 
 struct File{
-	struct SectionPointers{
-		uint32 NumberOfSectionPointers;
-		uint32 ClassDataPointer<bgcolor=cRed>;
-		uint32 UnkSize<bgcolor=cRed>;
-		uint32 PointerToGenderLock<bgcolor=cPurple>;
-		uint32 GenderLockSize<bgcolor=cPurple>;
-		uint32 TierLevelPointer<bgcolor=cBlue>;
-		uint32 TierLevelSize<bgcolor=cBlue>;
-		uint32 ClassAbilityPointer<bgcolor=cDkYellow>;
-		uint32 ClassAbilitySize<bgcolor=cDkYellow>;
-		uint32 MonasterBlockPtr<bgcolor=cDkBlue>;
-		uint32 MonasterBlockSize<bgcolor=cDkBlue>;
-		uint32 UnkPointer<bgcolor=cBlack>;
-		uint32 UnkSize<bgcolor=cBlack>;
-		uint32 UnkPointer<bgcolor=cGreen>;
-		uint32 UnkSize<bgcolor=cGreen>;
-		uint32 UnkPointer<bgcolor=cDkRed>;
-		uint32 UnkSize<bgcolor=cDkRed>;
-		uint32 UnkPointer<bgcolor=cDkPurple>;
-		uint32 UnkSize<bgcolor=cDkPurple>;
-		uint32 UnkPointer<bgcolor=cDkGreen>;
-		uint32 UnkSize<bgcolor=cDkGreen>;
-	}sectionpointers<name="Section Pointers">;
-
-    FSeek(sectionpointers.ClassDataPointer);
-	struct ClassData{
+    FileSections Headers;
+    
+    FSeekNextSection(Headers);
+	struct ClassData{ //0
         DataSection SectionHeader;
         for( i = 0; i < SectionHeader.NumEntries; i++ ){
             struct ClassBlock{
-                local ClassID Class<hidden=true>;
-                Class = i;
+                local ClassID Class<hidden=true> = i;
                 short CameraFrame[4];
                 AID MaleAID;
                 AID FemaleAID;
@@ -97,11 +74,9 @@ struct File{
                     byte MovGrowth<name="Mov Growth">;
                     byte CharmGrowth<name="Cha Growth">;
                 }playergrowths<bgcolor=cDkYellow>;
-                // byte PG[10];
                 Stats EnemyGrowths<name="Enemy Growth Rates">;
                 Stats Class_Modifiers<name="Class Modifiers">;
                 Stats Mounted_Modifiers<name="Mounted Stat Modifiers">;
-                // byte rankBonus[11];
                 struct RankBonus{
                     byte SwordExp<name="Sword Exp">;
                     byte LanceExp<name="Lance Exp">;
@@ -141,16 +116,14 @@ struct File{
             }classdata<bgcolor=cDkBlue,name="Class Data",read=EnumToString(Class)>;    
         }
     }classBlock<bgcolor=cDkBlue,name="Class Block">;
-    //file.classBlock.classdata[i].PG[j] = 0;
 
-	FSeek(sectionpointers.PointerToGenderLock);
-	struct GenderLock {
+	FSeekNextSection(Headers);
+	struct GenderLock { //1
 		DataSection SectionHeader;		
 		struct Requirements{
             for( i = 0; i < SectionHeader.NumEntries; i++ ) {
                 struct GenderLockID {
-                    local ClassID Class<hidden=true>;
-                    Class = i; // keeping a localvar so we can add classname to the struct indices
+                    local ClassID Class<hidden=true> = i;
                     ubyte examScaling<name="Certifcation Scaling Factor", bgcolor=cLtRed, comment="Pass% = 100 - Certifcation Scaling Factor x N Missing Ranks">;
                     ConsumablesByte RequiredItem<name="Item Need for Certification", bgcolor=cLtBlue>;
                     CertificationFlag certifiable<name="Certification Flag", bgcolor=cBlack, comment="Some classes cannot be able to cert regardless of flag">;
@@ -171,8 +144,8 @@ struct File{
 		}requirements<name="Class Requirements">;
 	}classReqs<bgcolor=cDkGreen,name="Certification Requirements", comment="Default Ranks. Only 3 of them can be used. Rest of the ranks will be ignored.">;
     
-    FSeek(sectionpointers.TierLevelPointer);
-	struct TierLevel {
+    FSeekNextSection(Headers);
+	struct TierLevel { //2
         DataSection SectionHeader;
         ubyte Zero<bgcolor=cWhite>;
         ubyte Beginner<bgcolor=cWhite>;
@@ -184,13 +157,12 @@ struct File{
         byte padding<hidden=true>;
     }tierlevel<bgcolor=cDkRed,name="Tier Level Requirements">;
     
-    FSeek(sectionpointers.ClassAbilityPointer);
-	struct ClassAbility {
+    FSeekNextSection(Headers);
+	struct ClassAbility { //3
 		DataSection SectionHeader;
         for( i = 0; i < SectionHeader.NumEntries; i++ )
             struct AbilityBlock{
-                local ClassID Class<hidden=true>;
-				Class = i; // keeping a localvar so we can add classname to the struct indice
+                local ClassID Class<hidden=true> = i;
 		        AbilityID MasteredAbility<name="Mastered Ability", bgcolor=cBlue>;
                 CombatArtID MasterArt<name="Mastered Combart Art", bgcolor=cBlue>;
                 AbilityID ClassAbility1<name="Class Ability", bgcolor=cGreen>;
@@ -199,76 +171,73 @@ struct File{
 		}classblock<name="Ability Block",read=MyStructToStringA>;
 	}classabilities<bgcolor=cDkBlue,name="Class Abilities">;
     
-        FSeek(sectionpointers.MonasterBlockPtr);
-                
-        struct MonsterBlock {
-            DataSection SectionHeader;
-            for (i = 0; i < SectionHeader.NumEntries; ++i){
-                FSeek(sectionpointers.MonasterBlockPtr + 64 +  i*SectionHeader.size);
-                struct MonsterClassData {
-                    local MonsterName name<hidden=true> = i;
-                    ushort unk<bgcolor=cBlack>;
-                    ushort unk<bgcolor=cBlack>;
-                    WeaponID weapon<name="Monster's Equipped Weapon", bgcolor=cBlue>;
-                    struct BarrierDrops {
-                        for (j = 0; j < 5; j++){
-                            struct BarrierItem{
-                                MiscItem barrierDrop<name="Item", bgcolor=cLtGreen>;
-                                ubyte padding<hidden=false, name="unknown padding?",bgcolor=cLtGreen>;
-                            }Bitem<name="Barrier Item", name=ReadBarrierItem, bgcolor=cLtGreen>;
-                        };
-                    }barrierItems<name="Barrier Items">;
-                    struct MonsterHPBarScalingByDifficulty {
-                        for(j = 0; j<3;++j){
-                            struct MonsterHPBarScaling { 
-                                local Difficulty diff;
-                                diff=j;
-                                local string diffName = EnumToString(diff);
-                                diffName = StrDel(diffName, Strlen(diffName)-2, 2);
-                                short a0<name="0 missing HP bars">;
-                                short a1<name="1 missing HP bars">;
-                                short a2<name="2 missing HP bars">;
-                                short a3<name="3 missing HP bars">;
-                                short a4<name="4 missing HP bars">;
-                            }monsterHPScaling<name="Difficulty Level", read=diffName, open=true>;
-                        }
-                    }monsterHPScalingByDiff<name="Monster HP Bar Scaling">;
-                    short unknown[2];
-                    ubyte barrierDamageReductionk<name="Barrier Damage Reduction %", bgcolor=cWhite>;
-                    BarrierStatus bstatus<name="Default Barrier Status", bgcolor=cBlue>;
-                    ubyte numberHP<name="Number of HP bars", bgcolor=cDkGreen>;
-                    ubyte BarrierText<name="Barrier Text Index", bgcolor=cDkYellow>;
-                    StaggeringBlow Staggering<name="Staggering Blow", bgcolor=cRed>;
-                    ubyte MonsterScale<name="Monster Scale">;
-                    MonsterSize size<name="Monster Tile Size">;
-                    ubyte unk;
-                    ubyte AllowLatentAbilities<comment="When enabled, this allows Monsters to gain Latent Abilities">;
-                    ubyte unk2<comment="This data was not actually covered by the original BT, need to investigate">;
-                    struct LatentAbilityBlock {
-                        ubyte latent[4]<name="Activation HP Bar", bgcolor=cDkYellow>;
-                        AbilityID latentAbility[4]<name="Latent Ability", bgcolor=cDkYellow>;
-                    }latentBlock<name="Latent Ability Data">;
-                    struct BarrierAbilities {
-                        AbilityID barrierAbility<name="Barrier Ability", bgcolor=cBlack>;
-                        AbilityID barrierAbility<name="Barrier Ability", bgcolor=cBlack>;
-                    }barrier<name="Barrier Ability List">;
-                    ubyte n_item[5]<name="BarrierItem Drop Quantity", bgcolor=cLtGreen>;
-                    ubyte rate_item[5]<name="BarrierItem Drop chance">;
-                }monsterClass<read=EnumToString(name), name="Monster Class Data">;
-            }
-        }monsterBlock<name="Monster Class Block">;
-    FSeek(sectionpointers.UnkPointer[0]);
-    GenericSection UnkSection1<name="Camera-Related">;
-    FSeek(sectionpointers.UnkPointer[1]);
-    GenericSection UnkSection2<name="Camera-Related">;
-    FSeek(sectionpointers.UnkPointer[2]);
-    //GenericSection UnkSection3;
+    FSeekNextSection(Headers);
+    struct MonsterBlock { //4
+        DataSection SectionHeader;
+        for (i = 0; i < SectionHeader.NumEntries; ++i){
+            struct MonsterClassData {
+                local MonsterName name<hidden=true> = i;
+                ushort unk<bgcolor=cBlack>;
+                ushort unk<bgcolor=cBlack>;
+                WeaponID weapon<name="Monster's Equipped Weapon", bgcolor=cBlue>;
+                struct BarrierDrops {
+                    for (j = 0; j < 5; j++){
+                        struct BarrierItem{
+                            MiscItem barrierDrop<name="Item", bgcolor=cLtGreen>;
+                            ubyte padding<hidden=false, name="unknown padding?",bgcolor=cLtGreen>;
+                        }Bitem<name="Barrier Item", name=ReadBarrierItem, bgcolor=cLtGreen>;
+                    };
+                }barrierItems<name="Barrier Items">;
+                struct MonsterHPBarScalingByDifficulty {
+                    for(j = 0; j<3;++j){
+                        struct MonsterHPBarScaling { 
+                            local Difficulty diff = j;
+                            local string diffName = EnumToString(diff);
+                            diffName = StrDel(diffName, Strlen(diffName)-2, 2);
+                            short a0<name="0 missing HP bars">;
+                            short a1<name="1 missing HP bars">;
+                            short a2<name="2 missing HP bars">;
+                            short a3<name="3 missing HP bars">;
+                            short a4<name="4 missing HP bars">;
+                        }monsterHPScaling<name="Difficulty Level", read=diffName, open=true>;
+                    }
+                }monsterHPScalingByDiff<name="Monster HP Bar Scaling">;
+                short unknown[2];
+                ubyte barrierDamageReductionk<name="Barrier Damage Reduction %", bgcolor=cWhite>;
+                BarrierStatus bstatus<name="Default Barrier Status", bgcolor=cBlue>;
+                ubyte numberHP<name="Number of HP bars", bgcolor=cDkGreen>;
+                ubyte BarrierText<name="Barrier Text Index", bgcolor=cDkYellow>;
+                StaggeringBlow Staggering<name="Staggering Blow", bgcolor=cRed>;
+                ubyte MonsterScale<name="Monster Scale">;
+                MonsterSize size<name="Monster Tile Size">;
+                ubyte unk;
+                ubyte AllowLatentAbilities<comment="When enabled, this allows Monsters to gain Latent Abilities">;
+                ubyte unk2<comment="This data was not actually covered by the original BT, need to investigate">;
+                struct LatentAbilityBlock {
+                    ubyte latent[4]<name="Activation HP Bar", bgcolor=cDkYellow>;
+                    AbilityID latentAbility[4]<name="Latent Ability", bgcolor=cDkYellow>;
+                }latentBlock<name="Latent Ability Data">;
+                struct BarrierAbilities {
+                    AbilityID barrierAbility<name="Barrier Ability", bgcolor=cBlack>;
+                    AbilityID barrierAbility<name="Barrier Ability", bgcolor=cBlack>;
+                }barrier<name="Barrier Ability List">;
+                ubyte n_item[5]<name="BarrierItem Drop Quantity", bgcolor=cLtGreen>;
+                ubyte rate_item[5]<name="BarrierItem Drop chance">;
+            }monsterClass<read=EnumToString(name), name="Monster Class Data">;
+        }
+    }monsterBlock<name="Monster Class Block">;
     
-    struct sClassPreviews{
+    FSeekNextSection(Headers);
+    GenericSection UnkSection1<name="Camera-Related">; //5
+    
+    FSeekNextSection(Headers);
+    GenericSection UnkSection2<name="Camera-Related">; //6
+    
+    FSeekNextSection(Headers);
+    struct sClassPreviews{ //7
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
             struct sClassPreview{
-                //ubyte unk[2];
                 ubyte CameraAngleOffset<comment="Clockwise: degrees offset from the Quadrant line">;
                 ubyte CameraQuadrant<comment="0 = North +0 deg, 1 = East +90 deg, 2 = South +180 deg, 3 = West +270 deg">;
                 CharID Character;
@@ -285,8 +254,8 @@ struct File{
         }    
     }ClassPreviews<name="Class Previews",comment="Determines the showcase of unit/classes when idling in the main menu">;
     
-    FSeek(sectionpointers.UnkPointer[3]);  
-    struct sSection9{
+    FSeekNextSection(Headers);
+    struct sSection9{ //8
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
             struct sdata9{
@@ -296,20 +265,19 @@ struct File{
         }
     }UnknownSection8;
     
-    FSeek(sectionpointers.UnkPointer[4]);
-    struct Section10{
+    FSeekNextSection(Headers);
+    struct Section10{ //9
         DataSection SectionHeader;
         for (i = 0; i < SectionHeader.NumEntries; ++i){
             struct Data10{
-                local ClassID Class<hidden=true>;
-                Class = i;
+                local ClassID Class<hidden=true> = i;
                 ClassID class1;
                 ClassID class2;
                 ClassID class3;
                 ClassID class4;
             }someEntry<read=EnumToString(Class)>;
         }
-    }UnKnownSection9<bgcolor=cLtBlue>;
+    }UnknownSection9<bgcolor=cLtBlue>;
 }file<open=true>;
 
 string MyStructToStringA(AbilityBlock& value) { return EnumToString(value.Class); }
