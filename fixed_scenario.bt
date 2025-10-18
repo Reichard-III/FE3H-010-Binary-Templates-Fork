@@ -16,106 +16,94 @@ LittleEndian();
 local int i<hidden=true>;
 
 struct CharacterSettings{
-    CharID unavailableCharIDA<bgcolor=cDkGreen>;
-    CharID unavailableCharIDB<bgcolor=cDkGreen>;
-    CharID unavailableCharIDC<bgcolor=cDkGreen>;
-    CharID unkParalogueCharIDA<bgcolor=cYellow>;
-    CharID unkParalogueCharIDB<bgcolor=cYellow>;
+	CharID unavailableCharIDA<bgcolor=cDkGreen>;
+	CharID unavailableCharIDB<bgcolor=cDkGreen>;
+	CharID unavailableCharIDC<bgcolor=cDkGreen>;
+	CharID unkParalogueCharIDA<bgcolor=cYellow>;
+	CharID unkParalogueCharIDB<bgcolor=cYellow>;
 };
 
 struct ParalogueExpiration{
-    ubyte expirationChapterSS<bgcolor=cDkGreen,name="Silver Snow Expiration Chapter">;
-    ubyte expirationChapterAM<bgcolor=cDkGreen,name="Azure Moon Expiration Chapter">;
-    ubyte expirationChapterVW<bgcolor=cDkGreen,name="Verdant Wind Expiration Chapter">;
-    ubyte expirationChapterCF<bgcolor=cDkGreen,name="Crimson Flower Expiration Chapter">;
-    ubyte expirationDateSS<bgcolor=cDkGreen,name="Silver Snow Expiration Day">;
-    ubyte expirationDateAM<bgcolor=cDkGreen,name="Azure Moon Expiration Day">;
-    ubyte expirationDateVW<bgcolor=cDkGreen,name="Verdant Wind Expiration Day">;
-    ubyte expirationDateCF<bgcolor=cDkGreen,name="Crimson Flower Expiration Day">;
+	ubyte expirationChapterSS<bgcolor=cDkGreen,name="Silver Snow Expiration Chapter">;
+	ubyte expirationChapterAM<bgcolor=cDkGreen,name="Azure Moon Expiration Chapter">;
+	ubyte expirationChapterVW<bgcolor=cDkGreen,name="Verdant Wind Expiration Chapter">;
+	ubyte expirationChapterCF<bgcolor=cDkGreen,name="Crimson Flower Expiration Chapter">;
+	ubyte expirationDateSS<bgcolor=cDkGreen,name="Silver Snow Expiration Day">;
+	ubyte expirationDateAM<bgcolor=cDkGreen,name="Azure Moon Expiration Day">;
+	ubyte expirationDateVW<bgcolor=cDkGreen,name="Verdant Wind Expiration Day">;
+	ubyte expirationDateCF<bgcolor=cDkGreen,name="Crimson Flower Expiration Day">;
 };
 struct ScenarioData{
-    uint32 scenarioMagic<bgcolor=cBlue>;
-    uint32 numberOfScenarios<bgcolor=cDkGreen>;
-    uint32 sizeOfScenario<bgcolor=cDkGreen>;
-	struct scenarioHeaderPadding{
-		byte Padding[0x34]<bgcolor=cDkYellow>;
-	}classdataheaderpadding<name="Padding">;
-    for( i = 0; i < numberOfScenarios; i++ ) {
-        struct Scenario {
-            local ScenarioName scenarioName;
-            scenarioName = i;
-            ubyte unk[4];
-            CharacterSettings characterSettings<bgcolor=cDkGreen,name="Character Settings">;
-            ubyte unkTernary<bgcolor=cRed>; // Only ever 0, 1, or 2
-            ubyte chapter<bgcolor=cDkGreen,name="Chapter ID">; // 23 = Paralogue, 24 = Aux battle, 25 = DLC Para/Aux
-            ubyte uncAuxiliaryAvailable<bgcolor=cYellow,name="Availability Chapter (Auxiliary)">;
-            // Functionality unknown. Seem to correlate with story progress.
-            ubyte unkProgressA<bgcolor=cYellow>;
-            ubyte unkProgressB<bgcolor=cYellow>;
-            ubyte unkProgressC<bgcolor=cYellow>;
-            ParalogueExpiration paralogueExpiration<name="Paralogue Expiration Date", comment="Day is a label and does not effect availibility during the Chapter">;
-            ubyte recruitLevel<bgcolor=cDkGreen,name="Recruit/Recommended Level">;
-            BGM auxillaryBGM<bgcolor=cDkGreen,name="BGM">;
-            ubyte hiddenTurnLimit<bgcolor=cDkGreen,name="Hard Turn Limit">;
-            Conditions victoryConditionLabel<bgcolor=cDkGreen,name="Victory Condition Label">;
-            MapList map<bgcolor=cDkGreen,name="Map ID">;
-            // These will match with Enemy Commander's levels. Subcommanders will be value - 1,
-            // regular units will be value - 2. May be affected by BAI scripts.
-            ubyte enemyLevelScalingNorm<bgcolor=cDkGreen,name="Normal Level Scaling">;
-            ubyte enemyLevelScaleHard<bgcolor=cDkGreen,name="Hard Level Scaling">;
-            ubyte enemyLevelScaleMad<bgcolor=cDkGreen,name="Maddening Level Scaling">;
-            struct ScenarioFlags{
-                    ubyte bit0 : 1<name="Use 3 Bai Route Blocks", comment="1st Block BE,  2nd BL,  and 3rd GD">;
-                    ubyte bit1 : 1<name="Use 2 Bai Route Blocks", comment="1st Block is for Non-CF,   2nd is for CF">;
-                    ubyte bit2 : 1<name="Silver Snow Victory Condition", comment="Applies Victory Condition Label to Silver Snow">;
-                    ubyte bit3 : 1<name="Azure Moon Victory Condition", comment="Applies Victory Condition Label to Azure Moon">;
-                    ubyte bit4 : 1<name="Verdant Wind Victory Condition", comment="Applies Victory Condition Label to Verdant Wind">;
-                    ubyte bit5 : 1<name="Crimson Flower Victory Condition", comment="Applies Victory Condition Label to Crimson Flower">;
-                    ubyte bit6 : 1<name="Is Post Timeskip", comment="Game Changes to Part 2">;
-                    ubyte bit7 : 1<name="Unknown", comment="Used in 4, 5, 6, 11, AM22,Rhea, VW18, VW20, VW21">;
-                    ubyte bit8 : 1<name="Forced Causal Mode", comment="Used in Chapter 1 and 7">;
-                    ubyte bit9 : 1<name="Unknown", comment="Used in Chapter 4, 5, 11, Rhea Paralogue">;
-                    ubyte bit10 : 1<name="BGM Continues Into Turn 1", comment="BGM does not fade out at the start of Turn 1">;
-                    ubyte bit11 : 1<name="Death BGM-Related", comment="When this is 0, the Death BGM continues, all maps but 3, 4, 13, CF12">;
-                    ubyte bit12 : 1<name="Cindered Shadows Victory Condition", comment="Applies Victory Condition Label to Cindered Shadows">;
-                    ubyte bit13 : 1<name="Unused">;
-                    ubyte bit14 : 1<name="Unused">;
-                    ubyte bit15 : 1<name="Unused">;
+	DataSection Header;
+	for( i = 0; i < Header.NumEntries; i++ ) {
+		struct Scenario {
+			local ScenarioName scenarioName = i;
+			ubyte unk[4];
+			CharacterSettings characterSettings<bgcolor=cDkGreen,name="Character Settings">;
+			ubyte unkTernary<bgcolor=cRed>; // Only ever 0, 1, or 2
+			ubyte chapter<bgcolor=cDkGreen,name="Chapter ID">; // 23 = Paralogue, 24 = Aux battle, 25 = DLC Para/Aux
+			ubyte uncAuxiliaryAvailable<bgcolor=cYellow,name="Availability Chapter (Auxiliary)">;
+			// Functionality unknown. Seem to correlate with story progress.
+			ubyte unkProgressA<bgcolor=cYellow>;
+			ubyte unkProgressB<bgcolor=cYellow>;
+			ubyte unkProgressC<bgcolor=cYellow>;
+			ParalogueExpiration paralogueExpiration<name="Paralogue Expiration Date", comment="Day is a label and does not effect availibility during the Chapter">;
+			ubyte recruitLevel<bgcolor=cDkGreen,name="Recruit/Recommended Level">;
+			BGM auxillaryBGM<bgcolor=cDkGreen,name="BGM">;
+			ubyte hiddenTurnLimit<bgcolor=cDkGreen,name="Hard Turn Limit">;
+			Conditions victoryConditionLabel<bgcolor=cDkGreen,name="Victory Condition Label">;
+			MapList map<bgcolor=cDkGreen,name="Map ID">;
+			ubyte enemyLevelScalingNorm<bgcolor=cDkGreen,name="Normal Level Scaling">;
+			ubyte enemyLevelScaleHard<bgcolor=cDkGreen,name="Hard Level Scaling">;
+			ubyte enemyLevelScaleMad<bgcolor=cDkGreen,name="Maddening Level Scaling">;
+			struct ScenarioFlags{
+					ubyte bit0 : 1<name="Use 3 Bai Route Blocks", comment="1st Block BE,  2nd BL,  and 3rd GD">;
+					ubyte bit1 : 1<name="Use 2 Bai Route Blocks", comment="1st Block is for Non-CF,   2nd is for CF">;
+					ubyte bit2 : 1<name="Silver Snow Victory Condition", comment="Applies Victory Condition Label to Silver Snow">;
+					ubyte bit3 : 1<name="Azure Moon Victory Condition", comment="Applies Victory Condition Label to Azure Moon">;
+					ubyte bit4 : 1<name="Verdant Wind Victory Condition", comment="Applies Victory Condition Label to Verdant Wind">;
+					ubyte bit5 : 1<name="Crimson Flower Victory Condition", comment="Applies Victory Condition Label to Crimson Flower">;
+					ubyte bit6 : 1<name="Is Post Timeskip", comment="Game Changes to Part 2">;
+					ubyte bit7 : 1<name="Unknown", comment="Used in 4, 5, 6, 11, AM22,Rhea, VW18, VW20, VW21">;
+					ubyte bit8 : 1<name="Forced Causal Mode", comment="Used in Chapter 1 and 7">;
+					ubyte bit9 : 1<name="Unknown", comment="Used in Chapter 4, 5, 11, Rhea Paralogue">;
+					ubyte bit10 : 1<name="BGM Continues Into Turn 1", comment="BGM does not fade out at the start of Turn 1">;
+					ubyte bit11 : 1<name="Death BGM-Related", comment="When this is 0, the Death BGM continues, all maps but 3, 4, 13, CF12">;
+					ubyte bit12 : 1<name="Cindered Shadows Victory Condition", comment="Applies Victory Condition Label to Cindered Shadows">;
+					ubyte bit13 : 1<name="Unused">;
+					ubyte bit14 : 1<name="Unused">;
+					ubyte bit15 : 1<name="Unused">;
 				}flags<name="Scenario Flags", bgcolor=cGray>;
-            // Applies after compelting a mission. Negative numbers work, but will become 99 if player's total is under 0.
-            byte unkDivinePulseIncrease<bgcolor=cDkGreen,name="Divine Pulse Increase Reward">;
-            byte unkDivinePulseIncreaseMaddening<bgcolor=cDkGreen,name="Divine Pulse Increase Reward (Maddening)">;
-            Conditions casualDefeatConditionLabel<bgcolor=cDkGreen,name="Casual Defeat Conditions">;
-            Conditions defeatConditionLabelSS<bgcolor=cDkGreen,name="Default Defeat Conditions">;
-            Conditions defeatConditionLabelAM<bgcolor=cDkGreen,name="Azure Moon Defeat Conditions">;
-            Conditions defeatConditionLabelVW<bgcolor=cDkGreen,name="Verdant Wind Defeat Conditions">;
-            Conditions defeatConditionLabelCF<bgcolor=cDkGreen,name="Crimson Flower Defeat Conditions">;
-            ubyte Padding<bgcolor=cDkYellow>;
-        }scenario<name="Scenario",read=getScenarioName>;
-    };
+			// Applies after compelting a mission. Negative numbers work, but will become 99 if player's total is under 0.
+			byte unkDivinePulseIncrease<bgcolor=cDkGreen,name="Divine Pulse Increase Reward">;
+			byte unkDivinePulseIncreaseMaddening<bgcolor=cDkGreen,name="Divine Pulse Increase Reward (Maddening)">;
+			Conditions casualDefeatConditionLabel<bgcolor=cDkGreen,name="Casual Defeat Conditions">;
+			Conditions defeatConditionLabelSS<bgcolor=cDkGreen,name="Default Defeat Conditions">;
+			Conditions defeatConditionLabelAM<bgcolor=cDkGreen,name="Azure Moon Defeat Conditions">;
+			Conditions defeatConditionLabelVW<bgcolor=cDkGreen,name="Verdant Wind Defeat Conditions">;
+			Conditions defeatConditionLabelCF<bgcolor=cDkGreen,name="Crimson Flower Defeat Conditions">;
+			ubyte Padding<bgcolor=cDkYellow>;
+		}scenario<name="Scenario",read=getScenarioName>;
+	};
 };
 struct GenericEnemyWeapons{
-    DataSection Header;
-    for (i = 0; i < Header.NumEntries; i++){
-        struct EnemyWeapons{  
-            ItemByte weapon[Header.size];
-        }weapon;
-    };
+	DataSection Header;
+	for (i = 0; i < Header.NumEntries; i++){
+		struct EnemyWeapons{  
+			ItemByte weapon[Header.size];
+		}weapon;
+	}
 };
 
 
 struct File {
-    struct SectionPointer {
-        uint32 header<bgcolor=cBlue>;
-        uint32 scenarioDataPointer<bgcolor=cDkGreen>;
-        uint32 scenarioDataSize<bgcolor=cDkGreen>;
-        uint32 unkDataPointer<bgcolor=cPurple>;
-        uint32 unkDataSize<bgcolor=cPurple>;
-    }sectionPointer<name="Section Pointers">;
-    ScenarioData scenarioData<name="Scenario Data">;
-    GenericEnemyWeapons EnemyWeapon<name="Generic Enemy Weapons">;
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	ScenarioData scenarioData<name="Scenario Data">;
+	
+	FSeekNextSection(Sections);
+	GenericEnemyWeapons EnemyWeapon<name="Generic Enemy Weapons">;
 }file<open=true>;
 
-string getScenarioName(Scenario & q) {
-    return EnumToString(q.scenarioName);
-}
+string getScenarioName(Scenario & q) { return EnumToString(q.scenarioName); }
