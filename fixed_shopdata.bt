@@ -64,37 +64,9 @@ enum<byte> ShopAvailablity {
 
 };
 struct FILE {
-	struct SECTIONPOINTERS {
-		uint header<name = "Header">;
-		uint PointertoWeaponTable;
-		uint SizeofWeaponTable;
-		uint PointertoEquipmentTable;
-		uint SizeofEquipmentTable;
-		uint PointertoItemTable;
-		uint SizeofItemTable;
-		uint PointertoTable04;
-		uint SizeofTable04;
-		uint PointertoTable05;
-		uint SizeofTable05;
-		uint PointertoTable06;
-		uint SizeofTable06;
-		uint PointertoTable07;
-		uint SizeofTable07;
-		uint PointertoTable08;
-		uint SizeofTable08;
-		uint PointertoTable09;
-		uint SizeofTable09;
-		uint PointertoTable10;
-		uint SizeofTable10;
-		uint PointertoTable11;
-		uint SizeofTable11;
-		uint PointertoTable12;
-		uint SizeofTable12;
-		uint PointertoTable13;
-		uint SizeofTable13;
-	} SectionPointer<name = "Section pointers", fgcolor = cLtBlue>;
+	FileSections Sections;
 
-	FSeek(SectionPointer.PointertoWeaponTable);
+	FSeekNextSection(Sections);
 	struct WEAPTABLESTRUCTURE {
 		DataSection Header;
 		struct WEAPTABLE {
@@ -111,10 +83,10 @@ struct FILE {
 			byte StoreLV2<name = "Store LV2 Stock">;
 			byte StoreLV3<name = "Store LV3 Stock">;
 			ubyte Padding<hidden=false>;
-		} WeapTable[WeapTableHeader.NumofWeap]<name = "Weapon Shop Data", bgcolor = cYellow, read = GetWeaponName>;
+		} WeapTable[Header.NumEntries]<name = "Weapon Shop Data", bgcolor = cYellow, read = GetWeaponName>;
 	} WeapTableStructure<name = "Weapon Shop Table">;
 
-	FSeek(SectionPointer.PointertoEquipmentTable);
+	FSeekNextSection(Sections);
 	struct EQUIPMENTTABLESTRUCTURE {
 		DataSection Header;
 		struct EQUIPMENTTABLE {
@@ -127,10 +99,10 @@ struct FILE {
 			byte StoreLV1<name = "Store LV1 Stock">;
 			byte StoreLV2<name = "Store LV2 Stock">;
 			byte StoreLV3<name = "Store LV3 Stock">;
-		} EquipmentTable[EquipmentTableHeader.NumofEquipment]<name = "Equipment Table Data", bgcolor = cYellow, read = GetEquipmentName>;
+		} EquipmentTable[Header.NumEntries]<name = "Equipment Table Data", bgcolor = cYellow, read = GetEquipmentName>;
 	} EquipmentTableStructure<name = "Equipment Table">;
 
-	FSeek(SectionPointer.PointertoItemTable);
+	FSeekNextSection(Sections);
 	struct ITEMTABLESTRUCTURE {
 	DataSection Header;
 	struct ITEMTABLE {
@@ -143,10 +115,10 @@ struct FILE {
 		byte StoreLV1<name = "Store LV1 Stock">;
 		byte StoreLV2<name = "Store LV2 Stock">;
 		byte StoreLV3<name = "Store LV3 Stock">;
-		} ItemTable[ItemTableHeader.NumofItem]<name = "Item Table Data", bgcolor = cYellow, read = GetItemName>;
+		} ItemTable[Header.NumEntries]<name = "Item Table Data", bgcolor = cYellow, read = GetItemName>;
 	} ItemShop<name = "Item Table">;
 
-	FSeek(SectionPointer.PointertoTable04);
+	FSeekNextSection(Sections);
 	struct Table04Structure {
 		DataSection Header;
 		struct TABLE04 {
@@ -172,10 +144,10 @@ struct FILE {
 				byte Shop3;
 			 }Shop<name="Shop Availability">;
 			ubyte padding;
-		} Table04[NumofTable04]<name = "Battalion Data", read=EnumToString(battalion)>;
+		} Table04[Header.NumEntries]<name = "Battalion Data", read=EnumToString(battalion)>;
 	} itemstructure04<name = "Battalion Block", bgcolor = cLtBlue>;
 
-	FSeek(SectionPointer.PointertoTable05);
+	FSeekNextSection(Sections);
 	struct Table05Structure {
 		DataSection Header;
 		struct TABLE05 {
@@ -186,10 +158,10 @@ struct FILE {
 			Item WeapToMake<name = "Forged Weapon">;
 			MinRanks ProfLevel<name = "Required Professor Level">;
 			ubyte MaterialAmount<name = "Required Material Amount">;
-		} Table05[NumofTable05]<name = "Forging Data", read = GetForgeName>;
+		} Table05[Header.NumEntries]<name = "Forging Data", read = GetForgeName>;
 	} itemstructure05<name = "Forging Block", bgcolor = cLtGreen>;
 
-	FSeek(SectionPointer.PointertoTable06);
+	FSeekNextSection(Sections);
 	struct Table06Structure {
 		DataSection Header;
 		struct TABLE06 {
@@ -224,10 +196,10 @@ struct FILE {
 			ubyte HvyArmr<name="Heavy Armor Bonus">;
 			ubyte Riding<name="Riding Bonus">;
 			ubyte Flying<name="Flying Bonus">;
-		} saint[NumofTable06]<name = "Saint Statue", read=GetSaintStatue>;
+		} saint[Header.NumEntries]<name = "Saint Statue", read=GetSaintStatue>;
 	} itemstructure06<name = "Saint Statues", bgcolor = cLtBlue>;
 
-	FSeek(SectionPointer.PointertoTable07);
+	FSeekNextSection(Sections);
 	struct Table07Structure {
 		DataSection Header;
 		struct TABLE07 {
@@ -236,10 +208,10 @@ struct FILE {
 			ProfessorRanks ProfessorRank;
 			ShopAvailablity Availablity;
 			ubyte Stock;
-		} Table07[NumofTable07]<name = "General Merchants Data", read = GetGeneralItem>;
+		} Table07[Header.NumEntries]<name = "General Merchants Data", read = GetGeneralItem>;
 	} itemstructure07<name = "General Merchants Block", bgcolor = cLtBlue>;
 
-	FSeek(SectionPointer.PointertoTable08);
+	FSeekNextSection(Sections);
 	struct Table08Structure {
 		DataSection Header;
 		struct TABLE08 {
@@ -247,20 +219,20 @@ struct FILE {
 			Item AnnaItemID;
 			ShopAvailablity Availablity;
 			ubyte Stock;
-		} Table08[NumofTable08]<name = "Anna Shop Data", read = GetAnnaItem>;
+		} Table08[Header.NumEntries]<name = "Anna Shop Data", read = GetAnnaItem>;
 	} itemstructure08<name = "Anna Shop Block", bgcolor = cLtRed>;
 	
-	FSeek(SectionPointer.PointertoTable09);
+	FSeekNextSection(Sections);
 	struct Table09Structure {
 		DataSection Header;
 		struct TABLE09 {
 			ushort price;
 			ubyte PerkLevel<name="Perk Level">;
 			ubyte Chapter<name="Chapter Unlock by">;
-		} Table09[NumofTable08]<name = "Influencer Cost">;
+		} Table09[Header.NumEntries]<name = "Influencer Cost">;
 	}Influencer<name = "Influencer Prices", bgcolor = cLtRed>;
 
-	FSeek(SectionPointer.PointertoTable10);
+	FSeekNextSection(Sections);
 	struct Table10Structure {
 		DataSection Header;
 		struct TABLE10 {
@@ -277,10 +249,10 @@ struct FILE {
 			ubyte StockAtShopLVl2;
 			ubyte Padding<hidden=false, bgcolor=cBlack>;
 			ubyte Padding<hidden=false, bgcolor=cBlack>;
-		} Table09[NumofTable10]<name = "Pagan Block 1", read=EnumToString(item)>;
+		} Table09[Header.NumEntries]<name = "Pagan Block 1", read=EnumToString(item)>;
 	}Influencer1<name = "Pagan Altar Weapons", bgcolor = cLtRed>;
 
-	FSeek(SectionPointer.PointertoTable11);
+	FSeekNextSection(Sections);
 	struct PaganTable2 {
 		DataSection Header;
 		struct PaganEquip {
@@ -293,10 +265,10 @@ struct FILE {
 			byte StoreLV2<name = "Store LV2 Stock">;
 			byte StoreLV3<name = "Store LV3 Stock">;
 			byte padding2<hidden=false>;
-		} Pagan2[NumEntry]<read=EnumToString(item)>;
+		} Pagan2[Header.NumEntries]<read=EnumToString(item)>;
 	 } table11<name = "Pagan Altar Equips", bgcolor = cLtRed>;
 	 
-	FSeek(SectionPointer.PointertoTable12);
+	FSeekNextSection(Sections);
 	struct PaganTable3 {
 		DataSection Header;
 		struct PaganItem {
@@ -309,10 +281,10 @@ struct FILE {
 			byte StoreLV2<name = "Store LV2 Stock">;
 			byte StoreLV3<name = "Store LV3 Stock">;
 			byte padding2<hidden=true>;
-		} Pagan3[NumEntry]<read=EnumToString(item)>;	
+		} Pagan3[Header.NumEntries]<read=EnumToString(item)>;	
 	 } table12<name = "Pagan Altar Items", bgcolor = cLtRed>;
 	 
-	FSeek(SectionPointer.PointertoTable13);
+	FSeekNextSection(Sections);
 	struct sMiscItemShopTable {
 		DataSection Header;
 		struct sMiscItemShopData {
@@ -321,19 +293,14 @@ struct FILE {
 			ProfessorRanks ProfessorRank;
 			ShopAvailablity Availability;
 			byte padding;
-		} MiscItemShopEntry[NumEntry]<optimize=false>;
+		} MiscItemShopEntry[Header.NumEntries]<optimize=false>;
 	}MiscItemShopTable;
 }File<name = "Item.bin File",open=true>;
 
-string GetWeaponName(WEAPTABLE &i) { return EnumToString(i.WepID); }
-string GetForgeName(TABLE05 &i) { return EnumToString(i.BaseWeap) + " to " + EnumToString(i.WeapToMake); }
+string GetWeaponName(WEAPTABLE &i) {         return EnumToString(i.WepID); }
+string GetForgeName(TABLE05 &i) {            return EnumToString(i.BaseWeap) + " to " + EnumToString(i.WeapToMake); }
 string GetEquipmentName(EQUIPMENTTABLE &i) { return EnumToString(i.Equipment); }
-string GetItemName(ITEMTABLE &i) { return EnumToString(i.item); }
-string GetGeneralItem(TABLE07 &i) { return EnumToString(i.Itemforsale); }
-string GetAnnaItem(TABLE08 &i) { return EnumToString(i.AnnaItemID); }
-string GetSaintStatue(TABLE06 &i) {
-	string out=EnumToString(i.StatueIndex);
-	string stat;
-	SPrintf(stat, "%s Statue Level %d", out, i.level);
-	return stat;
-}
+string GetItemName(ITEMTABLE &i) {           return EnumToString(i.item); }
+string GetGeneralItem(TABLE07 &i) {          return EnumToString(i.Itemforsale); }
+string GetAnnaItem(TABLE08 &i) {             return EnumToString(i.AnnaItemID); }
+string GetSaintStatue(TABLE06 &i) {          return Str("%d - %s",i.level,i.StatueIndex); }
