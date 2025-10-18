@@ -35,7 +35,7 @@ struct File{
 	FSeekNextSection(Sections);
 	struct PersonStructure{ //0
 		DataSection Header;
-		Person person[Header.NumEntries]<read=ReadNameID, name="Character Block",open=true>;
+		Person person[Header.NumEntries]<read=ReadNameID, name="Character Block">;
 	}personstructure<bgcolor=cRed, name="Character Blocks">;
 	
 	FSeekNextSection(Sections);
@@ -51,7 +51,7 @@ struct File{
 			int16 DLCOutfit<name="Post Sothis Fusion Asset ID (Flag Set)">;
 			int16 BodyModelPreTimeSkip<name="Part 1 Model">;
 			int16 AlternateStatePortrait<name="Alternate State Portrait (Constance)">;
-		}assetid[Header.NumEntries]<bgcolor=cGreen,open=true>;
+		}assetid[Header.NumEntries]<bgcolor=cGreen>;
 	}assetidstructure<bgcolor=cBlue, name="Asset IDs">;
 	
 	FSeekNextSection(Sections);
@@ -94,7 +94,7 @@ struct File{
 					ClassID class<name="Post TimeSkip Unique Class">;
 				}wpnrankdata<name="Wpn Ranks/Assets Data", read=EnumToString(name)>;
 			}
-		}wpnrank<name="Starting Weapon Ranks and Combat Assets",open=true>;
+		}wpnrank<name="Starting Weapon Ranks and Combat Assets">;
 	}wpnrankstructure<bgcolor=cDkYellow, name="Starting Weapon Ranks and Combat Assets">;
 	
 	FSeekNextSection(Sections);
@@ -110,7 +110,7 @@ struct File{
 					MinRanks ReasonLearnLevel[5]<name="Reason Learnt Level", comment="0 = null">;
 				}spelllistdata<name="Spell List Data", read=EnumToString(NameOfChar)>;
 			}
-		}SpellList<name="Spell List",open=true>;
+		}SpellList<name="Spell List">;
 	}spellliststructure<name="Spell List Table", bgcolor=cYellow>;
 	
 	FSeekNextSection(Sections);
@@ -127,7 +127,7 @@ struct File{
 					MinRanks RankLearnt[20]<name="Rank Learnt at">;
 				}skilllistdata<name="Skill List Data", read=EnumToString(NameOfChar)>;
 			}
-		}SkillList<name="Skill List",open=true>;
+		}SkillList<name="Skill List">;
 	}skillliststructure<name="Skill List Table", bgcolor=cLtYellow>;
 	
 	FSeekNextSection(Sections);
@@ -159,7 +159,7 @@ struct File{
 					MinRanks RequiredRank[10]<name="Required Rank">;
 				}artlearnsetdata<name="Combat Art Learnset Data", read=GetCharNames>;
 			}
-		}artlearnset<name="Combat Art Learnset", bgcolor=cYellow,open=true>;
+		}artlearnset<name="Combat Art Learnset", bgcolor=cYellow>;
 	}artlearnsetstruct<name="Combat Art Learnset Table">;
 	
 	FSeekNextSection(Sections);
@@ -191,7 +191,7 @@ struct File{
 			byte mtb<name="B Support Mt">;
 			byte mta<name="A Support Mt">;
 			byte mts<name="S Support Mt">;
-		}unksect1id[Header.NumEntries]<name="Linked Attack Data",optimize=false,open=true>;
+		}unksect1id[Header.NumEntries]<name="Linked Attack Data",optimize=false>;
 	}unksect1<name="Linked Attacks (Generic)", bgcolor=cDkGreen>;
 	
 	FSeekNextSection(Sections);
@@ -226,7 +226,7 @@ struct File{
 			byte mta<name="A Support Mt">;
 			byte mts<name="S Support Mt">;
 			byte unk30;
-		}unksect2id[Header.NumEntries]<name="Special Linked Attack Data", read=GetSupportPairs2, optimize=false,open=true>;
+		}unksect2id[Header.NumEntries]<name="Special Linked Attack Data", read=GetSupportPairs2, optimize=false>;
 	}unksect2<name="Linked Attacks (Special)", bgcolor=cDkGreen>;
 	
 	FSeekNextSection(Sections);
@@ -258,7 +258,7 @@ struct File{
 				ubyte bit15 : 1<name="Flag 15">;
 			}supportFlags<name="Flags?">;
 			ubyte padding<hidden=true, bgcolor=cBlack>;
-		}supportpairs[Header.NumEntries]<name="Support Pair", read=GetSupportPairs,open=true>;
+		}supportpairs[Header.NumEntries]<name="Support Pair", read=GetSupportPairs>;
 	}supportlisttablestruct<bgcolor=0x70c009, name="Support Pair Table">;
 	
 	FSeekNextSection(Sections);
@@ -270,7 +270,7 @@ struct File{
 			RankStats requiredStat<name="Required Stat">;
 			CombatArtID Art<name="Combat Art Learnt">;
 			AbilityID Skill<name="Skill Learnt">;
-		}hiddentalentdata[Header.NumEntries]<name="Hidden Talent Data", read=GetTalentNames,open=true>;
+		}hiddentalentdata[Header.NumEntries]<name="Hidden Talent Data", read=GetTalentNames>;
 	}hiddentalentstruct<name="Hidden Talent Table", bgcolor=cYellow>;
 		
 	FSeekNextSection(Sections);
@@ -313,7 +313,7 @@ struct File{
 			CharID CharacterID<name="Character ID">;
 			TrueFalse IsTeacher<name="IsTeacher">;
 			byte padding;
-		}facultyid[Header.NumEntries]<name="Faculty Training Stuff", read=EnumToString(CharacterID),open=true>;
+		}facultyid[Header.NumEntries]<name="Faculty Training Stuff", read=EnumToString(CharacterID)>;
 	}facultytraining<bgcolor=cBlack,name="Faculty ID">;
 	
 	FSeekNextSection(Sections);
@@ -341,7 +341,7 @@ struct File{
 			CharID CharacterID<name="Character ID">;
 			TrueFalse IsTeacher<name="IsTeacher">;
 			byte padding;
-		}seminarid[Header.NumEntries]<name="Seminar Stuff", read=EnumToString(CharacterID),open=true>;
+		}seminarid[Header.NumEntries]<name="Seminar Stuff", read=EnumToString(CharacterID)>;
 	}seminartraining<bgcolor=cGreen,name="Seminar ID">;
 	
 	FSeekNextSection(Sections);
@@ -379,7 +379,7 @@ struct File{
 			uint16 unk10<name="Expression ">;
 			uint16 unk11<name="Expression ">;
 			uint16 TimeSkip<name="Unknown Flag">;
-		}portraitsid[Header.NumEntries]<name="Face ID",open=true>;
+		}portraitsid[Header.NumEntries]<name="Face ID">;
 	}portraits<bgcolor=cDkPurple,name="Portrait IDs">;
 	
 	FSeekNextSection(Sections);
@@ -389,7 +389,7 @@ struct File{
 			CharID enemyName<name="Character">;
 			AbilityID skillid<name="Skill ID">;
 			byte pad<hidden=false>;
-		}sizefourid[Header.NumEntries]<name="Enemy Personal Skills",read=EnumToString(enemyName),open=true>;
+		}sizefourid[Header.NumEntries]<name="Enemy Personal Skills",read=EnumToString(enemyName)>;
 	}sizefour<name="Enemy Personal Skills", bgcolor=cDkGreen>;
 }file<open=true>;
 
