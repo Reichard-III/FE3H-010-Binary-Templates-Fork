@@ -12,6 +12,7 @@
 //   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
 //------------------------------------------------
 #include "Structs.bt"
+LittleEndian();
 local int i = 0;
 enum<byte> Response {
 	Bad_ = -1,

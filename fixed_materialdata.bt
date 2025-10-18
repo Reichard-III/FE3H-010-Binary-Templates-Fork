@@ -13,7 +13,7 @@
 //------------------------------------------------
 local int i = 0;
 #include "Structs.bt"
-
+LittleEndian();
 enum<byte> Quality {
 	One_Star,
 	Two_Star,

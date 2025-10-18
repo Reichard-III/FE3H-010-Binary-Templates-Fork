@@ -15,7 +15,7 @@
 //------------------------------------------------
 
 #include "Structs.bt"
-
+LittleEndian();
 local int i = 0;
 local int n;
 
