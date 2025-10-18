@@ -2354,8 +2354,7 @@ enum<ubyte> ItemByte
     no_item_B = 65535,
 };
 
-enum<ubyte> EquipID
-{
+enum<ubyte> EquipID{
     Equip_Leather_Shield,
     Equip_Iron_Shield,
     Equip_Steel_Shield,

@@ -1,0 +1,1365 @@
+struct SkillExp {
+	ushort Sword;
+	ushort Lance;
+	ushort Axe;
+	ushort Bow;
+	ushort Brawl;
+	ushort Reason;
+	ushort Faith;
+	ushort Authority;
+	ushort HeavyArmor;
+	ushort Riding;
+	ushort Flying;
+};
+
+struct BaseAbilityUnlock {
+	ubyte ability0:1<name="0_Sword_Prowess_Lv1">;
+	ubyte ability1:1<name="1_Sword_Prowess_Lv2">;
+	ubyte ability2:1<name="2_Sword_Prowess_Lv3">;
+	ubyte ability3:1<name="3_Sword_Prowess_Lv4">;
+	ubyte ability4:1<name="4_Sword_Prowess_Lv5">;
+	ubyte ability5:1<name="5_Lance_Prowess_Lv1">;
+	ubyte ability6:1<name="6_Lance_Prowess_Lv2">;
+	ubyte ability7:1<name="7_Lance_Prowess_Lv3">;
+	ubyte ability8:1<name="8_Lance_Prowess_Lv4">;
+	ubyte ability9:1<name="9_Lance_Prowess_Lv5">;
+	ubyte ability10:1<name="10_Axe_Prowess_Lv1">;
+	ubyte ability11:1<name="11_Axe_Prowess_Lv2">;
+	ubyte ability12:1<name="12_Axe_Prowess_Lv3">;
+	ubyte ability13:1<name="13_Axe_Prowess_Lv4">;
+	ubyte ability14:1<name="14_Axe_Prowess_Lv5">;
+	ubyte ability15:1<name="15_Bow_Prowess_Lv1">;
+	ubyte ability16:1<name="16_Bow_Prowess_Lv2">;
+	ubyte ability17:1<name="17_Bow_Prowess_Lv3">;
+	ubyte ability18:1<name="18_Bow_Prowess_Lv4">;
+	ubyte ability19:1<name="19_Bow_Prowess_Lv5">;
+	ubyte ability20:1<name="20_Brawling_Prowess_Lv1">;
+	ubyte ability21:1<name="21_Brawling_Prowess_Lv2">;
+	ubyte ability22:1<name="22_Brawling_Prowess_Lv3">;
+	ubyte ability23:1<name="23_Brawling_Prowess_Lv4">;
+	ubyte ability24:1<name="24_Brawling_Prowess_Lv5">;
+	ubyte ability25:1<name="25_Reason_Prowess_Lv1">;
+	ubyte ability26:1<name="26_Reason_Prowess_Lv2">;
+	ubyte ability27:1<name="27_Reason_Prowess_Lv3">;
+	ubyte ability28:1<name="28_Reason_Prowess_Lv4">;
+	ubyte ability29:1<name="29_Reason_Prowess_Lv5">;
+	ubyte ability30:1<name="30_Faith_Prowess_Lv1">;
+	ubyte ability31:1<name="31_Faith_Prowess_Lv2">;
+	ubyte ability32:1<name="32_Faith_Prowess_Lv3">;
+	ubyte ability33:1<name="33_Faith_Prowess_Lv4">;
+	ubyte ability34:1<name="34_Faith_Prowess_Lv5">;
+	ubyte ability35:1<name="35_Authority_Prowess_Lv1">;
+	ubyte ability36:1<name="36_Authority_Prowess_Lv2">;
+	ubyte ability37:1<name="37_Authority_Prowess_Lv3">;
+	ubyte ability38:1<name="38_Authority_Prowess_Lv4">;
+	ubyte ability39:1<name="39_Authority_Prowess_Lv5">;
+	ubyte ability40:1<name="40_Swordfaire">;
+	ubyte ability41:1<name="41_Lancefaire">;
+	ubyte ability42:1<name="42_Axefaire">;
+	ubyte ability43:1<name="43_Bowfaire">;
+	ubyte ability44:1<name="44_Fistfaire">;
+	ubyte ability45:1<name="45_Black_Tomefaire">;
+	ubyte ability46:1<name="46_White_Tomefaire">;
+	ubyte ability47:1<name="47_Dark_Tomefaire">;
+	ubyte ability48:1<name="48_Sword_Crit_Plus_10">;
+	ubyte ability49:1<name="49_Lance_Crit_Plus_10">;
+	ubyte ability50:1<name="50_Axe_Crit_Plus_10">;
+	ubyte ability51:1<name="51_Bow_Crit_Plus_10">;
+	ubyte ability52:1<name="52_Brawl_Crit_Plus_10">;
+	ubyte ability53:1<name="53_Black_Magic_Cirt_Plus_10">;
+	ubyte ability54:1<name="54_White_Magic_Crit_Plus_10">;
+	ubyte ability55:1<name="55_Dark_Magic_Cirt_Plus_10">;
+	ubyte ability56:1<name="56_Sword_Avo_Plus_20">;
+	ubyte ability57:1<name="57_Lance_Avo_Plus_20">;
+	ubyte ability58:1<name="58_Axe_Avo_Plus_20">;
+	ubyte ability59:1<name="59_Bow_Avo_Plus_20">;
+	ubyte ability60:1<name="60_Brawl_Avo_Plus_20">;
+	ubyte ability61:1<name="61_Black_Magic_Avo_Plus_20">;
+	ubyte ability62:1<name="62_White_Magic_Avo_Plus_20">;
+	ubyte ability63:1<name="63_Dark_Magic_Avo_Plus_20">;
+	ubyte ability64:1<name="64_HP_Plus_5">;
+	ubyte ability65:1<name="65_Strangth_Plus_2">;
+	ubyte ability66:1<name="66_Magic_Plus_2">;
+	ubyte ability67:1<name="67_Dexterity_Plus_">;
+	ubyte ability68:1<name="68_Speed_Plus_2">;
+	ubyte ability69:1<name="69_Pomp_and_Circumstance">;
+	ubyte ability70:1<name="70_Defense_Plus_2">;
+	ubyte ability71:1<name="71_Resistance_Plus_2">;
+	ubyte ability72:1<name="72_Movement_Plus_1">;
+	ubyte ability73:1<name="73_Hit_Plus_20">;
+	ubyte ability74:1<name="74_Avo_Plus_20">;
+	ubyte ability75:1<name="75_Crit_Plus_20">;
+	ubyte ability76:1<name="76_Defiant_Str">;
+	ubyte ability77:1<name="77_Defiant_Mag">;
+	ubyte ability78:1<name="78_Defiant_Spd">;
+	ubyte ability79:1<name="79_Defiant_Def">;
+	ubyte ability80:1<name="80_Defiant_Res">;
+	ubyte ability81:1<name="81_Defiant_Avo">;
+	ubyte ability82:1<name="82_Defiant_Crit">;
+	ubyte ability83:1<name="83_Imperial_Lineage">;
+	ubyte ability84:1<name="84_Royal_Lineage">;
+	ubyte ability85:1<name="85_Leicester_Lineage">;
+	ubyte ability86:1<name="86_Mastermind">;
+	ubyte ability87:1<name="87_Death_Blow">;
+	ubyte ability88:1<name="88_Fiendish_Blow">;
+	ubyte ability89:1<name="89_Darting_Blow">;
+	ubyte ability90:1<name="90_Armored_Blow">;
+	ubyte ability91:1<name="91_Warding_Blow">;
+	ubyte ability92:1<name="92_Officer_Duty">;
+	ubyte ability93:1<name="93_Lady_Knight">;
+	ubyte ability94:1<name="94_Watchful_Eye">;
+	ubyte ability95:1<name="95_Distinguished_House">;
+	ubyte ability96:1<name="96_Veteran_Knight">;
+	ubyte ability97:1<name="97_Charm_Ability">;
+	ubyte ability98:1<name="98_Advocate">;
+	ubyte ability99:1<name="99_Guardian">;
+	ubyte ability100:1<name="100_Lilys_Poise">;
+	ubyte ability101:1<name="101_Infirmary_Master">;
+	ubyte ability102:1<name="102_Philanderer">;
+	ubyte ability103:1<name="103_Rivalry">;
+	ubyte ability104:1<name="104_Born_Fighter">;
+	ubyte ability105:1<name="105_Rally_Strength">;
+	ubyte ability106:1<name="106_Rally_Magic">;
+	ubyte ability107:1<name="107_Rally_Speed">;
+	ubyte ability108:1<name="108_Rally_Defense">;
+	ubyte ability109:1<name="109_Rally_Resistance">;
+	ubyte ability110:1<name="110_Rally_Movement">;
+	ubyte ability111:1<name="111_Rally_Dexterity">;
+	ubyte ability112:1<name="112_Rally_Luck">;
+	ubyte ability113:1<name="113_Rally_Charm">;
+	ubyte ability114:1<name="114_Seal_Strength">;
+	ubyte ability115:1<name="115_Seal_Magic">;
+	ubyte ability116:1<name="116_Seal_Speed">;
+	ubyte ability117:1<name="117_Seal_Defense">;
+	ubyte ability118:1<name="118_Seal_Resistance">;
+	ubyte ability119:1<name="119_Seal_Movement">;
+	ubyte ability120:1<name="120_Heartseeker">;
+	ubyte ability121:1<name="121_Swordbreaker_Plus">;
+	ubyte ability122:1<name="122_Lancebreaker_Plus">;
+	ubyte ability123:1<name="123_Axebreaker_Plus">;
+	ubyte ability124:1<name="124_Bowbreaker">;
+	ubyte ability125:1<name="125_Fistbreaker">;
+	ubyte ability126:1<name="126_Tomebreaker">;
+	ubyte ability127:1<name="127_Model_Leader">;
+	ubyte ability128:1<name="128_Defensive_Tactics">;
+	ubyte ability129:1<name="129_Offensive_Tactics">;
+	ubyte ability130:1<name="130_Fire_Ablilty">;
+	ubyte ability131:1<name="131_Miasma_Ablilty">;
+	ubyte ability132:1<name="132_Heal_Ablilty">;
+	ubyte ability133:1<name="133_Renewal_Ablilty">;
+	ubyte ability134:1<name="134_Catnap">;
+	ubyte ability135:1<name="135_Goody_Basket">;
+	ubyte ability136:1<name="136_Songstress">;
+	ubyte ability137:1<name="137_Hunters_Boon">;
+	ubyte ability138:1<name="138_Poison_Strike">;
+	ubyte ability139:1<name="139_Live_to_Serve">;
+	ubyte ability140:1<name="140_Lifetaker">;
+	ubyte ability141:1<name="141_Survival_Instinct">;
+	ubyte ability142:1<name="142_Lethality">;
+	ubyte ability143:1<name="143_Poison">;
+	ubyte ability144:1<name="144_Pavise">;
+	ubyte ability145:1<name="145_Aegis">;
+	ubyte ability146:1<name="146_Miracle">;
+	ubyte ability147:1<name="147_Terrain_Resistance">;
+	ubyte ability148:1<name="148_Special_Dance">;
+	ubyte ability149:1<name="149_Paragon">;
+	ubyte ability150:1<name="150_Professors_Guidance">;
+	ubyte ability151:1<name="151_Discipline">;
+	ubyte ability152:1<name="152_Aptitude">;
+	ubyte ability153:1<name="153_Vantage">;
+	ubyte ability154:1<name="154_Missing_Number">;
+	ubyte ability155:1<name="155_Desperation">;
+	ubyte ability156:1<name="156_Quick_Riposte">;
+	ubyte ability157:1<name="157_Wrath">;
+	ubyte ability158:1<name="158_Dance">;
+	ubyte ability159:1<name="159_Steal">;
+	ubyte ability160:1<name="160_Locktouch">;
+	ubyte ability161:1<name="161_Stealth">;
+	ubyte ability162:1<name="162_Canto">;
+	ubyte ability163:1<name="163_Pass">;
+	ubyte ability164:1<name="164_Swordbreaker">;
+	ubyte ability165:1<name="165_Lancebreaker">;
+	ubyte ability166:1<name="166_Bowrange_Plus_1">;
+	ubyte ability167:1<name="167_Bowrange_Plus_2">;
+	ubyte ability168:1<name="168_Black_Magic_Range_Plus_1">;
+	ubyte ability169:1<name="169_Dark_Magic_Range_Plus_1">;
+	ubyte ability170:1<name="170_White_Magic_Range_Plus_1">;
+	ubyte ability171:1<name="171_Unarmed_Combat">;
+	ubyte ability172:1<name="172_Black_Magic_Uses_x2">;
+	ubyte ability173:1<name="173_Dark_Magic_Uses_x2">;
+	ubyte ability174:1<name="174_White_Magic_Uses_x2">;
+	ubyte ability175:1<name="175_White_Magic_Heal_Plus_5">;
+	ubyte ability176:1<name="176_White_Magic_Heal_Plus_10">;
+	ubyte ability177:1<name="177_Weight_Minus_3">;
+	ubyte ability178:1<name="178_Weight_Minus_5">;
+	ubyte ability179:1<name="179_Axebreaker">;
+	ubyte ability180:1<name="180_Unsealable_Magic">;
+	ubyte ability181:1<name="181_Immune_Status">;
+	ubyte ability182:1<name="182_General">;
+	ubyte ability183:1<name="183_Commander">;
+	ubyte ability184:1<name="184_Infinite_Magic">;
+	ubyte ability185:1<name="185_Magic_Bind">;
+	ubyte ability186:1<name="186_Infantry_Effect_Null">;
+	ubyte ability187:1<name="187_Armored_Effect_Null">;
+	ubyte ability188:1<name="188_Cavalry_Effect_Null">;
+	ubyte ability189:1<name="189_Flying_Effect_Null">;
+	ubyte ability190:1<name="190_Dragon_Effect_Null">;
+	ubyte ability191:1<name="191_Monster_Effect_Null">;
+	ubyte ability192:1<name="192_Effect_Null">;
+	ubyte ability193:1<name="193_Air_of_Intimidation">;
+	ubyte ability194:1<name="194_Vital_Defense">;
+	ubyte ability195:1<name="195_Giant_Wings">;
+	ubyte ability196:1<name="196_Anti_Magic_Armor">;
+	ubyte ability197:1<name="197_Divine_Dragon_Horn">;
+	ubyte ability198:1<name="198_Path_of_the_Conqueror">;
+	ubyte ability199:1<name="199_Noncombatant">;
+	ubyte ability200:1<name="200_Battalion_Desperation">;
+	ubyte ability201:1<name="201_Cursed_Power">;
+	ubyte ability202:1<name="202_Anchor">;
+	ubyte ability203:1<name="203_Counterattack">;
+	ubyte ability204:1<name="204_Twin_Crests">;
+	ubyte ability205:1<name="205_Ancient_Dragon_Wrath">;
+	ubyte ability206:1<name="206_Surging_Light">;
+	ubyte ability207:1<name="207_Ancient_Dragonskin">;
+	ubyte ability208:1<name="208_Keen_Intuition">;
+	ubyte ability209:1<name="209_Staunch_Shield">;
+	ubyte ability210:1<name="210_Lone_Wolf">;
+	ubyte ability211:1<name="211_Fighting_Spirit">;
+	ubyte ability212:1<name="212_Confidence">;
+	ubyte ability213:1<name="213_Persecution_Complex">;
+	ubyte ability214:1<name="214_Animal_Friend">;
+	ubyte ability215:1<name="215_Perseverance">;
+	ubyte ability216:1<name="216_Crest_Scholar">;
+	ubyte ability217:1<name="217_Compassion">;
+	ubyte ability218:1<name="218_Lockpick">;
+	ubyte ability219:1<name="219_Battalion_Vantage">;
+	ubyte ability220:1<name="220_Battalion_Wrath">;
+	ubyte ability221:1<name="221_Battalion_Renewal">;
+	ubyte ability222:1<name="222_Black_Magic_Uses_x4">;
+	ubyte ability223:1<name="223_Dark_Magic_Uses_x4">;
+	ubyte ability224:1<name="224_White_Magic_Uses_x4">;
+	ubyte ability225:1<name="225_Mighty_King_of_Legend">;
+	ubyte ability226:1<name="226_Ten_Elites">;
+	ubyte ability227:1<name="227_Alert_Stance">;
+	ubyte ability228:1<name="228_Alert_Stance_Plus">;
+	ubyte ability229:1<name="229_Close_Counter">;
+	ubyte ability230:1<name="230_Professors_Guidance_Plus">;
+	ubyte ability231:1<name="231_Imperial_Lineage_Plus">;
+	ubyte ability232:1<name="232_Royal_Lineage_Plus">;
+	ubyte ability233:1<name="233_Leicester_Lineage_Plus">;
+	ubyte ability234:1<name="234_Murderous_Intent">;
+	ubyte ability235:1<name="235_Sacred_Power">;
+	ubyte ability236:1<name="236_Agarthan_Technology">;
+	ubyte ability237:1<name="237_Blade_Breaker">;
+	ubyte ability238:1<name="238_Lucky_Seven">;
+	ubyte ability239:1<name="239_Transmute">;
+};
+
+struct DLCAbilityUnlock {
+	ubyte ability241:1<name="241_Honorable_Spirit">;
+	ubyte ability242:1<name="242_King_of_Grappling">;
+	ubyte ability243:1<name="243_Circadian_Beat">;
+	ubyte ability244:1<name="244_Monstrous_Appeal">;
+	ubyte ability245:1<name="245_Business_Prosperity">;
+	ubyte ability246:1<name="246_Umbral_Leech">;
+	ubyte ability247:1<name="247_Manifest_Phantom">;
+	ubyte ability248:1<name="248_Enhanced_Fortitude">;
+	ubyte ability249:1<name="249_Unused">;
+	ubyte ability250:1<name="250_Duelists_Blow">;
+	ubyte ability251:1<name="251_Unused">;
+	ubyte ability252:1<name="252_Unused">;
+	ubyte ability253:1<name="253_Unused">;
+	ubyte ability254:1<name="254_Unused">;
+};
+
+struct ClassUnlock {
+	ubyte Ability00:1;
+	ubyte Ability01:1;
+	ubyte Ability02:1;
+	ubyte Ability03:1;
+	ubyte Ability04:1;
+	ubyte Ability05:1;
+	ubyte Ability06:1;
+	ubyte Ability07:1;
+};
+struct UnitFlags {
+	int32 Flag0:1<name="IsAvailable?">;
+	int32 Flag1:1<name="HasJoined?">;
+	int32 Flag2:1<name="Dead And Unrecruited">;
+	int32 Flag3:1<name="Is Dead">;
+	int32 Flag4:1<name="HideSecondCrest?">;
+	int32 Flag5:1<name="Is currently Mounted?">;
+	int32 Flag6:1<name="Sword budding Talent">;
+	int32 Flag7:1<name="Lance budding Talent">;
+	int32 Flag8:1<name="Axe budding Talent">;
+	int32 Flag9:1<name="Bow budding Talent">;
+	int32 Flag10:1<name="Brawling budding Talent">;
+	int32 Flag11:1<name="Reason budding Talent">;
+	int32 Flag12:1<name="Faith budding Talent">;
+	int32 Flag13:1<name="Authority budding Talent">;
+	int32 Flag14:1<name="Heavy Armor budding Talent">;
+	int32 Flag15:1<name="Riding budding Talent">;
+	int32 Flag16:1<name="Flying budding Talent">;
+	int32 Flag17:1<name="BylethGreenHair/ Dimitri Anger">;
+	int32 Flag18:1<name="Deployed?">;
+	int32 Flag19:1<name="Force on Map">;
+	int32 Flag20:1<name="Assigned Adjutant">;
+	int32 Flag21:1<name="Battalion Equipped">;
+	int32 Flag22:1<name="Byleth Support Queued Up">;
+	int32 Flag23:1<name="Reject Tea Time">;
+	int32 Flag24:1<name="Something Personal?">;
+	int32 Flag25:1;
+	int32 Flag26:1;
+	int32 Flag27:1;
+	int32 Flag28:1;
+	int32 Flag29:1;
+	int32 Flag30:1;
+	int32 Flag31:1;
+};
+// Size of 588
+struct CombatArtUnlock {
+	ubyte CA0:1<name="Sunder">;
+	ubyte CA1:1<name="Wrath_Strike">;
+	ubyte CA2:1<name="Grounder">;
+	ubyte CA3:1<name="Hexblade">;
+	ubyte CA4:1<name="Windsweep">;
+	ubyte CA5:1<name="Haze_Slice">;
+	ubyte CA6:1<name="Subdue">;
+	ubyte CA7:1<name="Bane_of_Monsters">;
+	ubyte CA8:1<name="Finesse_Blade">;
+	ubyte CA9:1<name="Soulblade">;
+	ubyte CA10:1<name="Tempest_Lance">;
+	ubyte CA11:1<name="Shatter_Slash">;
+	ubyte CA12:1<name="Knightkneeler">;
+	ubyte CA13:1<name="Hit_and_Run">;
+	ubyte CA14:1<name="Monster_Piercer">;
+	ubyte CA15:1<name="Lance_Jab">;
+	ubyte CA16:1<name="Vengeance">;
+	ubyte CA17:1<name="Glowing_Ember">;
+	ubyte CA18:1<name="Swift_Strikes">;
+	ubyte CA19:1<name="Frozen_Lance">;
+	ubyte CA20:1<name="Smash">;
+	ubyte CA21:1<name="Spike">;
+	ubyte CA22:1<name="Helm_Splitter">;
+	ubyte CA23:1<name="Monster_Breaker">;
+	ubyte CA24:1<name="Diamond_Axe">;
+	ubyte CA25:1<name="Exhaustive_Strike">;
+	ubyte CA26:1<name="Armored_Strike">;
+	ubyte CA27:1<name="Wild_Abandon">;
+	ubyte CA28:1<name="Focused_Strike">;
+	ubyte CA29:1<name="Lightning_Axe">;
+	ubyte CA30:1<name="Curved_Shot">;
+	ubyte CA31:1<name="Deadeye">;
+	ubyte CA32:1<name="Heavy_Draw">;
+	ubyte CA33:1<name="Encloser">;
+	ubyte CA34:1<name="Ward_Arrow">;
+	ubyte CA35:1<name="PointBlank_Volley">;
+	ubyte CA36:1<name="Monster_Blast">;
+	ubyte CA37:1<name="Waning_Shot">;
+	ubyte CA38:1<name="Break_Shot">;
+	ubyte CA39:1<name="Schism_Shot">;
+	ubyte CA40:1<name="Healing_Focus">;
+	ubyte CA41:1<name="Draining_Blow">;
+	ubyte CA42:1<name="Mighty_Blow">;
+	ubyte CA43:1<name="Bombard">;
+	ubyte CA44:1<name="Rushing_Blow">;
+	ubyte CA45:1<name="Fading_Blow">;
+	ubyte CA46:1<name="Mystic_Blow">;
+	ubyte CA47:1<name="Nimble_Combo">;
+	ubyte CA48:1<name="OneTwo_Punch">;
+	ubyte CA49:1<name="Monster_Crusher">;
+	ubyte CA50:1<name="Swap">;
+	ubyte CA51:1<name="Shove">;
+	ubyte CA52:1<name="Reposition">;
+	ubyte CA53:1<name="Draw_Back">;
+	ubyte CA54:1<name="Smite">;
+	ubyte CA55:1<name="Foudroyant_Strike">;
+	ubyte CA56:1<name="Beast_Fang">;
+	ubyte CA57:1<name="Ruptured_Heaven">;
+	ubyte CA58:1<name="Ruined_Sky">;
+	ubyte CA59:1<name="Atrocity">;
+	ubyte CA60:1<name="Burning_Quake">;
+	ubyte CA61:1<name="Apocalyptic_Flame">;
+	ubyte CA62:1<name="Dust">;
+	ubyte CA63:1<name="Fallen_Star">;
+	ubyte CA64:1<name="Raging_Storm">;
+	ubyte CA65:1<name="Fallen_Heaven">;
+	ubyte CA66:1<name="Triangle_Attack">;
+	ubyte CA67:1<name="Hunter_Volley">;
+	ubyte CA68:1<name="Assassinate">;
+	ubyte CA69:1<name="Fierce_Iron_Fist">;
+	ubyte CA70:1<name="Astra">;
+	ubyte CA71:1<name="Paraselene">;
+	ubyte CA72:1<name="Wind_God">;
+	ubyte CA73:1<name="Flickering_Flower">;
+	ubyte CA74:1<name="War_Master_Strike">;
+	ubyte CA75:1<name="Sublime_Heaven">;
+	ubyte CA76:1<name="Sword_Dance">;
+	ubyte CA77:1<name="FoulPlay">;
+	ubyte CA78:1<name="Eviscerate">;
+	ubyte CA79:1<name="PneumaGale">;
+};
+
+struct sSaintStatue_UpgradeLevels{
+	byte Cethleann;
+	byte Cichol;
+	byte Macuil;
+	byte Indech;
+};
+
+enum<ubyte> MonasteryMerchantItemList{
+	Poultry_0,
+    Wild_Game_1,
+    Mixed_Herb_Seeds_2,
+    Root_Vegetable_Seeds_3,
+    Vegetable_Seeds_4,
+    Western_Foldlan_Seeds_5,
+    Eastern_Fodlan_Seeds_6,
+    Southern_Fodlan_Seeds_7,
+    Northern_Foldlan_Seeds_8,
+    Red_Flower_Seeds_9,
+    White_Flowers_Seeds_10_,
+    Blue_Flowers_Seeds_11_,
+    Purple_Flowers_Seeds_12_,
+    Yellow_Flowers_Seeds_13_,
+    Green_Flowers_Seeds_14_,
+    Pale_Blue_Flower_Seeds_15_,
+    Floral_Adornment_16_,
+    Tasty_Baked_Treat_17_,
+    Smoked_Meat_18_,
+    Watering_Can_19_,
+    Dapper_Handkerchief_20_,
+    Armored_Bear_Stuffy_21_,
+    Riding_Boots_22_,
+    Legends_of_Chivalry_23_,
+    Goddess_Statuette_24_,
+    Ceremonial_Sword_25_,
+    Coffee_Beans_26_,
+    Insect_Larva_27_,
+    Pond_Snail_28_,
+    Earthworm_29_,
+    Blowfly_30_,
+    Herring_Bait_31_,
+    Smithing_Stone_32_,
+    Black_Sand_Steel_33_,
+    Sweet_Apple_Blend_34_,
+    Albinean_Berry_Blend_35_,
+    Southern_Fruit_Blend_36_,
+    Mint_Leaves_37_,
+    Almond_Blend_38_,
+    Ginger_Tea_39_,
+    Angelica_Tea_40_,
+    Almyran_Pine_Needles_41_,
+    Crescent_Moon_Tea_42_,
+    Honeyed_Fruit_Blend_43_,
+    Lavender_Blend_44_,
+    Chamomile_45_,
+    Bergamot_46_,
+    Rose_Petal_Blend_47_,
+    Four_Spice_Blend_48_,
+    Fishing_Float_49_,
+    Gemstone_Beads_50_,
+    Hunting_Dagger_51_,
+    Whetstone_52_,
+    Stylish_Hair_Clip_53_,
+    Training_Weight_54_,
+	Tea_Leaves_55_,
+	Exotic_Spices_56_,
+	Board_Game_57_,
+	Arcane_Crystal_58_,
+	Cinnamon_Blend_59_,
+	Seiros_Blend_60_,
+	Dagda_Fruit_Blend_61_,
+	Hresvelg_Blend_62_,
+	Lecicester_Cortania_63_,
+	Book_of_Sheet_Music_64_,
+	Arithmetic_Textbook_65_,
+	The_History_of_Fodlan_66_,
+	Monarch_Studies_Book_67_,
+	Ancient_Coin_68_,
+	Book_of_Crest_Designs_69_,
+	Blue_Cheese_70_,
+	Landscape_Painting_71_,
+	Queen_Loach_72_,
+	Teutates_Pike_73_,
+	Bullhead_74_,
+	Morfis_Plum_75_,
+	Nordsalat_76_,
+	Boa_Fruit_77_,
+	Magdred_Kirsch_78_,
+	Angelica_79_,
+	Duscur_Bear_80_,
+	Oghma_Wolverine_81_,
+	No_Item_82_MMIL,
+	No_Item_83_MMIL,
+	No_Item_84_MMIL,
+	No_Item_85_MMIL,
+	No_Item_86_MMIL,
+	No_Item_87_MMIL,
+	No_Item_88_MMIL,
+	No_Item_89_MMIL,
+	No_Item_90_MMIL,
+	No_Item_91_MMIL,
+	No_Item_92_MMIL,
+	No_Item_93_MMIL,
+	No_Item_94_MMIL,
+	No_Item_95_MMIL,
+	No_Item_96_MMIL,
+	No_Item_97_MMIL,
+	No_Item_98_MMIL,
+    No_Item_99_MMIL,
+};
+
+enum<ubyte> AnnaShopItemList{
+	Elixir_0,
+	Master_Seal_1,
+	Seraph_Robe_2,
+	Energy_Drop_3,
+	Spirit_Dust_4,
+	Secret_Book_5,
+	Speed_Wing_6,
+	Goddess_Icon_7,
+	Giant_Shell_8,
+	Talisman_9,
+	Black_Pearl_10,
+	Silver_Shield_11,
+	Hexlock_Shield_12,
+	Accuracy_Ring_13,
+	Critical_Ring_14,
+	Evasion_Ring_15,
+	Speed_Ring_16,
+	Goddess_Ring_17,
+	Prayer_Ring_18,
+	No_Item_19,
+	No_Item_20,
+	No_Item_21,
+	No_Item_22,
+	No_Item_23,
+	No_Item_24,
+	No_Item_25,
+	No_Item_26,
+	No_Item_27,
+	No_Item_28,
+	No_Item_29,
+	No_Item_30,
+	No_Item_31,
+	No_Item_32,
+	No_Item_33,
+	No_Item_34,
+	No_Item_35,
+	No_Item_36,
+	No_Item_37,
+	No_Item_38,
+	No_Item_39,
+	No_Item_40,
+	No_Item_41,
+	No_Item_42,
+	No_Item_43,
+	No_Item_44,
+	No_Item_45,
+	No_Item_46,
+	No_Item_47,
+	No_Item_48,
+	No_Item_49,
+};
+
+struct sBattalionShopStock{
+	for(i=0;i<200;i++){
+		struct sBattalionShopStockEntry{
+			local BattalionID Name = i;
+			ubyte Count;
+			local string display = Str("%d - %s",Count,EnumToString(Name));
+		}BattEntry<read = display>;
+	}
+};
+
+struct sMonasteryMerchantStock{
+	for(i=0;i<100;i++){
+		struct sMonasteryMerchantStockEntry{
+            local MonasteryMerchantItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}MonasteryMerchantStockEntry<read=display>;
+	}
+};
+
+struct sAnnaSecretShopStock{
+	for(i=0;i<50;i++){
+		struct sAnnaSecretShopStockEntry{
+			local AnnaShopItemList name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}AnnaSecretShopStockEntry<read = display>;
+	}
+};
+
+struct sWeaponShopStock{
+	for(i=0;i<200;i++){
+		struct sWeaponShopStockEntry{
+			local Item name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}WeaponShopStockEntry<read=display>;
+	}
+};
+
+struct sEquipmentShopStock{
+	for(i=0;i<50;i++){
+		struct sEquipmentShopStockEntry{
+			local EquipID name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}EquipmentShopStockEntry<read=display>;
+	}
+};
+
+struct sItemShopStock{
+	for(i=0;i<200;i++){
+		struct sItemShopStockEntry{
+			local Consumables name = i;
+			ubyte Count;
+			local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}ItemShopStockEntry<read=display>;
+	}
+};
+
+struct sQuestStatuses{
+	for(i=0;i<151;i++){
+		struct sQuestStatusesEntry{
+			local QuestID name = i;
+			
+			QuestStatus QS<name="Quest Status">;
+			local string display = Str("%s - %s", EnumToString(QS), EnumToString(name));
+		}QuestStatusesEntry<read=display>;
+	}
+};
+
+struct sPreTimeSkipQuestionsAsked{
+	ubyte PTS0:1<name="">;
+	ubyte PTS1:1<name="">;
+	ubyte PTS2:1<name="">;
+	ubyte PTS3:1<name="">;
+	ubyte PTS4:1<name="">;
+	ubyte PTS5:1<name="">;
+	ubyte PTS6:1<name="">;
+	ubyte PTS7:1<name="">;
+	ubyte PTS8:1<name="">;
+	ubyte PTS9:1<name="">;
+	ubyte PTS10:1<name="">;
+	ubyte PTS11:1<name="">;
+	ubyte PTS12:1<name="">;
+	ubyte PTS13:1<name="">;
+	ubyte PTS14:1<name="">;
+	ubyte PTS15:1<name="">;
+	ubyte PTS16:1<name="">;
+	ubyte PTS17:1<name="">;
+	ubyte PTS18:1<name="">;
+	ubyte PTS19:1<name="">;
+	ubyte PTS20:1<name="">;
+	ubyte PTS21:1<name="">;
+	ubyte PTS22:1<name="">;
+	ubyte PTS23:1<name="">;
+	ubyte PTS24:1<name="">;
+	ubyte PTS25:1<name="">;
+	ubyte PTS26:1<name="">;
+	ubyte PTS27:1<name="">;
+	ubyte PTS28:1<name="">;
+	ubyte PTS29:1<name="">;
+	ubyte PTS30:1<name="">;
+	ubyte PTS31:1<name="">;
+	ubyte PTS32:1<name="">;
+	ubyte PTS33:1<name="">;
+	ubyte PTS34:1<name="">;
+	ubyte PTS35:1<name="">;
+	ubyte PTS36:1<name="">;
+	ubyte PTS37:1<name="">;
+	ubyte PTS38:1<name="">;
+	ubyte PTS39:1<name="">;
+	ubyte PTS40:1<name="">;
+	ubyte PTS41:1<name="">;
+	ubyte PTS42:1<name="">;
+	ubyte PTS43:1<name="">;
+	ubyte PTS44:1<name="">;
+	ubyte PTS45:1<name="">;
+	ubyte PTS46:1<name="">;
+	ubyte PTS47:1<name="">;
+	ubyte PTS48:1<name="">;
+	ubyte PTS49:1<name="">;
+	ubyte PTS50:1<name="">;
+	ubyte PTS51:1<name="">;
+	ubyte PTS52:1<name="">;
+	ubyte PTS53:1<name="">;
+	ubyte PTS54:1<name="">;
+	ubyte PTS55:1<name="">;
+	ubyte PTS56:1<name="">;
+	ubyte PTS57:1<name="">;
+	ubyte PTS58:1<name="">;
+	ubyte PTS59:1<name="">;
+	ubyte PTS60:1<name="">;
+	ubyte PTS61:1<name="">;
+	ubyte PTS62:1<name="">;
+	ubyte PTS63:1<name="">;
+	ubyte PTS64:1<name="">;
+	ubyte PTS65:1<name="">;
+	ubyte PTS66:1<name="">;
+	ubyte PTS67:1<name="">;
+	ubyte PTS68:1<name="">;
+	ubyte PTS69:1<name="">;
+	ubyte PTS70:1<name="">;
+	ubyte PTS71:1<name="">;
+	ubyte PTS72:1<name="">;
+	ubyte PTS73:1<name="">;
+	ubyte PTS74:1<name="">;
+	ubyte PTS75:1<name="">;
+	ubyte PTS76:1<name="">;
+	ubyte PTS77:1<name="">;
+	ubyte PTS78:1<name="">;
+	ubyte PTS79:1<name="">;
+	ubyte PTS80:1<name="">;
+	ubyte PTS81:1<name="">;
+	ubyte PTS82:1<name="">;
+	ubyte PTS83:1<name="">;
+	ubyte PTS84:1<name="">;
+	ubyte PTS85:1<name="">;
+	ubyte PTS86:1<name="">;
+	ubyte PTS87:1<name="">;
+	ubyte PTS88:1<name="">;
+	ubyte PTS89:1<name="">;
+	ubyte PTS90:1<name="">;
+	ubyte PTS91:1<name="">;
+	ubyte PTS92:1<name="">;
+	ubyte PTS93:1<name="">;
+	ubyte PTS94:1<name="">;
+	ubyte PTS95:1<name="">;
+	ubyte PTS96:1<name="">;
+	ubyte PTS97:1<name="">;
+	ubyte PTS98:1<name="">;
+	ubyte PTS99:1<name="">;
+};             
+
+struct sPostTimeSkipQuestionsAsked{
+	ubyte TS0:1<name="">;
+	ubyte TS1:1<name="">;
+	ubyte TS2:1<name="">;
+	ubyte TS3:1<name="">;
+	ubyte TS4:1<name="">;
+	ubyte TS5:1<name="">;
+	ubyte TS6:1<name="">;
+	ubyte TS7:1<name="">;
+	ubyte TS8:1<name="">;
+	ubyte TS9:1<name="">;
+	ubyte TS10:1<name="">;
+	ubyte TS11:1<name="">;
+	ubyte TS12:1<name="">;
+	ubyte TS13:1<name="">;
+	ubyte TS14:1<name="">;
+	ubyte TS15:1<name="">;
+	ubyte TS16:1<name="">;
+	ubyte TS17:1<name="">;
+	ubyte TS18:1<name="">;
+	ubyte TS19:1<name="">;
+	ubyte TS20:1<name="">;
+	ubyte TS21:1<name="">;
+	ubyte TS22:1<name="">;
+	ubyte TS23:1<name="">;
+	ubyte TS24:1<name="">;
+	ubyte TS25:1<name="">;
+	ubyte TS26:1<name="">;
+	ubyte TS27:1<name="">;
+	ubyte TS28:1<name="">;
+	ubyte TS29:1<name="">;
+	ubyte TS30:1<name="">;
+	ubyte TS31:1<name="">;
+	ubyte TS32:1<name="">;
+	ubyte TS33:1<name="">;
+	ubyte TS34:1<name="">;
+	ubyte TS35:1<name="">;
+	ubyte TS36:1<name="">;
+	ubyte TS37:1<name="">;
+	ubyte TS38:1<name="">;
+	ubyte TS39:1<name="">;
+	ubyte TS40:1<name="">;
+	ubyte TS41:1<name="">;
+	ubyte TS42:1<name="">;
+	ubyte TS43:1<name="">;
+	ubyte TS44:1<name="">;
+	ubyte TS45:1<name="">;
+	ubyte TS46:1<name="">;
+	ubyte TS47:1<name="">;
+	ubyte TS48:1<name="">;
+	ubyte TS49:1<name="">;
+	ubyte TS50:1<name="">;
+	ubyte TS51:1<name="">;
+	ubyte TS52:1<name="">;
+	ubyte TS53:1<name="">;
+	ubyte TS54:1<name="">;
+	ubyte TS55:1<name="">;
+	ubyte TS56:1<name="">;
+	ubyte TS57:1<name="">;
+	ubyte TS58:1<name="">;
+	ubyte TS59:1<name="">;
+	ubyte TS60:1<name="">;
+	ubyte TS61:1<name="">;
+	ubyte TS62:1<name="">;
+	ubyte TS63:1<name="">;
+	ubyte TS64:1<name="">;
+	ubyte TS65:1<name="">;
+	ubyte TS66:1<name="">;
+	ubyte TS67:1<name="">;
+	ubyte TS68:1<name="">;
+	ubyte TS69:1<name="">;
+	ubyte TS70:1<name="">;
+	ubyte TS71:1<name="">;
+	ubyte TS72:1<name="">;
+	ubyte TS73:1<name="">;
+	ubyte TS74:1<name="">;
+	ubyte TS75:1<name="">;
+	ubyte TS76:1<name="">;
+	ubyte TS77:1<name="">;
+	ubyte TS78:1<name="">;
+	ubyte TS79:1<name="">;
+	ubyte TS80:1<name="">;
+	ubyte TS81:1<name="">;
+	ubyte TS82:1<name="">;
+	ubyte TS83:1<name="">;
+	ubyte TS84:1<name="">;
+	ubyte TS85:1<name="">;
+	ubyte TS86:1<name="">;
+	ubyte TS87:1<name="">;
+	ubyte TS88:1<name="">;
+	ubyte TS89:1<name="">;
+	ubyte TS90:1<name="">;
+	ubyte TS91:1<name="">;
+	ubyte TS92:1<name="">;
+	ubyte TS93:1<name="">;
+	ubyte TS94:1<name="">;
+	ubyte TS95:1<name="">;
+	ubyte TS96:1<name="">;
+	ubyte TS97:1<name="">;
+	ubyte TS98:1<name="">;
+	ubyte TS99:1<name="">;
+};             
+
+struct sFacultyTrainingCompleted{
+	ubyte FTC0:1<name="Edelgard">;
+	ubyte FTC1:1<name="Dimitri">;
+	ubyte FTC2:1<name="Claude">;
+	ubyte FTC3:1<name="Hubert">;
+	ubyte FTC4:1<name="Ferdinand">;
+	ubyte FTC5:1<name="Linhardt">;
+	ubyte FTC6:1<name="Caspar">;
+	ubyte FTC7:1<name="Bernadetta">;
+	ubyte FTC8:1<name="Dorothea">;
+	ubyte FTC9:1<name="Petra">;
+	ubyte FTC10:1<name="Dedue">;
+	ubyte FTC11:1<name="Felix">;
+	ubyte FTC12:1<name="Ashe">;
+	ubyte FTC13:1<name="Sylvain">;
+	ubyte FTC14:1<name="Mercedes">;
+	ubyte FTC15:1<name="Annette">;
+	ubyte FTC16:1<name="Ingrid">;
+	ubyte FTC17:1<name="Lorenz">;
+	ubyte FTC18:1<name="Raphael">;
+	ubyte FTC19:1<name="Ignatz">;
+	ubyte FTC20:1<name="Lysithea">;
+	ubyte FTC21:1<name="Marianne">;
+	ubyte FTC22:1<name="Hilda">;
+	ubyte FTC23:1<name="Leonie">;
+	ubyte FTC24:1<name="Seteth">;
+	ubyte FTC25:1<name="Flayn">;
+	ubyte FTC26:1<name="Hanneman">;
+	ubyte FTC27:1<name="Manuela">;
+	ubyte FTC28:1<name="Gilbert">;
+	ubyte FTC29:1<name="Alois">;
+	ubyte FTC30:1<name="Catherine">;
+	ubyte FTC31:1<name="Shamir">;
+	ubyte FTC32:1<name="Cyril">;
+	ubyte FTC33:1<name="Jeralt">;
+	ubyte FTC34:1<name="Rhea">;
+    ubyte FTC35:1<name="Yuri">;
+	ubyte FTC36:1<name="Balthus">;
+	ubyte FTC37:1<name="Constance">;
+	ubyte FTC38:1<name="Hapi">;
+	ubyte FTC39:1<name="Aelfric">;
+	ubyte FTC40:1<name="Jeritza Playable">;
+	ubyte FTC41:1<name="Anna Playable">;
+	ubyte FTC42:1<name="Jeritza">;
+	ubyte FTC43:1<name="">;
+	ubyte FTC44:1<name="">;
+	ubyte FTC45:1<name="">;
+	ubyte FTC46:1<name="">;
+	ubyte FTC47:1<name="">;
+	ubyte FTC48:1<name="">;
+	ubyte FTC49:1<name="">;
+	ubyte FTC50:1<name="">;
+	ubyte FTC51:1<name="">;
+	ubyte FTC52:1<name="">;
+	ubyte FTC53:1<name="">;
+	ubyte FTC54:1<name="">;
+	ubyte FTC55:1<name="">;
+};   
+
+enum<ubyte> sPaganAltarWeaponItemList{
+	Brave_Sword_0,
+	Killing_Edge_1,
+	Brave_Lance_2,
+	Killer_Lance_3,
+	Brave_Axe_4,
+	Killer_Axe_5,
+	Brave_Bow_6,
+	Killer_Bow_7,
+	Levin_Sword_8,
+	Bolt_Axe_9,
+	Magic_Bow_10,
+	Spear_11,
+	Tomahawk_12,
+	Longbow_13,
+	Rapier_14,
+	Blessed_Lance_15,
+	Blessed_Bow_16,
+	Devil_Sword_17,
+	Devil_Axe_18,
+	Wo_Dao_19,
+	Dragon_Claw_20,
+	Venin_Edge_21,
+	Venin_Lance_22,
+	Venin_Axe_23,
+	Vinen_Bow_24,
+	Killer_Knuckles_25,
+	Aura_Knuckles_26,
+	Iron_Sword_Plus_27,
+	Steel_Sword_Plus_28,
+	Silver_Sword_Plus_29,
+	Training_Sword_Plus_30,
+	Iron_Lance_Plus_31,
+	Steel_Lance_Plus_32,
+	Silver_Lance_Plus_33,
+	Training_Lance_Plus_34,
+	Iron_Axe_Plus_35,
+	Steel_Axe_Plus_36,
+	Silver_Axe_Plus_37,
+	Training_Axe_Plus_38,
+	Iron_Bow_Plus_39,
+	Steel_Bow_Plus_40,
+	Silver_Bow_Plus_41,
+	Training_Bow_Plus_42,
+	Iron_Gauntlets_Plus_43,
+	Steel_Gauntlets_Plus_44,
+	Silver_Gauntlets_Plus_45,
+	Training_Gauntlets_Plus_46,
+	No_Item_47_PAW,
+	No_Item_48_PAW,
+	No_Item_49_PAW,
+};
+
+struct sPaganAltarWeaponShopStock{
+	for(i=0;i<50;i++){
+		struct sPaganAltarWeaponShopStockEntry{
+        	local sPaganAltarWeaponItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}PaganAltarWeaponShopStockEntry<read = display>;
+	}
+};
+
+enum<ubyte> sPaganAltarEquipItemList{
+	Equip_Talisman_Shield_IL,
+	Equip_Hexlock_Shield_IL,
+	Equip_Accuracy_Ring_IL,
+	Equip_Critical_Ring_IL,
+	Equip_Evasion_Ring_IL,
+	Equip_Speed_Ring_IL,
+	Equip_March_Ring_IL,
+	Equip_Goddess_Ring_IL,
+	Equip_Prayer_Ring_IL,
+	Equip_Magic_Staff_IL,
+	Equip_Healing_Staff_IL,
+
+};
+
+struct sPaganAltarEquipShopStock{
+	for(i=0;i<30;i++){
+		struct sPaganAltarEquipShopStockEntry{
+			local sPaganAltarEquipItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}PaganAltarEquipShopStockEntry<read=display>;
+	}
+};
+
+enum<ubyte> sPaganAltarItemList{
+	Item_Beginner_Seal_IL,
+	Item_Intermediate_Seal_IL,
+	Item_Advanced_Seal_IL,
+	Item_Master_Seal_IL,
+	Item_Door_Key_IL,
+	Item_Chest_Key_IL,
+	Item_Master_Key_IL,
+	Item_Abyssian_Exam_Pass_IL,
+};
+
+struct sPaganAltarItemShopStock{
+	for(i=0;i<20;i++){
+		struct sPaganAltarItemShopStockEntry{
+			local sPaganAltarItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}PaganAltarItemShopStockEntry<read=display>;
+	}
+};
+
+enum<ubyte> sMiscItemShopItemList{
+	Poultry_,
+	Wild_Game_,
+	Mixed_Herb_Seeds_,
+	Root_Vegetable_Seeds_,
+	Vegetable_Seeds_,
+	Western_Fodlan_Seeds_,
+	Eastern_Fodlan_Seeds_,
+	Southern_Fodlan_Seeds_,
+	Northern_Foldlan_Seeds_,
+	Red_Flower_Seeds_,
+	White_Flowers_Seeds_,
+	Blue_Flowers_Seeds_,
+	Purple_Flowers_Seeds_,
+	Yellow_Flowers_Seeds_,
+	Green_Flowers_Seeds_,
+	Pale_Blue_Flower_Seeds_,
+	Floral_Adornment_,
+	Tasty_Baked_Treat_,
+	Smoked_Meat_,
+	Watering_Can_,
+	Dapper_Handkerchief_,
+	Armored_Bear_Stuffy_,
+	Riding_Boots_,
+	Legends_of_Chivalry_,
+	Goddess_Statuette_,
+	Ceremonial_Sword_,
+	Coffee_Beans_,
+	Insect_Larva_,
+	Pond_Snail_,
+	Earthworm_,
+};
+
+struct sMiscItemShopStock{
+	for(i=0;i<30;i++){
+		struct sMiscItemShopStockEntry{
+			local sMiscItemShopItemList name = i;
+			ubyte Count;
+            local string display;
+            if(Count==255) display = Str("infinite - %s",EnumToString(name));
+            else           display = Str("%d - %s", Count, EnumToString(name));
+		}MiscItemShopStockEntry<read = display>;
+	}
+};
+
+struct sBattalionBarracks{
+	for(i=0;i<200;i++){
+		struct sBattalionBarracksEntry{
+			CharID AssignedCharacter;
+			ushort BattalionExp;
+			ushort BattalionEndurance;
+			BattalionID battID;
+			GambitType GambitID;
+			local string display += Str("%s - %s", EnumToString(AssignedCharacter),EnumToString(battID));
+		}BattalionBarracksEntry<read = display>;
+	}
+};
+
+enum<ubyte> SupportPairs{
+	MByleth_Edelgard,
+	MByleth_Dimitri,
+	MByleth_Claude,
+	MByleth_Hubert,
+	MByleth_Ferdinand,
+	MByleth_Linhardt,
+	MByleth_Caspar,
+	MByleth_Bernadetta,
+	MByleth_Dorothea,
+	MByleth_Petra,
+	MByleth_Dedue,
+	MByleth_Felix,
+	MByleth_Ashe,
+	MByleth_Sylvain,
+	MByleth_Mercedes,
+	MByleth_Annette,
+	MByleth_Ingrid,
+	MByleth_Lorenz,
+	MByleth_Raphael,
+	MByleth_Ignatz,
+	MByleth_Lysithea,
+	MByleth_Marianne,
+	MByleth_Hilda,
+	MByleth_Leonie,
+	MByleth_Seteth,
+	MByleth_Flayn,
+	MByleth_Hanneman,
+	MByleth_Manuela,
+	MByleth_Gilbert,
+	MByleth_Alois,
+	MByleth_Catherine,
+	MByleth_Shamir,
+	MByleth_Cyril,
+	MByleth_Rhea,
+	MByleth_Sothis,
+	Edelgard_Dimitri,
+	Edelgard_Claude,
+	Edelgard_Hubert,
+	Edelgard_Ferdinand,
+	Edelgard_Linhardt,
+	Edelgard_Caspar,
+	Edelgard_Bernadetta,
+	Edelgard_Dorothea,
+	Edelgard_Petra,
+	Edelgard_Hanneman,
+	Edelgard_Manuela,
+	Edelgard_Lysithea,
+	Dimitri_Claude,
+	Dimitri_Dedue,
+	Dimitri_Felix,
+	Dimitri_Ashe,
+	Dimitri_Sylvain,
+	Dimitri_Mercedes,
+	Dimitri_Annette,
+	Dimitri_Ingrid,
+	Dimitri_Raphael,
+	Dimitri_Marianne,
+	Dimitri_Flayn,
+	Dimitri_Gilbert,
+	Dimitri_Alois,
+	Dimitri_Catherine,
+	Claude_Annette,
+	Claude_Ingrid,
+	Claude_Petra,
+	Claude_Lorenz,
+	Claude_Raphael,
+	Claude_Ignatz,
+	Claude_Lysithea,
+	Claude_Marianne,
+	Claude_Hilda,
+	Claude_Leonie,
+	Claude_Flayn,
+	Claude_Shamir,
+	Claude_Cyril,
+	Hubert_Ferdinand,
+	Hubert_Linhardt,
+	Hubert_Caspar,
+	Hubert_Bernadetta,
+	Hubert_Dorothea,
+	Hubert_Petra,
+	Hubert_Hanneman,
+	Hubert_Shamir,
+	Ferdinand_Mercedes,
+	Ferdinand_Linhardt,
+	Ferdinand_Caspar,
+	Ferdinand_Bernadetta,
+	Ferdinand_Dorothea,
+	Ferdinand_Petra,
+	Ferdinand_Lorenz,
+	Ferdinand_Marianne,
+	Ferdinand_Hilda,
+	Ferdinand_Flayn,
+	Ferdinand_Manuela,
+	Linhardt_Annette,
+	Linhardt_Caspar,
+	Linhardt_Bernadetta,
+	Linhardt_Dorothea,
+	Linhardt_Petra,
+	Linhardt_Hanneman,
+	Linhardt_Lysithea,
+	Linhardt_Marianne,
+	Linhardt_Flayn,
+	Linhardt_Catherine,
+	Caspar_Ashe,
+	Caspar_Annette,
+	Caspar_Bernadetta,
+	Caspar_Dorothea,
+	Caspar_Petra,
+	Caspar_Raphael,
+	Caspar_Hilda,
+	Caspar_Catherine,
+	Caspar_Shamir,
+	Bernadetta_Felix,
+	Bernadetta_Sylvain,
+	Bernadetta_Ingrid,
+	Bernadetta_Dorothea,
+	Bernadetta_Petra,
+	Bernadetta_Raphael,
+	Bernadetta_Leonie,
+	Bernadetta_Seteth,
+	Bernadetta_Alois,
+	Dorothea_Felix,
+	Dorothea_Sylvain,
+	Dorothea_Ingrid,
+	Dorothea_Petra,
+	Dorothea_Lorenz,
+	Dorothea_Hanneman,
+	Dorothea_Manuela,
+	Petra_Ashe,
+	Petra_Ignatz,
+	Petra_Alois,
+	Petra_Shamir,
+	Petra_Cyril,
+	Dedue_Felix,
+	Dedue_Ashe,
+	Dedue_Sylvain,
+	Dedue_Mercedes,
+	Dedue_Annette,
+	Dedue_Ingrid,
+	Dedue_Flayn,
+	Dedue_Gilbert,
+	Dedue_Shamir,
+	Felix_Ashe,
+	Felix_Sylvain,
+	Felix_Mercedes,
+	Felix_Annette,
+	Felix_Ingrid,
+	Felix_Lysithea,
+	Felix_Leonie,
+	Felix_Seteth,
+	Felix_Flayn,
+	Ashe_Sylvain,
+	Ashe_Mercedes,
+	Ashe_Annette,
+	Ashe_Ingrid,
+	Ashe_Marianne,
+	Ashe_Gilbert,
+	Ashe_Catherine,
+	Ashe_Cyril,
+	Sylvain_Mercedes,
+	Sylvain_Annette,
+	Sylvain_Ingrid,
+	Sylvain_Lorenz,
+	Sylvain_Lysithea,
+	Sylvain_Marianne,
+	Sylvain_Hilda,
+	Sylvain_Leonie,
+	Sylvain_Flayn,
+	Sylvain_Manuela,
+	Mercedes_Annette,
+	Mercedes_Ingrid,
+	Mercedes_Lorenz,
+	Mercedes_Ignatz,
+	Mercedes_Hilda,
+	Mercedes_Alois,
+	Mercedes_Cyril,
+	Annette_Ingrid,
+	Annette_Lysithea,
+	Annette_Hilda,
+	Annette_Hanneman,
+	Annette_Gilbert,
+	Ingrid_Raphael,
+	Ingrid_Ignatz,
+	Ingrid_Seteth,
+	Ingrid_Catherine,
+	Lorenz_Raphael,
+	Lorenz_Ignatz,
+	Lorenz_Lysithea,
+	Lorenz_Marianne,
+	Lorenz_Hilda,
+	Lorenz_Leonie,
+	Lorenz_Manuela,
+	Lorenz_Catherine,
+	Raphael_Ignatz,
+	Raphael_Lysithea,
+	Raphael_Marianne,
+	Raphael_Hilda,
+	Raphael_Leonie,
+	Raphael_Flayn,
+	Raphael_Shamir,
+	Ignatz_Lysithea,
+	Ignatz_Marianne,
+	Ignatz_Hilda,
+	Ignatz_Leonie,
+	Ignatz_Flayn,
+	Ignatz_Shamir,
+	Ignatz_Cyril,
+	Lysithea_Marianne,
+	Lysithea_Hilda,
+	Lysithea_Leonie,
+	Lysithea_Hanneman,
+	Lysithea_Catherine,
+	Lysithea_Cyril,
+	Marianne_Hilda,
+	Marianne_Leonie,
+	Marianne_Hanneman,
+	Hilda_Leonie,
+	Hilda_Seteth,
+	Hilda_Cyril,
+	Leonie_Seteth,
+	Leonie_Alois,
+	Leonie_Catherine,
+	Leonie_Shamir,
+	Seteth_Flayn,
+	Seteth_Hanneman,
+	Seteth_Manuela,
+	Seteth_Catherine,
+	Seteth_Cyril,
+	Flayn_Manuela,
+	Hanneman_Manuela,
+	Hanneman_Gilbert,
+	Hanneman_Alois,
+	Manuela_Gilbert,
+	Manuela_Alois,
+	Manuela_Cyril,
+	Gilbert_Alois,
+	Gilbert_Catherine,
+	Alois_Catherine,
+	Alois_Shamir,
+	Catherine_Shamir,
+	Shamir_Cyril,
+	MByleth_Jeritza_Playable,
+	Mercedes_Jeritza_Playable,
+	MByleth_Yuri,
+	MByleth_Balthus,
+	MByleth_Constance,
+	MByleth_Hapi,
+	BernadettaJeritza_Playable,
+	ConstanceJeritza_Playable,
+	Yuri_Balthus,
+	Yuri_Constance,
+	Yuri_Hapi,
+	Bernadetta_Yuri,
+	Dorothea_Yuri,
+	Ingrid_Yuri,
+	Balthus_Constance,
+	Balthus_Hapi,
+	Claude_Balthus,
+	Hilda_Balthus,
+	Lysithea_Balthus,
+	Constance_Hapi,
+	Edelgard_Constance,
+	Ferdinand_Constance,
+	Mercedes_Constance,
+	Dimitri_Hapi,
+	Ashe_Hapi,
+	Linhardt_Hapi,
+	NoCharacter_NoCharacter_267,
+	NoCharacter_NoCharacter_268,
+	NoCharacter_NoCharacter_269,
+};
+
+struct sSupportExp{
+    for (i=0; i<270;i++){
+    	struct sSupportExpEntry{
+        	short SupportExp;
+            local SupportPairs Pair = i;
+        }SupportExpEntry<read=Str("%4d - %s",SupportExp,EnumToString(Pair))>;
+    }
+};
