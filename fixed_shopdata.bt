@@ -47,7 +47,7 @@ enum<ubyte> BattalionGreeting {
     Ready_for_your_command = 8,
     Great_to_meet_you = 9,
     Well_do_our_best = 10,
-   Were_here_to_support_you = 11,
+    Were_here_to_support_you = 11,
     We_got_you_covered = 12,
     Whatever_the_mission_Well_handle_it,
     Ready_and_able,
@@ -96,12 +96,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoWeaponTable);
   struct WEAPTABLESTRUCTURE {
-    struct WEAPTABLEHEADER {
-        uint Header;
-        uint NumofWeap;
-        uint SizeofWeap;
-        byte Padding[0x34]<bgcolor = cBlue>;
-    } WeapTableHeader<name = "Header", bgcolor = cRed>;
+    DataSection Header;
     struct WEAPTABLE {
         int BuyPrice<name = "Buying Price">;
         int SellPrice<name = "Selling Price">;
@@ -122,12 +117,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoEquipmentTable);
   struct EQUIPMENTTABLESTRUCTURE {
-    struct EQUIPMENTTABLEHEADER {
-      uint Header;
-      uint NumofEquipment;
-      uint SizeofEquipment;
-      byte Padding[0x34]<bgcolor = cBlue>;
-    } EquipmentTableHeader<name = "Header", bgcolor = cRed>;
+    DataSection Header;
     struct EQUIPMENTTABLE {
       uint BuyPrice;
       uint SellPrice;
@@ -145,12 +135,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoItemTable);
   struct ITEMTABLESTRUCTURE {
-    struct ITEMTABLEHEADER {
-      uint Header;
-      uint NumofItem;
-      uint SizeofItem;
-      byte Padding[0x34]<bgcolor = cBlue>;
-    } ItemTableHeader<name = "Header", bgcolor = cRed>;
+    DataSection Header;
     struct ITEMTABLE {
       uint BuyPrice;
       uint SellPrice;
@@ -166,10 +151,7 @@ struct FILE {
    
   FSeek(SectionPointer.PointertoTable04);
   struct Table04Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable04<bgcolor = cRed>;
-    uint SizeOfTable04<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct TABLE04 {
         int price<name="Battalion Cost">;
         int Sell<name="Dismissial Cost">;
@@ -198,10 +180,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoTable05);
   struct Table05Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable05<bgcolor = cRed>;
-    uint SizeOfTable05<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct TABLE05 {
       int Price<name = "Price">;
       Item BaseWeap<name = "Base Weapon">;
@@ -215,10 +194,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoTable06);
   struct Table06Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable06<bgcolor = cRed>;
-    uint SizeOfTable06<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue, hidden=true>;
+    DataSection Header;
     struct TABLE06 {
         ushort cost<name="Saint Statue Renown Cost", bgcolor=cGreen>;
         ubyte DP<name="Divine Pulse Charges", bgcolor=cPurple>;
@@ -256,10 +232,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoTable07);
   struct Table07Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable07<bgcolor = cRed>;
-    uint SizeOfTable07<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct TABLE07 {
       Item Itemforsale;
       MerchantType Merchant;
@@ -271,10 +244,7 @@ struct FILE {
 
   FSeek(SectionPointer.PointertoTable08);
   struct Table08Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable08<bgcolor = cRed>;
-    uint SizeOfTable08<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct TABLE08 {
       int Price;
       Item AnnaItemID;
@@ -284,10 +254,7 @@ struct FILE {
   } itemstructure08<name = "Anna Shop Block", bgcolor = cLtRed>;
 FSeek(SectionPointer.PointertoTable09);
   struct Table09Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable08<bgcolor = cRed>;
-    uint SizeOfTable08<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct TABLE09 {
         ushort price;
         ubyte PerkLevel<name="Perk Level">;
@@ -297,10 +264,7 @@ FSeek(SectionPointer.PointertoTable09);
 
 FSeek(SectionPointer.PointertoTable10);
 struct Table10Structure {
-    uint Header<bgcolor = cRed>;
-    uint NumofTable10<bgcolor = cRed>;
-    uint SizeOfTable10<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct TABLE10 {
         uint Price<name="Price">;
         uint Unk;
@@ -320,10 +284,7 @@ struct Table10Structure {
 
 FSeek(SectionPointer.PointertoTable11);
 struct PaganTable2 {
-    uint Header<bgcolor = cRed>;
-    uint NumEntry<bgcolor = cRed>;
-    uint EntrySize<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct PaganEquip {
         uint Price;
         uint Price2;
@@ -339,10 +300,7 @@ struct PaganTable2 {
  } table11<name = "Pagan Altar Equips", bgcolor = cLtRed>;
 FSeek(SectionPointer.PointertoTable12);
 struct PaganTable3 {
-    uint Header<bgcolor = cRed>;
-    uint NumEntry<bgcolor = cRed>;
-    uint EntrySize<bgcolor = cRed>;
-    byte Padding[0x34]<name = "Padding", bgcolor = cBlue>;
+    DataSection Header;
     struct PaganItem {
         uint Price;
         uint Price2;
@@ -358,10 +316,7 @@ struct PaganTable3 {
  } table12<name = "Pagan Altar Items", bgcolor = cLtRed>;
 FSeek(SectionPointer.PointertoTable13);
 struct sMiscItemShopTable {
-    uint Header;
-    uint NumEntry;
-    uint Size;
-    byte Padding[0x34]<bgcolor = cBlue>;
+    DataSection Header;
     struct sMiscItemShopData {
         Item item;
         ubyte Stock;
