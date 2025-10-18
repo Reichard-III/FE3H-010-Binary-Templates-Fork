@@ -66,12 +66,7 @@ struct File{
 
     FSeek(sectionpointers.ClassDataPointer);
 	struct ClassData{
-		uint32 ClassDataMagic;
-		uint32 numClassData;
-		uint32 SizeOfClassData;
-		struct ClassDataHeaderPadding{
-			byte Padding[0x34];
-		}classdataheaderpadding<name="Padding">;
+		DataSection Header;
 		local int i;
         for( i = 0; i < numClassData; i++ )
             struct ClassBlock{
@@ -145,12 +140,7 @@ struct File{
 	FSeek(sectionpointers.PointerToGenderLock);
 	struct GenderLock
 	{
-		uint32 GenderLockMagic;
-		uint32 numGenderLock;
-		uint32 SizeOfGenderLock;
-		struct GenderLockHeaderPadding{
-			byte Padding[0x34];
-		}genderlockheaderpadding<name="Padding">;
+		DataSection Header;
 		local int i;
 		struct Requirements{
 			for( i = 0; i < numGenderLock; i++ )
@@ -213,10 +203,7 @@ struct File{
         FSeek(sectionpointers.MonasterBlockPtr);
                 
         struct MonsterBlock {
-            int magic<bgcolor=cLtGreen>; // should be 00 19 12 16
-            int MonsterClassCount<bgcolor=cLtGreen>;
-            int sizeMonsterClass<bgcolor=cLtGreen>;
-            int Padding[13]<bgcolor=cYellow>;
+            DataSection Header;
             local int i;
             local int j;
             local int k;
