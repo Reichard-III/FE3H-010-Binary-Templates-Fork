@@ -2,7 +2,7 @@
 //--- 010 Editor v15.0.2 Binary Template
 //
 //      File: fixed_AIData.bt
-//   Authors: ReichardTheThird, Triabolical
+//   Authors: Triabolical
 //   Version: 1.0
 //   Purpose: Parse through the v1.0 data "14.bin" that stores AI data
 //  Category: Reichard
@@ -13,55 +13,58 @@
 //------------------------------------------------
 
 LittleEndian();
-local int i,x,y = 0;
 #include "Structs.bt"
-
-enum<ubyte> AIMode{
-    idk0,
-    idk1,
-    QuakeMode2,
-    SomeCoordsMode3,
-    TurnCountMode,
-    QuakeMode5,
-    idk6,
-    SomeCoordsMode7,
-       
+local int n = 0;
+enum<byte> Field0x0 {
+	DoNotAttack,
+	Unknown1,
+	Unknown2,
+	DoNotTargetCharacters,
+	TargetHasClass = 4,
+	DoNotTargetByleth = 5,
 };
 
-enum<byte> MoveMode{
-    noMove0=0,
-    noMove2=2,    
+enum<byte> Field0x4 {
+	NoMovement_0,
+	Unk1,
+	NoMovement_2,	
+	Byleth_Related = 5,
 };
 
-struct GenericFile {
-    FileSections Sections;
-    FSeek(Sections.SectionPointers[0].Ptr);
-    struct sAIData {
-        DataSection Header;
-        for (i = 0; i < Header.NumEntries; i++){
-            struct sAIDataE {
-                  byte unkByte0x0;
-                  byte unkByte0x1;
-                  AIMode Mode;
-                  byte unkByte0x3;
-                  MoveMode unkByte0x4;
-                  byte unkByte0x5;
-                  byte XCoordA;
-                  byte YCoordA;
-                  byte XCoordB;
-                  byte YCoordB;
-                  byte unkByte0xa;
-                  byte unkByte0xb;
-                  byte unkByte0xc;
-                  byte BAIIndex;
-                  byte unkByte0xe;
-                  byte unkByte0xf;
-                  byte unkByte0x10;
-                  byte unkByte0x11;
-                  byte unkByte0x12;
-                  byte unkByte0x13;
-            }AIDataEntry;
-        };
-    }AIData<open=true>;
-    
-}File<open=true>;
+struct AIDataEntry {
+	Field0x0 unk0<bgcolor=cBlue>;
+	ubyte unk1;
+	ubyte unk2<bgcolor=cDkGreen>;
+	ubyte HealthRelated<name="Heal when below HP%", bgcolor=cGreen>;
+	Field0x4 unk4<bgcolor=cGray>;
+	ubyte unk5<name="Avoid Damage", bgcolor=cBlack>;
+	ubyte ParameterSet1[4]<bgcolor=cYellow>;
+	ubyte unka;
+	if (unk0 == 3 || unk0 == 5) {
+		ubyte Characters[3];
+	}
+	else if (unk0 == 4) {
+		ubyte Class;
+		ubyte padding[2];	
+	}
+	else if (unk0 == 1) {
+		ubyte unkd[3];
+	}
+	else {
+		ubyte unkb;
+		ubyte unkc;
+		ubyte unkd;
+	};
+	ubyte ParameterSet[4]<bgcolor=cRed>; 
+	ubyte unk12;
+	ubyte unk13;
+};
+
+struct AIDataFile {
+	FileSections Section;
+	FSeekNextSection(Section);
+	DataSection header;
+	for (n = 0; n < header.NumEntries; ++n) {
+		AIDataEntry AIEntry;
+	}
+}File;
