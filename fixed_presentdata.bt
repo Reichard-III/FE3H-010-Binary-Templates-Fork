@@ -13,7 +13,7 @@
 //------------------------------------------------
 
 #include "Structs.bt"
-
+LittleEndian();
 local int i = 0;
 enum<ubyte> GiftQuality {
 	One_Star,
