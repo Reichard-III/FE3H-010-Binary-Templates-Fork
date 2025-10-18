@@ -69,13 +69,11 @@ struct CharacterBlock {
 	DLCAbilityUnlock AbilityAvailableSet2<name="Unlocked DLC Abilities", bgcolor=cBlue>;
 	byte UnknownValues0xc0[4]<bgcolor=cBlack>;
 	byte Motivation;
-	
 	byte TimesGiftedMaybe;
 	byte TimesInstructed[11];
 	byte UnknownV[2]<bgcolor=cBlack>;
 	ClassUnlock ClassUnlockFlagsSet1[8];
 	byte LearningGoal<bgcolor=cRed>;
-	
 	byte unknown;
 	byte MonthlyCharmIncreaseMaybe;
 	byte TotalTeaTimes;
@@ -88,38 +86,11 @@ struct CharacterBlock {
 		byte HasUsedSauna:1;
 		byte SaunaRelaxed:1;
 		byte SaunaVeryRelaxe:1;
-
-
 	}MonasteryStatus;
 	byte unknownX[2];
 	byte TotalTeaCharmCountMaybe;
-	
 	ClassUnlock ClassUnlockFlagsSet2[3];
 	short RecruitmentRelated[4];
-	/*
-	short unk_26;
-	short unk_28;
-	byte unk_2A;
-	byte unk_2B;
-	MinRanks Exp<name="EXP", bgcolor=cBlue>;
-	FSeek(0x32);
-	SkillExp Wexp<bgcolor=cGreen>;
-	short classEXP<name="Class EXP", bgcolor=cBlue>;
-	ubyte currentLevel<name="Level", bgcolor=cLtGreen>;
-	CID currentClass<name="Class">;
-	ubyte HP<bgcolor=cRed>;
-	byte unk_4D;
-	Stat characterStats<name="Character Stats", bgcolor=cRed>;
-	FSeek(0x7F);
-	AbilityID EquippedAbilities[5]<bgcolor=cYellow>;
-	CombatArtID Equipped_CombatArts[3];
-	FSeek(0x88);
-	SkillMinRanks WeaponMinRanks<bgcolor=cYellow>;
-	FSeek(0xFC);
-	SkillExp Wexp2<bgcolor=cGreen, comment="Not sure why there are two copies of Skill Exp here...">;
-	FSeek(0x1DC);
-	SkillMinRanks WeaponMinRanks2<bgcolor=cYellow, comment="Not sure why there are two copies of Skill MinRankss here...">;
-	*/
 	byte junk[12];
 	short adjutantID;
 	short SkillExp2[11];
@@ -140,9 +111,8 @@ ItemBlock items[400]<name="Items">;
 int item_count;
 CharacterBlock character[60]<read=EnumToString(ID)>;
 char PlayerName[40];
-//uint m_NPC;
 byte unkByte0x903c;
-byte BylethBirthMonth<comment="the Month is 0 indexed, i.e. 0 = January (1st month)">;
+Month BylethBirthMonth<comment="the Month is 0 indexed, i.e. 0 = January (1st month)">;
 byte BylethBirthDay;
 
 
@@ -252,39 +222,28 @@ struct sActivities{
 	byte ActivityLesson;
 	byte ActivityBattle;
 	byte unkLOL;
-	struct sSaintStatue_UpgradeLevels{
-		byte Cethleann;
-		byte Cichol;
-		byte Macuil;
-		byte Indech;
-	}SaintStatue_UpgradeLevels;
+	sSaintStatue_UpgradeLevels SaintStatue_UpgradeLevels;
 	byte BattalionShopLevel;
 	struct sBattalionShopStock{
 		for(i=0;i<200;i++){
 			struct sBattalionShopStockEntry{
-				local BattalionID Name;
-				Name = i;
-				local string display;
+				local BattalionID Name = i;
 				ubyte Count;
-				display += Str("%d - ",Count);
-				display += EnumToString(Name);
-				display += Str("_%d",i);
+				local string display = Str("%d - %s",Count,EnumToString(Name));
 			}BattEntry<read = display>;
 		}
 	}BattalionShopStock;
 	struct sMonasteryMerchantStock{
 		for(i=0;i<100;i++){
 			struct sMonasteryMerchantStockEntry{
-				//local MiscItem Name;
-				//Name = i;
-				//local string display;
+            	local MonasteryMerchantItemList name = i;
 				ubyte Count;
-				//display += Str("%d - ",Count);
-				//display += EnumToString(Name);
-				//display += Str("_%d",i);
-			}MonasteryMerchantStockEntry<comment="refer to Shopdata monasterymerchant table for items/merchants, 255 means infinite">;
+                local string display;
+                if(Count==255) display = Str("infinite - %s",EnumToString(name));
+                else           display = Str("%d - %s", Count, EnumToString(name));
+			}MonasteryMerchantStockEntry<read=display>;
 		}
-	}MonasterMerchantStock;
+	}MonasteryMerchantStock;
 	struct sAnnaSecretShopStock{
 		for(i=0;i<50;i++){
 			struct sAnnaSecretShopStockEntry{

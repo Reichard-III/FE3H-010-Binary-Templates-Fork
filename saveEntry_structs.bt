@@ -1,15 +1,3 @@
-//------------------------------------------------
-//--- 010 Editor v15.0.2 Binary Template
-//
-//      File: 
-//   Authors: 
-//   Version: 
-//   Purpose: 
-//  Category: 
-// File Mask: 
-//  ID Bytes: 
-//   History: 
-//------------------------------------------------
 struct SkillExp {
 	ushort Sword;
 	ushort Lance;
@@ -410,4 +398,114 @@ struct CombatArtUnlock {
 	ubyte CA77:1<name="FoulPlay">;
 	ubyte CA78:1<name="Eviscerate">;
 	ubyte CA79:1<name="PneumaGale">;
+};
+
+struct sSaintStatue_UpgradeLevels{
+	byte Cethleann;
+	byte Cichol;
+	byte Macuil;
+	byte Indech;
+};
+
+enum<ubyte> MonasteryMerchantItemList{
+	Poultry_0,
+    Wild_Game_1,
+    Mixed_Herb_Seeds_2,
+    Root_Vegetable_Seeds_3,
+    Vegetable_Seeds_4,
+    Western_Foldlan_Seeds_5,
+    Eastern_Fodlan_Seeds_6,
+    Southern_Fodlan_Seeds_7,
+    Northern_Foldlan_Seeds_8,
+    Red_Flower_Seeds_9,
+    White_Flowers_Seeds_10_,
+    Blue_Flowers_Seeds_11_,
+    Purple_Flowers_Seeds_12_,
+    Yellow_Flowers_Seeds_13_,
+    Green_Flowers_Seeds_14_,
+    Pale_Blue_Flower_Seeds_15_,
+    Floral_Adornment_16_,
+    Tasty_Baked_Treat_17_,
+    Smoked_Meat_18_,
+    Watering_Can_19_,
+    Dapper_Handkerchief_20_,
+    Armored_Bear_Stuffy_21_,
+    Riding_Boots_22_,
+    Legends_of_Chivalry_23_,
+    Goddess_Statuette_24_,
+    Ceremonial_Sword_25_,
+    Coffee_Beans_26_,
+    Insect_Larva_27_,
+    Pond_Snail_28_,
+    Earthworm_29_,
+    Blowfly_30_,
+    Herring_Bait_31_,
+    Smithing_Stone_32_,
+    Black_Sand_Steel_33_,
+    Sweet_Apple_Blend_34_,
+    Albinean_Berry_Blend_35_,
+    Southern_Fruit_Blend_36_,
+    Mint_Leaves_37_,
+    Almond_Blend_38_,
+    Ginger_Tea_39_,
+    Angelica_Tea_40_,
+    Almyran_Pine_Needles_41_,
+    Crescent_Moon_Tea_42_,
+    Honeyed_Fruit_Blend_43_,
+    Lavender_Blend_44_,
+    Chamomile_45_,
+    Bergamot_46_,
+    Rose_Petal_Blend_47_,
+    Four_Spice_Blend_48_,
+    Fishing_Float_49_,
+    Gemstone_Beads_50_,
+    Hunting_Dagger_51_,
+    Whetstone_52_,
+    Stylish_Hair_Clip_53_,
+    Training_Weight_54_,
+	Tea_Leaves_55_,
+	Exotic_Spices_56_,
+	Board_Game_57_,
+	Arcane_Crystal_58_,
+	Cinnamon_Blend_59_,
+	Seiros_Blend_60_,
+	Dagda_Fruit_Blend_61_,
+	Hresvelg_Blend_62_,
+	Lecicester_Cortania_63_,
+	Book_of_Sheet_Music_64_,
+	Arithmetic_Textbook_65_,
+	The_History_of_Fodlan_66_,
+	Monarch_Studies_Book_67_,
+	Ancient_Coin_68_,
+	Book_of_Crest_Designs_69_,
+	Blue_Cheese_70_,
+	Landscape_Painting_71_,
+	Queen_Loach_72_,
+	Teutates_Pike_73_,
+	Bullhead_74_,
+	Morfis_Plum_75_,
+	Nordsalat_76_,
+	Boa_Fruit_77_,
+	Magdred_Kirsch_78_,
+	Angelica_79_,
+	Duscur_Bear_80_,
+	Oghma_Wolverine_81_,
+	No_Item_82_,
+	No_Item_83_,
+	No_Item_84_,
+	No_Item_85_,
+	No_Item_86_,
+	No_Item_87_,
+	No_Item_88_,
+	No_Item_89_,
+	No_Item_90_,
+	No_Item_91_,
+	No_Item_92_,
+	No_Item_93_,
+	No_Item_94_,
+	No_Item_95_,
+	No_Item_96_,
+	No_Item_97_,
+	No_Item_99_,
+	No_Item_99__,
 };
