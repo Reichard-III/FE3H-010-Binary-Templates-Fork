@@ -34,16 +34,10 @@ struct ParalogueExpiration{
     ubyte expirationDateCF<bgcolor=cDkGreen,name="Crimson Flower Expiration Day">;
 };
 struct ScenarioData{
-    uint32 scenarioMagic<bgcolor=cBlue>;
-    uint32 numberOfScenarios<bgcolor=cDkGreen>;
-    uint32 sizeOfScenario<bgcolor=cDkGreen>;
-	struct scenarioHeaderPadding{
-		byte Padding[0x34]<bgcolor=cDkYellow>;
-	}classdataheaderpadding<name="Padding">;
-    for( i = 0; i < numberOfScenarios; i++ ) {
+    DataSection Header;
+    for( i = 0; i < Header.NumEntries; i++ ) {
         struct Scenario {
-            local ScenarioName scenarioName;
-            scenarioName = i;
+            local ScenarioName scenarioName = i;
             ubyte unk[4];
             CharacterSettings characterSettings<bgcolor=cDkGreen,name="Character Settings">;
             ubyte unkTernary<bgcolor=cRed>; // Only ever 0, 1, or 2
@@ -59,8 +53,6 @@ struct ScenarioData{
             ubyte hiddenTurnLimit<bgcolor=cDkGreen,name="Hard Turn Limit">;
             Conditions victoryConditionLabel<bgcolor=cDkGreen,name="Victory Condition Label">;
             MapList map<bgcolor=cDkGreen,name="Map ID">;
-            // These will match with Enemy Commander's levels. Subcommanders will be value - 1,
-            // regular units will be value - 2. May be affected by BAI scripts.
             ubyte enemyLevelScalingNorm<bgcolor=cDkGreen,name="Normal Level Scaling">;
             ubyte enemyLevelScaleHard<bgcolor=cDkGreen,name="Hard Level Scaling">;
             ubyte enemyLevelScaleMad<bgcolor=cDkGreen,name="Maddening Level Scaling">;
