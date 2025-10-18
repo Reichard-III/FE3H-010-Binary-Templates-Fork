@@ -15,7 +15,6 @@
 #include "Structs.bt"
 
 local int i = 0;
-local int n;
 enum<ubyte> GiftQuality {
     One_Star,
     Two_Star,
@@ -24,15 +23,14 @@ enum<ubyte> GiftQuality {
     Five_Star,    
 };
 
-
 struct GenericFile {
     FileSections Sections;
     
     struct GiftData {
         DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
+        for (i = 0; i < Header.NumEntries; i++)
         struct GiftEntry {
-            local Gifts gift = n;
+            local Gifts gift = i;
             uint price<name="Price", bgcolor=cGreen>;
             GiftQuality star<name="Quality", bgcolor=cYellow>;
             TrueFalse Cannot_Gift<name="Cannot Gift", bgcolor=cBlack>;
@@ -45,9 +43,9 @@ struct GenericFile {
     
     struct sCharacterGiftList {
         DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
+        for (i = 0; i < Header.NumEntries; i++)
         struct CharList {
-            local CharID id = n;
+            local CharID id = i;
             Gifts flower<name="Favorite Flower?", bgcolor=cYellow>;
             Gifts LostItems[3]<name="Lost Items", bgcolor=cBlue>;
             Gifts Disliked[3]<name="Disliked Gifts", bgcolor=cRed>;
@@ -58,7 +56,7 @@ struct GenericFile {
                 
     struct sunkTable2 {
         DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
+        for (i = 0; i < Header.NumEntries; i++)
         struct sunkEntry2 {
             CharID Character;
             ushort unkShort2FloatArray0x2[5];
@@ -72,7 +70,7 @@ struct GenericFile {
     
     struct sunkTable3 {
         DataSection Header;
-        for (n = 0; n < Header.NumEntries; n++)
+        for (i = 0; i < Header.NumEntries; i++)
         struct sunkEntry3 {
             byte unkByte0x0;
             byte unkByte0x1;
