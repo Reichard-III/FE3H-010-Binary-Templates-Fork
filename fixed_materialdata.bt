@@ -13,57 +13,59 @@
 //------------------------------------------------
 local int i = 0;
 #include "Structs.bt"
+
 enum<byte> Quality {
-    One_Star,
-    Two_Star,
-    Three_Star,
-    Four_Star,
-    Five_Star,
+	One_Star,
+	Two_Star,
+	Three_Star,
+	Four_Star,
+	Five_Star,
 };
+
 enum<byte> Icon {
-    Bait_Icon,
-    Seed_Icon,
-    Ore_Icon,
-    Fish_Icon,
-    Crop_Icon,
-    Meat_Icon,
-    Tea_Icon,
+	Bait_Icon,
+	Seed_Icon,
+	Ore_Icon,
+	Fish_Icon,
+	Crop_Icon,
+	Meat_Icon,
+	Tea_Icon,
 };
+
 struct GenericFile {
-    FileSections Sections;
-    FSeek(Sections.SectionPointers[0].Ptr);
-    struct MaterialBlock {
-        DataSection Header;
-        for (i = 0; i < Header.NumEntries; ++i){
-            struct Material {
-                local MiscItem name<hidden=true>;
-                name = i;
-                int price<bgcolor=cDkGreen>;
-                ushort renown<name="Renown from Altar", bgcolor=cPurple>;
-                short exp<name="Professor EXP", bgcolor=cRed>;
-                Quality stars<name="Grade of the Material">;
-                Icon materialIcon<name="Icon">;
-                short unk;
-            }item<read=EnumToString(name)>;
-        };
-    }MiscItemBlock;
-    FSeek(Sections.SectionPointers[1].Ptr);
-    struct CookingBlock {
-        DataSection Header;
-        for (i = 0; i < Header.NumEntries; ++i){
-            struct LOL{
-                ushort exp<name="Professor EXP">;
-                //short item[3]<name="Ingredients">;
-                local int o;
-                MiscItemShort miscitem0;
-                MiscItemShort miscitem1;
-                MiscItemShort miscitem2;
-                MinRanks RequiredProfessorRank<name="Required Professor Rank">;
-                byte unk;
-                byte hp<name="HP Boost">;
-                Stats boost<name="Stat Boosts">;   
-                byte amount_required[4]<name="Ingredient Cost">;
-            }cook;
-        };
-    } CookingBlockd;
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	struct MaterialBlock {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; ++i){
+			struct Material {
+				local MiscItem name<hidden=true> = i;
+				int price<bgcolor=cDkGreen>;
+				ushort renown<name="Renown from Altar", bgcolor=cPurple>;
+				short exp<name="Professor EXP", bgcolor=cRed>;
+				Quality stars<name="Grade of the Material">;
+				Icon materialIcon<name="Icon">;
+				short unk;
+			}item<read=EnumToString(name)>;
+		}
+	}MiscItemBlock;
+	
+	FSeekNextSection(Sections);
+	struct CookingBlock {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; ++i){
+			struct LOL{
+				ushort exp<name="Professor EXP">;
+				MiscItemShort miscitem0;
+				MiscItemShort miscitem1;
+				MiscItemShort miscitem2;
+				MinRanks RequiredProfessorRank<name="Required Professor Rank">;
+				byte unk;
+				byte hp<name="HP Boost">;
+				Stats boost<name="Stat Boosts">;   
+				byte amount_required[4]<name="Ingredient Cost">;
+			}cook;
+		}
+	} CookingBlockd;
 }File<open=true>;
