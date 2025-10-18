@@ -73,22 +73,23 @@ struct RouteFlow {
 };
 
 struct File {
-    int count<bgcolor=cBlack>;
-    struct PointerPair {
-        int start<format=hex>;
-        int length<format=hex>;
-    } pointertable[count]<bgcolor=cRed>;
+    FileSections Sections;
     
-        FSeek(pointertable[0].start);
-        RouteFlow route<name="Route", read="Silver Snow">;
-        FSeek(pointertable[1].start);
-        RouteFlow route<name="Route",read="Azure Moon">;
-        FSeek(pointertable[2].start);
-        RouteFlow route<name="Route", read="Verdant Wind">;
-        FSeek(pointertable[3].start);
-        RouteFlow route<name="Route",read="Crimson Flower">;
-        FSeek(pointertable[4].start);
-        ParalogueBlock paralogues<name="Paralogues", read="Paralogue Block">;
-        FSeek(pointertable[5].start);
-        RouteFlow route<name="Route", read="Cindered Shadows">;
+    FSeekNextSection(Sections);
+    RouteFlow route<name="Route", read="Silver Snow">;
+    
+    FSeekNextSection(Sections);
+    RouteFlow route<name="Route",read="Azure Moon">;
+    
+    FSeekNextSection(Sections);
+    RouteFlow route<name="Route", read="Verdant Wind">;
+    
+    FSeekNextSection(Sections);
+    RouteFlow route<name="Route",read="Crimson Flower">;
+    
+    FSeekNextSection(Sections);
+    ParalogueBlock paralogues<name="Paralogues", read="Paralogue Block">;
+    
+    FSeekNextSection(Sections);
+    RouteFlow route<name="Route", read="Cindered Shadows">;
 } file<open=true>;
