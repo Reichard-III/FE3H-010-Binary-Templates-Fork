@@ -399,7 +399,7 @@ string GetCharNames(ArtLearnsetData &i){      return EnumToString(i.NameOfChar);
 string GetCharNames2(SkillListData &i){       return EnumToString(i.NameOfChar); }
 string GetCharNames3(SpellListData &i){       return EnumToString(i.NameOfChar); }
 string GetTalentNames(HiddenTalentData &i){   return EnumToString(i.character); }
-string GetCharNames4(WpnRankData &i){      z  return EnumToString(i.NameOfChar); }
+string GetCharNames4(WpnRankData &i){         return EnumToString(i.NameOfChar); }
 string GetRankName(SharedAbilitiesStruct &i){ return EnumToString(i.NameOfRank); }
 
 string GetSupportPairs(SupportPairs &i){
