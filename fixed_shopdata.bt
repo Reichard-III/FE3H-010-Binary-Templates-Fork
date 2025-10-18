@@ -258,7 +258,7 @@ struct FILE {
 		struct PaganEquip {
 			uint Price;
 			uint Price2;
-			EquipID item;
+			EquipIDShort item;
 			ShopAvailablity Availablity;
 			ProfessorRanks ProfessorRank<hidden=false>;
 			byte StoreLV1<name = "Store LV1 Stock">;
@@ -293,7 +293,7 @@ struct FILE {
 			ProfessorRanks ProfessorRank;
 			ShopAvailablity Availability;
 			byte padding;
-		} MiscItemShopEntry[Header.NumEntries]<optimize=false>;
+		} MiscItemShopEntry[Header.NumEntries]<optimize=false,read=EnumToString(item)>;
 	}MiscItemShopTable;
 }File<name = "Item.bin File",open=true>;
 
