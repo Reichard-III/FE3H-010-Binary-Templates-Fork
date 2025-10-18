@@ -14,118 +14,120 @@
 LittleEndian();
 #include "Structs.bt"
 local int i = 0;
-local int n;
-
 
 struct StageEnvInfo {
-    FileSections Sections;
-    struct Table0 {
-        DataSection Header;
-        for(i=0; i<Header.NumEntries; i++){
-            struct Table0Entry {
-                local MapList map;
-                map = i;
-                
-                float unkFloat0x0;
-                float unkFloat0x4;
-                float unkFloat0x8<comment="Unused?">;
-                float unkFloat0xc<comment="Unused?">;
-                float unkFloat0x10;
-                float unkFloat0x14;
-                float unkFloat0x18;
-                ubyte unkByte0x1c;
-                ubyte unk1[5];
-                ubyte unkByte0x22;
-                ubyte unk2[2];
-                ubyte unkByte0x25;
-                ubyte unkByte0x26;
-                ubyte unkByte0x27;
-                ubyte unkByte0x28;
-                ubyte unkByte0x29;
-                ubyte unkByte0x2a;
-                ubyte unkByte0x2b;
-                ubyte unkByte0x2c;
-                ubyte unkByte0x2d;
-                ubyte unkByte0x2e;
-                ubyte unkByte0x2f;
-                ubyte unkByte0x30;
-                ubyte Constance_SunOrShade<name="Constance Circadian Beat Sun/Shade", comment="determines which effect Circadian Beat grants">;
-                ubyte unkByte0x32;
-                ubyte unkByte0x33;
-                ubyte unkByte0x34;
-                ubyte unkByte0x35;
-                ubyte unkByte0x36;
-                ubyte unkByte0x37;
-                ubyte unk0x38;
-                ubyte unkByte0x39;
-                ubyte unk0x3a;
-                ubyte unk0x3b;
-            }eTable0Entry<name="Scenario",read=EnumToString(map)>;       
-        }
-    }eTable0;
-    
-    struct Table1 {
-        DataSection Header;
-        for(i=0; i<Header.NumEntries; i++){
-            struct Table1Entry {
-                local MapList map;
-                map = i;
-                
-                ubyte c0;
-                ubyte f3;
-                ubyte unk0x2;
-                ubyte g0;
-                
-                ubyte g1;
-                ubyte g2;
-                ubyte a0;
-                ubyte a1;
-                
-                ubyte a2;
-                ubyte b0;
-                ubyte b1;
-                ubyte b2;
-                
-                ubyte e0;
-                ubyte c1;
-                ubyte c2;
-                ubyte d0;
-                
-                ubyte d1;
-                ubyte d2;
-                ubyte f2;
-                ubyte e1;
-                
-                ubyte e2;
-                ubyte f0;
-                ubyte f1;
-            }eTable1Entry<name="Scenario",read=EnumToString(map)>;
-        }
-        ubyte padding[3];
-    }eTable1;
-    struct Table2 {
-        DataSection Header;
-        for(i=0; i<Header.NumEntries; i++){
-            struct Table2Entry {
-                ubyte unkByte0x0;
-                ubyte unkByte0x1;
-                ubyte someIndex;
-                ubyte unkByte0x3;
-                
-                ubyte unkByte0x4;
-                ubyte unkByte0x5;
-                
-                local MapList map = someIndex;
-            }eTable2Entry<read = EnumToString(map)>;
-        }
-    }eTable2;
-    
-    struct Table3 {
-        DataSection Header;
-        for(i=0; i<Header.NumEntries; i++){
-            struct Table3Entry {
-                ubyte unk[Header.size];
-            }eTable3Entry<>;
-        }
-    }eTable3;
+	FileSections Sections;
+	
+	FSeekNextSection(Sections);
+	struct Table0 {
+		DataSection Header;
+		for(i=0; i<Header.NumEntries; i++){
+			struct Table0Entry {
+				local MapList map= i;
+				
+				float unkFloat0x0;
+				float unkFloat0x4;
+				float unkFloat0x8<comment="Unused?">;
+				float unkFloat0xc<comment="Unused?">;
+				float unkFloat0x10;
+				float unkFloat0x14;
+				float unkFloat0x18;
+				ubyte unkByte0x1c;
+				ubyte unk1[5];
+				ubyte unkByte0x22;
+				ubyte unk2[2];
+				ubyte unkByte0x25;
+				ubyte unkByte0x26;
+				ubyte unkByte0x27;
+				ubyte unkByte0x28;
+				ubyte unkByte0x29;
+				ubyte unkByte0x2a;
+				ubyte unkByte0x2b;
+				ubyte unkByte0x2c;
+				ubyte unkByte0x2d;
+				ubyte unkByte0x2e;
+				ubyte unkByte0x2f;
+				ubyte unkByte0x30;
+				ubyte Constance_SunOrShade<name="Constance Circadian Beat Sun/Shade", comment="determines which effect Circadian Beat grants">;
+				ubyte unkByte0x32;
+				ubyte unkByte0x33;
+				ubyte unkByte0x34;
+				ubyte unkByte0x35;
+				ubyte unkByte0x36;
+				ubyte unkByte0x37;
+				ubyte unk0x38;
+				ubyte unkByte0x39;
+				ubyte unk0x3a;
+				ubyte unk0x3b;
+			}eTable0Entry<name="Scenario",read=EnumToString(map)>;	   
+		}
+	}eTable0;
+	
+	FSeekNextSection(Sections);
+	struct Table1 {
+		DataSection Header;
+		for(i=0; i<Header.NumEntries; i++){
+			struct Table1Entry {
+				local MapList map = i;
+				
+				ubyte c0;
+				ubyte f3;
+				ubyte unk0x2;
+				ubyte g0;
+				
+				ubyte g1;
+				ubyte g2;
+				ubyte a0;
+				ubyte a1;
+				
+				ubyte a2;
+				ubyte b0;
+				ubyte b1;
+				ubyte b2;
+				
+				ubyte e0;
+				ubyte c1;
+				ubyte c2;
+				ubyte d0;
+				
+				ubyte d1;
+				ubyte d2;
+				ubyte f2;
+				ubyte e1;
+				
+				ubyte e2;
+				ubyte f0;
+				ubyte f1;
+			}eTable1Entry<name="Scenario",read=EnumToString(map)>;
+		}
+		ubyte padding[3];
+	}eTable1;
+	
+	FSeekNextSection(Sections);
+	struct Table2 {
+		DataSection Header;
+		for(i=0; i<Header.NumEntries; i++){
+			struct Table2Entry {
+				ubyte unkByte0x0;
+				ubyte unkByte0x1;
+				ubyte someIndex;
+				ubyte unkByte0x3;
+				
+				ubyte unkByte0x4;
+				ubyte unkByte0x5;
+				
+				local MapList map = someIndex;
+			}eTable2Entry<read = EnumToString(map)>;
+		}
+	}eTable2;
+	
+	FSeekNextSection(Sections);
+	struct Table3 {
+		DataSection Header;
+		for(i=0; i<Header.NumEntries; i++){
+			struct Table3Entry {
+				ubyte unk[Header.size];
+			}eTable3Entry<>;
+		}
+	}eTable3;
 }File<open=true>;

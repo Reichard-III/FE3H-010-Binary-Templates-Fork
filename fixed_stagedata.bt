@@ -15,128 +15,126 @@ LittleEndian();
 local int i, j = 0;
 #include "Structs.bt"
 enum<byte> TileType {
-    Not_Passable = 0,
-    Flier_Only = 1,
-    Normal_Cost = 2,
-    Forest_TT = 3,
-    Sand_TT = 4,
-    Thicket_TT = 5,
-    ShoalSnow_TT = 6,
-    Unused_NoCav_3Infantry_TT = 7,
-    Unused_Thief3_NoCav_Infantry_TT = 8,
-    FlameSwampCrater_TT = 9,
-    SpecialTiles_TT = 10,
-    Stairs_TT = 11,
-    Wasteland_TT = 12,
-    Invalid13_TT = 13,
+	Not_Passable = 0,
+	Flier_Only = 1,
+	Normal_Cost = 2,
+	Forest_TT = 3,
+	Sand_TT = 4,
+	Thicket_TT = 5,
+	ShoalSnow_TT = 6,
+	Unused_NoCav_3Infantry_TT = 7,
+	Unused_Thief3_NoCav_Infantry_TT = 8,
+	FlameSwampCrater_TT = 9,
+	SpecialTiles_TT = 10,
+	Stairs_TT = 11,
+	Wasteland_TT = 12,
+	Invalid13_TT = 13,
 	Invalid14_TT = 14,
-    Invalid15_TT = 15,
+	Invalid15_TT = 15,
 };
 
 struct StageData {
-    FileSections Sections;
-    FSeek(Sections.SectionPointers[0].Ptr);
-    struct TileData {
-        DataSection Header;
-        for (i = 0; i < Header.NumEntries; i++){
-            struct Terrain {
-                local TerrainTile name<hidden=true>;
-                name = i;
-                local string s;
-                s = EnumToString(name);
-                
-                byte unk<bgcolor=cGreen>;
-                byte unk<bgcolor=cGreen>;
-                ushort unkShort<bgcolor=cGreen>;
-                byte Def<name="Protection+",bgcolor=cRed>;
-                byte Res<name="Resilence+",bgcolor=cBlue>;
-                byte Avoid<name="Avoid Bonus",bgcolor=cYellow>;
-                byte Heal<name="Healing %",bgcolor=cPurple>;
-                byte BreakableWallHP<bgcolor=cGreen>;
-                byte UnusedByte<bgcolor=cGreen>;
-                TileType restrict<name="Movement Cost", bgcolor=cYellow>;
-                struct terrainFlags_Struct{
-                    ubyte flag0:1;    
-                    ubyte flag1:1;
-                    ubyte flag2:1;
-                    ubyte flag3:1;
-                    ubyte flag4:1;    
-                    ubyte flag5:1;
-                    ubyte flag6:1;
-                    ubyte flag7:1;
-                    
-                    ubyte flag8:1;    
-                    ubyte flag9:1;
-                    ubyte flag10:1;
-                    ubyte flag11:1;
-                    ubyte flag12:1;    
-                    ubyte flag13:1;
-                    ubyte flag14:1;
-                    ubyte flag15:1;
-                    
-                    ubyte flag16:1;    
-                    ubyte flag17:1;
-                    ubyte flag18:1;
-                    ubyte flag19:1;
-                    ubyte flag20:1;    
-                    ubyte flag21:1;
-                    ubyte flag22:1;
-                    ubyte flag23:1;
-                }terrainFlags<bgcolor=cBlue>;    
-            }terrain<read=EnumToString(name)>;
-        };
-    }TerrainData;
-    FSeek(Sections.SectionPointers[1].Ptr);
+	FileSections Sections;
     
-    struct TileTypeMoveCostsTable{
-        DataSection Header;
-        for (i=0; i<Header.NumEntries; i++){
-            struct MoveCostsPerTileTypeEntry{
-                local MoveType MoveTypeName<hidden=true>;
-                MoveTypeName = i;   
-                ubyte Impassible;
-                ubyte FlierOnly;
-                ubyte NormalCost;
-                ubyte Forest;
-                
-                ubyte DesertBeach;
-                ubyte ThicketElement;
-                ubyte ShoalSnow;
-                ubyte uNoCav3Inf;
-                
-                ubyte uThief3NoCavInf;
-                ubyte FlameSwampCrater;
-                ubyte SpecialTiles;
-                ubyte Stairs;
-                
-                ubyte Wasteland;
-                ubyte uInvalid13;
-                ubyte uInvalid14;
-                ubyte uInvalid15;
-                
-            }MoveCostsPerTileType<read=EnumToString(MoveTypeName)>;
-        }
-    }TileTypeMoveCostsT;
+	FSeekNextSection(Sections);
+	struct TileData {
+		DataSection Header;
+		for (i = 0; i < Header.NumEntries; i++){
+			struct Terrain {
+				local TerrainTile name<hidden=true>;
+				name = i;
+				local string s;
+				s = EnumToString(name);
+				
+				byte unk<bgcolor=cGreen>;
+				byte unk<bgcolor=cGreen>;
+				ushort unkShort<bgcolor=cGreen>;
+				byte Def<name="Protection+",bgcolor=cRed>;
+				byte Res<name="Resilence+",bgcolor=cBlue>;
+				byte Avoid<name="Avoid Bonus",bgcolor=cYellow>;
+				byte Heal<name="Healing %",bgcolor=cPurple>;
+				byte BreakableWallHP<bgcolor=cGreen>;
+				byte UnusedByte<bgcolor=cGreen>;
+				TileType restrict<name="Movement Cost", bgcolor=cYellow>;
+				struct terrainFlags_Struct{
+					ubyte flag0:1;	
+					ubyte flag1:1;
+					ubyte flag2:1;
+					ubyte flag3:1;
+					ubyte flag4:1;	
+					ubyte flag5:1;
+					ubyte flag6:1;
+					ubyte flag7:1;
+					
+					ubyte flag8:1;	
+					ubyte flag9:1;
+					ubyte flag10:1;
+					ubyte flag11:1;
+					ubyte flag12:1;	
+					ubyte flag13:1;
+					ubyte flag14:1;
+					ubyte flag15:1;
+					
+					ubyte flag16:1;	
+					ubyte flag17:1;
+					ubyte flag18:1;
+					ubyte flag19:1;
+					ubyte flag20:1;	
+					ubyte flag21:1;
+					ubyte flag22:1;
+					ubyte flag23:1;
+				}terrainFlags<bgcolor=cBlue>;	
+			}terrain<read=EnumToString(name)>;
+		};
+	}TerrainData;
+	
+    FSeekNextSection(Sections);
+	struct TileTypeMoveCostsTable{
+		DataSection Header;
+		for (i=0; i<Header.NumEntries; i++){
+			struct MoveCostsPerTileTypeEntry{
+				local MoveType MoveTypeName<hidden=true>;
+				MoveTypeName = i;   
+				ubyte Impassible;
+				ubyte FlierOnly;
+				ubyte NormalCost;
+				ubyte Forest;
+				
+				ubyte DesertBeach;
+				ubyte ThicketElement;
+				ubyte ShoalSnow;
+				ubyte uNoCav3Inf;
+				
+				ubyte uThief3NoCavInf;
+				ubyte FlameSwampCrater;
+				ubyte SpecialTiles;
+				ubyte Stairs;
+				
+				ubyte Wasteland;
+				ubyte uInvalid13;
+				ubyte uInvalid14;
+				ubyte uInvalid15;
+				
+			}MoveCostsPerTileType<read=EnumToString(MoveTypeName)>;
+		}
+	}TileTypeMoveCostsT;
+	
     
-    FSeek(Sections.SectionPointers[2].Ptr);
-    
-    struct UnkScenarioIndexedWeirdCoordinatesThingTable{
-        DataSection Header;
-        for(i=0; i<Header.NumEntries; i++){
-            struct UnkScenIndexedWeirdCoordsThingEntry{
-                local MapList MapName<hidden=true>;
-                MapName=i;
-                struct XCoord{
-                    for(j=0; j<10; j++){
-                        ubyte XCoord;
-                    }    
-                }XCoords;
-                struct YCoord{
-                    for(j=0; j<10; j++){
-                        ubyte YCoord;
-                    }    
-                }YCoords;
-            }UnkScenIndexedWeirdCoordsThingE<read=EnumToString(MapName)>;
-        }   
-    }UnkCoordinatesPerScenario;
+	FSeekNextSection(Sections);
+	struct UnkScenarioIndexedWeirdCoordinatesThingTable{
+		DataSection Header;
+		for(i=0; i<Header.NumEntries; i++){
+			struct UnkScenIndexedWeirdCoordsThingEntry{
+				local MapList MapName<hidden=true> = i;
+				struct XCoord{
+					for(j=0; j<10; j++)
+						ubyte XCoord;
+				}XCoords;
+				struct YCoord{
+					for(j=0; j<10; j++)
+						ubyte YCoord;
+				}YCoords;
+			}UnkScenIndexedWeirdCoordsThingE<read=EnumToString(MapName)>;
+		}   
+	}UnkCoordinatesPerScenario;
 }File<open=true>;
