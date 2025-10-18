@@ -23,15 +23,9 @@ local int i<hidden=true>;
 local int StringStart<hidden=true> = 0xFAC;
 
 struct File{
-	struct SectionPointers{
-		uint32 NumOfSections;
-		uint32 AbilityListPointer<bgcolor=cDkPurple>;
-		uint32 AbilityListTotalSize<bgcolor=cDkPurple>;
-		uint32 CrestDataPointer<bgcolor=cDkGreen>;
-		uint32 CrestDataTotalSize<bgcolor=cDkGreen>;
-	}sectionpointers<name="Section Pointers">;
+	FileSections Sections;
 
-	FSeek(sectionpointers.AbilityListPointer);
+	FSeekNextSection(Sections);
 	struct AbilityListStructure{
 		uint32 AbilityList_Magic<bgcolor=cRed>;
 		uint32 numAbilityList<bgcolor=cRed>;
@@ -39,8 +33,7 @@ struct File{
 		struct AbilityListHeaderPadding {
 			byte Padding[0x34];
 		}AbilityListheaderpadding<name="Padding", bgcolor=cBlue>;
-		for( i = 0; i < numAbilityList; i++ )
-		{
+		for( i = 0; i < numAbilityList; i++ ){
 			struct AbilityStruct{
 			local AbilityID NameOfAbility<hidden=true>;
 			NameOfAbility = i;
@@ -76,7 +69,7 @@ struct File{
 		}
 	}abilityliststructure<name="Skill List", bgcolor=cDkBlue>;
 	
-	FSeek(sectionpointers.CrestDataPointer);
+	FSeekNextSection(Sections);
 	struct CrestDataStructure{
 		uint32 CrestData_Magic<bgcolor=cRed>;
 		uint32 numCrestData<bgcolor=cRed>;
@@ -85,8 +78,7 @@ struct File{
 			byte Padding[0x34];
 		}crestdataheaderpadding<name="Padding", bgcolor=cBlue>;
 		struct CrestsStruct{
-			for( i = 0; i < numCrestData; i++ )
-			{
+			for( i = 0; i < numCrestData; i++ ){
 				struct CrestData{
 					local CrestID NameOfCrest<hidden=true>;
 					NameOfCrest = i;
@@ -111,8 +103,7 @@ struct File{
 		}crestsstruct<name="Crests">;
         
         struct sCrestStrings{
-            for(i=0;i<numCrestData; i++)
-            {
+            for(i=0;i<numCrestData; i++){
                 struct sCrestString{
                     string crest;   
                 }CrestString<read=crest>;
