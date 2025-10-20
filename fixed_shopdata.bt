@@ -29,9 +29,10 @@ enum<ubyte> Statue {
 };
 
 enum<byte> AccumulationType {
+	//Determines how the amount of purchaseable stock is counted
 	IDK_0_AT =0,
 	EqualToShopAvailability,
-	AccumulatesCurrentPurchasableReserveWithShopAvailability, //TODO clarify purpose
+	AddsToCurrentStock,
 	IDK_255_AT=255 
 };
 
