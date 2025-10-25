@@ -37,6 +37,7 @@ struct sFile{
             for(i=0;i<SectionHeader.NumEntries;i++){
                 struct sItemSpot{
                     int ItemSpotTypeStringOffset<comment="used to index the strings in ItemLocationType">;
+                    local string name = ReadString(Sections.SectionPointers[0].Ptr + ItemSpotTypeStringOffset + 0x40 + SectionHeader.NumEntries * SectionHeader.size,-1);
                     struct Flags0x4{
                         ubyte bit0 : 1<name="Byleth's NG+ Journal">;
                         ubyte bit1 : 1<name="Spend Free Day on Battles">;
@@ -120,7 +121,7 @@ struct sFile{
                     byte unkByte0x33;
                     byte unkByte0x34;
                     byte UnusedOrPadding[3];   
-                }ItemSpot<name="Item Spot">;
+                }ItemSpot<name="Item Spot",read = Str("(%5d,%5d,%5d) %s",ItemXCoord,ItemYCoord, ItemZCoord, name)>;
             };
         }ItemSpotEntries<name="Item Spot Entries",comment="Probably requires reloading monastery to see stuff update">;
         
@@ -144,7 +145,7 @@ struct sFile{
                 ushort ItemYCoord;
                 RNGItemPool RNGPool<name="RNG Item Pool">;
                 ubyte paddingMaybe<name="padding?">;
-            }RandomItemSpot;
+            }RandomItemSpot<read = Str("(%5d,%5d,%5d) - %s",ItemXCoord,ItemYCoord, ItemZCoord,EnumToString(RNGPool))>;
         };
     }RandomItemSpots<name="Random ItemSpots", comment="Picks a random item from various pools of items, ">;
     
@@ -154,7 +155,7 @@ struct sFile{
         struct RNG_Item{
             RNGItemPool RNGPool<name="Random Item Pool",comment="Items with the same number belong to the same Item pool. Locations in SDT1 roll a random item out of this Item pool">;
             MiscItem MiscellaneousItem;
-        }RandomItems[SectionHeader.NumEntries]<read=EnumToString(MiscellaneousItem), open=false>;
+        }RandomItems[SectionHeader.NumEntries]<read=Str("%-16s - %s",EnumToString(RNGPool),EnumToString(MiscellaneousItem)), open=false>;
     }RandomItemPools<name="Random Item Pools">;
     
     FSeekNextSection(Sections);
@@ -163,7 +164,7 @@ struct sFile{
         for(i=0;i<SectionHeader.NumEntries;i++){
             struct sItemSpotAltDropMiscItem{
                 MiscItem MiscellaneousItem;
-            }ItemSpotAltDropMiscItem<name="ItemSpot Alt Drop MiscItem",open=true>;
+            }ItemSpotAltDropMiscItem<name="ItemSpot Alt Drop MiscItem",read = EnumToString(MiscellaneousItem)>;
         };
         struct UntrackedSection3{
             ubyte unk[0x3];
