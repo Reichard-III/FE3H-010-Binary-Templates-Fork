@@ -439,7 +439,7 @@ enum<ushort> Item_Adjusted
     Dark_Freikugel_adj,
     Dark_Crusher_adj,
     Dark_Failnaught_adj,
-    Leather_Shield_adj = 601, //Equipment Table
+    Leather_Shield_adj = 600, //Equipment Table
     Iron_Shield_adj,
     Steel_Shield_adj,
     Silver_Shield_adj,

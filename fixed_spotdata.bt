@@ -175,13 +175,12 @@ struct sFile{
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
             struct sRandomItems{
-                Item weapon<comment="For Weapons, the actual item granted is -10 of what's written here (i.e.: 72 Ukonvasara actually gives you 62 Sword of the Creator ), but for equips like shields, their index is the same as what's written">;
+                Item_Adjusted weapon;
                 byte BaseDurabilityPercent<name="Base Durability%",comment="if -1, then it has no durability (i.e. equips/ broken/ rusted)">;
                 AbyssItemPool AbyssPool<name="Abyss Item Pool",comment="determines the tier of the item when rolling">;
                 ubyte Enabled;
                 ubyte paddingProbably;
-                //ubyte unk[6];
-            }RandomItems;
+            }RandomItems<read = Str("%-26s - %s",EnumToString(AbyssPool),EnumToString(weapon))>;
         };
     }AbyssLostAndFoundItems<name="Abyss Lost and Found - Items">;
     
@@ -190,17 +189,10 @@ struct sFile{
         DataSection SectionHeader;
         for(i=0;i<SectionHeader.NumEntries;i++){
             struct sAbyssLostAndFoundItemPoolTier{
-                local AbyssItemPool name;
-                name = i;
+                local AbyssItemPool name = i;
                 ubyte ItemPoolChance[6]<name="Item Pool Chances @ Influencer Rank">;
                 ubyte ProbablyUnused[9];
-            }AbyssLostAndFoundItemPoolTiers<name="Item Pool",read=GetItemPoolName>;
+            }AbyssLostAndFoundItemPoolTiers<name="Item Pool",read=Str("%2d %2d %2d %2d %2d %2d - %s",ItemPoolChance[0],ItemPoolChance[1],ItemPoolChance[2],ItemPoolChance[3],ItemPoolChance[4],ItemPoolChance[5], EnumToString(name))>;
         };
     }AbyssLostAndFoundItemPoolTiers<name="Abyss Lost and Found - Item Pools">;
 }File<open=true>;
-
-
-string GetItemPoolName(sAbyssLostAndFoundItemPoolTier &i)
-{
-    return EnumToString(i.name);
-}
