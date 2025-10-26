@@ -480,7 +480,7 @@ enum<ushort> Item_Adjusted
     Blue_Lion_Brooch_adj,
     Golden_Deer_Bracelet_adj,
     White_Dragon_Scarf_adj,
-    Vulnerary_adj = 1001, // Item Table
+    Vulnerary_adj = 1000, // Item Table
     Concoction_adj,
     Elixir_adj,
     Intermediate_Seal_adj,
@@ -539,7 +539,7 @@ enum<ushort> Item_Adjusted
     Fruit_of_Life_adj,
     Dark_Seal_adj,
     Beginner_Seal_adj,
-    Insect_Larva_adj = 1401, // Misc Items
+    Insect_Larva_adj = 1400, // Misc Items
     Minnow_Fillet_adj,
     Fresh_Insect_Larva_adj,
     Fresh_Minnow_Fillet_adj,
@@ -762,7 +762,7 @@ enum<ushort> Item_Adjusted
     Tea_Leaves_29_adj,
     Tea_Leaves_30_adj,
     Tea_Leaves_31_adj,
-	Floral_Adornment_adj = 2001, //Gifts
+	Floral_Adornment_adj = 2000, //Gifts
 	Fishing_Float_adj,
 	Tasty_Baked_Treat_adj,
 	Gemstone_Beads_adj,
