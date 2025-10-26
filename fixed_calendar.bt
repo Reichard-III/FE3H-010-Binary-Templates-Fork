@@ -220,16 +220,37 @@ struct sTournamentEvents {
 
 struct File {
 	FileSections Sections;
+    FSeekNextSection(Sections);
 	CelebrationData celebrationData<name="Celebration Event Table">;
+    
+    FSeekNextSection(Sections);
 	ScheduleTable academyScheduleData<name="White Clouds Calendar">;
+    
+    FSeekNextSection(Sections);
 	ScheduleTable churchScheduleData<name="Silver Snow Calendar">;
+    
+    FSeekNextSection(Sections);
 	ScheduleTable lionsScheduleData<name="Azure Moon Calendar">;
+    
+    FSeekNextSection(Sections);
 	ScheduleTable deerScheduleData<name="Verdant Wind Calendar">;
+    
+    FSeekNextSection(Sections);
 	ScheduleTable eaglesScheduleData<name="Crimson Flower Calendar">;
+    
+    FSeekNextSection(Sections);
 	sFishingEvents FishingEventTable<name="Fishing Event Table">;
+    
+    FSeekNextSection(Sections);
 	sGardeningEvents GardeningEventTable<name="Gardening Event Table">;
+    
+    FSeekNextSection(Sections);
 	sFoodEvents unkData8<name="Food Event Table">;
+    
+    FSeekNextSection(Sections);
 	sChoirEvents ChoirEventTable<name="Choir Event Table">;
+    
+    FSeekNextSection(Sections);
 	sTournamentEvents TournamentEventTable<name="Tournament Event Table">;
 } file<open=true>;
 
