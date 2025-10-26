@@ -27,13 +27,8 @@ struct File{
 
 	FSeekNextSection(Sections);
 	struct AbilityListStructure{
-		uint32 AbilityList_Magic<bgcolor=cRed>;
-		uint32 numAbilityList<bgcolor=cRed>;
-		uint32 SizeOfAbilityBlock<bgcolor=cRed>;
-		struct AbilityListHeaderPadding {
-			byte Padding[0x34];
-		}AbilityListheaderpadding<name="Padding", bgcolor=cBlue>;
-		for( i = 0; i < numAbilityList; i++ ){
+		DataSection SectionHeader;
+		for( i = 0; i < SectionHeader.NumEntries; i++ ){
 			struct AbilityStruct{
 			local AbilityID NameOfAbility<hidden=true>;
 			NameOfAbility = i;
@@ -65,20 +60,15 @@ struct File{
 			SkillProperty Property3<name="Skill Property 3", bgcolor=cYellow>;
             byte Conditionalvalue<name="Modifier 1", bgcolor=cLtBlue>;
 			byte Conditionalexpression<name="Modifier 2", bgcolor=cLtBlue>;
-			}abilitystruct<name="Skill List Data", read=(EnumToString(NameOfAbility) + " - " + EnumToString(Conditionalmaybe1)), bgcolor=cDkBlue>;
+			}abilitystruct<name="Skill List Data", read=Str("%-24s - %-31s - %-s",EnumToString(NameOfAbility),EnumToString(Conditionalmaybe1),EnumToString(Conditionalmaybe2)), bgcolor=cDkBlue>;
 		}
 	}abilityliststructure<name="Skill List", bgcolor=cDkBlue>;
 	
 	FSeekNextSection(Sections);
 	struct CrestDataStructure{
-		uint32 CrestData_Magic<bgcolor=cRed>;
-		uint32 numCrestData<bgcolor=cRed>;
-		uint32 SizeOfCrestDataBlock<bgcolor=cRed>;
-		struct CrestDataHeaderPadding{
-			byte Padding[0x34];
-		}crestdataheaderpadding<name="Padding", bgcolor=cBlue>;
+		DataSection SectionHeader;
 		struct CrestsStruct{
-			for( i = 0; i < numCrestData; i++ ){
+			for( i = 0; i < SectionHeader.NumEntries; i++ ){
 				struct CrestData{
 					local CrestID NameOfCrest<hidden=true>;
 					NameOfCrest = i;
@@ -98,12 +88,12 @@ struct File{
 					ubyte ItemRate<name="Activation Rate as NG+ Item Crest">;
 					uint16 unknown<name="Unknown", bgcolor=cBlack>;
 					ubyte unknown<name="Unknown", bgcolor=cBlack>;
-				}crestdata<name="Crest Data",read=ReadName>;
+				}crestdata<name="Crest Data",read=Str("%-30s - %s",EnumToString(effect),EnumToString(NameOfCrest))>;
 			}
 		}crestsstruct<name="Crests">;
         
         struct sCrestStrings{
-            for(i=0;i<numCrestData; i++){
+            for(i=0;i<SectionHeader.NumEntries; i++){
                 struct sCrestString{
                     string crest;   
                 }CrestString<read=crest>;
@@ -111,13 +101,3 @@ struct File{
         }crestStrings;
 	}crestdatastructure<bgcolor=cDkGreen,name="Crest Data Section">;
 }file<name="Skill Data",open=true>;
-
-string ReadName(CrestData &p)
-{
-return EnumToString(p.NameOfCrest);
-}
-
-string GetAbilityName(AbilityStruct &i)
-{
-    return EnumToString(i.NameOfAbility);
-}
