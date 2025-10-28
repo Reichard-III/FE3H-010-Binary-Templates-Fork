@@ -135,8 +135,9 @@ struct sPlayerData{
 	ubyte GameMode;
 	ubyte Route;
 	ubyte Timeskip;
-	ubyte MoreFlags_UnsureDueToRandom39BytesBelow[234];
-	ubyte wtf[39];
+	ScenarioName CurrentScenario;
+	byte MonasteryScriptID;
+	ubyte Flags_271[271];
 	struct sStorehouseItems{
 		for(i=0;i<223;i++){
 			struct sStorehouseItemsEntry{
