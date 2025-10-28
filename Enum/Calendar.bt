@@ -17,7 +17,8 @@ enum<ubyte> CelebrationType {
     NoCelebration,
     Holiday,
     Birthday,
-    Unknown
+    Cutscene,
+    S_Support_Selection,
 };
 
 enum<ubyte> CelebrationActivity {
@@ -74,13 +75,11 @@ enum<ubyte> DayType {
     Mission = 3
 };
 
-// Don't like having this, but should help sort out the
-// displayCircumstances weirdness
 enum<byte> DisplayCircumstances {
-    NeverShow = 0,
-    ShowOnHoliday = 1,
-    ShowOnSpecialCircumstances = 2, // GarregMachEstablishment, Jeritza's Birthday, and Type-3 events
-    ShowOnBirthday = 3
+    Never = 0,
+    PreTS= 1,
+    PostTS = 2, 
+    Always = 3
 };
 
 enum<byte> TournamentType {

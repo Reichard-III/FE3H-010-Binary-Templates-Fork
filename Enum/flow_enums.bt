@@ -11,6 +11,14 @@
 //   History: 
 //------------------------------------------------
 
+enum<byte> RouteAbbrev{
+	WC,
+	SS,
+	AM,
+	VW,
+	CF,
+};
+
 enum<byte> RouteName {
     White_Clouds,
     Silver_Snow = 1,

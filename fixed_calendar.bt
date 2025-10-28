@@ -16,7 +16,7 @@
 #include "Structs.bt"
 
 LittleEndian();
-local int i<hidden=true>;
+local int i,j;
 
 // Birthdays and Holidays (and something else)
 struct CelebrationData {
@@ -24,35 +24,36 @@ struct CelebrationData {
 	for( i = 0; i < Header.NumEntries; i++ ) {
 		struct Celebration {
 			local CalendarEvent celebrationName = i;
-
-			//Determines who's birthday on Birthdays, unknown use on Type-3 events
-			CharID relatedCharID<bgcolor=cDkGreen,name="Related Unit">;
-			CharID relatedCharID2<bgcolor=cYellow,name="Related Unit (2)">;
-			CharID relatedCharID3<bgcolor=cYellow,name="Related Unit (3)">;
+			local byte CT = ReadByte(FTell()+7);
+            
+			if(CT==3){
+				Event cutscene<comment="Loads a cutscene (character conversation) on a calendar day">;
+				Event cutscene;
+				Event cutscene;
+			}else{
+				//How each CelebrationType reads/uses this data is not investigated yet, defaulting to CharID
+				CharID relatedCharID<bgcolor=cDkGreen,name="Related Unit">;
+				CharID relatedCharID<bgcolor=cYellow,name="Related Unit">;
+				CharID relatedCharID<bgcolor=cYellow,name="Related Unit">;
+			}
 
 			ubyte eventDay<bgcolor=cDkGreen,name="Day of the Month">;
-
-			// Note that these will be ordered by Celebration, not Character ID
 			CelebrationType eventType<bgcolor=cDkGreen,name="Type of Event">;
 			Month eventMonth<bgcolor=cDkGreen,name="Month">;
 			CelebrationActivity eventActivity<bgcolor=cDkGreen,name="Activity (Holidays)">;
 			struct sRouteFlags{
-				byte SilverSnow:1;
-				byte AzureMoon:1;
-				byte VerdantWind:1;
-				byte CrimsonFlower:1;
+				byte bit:1<name="SilverSnow">;
+				byte bit:1<name="AzureMoon">;
+				byte bit:1<name="VerdantWind">;
+				byte bit:1<name="CrimsonFlower">;
 				
-				byte bit4:1;
-				byte bit5:1;
-				byte bit6:1;
-				byte bit7:1;
+				byte bit:1;
+				byte bit:1;
+				byte bit:1;
+				byte bit:1;
 			}RouteFlags;
-
-			// Celebration is visible on odd numbers, hidden on even ones
-			// Outlier is Jeritza's birthday, which uses a 2. Hidden outside
-			// of Crimson Flower?
-			DisplayCircumstances uncDisplayCircumstances<bgcolor=cYellow>;
-		} celebration<name="Celebration",read=getCelebrationName>;
+			DisplayCircumstances DisplayFlags<bgcolor=cYellow>;
+		} celebration<name=" - Celebration",read=getCelebrationDisplay>;
 	};
 };
 
@@ -254,5 +255,37 @@ struct File {
 	sTournamentEvents TournamentEventTable<name="Tournament Event Table">;
 } file<open=true>;
 
-string getCelebrationName(Celebration & q) { return EnumToString(q.celebrationName); }
 string getScheduleName(ScheduleData & q) {   return q.scheduleName; }
+string getCelebrationDisplay(Celebration & CD){
+	local string display;
+	display += Str("%-15.15s %2d/%2d - ",EnumToString(CD.eventMonth),CD.eventMonth+1,CD.eventDay);
+    
+	local RouteAbbrev routeAbbrev;
+	for(j=0;j<4;j++){
+    	if(CD.RouteFlags.bit[j]){
+        	routeAbbrev = j+1;
+        	display += Str("%2.2s",EnumToString(routeAbbrev));
+        	if(j<3) display += "/";
+    	}else
+        	if(j==3) display += "  ";
+        	else     display += "  /";
+	}
+    
+	display += Str(" %-6s - ",EnumToString(CD.DisplayFlags));
+    
+	if       (CD.eventType==0) display += Str("Skip(?)");
+	else if  (CD.eventType==1) display += Str("Holiday    : %s",EnumToString(CD.eventActivity));
+	else if  (CD.eventType==2) display += Str("Birthday   : %-11.11s %-11.11s %-11.11s",EnumToString(CD.relatedCharID[0]),EnumToString(CD.relatedCharID[1]),EnumToString(CD.relatedCharID[2]));
+	else if  (CD.eventType==3){
+    	local byte numCutscenes;
+    	for(j=0;j<3;j++)
+        	if(CD.cutscene[j]!=-1) numCutscenes++;
+    	if(numCutscenes!=1) display += Str("%1d Cutscenes: ",numCutscenes);
+    	else                display += "1 Cutscene : ";
+    	for(j=0;j<3;j++)
+        	if(CD.cutscene[j]!=-1)
+            	display += Str("%s   ",EnumToString(CD.cutscene[j]));
+	}else if (CD.eventType==4)
+    	display += "S-Support Selection";
+	return display;
+}
