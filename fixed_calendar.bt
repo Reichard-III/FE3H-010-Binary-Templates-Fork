@@ -27,18 +27,18 @@ struct CelebrationData {
 			local byte CT = ReadByte(FTell()+7);
             
 			if(CT==3){
-				Event cutscene<comment="Loads a cutscene (character conversation) on a calendar day">;
-				Event cutscene;
-				Event cutscene;
+				Event multiPurpose<name="cutscene",comment="Loads a cutscene (character conversation) on a calendar day">;
+				Event multiPurpose<name="cutscene">;
+				Event multiPurpose<name="cutscene">;
 			}else{
 				//How each CelebrationType reads/uses this data is not investigated yet, defaulting to CharID
-				CharID relatedCharID<bgcolor=cDkGreen,name="Related Unit">;
-				CharID relatedCharID<bgcolor=cYellow,name="Related Unit">;
-				CharID relatedCharID<bgcolor=cYellow,name="Related Unit">;
+				CharID multiPurpose<bgcolor=cDkGreen,name="Related Unit">;
+				CharID multiPurpose<bgcolor=cYellow,name="Related Unit">;
+				CharID multiPurpose<bgcolor=cYellow,name="Related Unit">;
 			}
 
 			ubyte eventDay<bgcolor=cDkGreen,name="Day of the Month">;
-			CelebrationType eventType<bgcolor=cDkGreen,name="Type of Event">;
+			CelebrationType eventType<bgcolor=cDkGreen,name="Type of Event",comment="if you change this, you will have to reload the template (f5) if you want to see the appropriate enum names for the above data">;
 			Month eventMonth<bgcolor=cDkGreen,name="Month">;
 			CelebrationActivity eventActivity<bgcolor=cDkGreen,name="Activity (Holidays)">;
 			struct sRouteFlags{
@@ -53,7 +53,7 @@ struct CelebrationData {
 				byte bit:1;
 			}RouteFlags;
 			DisplayCircumstances DisplayFlags<bgcolor=cYellow>;
-		} celebration<name=" - Celebration",read=getCelebrationDisplay>;
+		} celebration<name="Celebration",read=getCelebrationDisplay>;
 	};
 };
 
@@ -275,16 +275,16 @@ string getCelebrationDisplay(Celebration & CD){
     
 	if       (CD.eventType==0) display += Str("Skip(?)");
 	else if  (CD.eventType==1) display += Str("Holiday    : %s",EnumToString(CD.eventActivity));
-	else if  (CD.eventType==2) display += Str("Birthday   : %-11.11s %-11.11s %-11.11s",EnumToString(CD.relatedCharID[0]),EnumToString(CD.relatedCharID[1]),EnumToString(CD.relatedCharID[2]));
+	else if  (CD.eventType==2) display += Str("Birthday   : %-11.11s %-11.11s %-11.11s",EnumToString(CD.multiPurpose[0]),EnumToString(CD.multiPurpose[1]),EnumToString(CD.multiPurpose[2]));
 	else if  (CD.eventType==3){
     	local byte numCutscenes;
     	for(j=0;j<3;j++)
-        	if(CD.cutscene[j]!=-1) numCutscenes++;
+        	if(CD.multiPurpose[j]!=-1) numCutscenes++;
     	if(numCutscenes!=1) display += Str("%1d Cutscenes: ",numCutscenes);
     	else                display += "1 Cutscene : ";
     	for(j=0;j<3;j++)
-        	if(CD.cutscene[j]!=-1)
-            	display += Str("%s   ",EnumToString(CD.cutscene[j]));
+        	if(CD.multiPurpose[j]!=-1)
+            	display += Str("%s   ",EnumToString(CD.multiPurpose[j]));
 	}else if (CD.eventType==4)
     	display += "S-Support Selection";
 	return display;
