@@ -95,14 +95,31 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk2{ //1
 		DataSection Header;
-		struct UnknownSection2{
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-		}unknownsection2[Header.NumEntries]<name="Unknown Section2">;
-	}unk2<name="Unknown Section 1",bgcolor=cBlue>;
+        for(i=0;i<Header.NumEntries;i++){
+			struct UnknownSection2{
+            	local LobbyCommon1Regions name=i;
+                local string display;
+				uint16 Y0;
+				uint16 X0;
+				uint16 Y1;
+				uint16 X1;
+				uint16 MapFlag<comment="0 and 1 used for Monastery, 2 used for Abyss. 1/2 trigger the region display text, 0 does not">;
+                local uint16 MinX = Min(X0,X1);
+                local uint16 MaxX = Max(X0,X1);
+                
+                local uint16 MinY = Min(Y0,Y1);
+                local uint16 MaxY = Max(Y0,Y1);
+                
+                display = Str("%-25.25s (%3d, %3d)-(%3d, %3d) | (%5d, %5d)-(%5d, %5d) ",EnumToString(name), MinX, MinY, MaxX, MaxY, MinX*250, MinY*250, MaxX*250, MaxY*250);
+                switch(MapFlag){
+                	case 0: display +="Monastery, no text"; break;
+                    case 1: display +="Monastery, display"; break;
+                    case 2: display +="Abyss, display";     break;
+                    default: display+="Unknown"; break;
+                }
+			}unknownsection2<name="Unknown Section2",read=display>;
+        }
+	}unk2<name="Monastery Regions",bgcolor=cBlue>;
 	
 	FSeekNextSection(Sections);
 	struct Unk3{ //2
