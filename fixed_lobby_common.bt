@@ -212,13 +212,31 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk5{ //5
 		DataSection Header;
-		struct UnknownSection5{
-			uint16 unkShort0x0;
-			uint16 unkShort0x2;
-			ubyte unk;
-			ubyte unk;
-		}unknownsection5[Header.NumEntries]<name="Unknown Section4">;
-	}unk5<name="Unknown Section 5",bgcolor=cBlack>;
+        for(i=0;i<Header.NumEntries;i++){
+			struct UnknownSection5{
+				uint16 YCoord;
+				uint16 XCoord;
+				ubyte unk<name="stairs index?">;
+				TrueFalse IsDownwardStairs;
+                
+                local string display = Str("(%5d, %5d) - ",XCoord, YCoord);
+                if(XCoord==65535 || YCoord==65535) display +=" Disabled   - "; 
+                else if(IsDownwardStairs) display+=" Downstairs - ";
+                else                 display+=" Upstairs   - ";
+                
+                switch(i){ //location of icon, not their destination
+                	case 0: display+="Reception Hall Stairs"; break;
+                    case 1: display+="2nd Floor West"; break;
+                    case 2: display+="2nd Floor East"; break;
+                    case 3: display+="3rd Floor"; break;
+                    case 4: display+="Commoners Dormitory"; break;
+                    case 5: display+="Lords Dormitory"; break;
+                    default: break;
+                }
+                
+			}unknownsection5<name="Stairs",read=display>;
+        }
+	}unk5<name="Monastery Stairs Icon Coordinates",bgcolor=cBlack>;
 	
 	FSeekNextSection(Sections);
 	struct sItemSpotAltItems{ //6
