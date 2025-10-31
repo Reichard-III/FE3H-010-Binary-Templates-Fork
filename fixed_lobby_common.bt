@@ -155,10 +155,7 @@ struct File{
 			uint16 unk;
 			uint16 unk;
 			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
+			uint16 unk3c[4];
 			uint16 unk;
 			uint16 unk;
 			uint16 unk;
@@ -183,7 +180,7 @@ struct File{
 		DataSection Header;
 		struct UnknownSection4{
 			uint16 unk;
-			CharID character<name="Character ID">;
+			CharID character<name="Character ID">; //probably not right
 			uint16 unk;
 			uint16 unk;
 			uint16 unk;
@@ -279,55 +276,53 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk8{ //8
 		DataSection Header;
-		struct UnknownSection8{
-			float unkFloat0x0;
-			float unkFloat0x4;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-		}unknownsection8[Header.NumEntries]<name="Unknown Section8">;
-	}unk8<name="Unknown Section 8",bgcolor=cDkPurple>;
+        for(i=0;i<Header.NumEntries;i++){
+			struct UnknownSection8{
+				float unkFloat0x0;
+				float unkFloat0x4;
+				float unkFloat0x8;
+				uint16 unk0xc;
+				uint16 un0xe;
+            	
+				float unkFloat0x10;
+				float CameraTargetZ_TS;
+				float CameraPositionY_TS<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
+				float CameraTargetY<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
+            	
+				float CameraPositionX;
+				float CameraPositionZ;
+				float CameraPositionY<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
+				float CameraTargetX;
+                
+				float CameraTargetZ;
+				float unkFloat0x34;
+				float CameraPositionZ_TS;
+				float CameraPositionX_TS;
+                
+				float CameraTargetY_TS<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
+				float CameraTargetX_TS;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+            	
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+				uint16 unk;
+                
+				local string display = Str("P(%5d,%5d,%5d) - T(%5d,%5d,%5d) | Timeskip P(%5d,%5d,%5d) - T(%5d,%5d,%5d)",
+					CameraPositionX,    CameraPositionY,    CameraPositionZ,
+					CameraTargetX,      CameraTargetY,      CameraTargetZ,
+					CameraPositionX_TS, CameraPositionY_TS, CameraPositionZ_TS,
+					CameraTargetX_TS,   CameraTargetY_TS,   CameraTargetZ_TS);
+			}unknownsection8<name="Unknown Section8",read=display>;
+        }
+	}unk8<name="Classroom Cameras",bgcolor=cDkPurple>;
 		
 	FSeekNextSection(Sections);
 	struct Unk9{ //9
