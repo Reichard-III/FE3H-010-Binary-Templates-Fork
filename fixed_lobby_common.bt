@@ -95,30 +95,30 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk2{ //1
 		DataSection Header;
-        for(i=0;i<Header.NumEntries;i++){
+		for(i=0;i<Header.NumEntries;i++){
 			struct UnknownSection2{
-            	local LobbyCommon1Regions name=i;
-                local string display;
+				local LobbyCommon1Regions name=i;
+				local string display;
 				uint16 Y0;
 				uint16 X0;
 				uint16 Y1;
 				uint16 X1;
 				uint16 MapFlag<comment="0 and 1 used for Monastery, 2 used for Abyss. 1/2 trigger the region display text, 0 does not">;
-                local uint16 MinX = Min(X0,X1);
-                local uint16 MaxX = Max(X0,X1);
-                
-                local uint16 MinY = Min(Y0,Y1);
-                local uint16 MaxY = Max(Y0,Y1);
-                
-                display = Str("%-25.25s (%3d, %3d)-(%3d, %3d) | (%5d, %5d)-(%5d, %5d) ",EnumToString(name), MinX, MinY, MaxX, MaxY, MinX*250, MinY*250, MaxX*250, MaxY*250);
-                switch(MapFlag){
-                	case 0: display +="Monastery, no text"; break;
-                    case 1: display +="Monastery, display"; break;
-                    case 2: display +="Abyss, display";     break;
-                    default: display+="Unknown"; break;
-                }
+				local uint16 MinX = Min(X0,X1);
+				local uint16 MaxX = Max(X0,X1);
+				
+				local uint16 MinY = Min(Y0,Y1);
+				local uint16 MaxY = Max(Y0,Y1);
+				
+				display = Str("%-25.25s (%3d, %3d)-(%3d, %3d) | (%5d, %5d)-(%5d, %5d) ",EnumToString(name), MinX, MinY, MaxX, MaxY, MinX*250, MinY*250, MaxX*250, MaxY*250);
+				switch(MapFlag){
+					case 0: display +="Monastery, no text"; break;
+					case 1: display +="Monastery, display"; break;
+					case 2: display +="Abyss, display";	 break;
+					default: display+="Unknown"; break;
+				}
 			}unknownsection2<name="Unknown Section2",read=display>;
-        }
+		}
 	}unk2<name="Monastery Regions",bgcolor=cBlue>;
 	
 	FSeekNextSection(Sections);
@@ -179,11 +179,11 @@ struct File{
 	struct Unk4{ //3
 		DataSection Header;
 		struct UnknownSection4{
-			uint16 unk;
-			CharID character<name="Character ID">; //probably not right
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
+			uint16 unk0x0;
+			uint16 unk0x2;
+			uint16 unk0x4;
+			uint16 unk0x6;
+			uint16 unk0x8;
 		}unknownsection4[Header.NumEntries]<name="Unknown Section4">;
 	}unk4<name="Unknown Section 3",bgcolor=cDkBlue>;
 	
@@ -209,30 +209,30 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk5{ //5
 		DataSection Header;
-        for(i=0;i<Header.NumEntries;i++){
+		for(i=0;i<Header.NumEntries;i++){
 			struct UnknownSection5{
 				uint16 YCoord;
 				uint16 XCoord;
 				ubyte unk<name="stairs index?">;
 				TrueFalse IsDownwardStairs;
-                
-                local string display = Str("(%5d, %5d) - ",XCoord, YCoord);
-                if(XCoord==65535 || YCoord==65535) display +=" Disabled   - "; 
-                else if(IsDownwardStairs) display+=" Downstairs - ";
-                else                 display+=" Upstairs   - ";
-                
-                switch(i){ //location of icon, not their destination
-                	case 0: display+="Reception Hall Stairs"; break;
-                    case 1: display+="2nd Floor West"; break;
-                    case 2: display+="2nd Floor East"; break;
-                    case 3: display+="3rd Floor"; break;
-                    case 4: display+="Commoners Dormitory"; break;
-                    case 5: display+="Lords Dormitory"; break;
-                    default: break;
-                }
-                
+				
+				local string display = Str("(%5d, %5d) - ",XCoord, YCoord);
+				if(XCoord==65535 || YCoord==65535) display +=" Disabled   - "; 
+				else if(IsDownwardStairs) display+=" Downstairs - ";
+				else				 display+=" Upstairs   - ";
+				
+				switch(i){ //location of icon, not their destination
+					case 0: display+="Reception Hall Stairs"; break;
+					case 1: display+="2nd Floor West"; break;
+					case 2: display+="2nd Floor East"; break;
+					case 3: display+="3rd Floor"; break;
+					case 4: display+="Commoners Dormitory"; break;
+					case 5: display+="Lords Dormitory"; break;
+					default: break;
+				}
+				
 			}unknownsection5<name="Stairs",read=display>;
-        }
+		}
 	}unk5<name="Monastery Stairs Icon Coordinates",bgcolor=cBlack>;
 	
 	FSeekNextSection(Sections);
@@ -276,52 +276,59 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk8{ //8
 		DataSection Header;
-        for(i=0;i<Header.NumEntries;i++){
+		for(i=0;i<Header.NumEntries;i++){
 			struct UnknownSection8{
-				float unkFloat0x0;
-				float unkFloat0x4;
-				float unkFloat0x8;
-				uint16 unk0xc;
-				uint16 un0xe;
-            	
-				float unkFloat0x10;
-				float CameraTargetZ_TS;
+				float VFX_X; //unsure if it's for VFX
+				float VFX_Y;
+				float CharRotation<comment="in degrees, not radians">;
+				float VFX_X_TS;
+				
+				float CharRotation_TS;
+				float CameraTargetZ_TS<comment="in degrees, not radians">;
 				float CameraPositionY_TS<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
 				float CameraTargetY<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
-            	
+				
 				float CameraPositionX;
 				float CameraPositionZ;
 				float CameraPositionY<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
 				float CameraTargetX;
-                
+				
 				float CameraTargetZ;
-				float unkFloat0x34;
+				float VFX_Y_TS;
 				float CameraPositionZ_TS;
 				float CameraPositionX_TS;
-                
+				
 				float CameraTargetY_TS<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
 				float CameraTargetX_TS;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-            	
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-				uint16 unk;
-                
-				local string display = Str("P(%5d,%5d,%5d) - T(%5d,%5d,%5d) | Timeskip P(%5d,%5d,%5d) - T(%5d,%5d,%5d)",
+				uint16 A;    //unknown purpose
+				uint16 A_TS; //
+				uint16 B;    //
+				uint16 B_TS; //
+				
+				byte SetStudentIndex; //Idk
+				byte SetStudentIndex_TS;
+				byte SomeUnkIndexB;
+				ubyte LobbyCommon3_AIndex_TS;
+				byte SomeUnkIndexB_TS;
+				byte RandomStudentIndex_TS;
+				ubyte LobbyCommon3_BIndex_TS;
+				byte SomeUnkIndexA;
+				byte SomeBool_TS;
+				ubyte LobbyCommon3_AIndex;
+				byte RandomStudentIndex;
+				ubyte LobbyCommon3_BIndex;
+				byte SomeBool;
+				uint16 SomeUnkIndexA_TS;
+				byte unk0x5f<name="padding?">;
+				
+				local string display = Str("(%5d,%5d,%5d)-(%5d,%5d,%5d) | TS (%5d,%5d,%5d)-(%5d,%5d,%5d) | %5d,%5d",
 					CameraPositionX,    CameraPositionY,    CameraPositionZ,
 					CameraTargetX,      CameraTargetY,      CameraTargetZ,
 					CameraPositionX_TS, CameraPositionY_TS, CameraPositionZ_TS,
-					CameraTargetX_TS,   CameraTargetY_TS,   CameraTargetZ_TS);
-			}unknownsection8<name="Unknown Section8",read=display>;
-        }
+					CameraTargetX_TS,   CameraTargetY_TS,   CameraTargetZ_TS,
+					VFX_X,VFX_Y);
+			}unknownsection8<name="Camera Positions",read=display>;
+		}
 	}unk8<name="Classroom Cameras",bgcolor=cDkPurple>;
 		
 	FSeekNextSection(Sections);
