@@ -278,12 +278,12 @@ struct File{
 		DataSection Header;
 		for(i=0;i<Header.NumEntries;i++){
 			struct UnknownSection8{
-				float VFX_X; //unsure if it's for VFX
-				float VFX_Y;
-				float CharRotation<comment="in degrees, not radians">;
-				float VFX_X_TS;
+				float Professor_X; // If Professor Coords are not set then default to normal position
+				float Professor_Y;
+				float ProfessorRotation<comment="in degrees, not radians">;
+				float Professor_X_TS;
 				
-				float CharRotation_TS;
+				float ProfessorRotation_TS;
 				float CameraTargetZ_TS<comment="in degrees, not radians">;
 				float CameraPositionY_TS<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
 				float CameraTargetY<comment="PreTimeskip Y Coords are based on Black Eagles, and are automatically adjusted for AM/GD">;
@@ -294,7 +294,7 @@ struct File{
 				float CameraTargetX;
 				
 				float CameraTargetZ;
-				float VFX_Y_TS;
+				float Professor_Y_TS;
 				float CameraPositionZ_TS;
 				float CameraPositionX_TS;
 				
@@ -326,7 +326,7 @@ struct File{
 					CameraTargetX,      CameraTargetY,      CameraTargetZ,
 					CameraPositionX_TS, CameraPositionY_TS, CameraPositionZ_TS,
 					CameraTargetX_TS,   CameraTargetY_TS,   CameraTargetZ_TS,
-					VFX_X,VFX_Y);
+					Professor_X,Professor_Y);
 			}unknownsection8<name="Camera Positions",read=display>;
 		}
 	}unk8<name="Classroom Cameras",bgcolor=cDkPurple>;
@@ -334,43 +334,41 @@ struct File{
 	FSeekNextSection(Sections);
 	struct Unk9{ //9
 		DataSection Header;
-		struct UnknownSection9{
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			uint16 unk;
-			long unkLong0x40;
-		}unknownsection9[Header.NumEntries]<name="Unknown Section9">;
+		for(i=0;i<Header.NumEntries;i++){
+			struct UnknownSection9{
+				uint16 unk;
+				uint16 unk;
+				float XCoord_A;
+				float ZCoord_A;
+				float YCoord_A;
+				float Rotation_A;
+				float XCoord_B;
+				float ZCoord_B;
+				float YCoord_B;
+				float Rotation_B;
+				float XCoord_Byleth;
+				float CameraTargetY;
+				float YCoord_Byleth;
+				uint16 unk;
+				uint16 unk;
+				float CameraPositionX;
+				float CameraPositionZ;
+				float CameraPositionY;
+				float CameraTargetX;
+				float CameraTargetZ;
+                
+				local string display;
+				switch(i){
+					case 0: display+="Stable Duty"; break;
+					case 1: display+="Weeding"; break;
+					case 2: display+="Clearing Rubble"; break;
+					case 3: display+="Sky Watch"; break; 
+					default: break;
+				}
+			}unknownsection9<name="Unknown Section9",read = display>;
+		}
 		byte unknownExtra[16];
-	}unk9<name="Unknown Section 9",bgcolor=cDkGreen>;
+	}unk9<name="Group Task Camera",bgcolor=cDkGreen>;
 	
 	FSeekNextSection(Sections);
 	struct FavoriteTeaLeaves{ //10
