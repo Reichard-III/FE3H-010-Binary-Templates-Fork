@@ -251,27 +251,27 @@ struct File{
 	struct UnknownSection7{ //7
 		DataSection Header;
 		struct Unk7{
-			ushort unkShort0x0<name="Story Flags?">;
+			ushort SomeShort2F_B;
 			NameID charID<name="Character">;
-			ushort unkShort0x4;
-			ushort unkShort0x6;
-			ushort unkShort0x8;
-			ubyte unkByte0xa;
-			ubyte unkByte0xb;
+			ushort SomeShort2F_B_TS;
+			ushort SomeShort2F_A;
+			ushort SomeShort2F_A_TS;
+			ubyte LC3IndexA;
+			ubyte SomeIndex_B_TS;
 			ubyte RotationOctant;
-			ubyte unkByte0xd;
-			ubyte unkByte0xe;
-			ubyte unkByte0xf;
-			ubyte unkByte0x10;
-			ubyte unkByte0x11;
-			ubyte unkByte0x12;
-			ubyte unkByte0x13;
-			ubyte unkByte0x14;
-			ubyte unkByte0x15;
-			ubyte unkByte0x16;
+			ubyte SomeIndex;
+			ubyte SomeIndexB;
+			ubyte Enabled;
+			ubyte BylethOctant_TS<comment="If nonzero, then draw byleth in this octant - 1 @ 150.0F units away from this character">;
+			ubyte BylethOctant<comment="If nonzero, then draw byleth in this octant - 1 @ 150.0F units away from this character">;
+			ubyte LC3IndexB_TS;
+			ubyte LC3IndexB;
+			ubyte SomeIndex_TS;
+			ubyte Enabled_TS;
+			ubyte LC3IndexA_TS;
 			ubyte RotationOctant_TS;
 		}unk7[Header.NumEntries]<name="Recruit Conditions 2",read=GetName2>;
-	}unknownsection7<name="Recruit Conditions 2",bgcolor=cDkRed>;
+	}unknownsection7<name="Classroom Seating Camera",bgcolor=cDkRed>;
 	
 	FSeekNextSection(Sections);
 	struct Unk8{ //8
