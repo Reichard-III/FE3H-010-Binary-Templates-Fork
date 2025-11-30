@@ -1,0 +1,17 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Script File
+//
+//      File: Save
+//   Authors: ReichardTheThird
+//   Version: 
+//   Purpose: Updates the checksum of the slotXX savefiles before opening the template
+//  Category: Reichard
+//   History: 
+//------------------------------------------------
+local int checksum8_old = ReadInt(FTell());
+local int checksum8_new = Checksum(CHECKSUM_BYTE, 0xc, FileSize(), -1. -1);
+
+Printf(Str("Old Checksum: 0x%x\nNew Checksum: 0x%x", checksum8_old, checksum8_new));
+
+WriteInt(FTell(), checksum8_new);
+RunTemplate("saveEntry.bt",false);
