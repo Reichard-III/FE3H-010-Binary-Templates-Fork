@@ -75,11 +75,11 @@ struct GenericFile {
 		DataSection Header;
 		for (i = 0; i < Header.NumEntries; i++){
 			struct sunkEntry3 {
-				byte unkByte0x0;
-				byte unkByte0x1;
-			} unkEntry3;
+				MiscItem Reward;
+				byte MarginalRollThreshold;
+			} unkEntry3<read=Str("%2d - %s",MarginalRollThreshold,EnumToString(Reward))>;
 		}
-	}unkTable3;
+	}AnimalFeedingRewards;
 	
 }File<open=true>;
 

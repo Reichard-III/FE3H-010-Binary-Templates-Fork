@@ -24,7 +24,7 @@ struct ENTRY {
 	uint64 compressed_size<name="Compressed size", comment="Compressed size of the entry", format=hex, fgcolor=cLtPurple>;
 uint64 is_compressed<name="Is Compressed?", comment="Boolean, should be 1 if a compressed size is available", fgcolor=cLtGreen>; //Actually a boolean but that way the parsing is easier
 char filename[0x100]<name="Filename", fgcolor=cLtRed>;
-} Entries[entryCount]<read=GetEntryId,open=true>;
+} Entries[entryCount]<read=GetEntryId,open=false>;
 
 string GetEntryId(ENTRY &e)
 {

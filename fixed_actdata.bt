@@ -81,7 +81,7 @@ struct FILE {
             ubyte mount2<name="Mount Animation", bgcolor=cBlue>;
 			ClassID Class<name="Class", bgcolor=cLtBlue>;
 			ClassType type<name="Class Type", bgcolor=cBlack>;
-			TrueFalse Enabled<name="Is Enable?", bgcolor=cRed>;
+			TrueFalse Enabled<name="For Specific Weapon Type", bgcolor=cRed>;
 			WeapAnimType Weapon<name="Weapon Type", bgcolor=cGreen>; 
 			Gender gender<name="Gender">;
 			byte unk<hidden=false>;
@@ -129,7 +129,7 @@ struct FILE {
             }actSet<name="Class Animation Set", bgcolor=cLtRed, read=EnumToString(Class)>;
     } block10<name="Class Animation Sets Block">;
     
-	GenericSection block11<name="block11">; //11
+	GenericSection block11<name="Never Used 11?">; //11
 	
     struct Block12 { //12
         DataSection sectionHeader<name="Section Header">;
@@ -363,7 +363,7 @@ struct FILE {
                 } block26_entry<name="Effect Name", read=EffectName>;
         }OtherVFX;
         byte padding<hidden=false>;
-    }block26<name="Another Effect Block">;
+    }block26<name="Hit VFX">;
     
     struct sMonasteryMovementAnimations{ //27
         DataSection sectionHeader;
