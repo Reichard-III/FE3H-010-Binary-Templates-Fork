@@ -63,6 +63,7 @@ enum<short> ModelID {
     Solon_ = 39,
     Tomas_ = 55,
     Nemesis_ = 56,
+    Rhea_Sick_ = 78,
     //Guesses to Cav Mounts
     Cav_Mount = 230,
     Mount_Paladin = 231,
@@ -130,6 +131,7 @@ enum<uint> ModelIDInt {
     Solon_modelidInt = 39,
     Tomas_modelidInt = 55,
     Nemesis_modelidInt = 56,
+    Rhea_Sick_modelidInt = 78,
     //Guesses to Cav Mounts
     Cav_Mount_modelidInt = 230,
     Mount_Paladin_modelidInt =  231,
