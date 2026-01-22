@@ -396,7 +396,7 @@ struct FILE {
 			short unk1;
 			short unk2;
 		}Item13[Header.NumEntries]<name="Item Data">;
-	}itemstructure13<name="Other Block 06", bgcolor=cYellow>;
+	}itemstructure13<name="Fixed Data Table 12", bgcolor=cYellow>;
 
 	FSeekNextSection(Sections);
 	struct ItemStructure14 { //13
@@ -415,7 +415,7 @@ struct FILE {
 		struct ITEM15{
 			byte Item15Size[Header.size];
 		}Item15[Header.NumEntries]<name="Item Data", optimize=false>;
-	}itemstructure15<name="Other Block 08", bgcolor=cYellow>;
+	}itemstructure15<name="Fixed Data Table 14", bgcolor=cYellow>;
 
 	FSeekNextSection(Sections);
 	struct ItemStructure16 { //15
@@ -423,7 +423,7 @@ struct FILE {
 		struct ITEM16{
 			ubyte someModelID[Header.size]<comment="unsure">;
 		}Item16[Header.NumEntries]<name="Item Data", optimize=false>;
-	}itemstructure16<name="Other Block 09", bgcolor=cYellow>;
+	}itemstructure16<name="Fixed Data Table 15", bgcolor=cYellow>;
 
 }File<name="Item.bin File",open=true>;
 
