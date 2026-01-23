@@ -392,11 +392,15 @@ struct FILE {
 	FSeekNextSection(Sections);
 	struct ItemStructure13 { //12
 		DataSection Header;
-		struct ITEM13{
-			short unk1;
-			short unk2;
-		}Item13[Header.NumEntries]<name="Item Data">;
-	}itemstructure13<name="Fixed Data Table 12", bgcolor=cYellow>;
+        for(i=0;i<Header.NumEntries;i++){
+		    struct ITEM13{
+                local MountID name=i;
+			    AID AssetID;
+			    MountID BattalionMountID<name="Battalion's MountID",comment="Battalion mounts use the AssetID using this index instead">;
+                byte padding;
+		    }MountData<name="MountData", read = EnumToString(name)">;
+        }
+	}itemstructure13<name="Mount Data Table", bgcolor=cYellow>;
 
 	FSeekNextSection(Sections);
 	struct ItemStructure14 { //13

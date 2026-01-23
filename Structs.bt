@@ -127,7 +127,7 @@ struct Person{
     NameID Name<name="Name ID">;
     int16 unk_0x14<bgcolor=cBlack>;
     uint16 CharacterID<name="Voice ID">;
-    uint16 AssetsID<name="Asset ID">;
+    AID AssetsID<name="Asset ID">;
     ClassID Class<name="Default Class">;
     ubyte Age<name="Age">;
     Month BirthMonth<name="Birthday: Month">;
