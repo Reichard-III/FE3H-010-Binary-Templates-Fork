@@ -398,7 +398,7 @@ struct FILE {
 			    AID AssetID;
 			    MountID BattalionMountID<name="Battalion's MountID",comment="Battalion mounts use the AssetID using this index instead">;
                 byte padding;
-		    }MountData<name="MountData", read = EnumToString(name)">;
+		    }MountData<name="MountData", read = EnumToString(name)>;
         }
 	}itemstructure13<name="Mount Data Table", bgcolor=cYellow>;
 
