@@ -194,7 +194,21 @@ struct FILE {
     
     GenericSection block17; //17
     
-    GenericSection block18; //18
+    struct sMonsterRelatedTable{
+        DataSection sectionHeader<name="Section Header">;
+        struct sMonsterRelatedEntries{
+            for(i=0; i < sectionHeader.NumEntries; i++)
+                struct sMonsterRelatedData{
+                    local MonsterName monster = i;
+                    float unkFloat0x0;
+                    float unkFloat0x4;
+                    float unkFloat0x8;
+                    byte  unkByte0xc[0x30];
+                    short unkShort0x3c;
+                    short unkShort0x3e[5];
+                }MonsterRelatedData<read=EnumToString(monster)>;
+        }MonsterRelatedEntries;
+    }MonsterRelatedTable;
     
     struct WEAPEFFECTS1 { //19
         DataSection sectionHeader<name="Section Header">;
