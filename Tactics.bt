@@ -1,0 +1,39 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.2 Binary Template
+//
+//      File: Tactics
+//   Authors: ReichardTheThird
+//   Version: 1.0
+//   Purpose: Parse the 21 different Tactics.* files
+//  Category: Reichard
+// File Mask: Tactics.*
+//  ID Bytes: 01 00 00 00
+//   History: 
+//   1.0    01/27/26 ReichardTheThird: Started this file
+//------------------------------------------------
+#include "Structs.bt"
+LittleEndian();
+local int i=0;
+
+struct sFile{
+    FileSections Sections;
+    
+    struct sTactics{
+        DataSection Header;
+        for(i=0;i<Header.NumEntries;i++){
+            struct sTacticsData{
+                float unkFloat0x0;
+                float unkFloat0x4;
+                float unkFloat0x8;
+                float unkFloat0xc;
+                float unkFloat0x10;
+                float unkFloat0x14;
+                byte unkByte0x18[0xd];
+                byte byte0x25;
+                byte unkByte0x26[0x2];
+            }TacticsData;
+            
+        }
+        
+    }Tactics;
+}File;

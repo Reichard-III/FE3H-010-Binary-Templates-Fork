@@ -203,9 +203,22 @@ struct FILE {
                     float unkFloat0x0;
                     float unkFloat0x4;
                     float unkFloat0x8;
-                    byte  unkByte0xc[0x30];
+                    struct sMonsterRelatedDataSubEntry{
+                        float unkFloat0x0;
+                        float unkFloat0x4;
+                        float unkFloat0x8;
+                        float unkFloat0xc;
+                    };
+                    sMonsterRelatedDataSubEntry a_se;
+                    sMonsterRelatedDataSubEntry b_se;
+                    sMonsterRelatedDataSubEntry c_se;
                     short unkShort0x3c;
-                    short unkShort0x3e[5];
+                    struct sabc{
+                        short a;
+                        short b;
+                        short c;
+                    }abc;
+                    byte unkByte[4];
                 }MonsterRelatedData<read=EnumToString(monster)>;
         }MonsterRelatedEntries;
     }MonsterRelatedTable;

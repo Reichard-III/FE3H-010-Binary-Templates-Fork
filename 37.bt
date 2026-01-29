@@ -18,8 +18,8 @@ local int i=0;
 
 struct sUnkD{
 	ushort unkShort2F0x0_A;
-	ushort unkShort2F0x2_B;
-	ushort unkShort2F0x4_B;
+	ushort MonasteryXPos;
+	ushort MonasteryYPos;
 	ushort unkShort2F0x6_A;
 	ushort unkShort2F0x8_A_Z;
 	ushort unkShort2F0xa_B;
