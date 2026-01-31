@@ -190,11 +190,46 @@ struct FILE {
 		}weapanimdata;
 	}WeapAnim;
     
-    GenericSection block16; byte padding16[2]<hidden=true>; //16
+    struct sEquipmentRelatedTable{ //16
+        DataSection sectionHeader<name="Section Header">;
+        struct sEquipmentRelatedEntries{
+            for(i=0; i<sectionHeader.NumEntries; i++)
+                struct sEquipmentRelatedData{
+                    local EquipID name = i;
+                    short A0;
+                    short B1;
+                    short C0;
+                    short A1;
+                    short C1;
+                    short D0;
+                    short E0;
+                    short F0;
+                    short E1;
+                    short F1;
+                    short B0;
+                    short D1;
+                    byte  byte2Float_0x18;
+                    byte  byte2Float_0x19;
+                }equipmentRelatedData<read=EnumToString(name)>;
+        }equipmentRelatedEntries;
+    } equipmentRelatedTable;
+    byte padding16[2]<hidden=true>; //16
     
-    GenericSection block17; //17
+    struct sClassRelatedTable{ //17
+        DataSection sectionHeader<name="Section Header">;
+        struct sClassRelatedEntries{
+            for(i=0;i<sectionHeader.NumEntries;i++)
+                struct sClassRelatedData{
+                    local ClassID name = i;
+                    short short2float0x0;
+                    short short2float0x2;
+                    ubyte  byte2float0x3;
+                    ubyte  byte2float0x4;
+                }classRelatedData<read=EnumToString(name)>;
+        }ClassRelatedEntries;
+    }ClassRelatedTable;
     
-    struct sMonsterRelatedTable{
+    struct sMonsterRelatedTable{ //18
         DataSection sectionHeader<name="Section Header">;
         struct sMonsterRelatedEntries{
             for(i=0; i < sectionHeader.NumEntries; i++)
@@ -339,7 +374,22 @@ struct FILE {
 		}WeapAuraEffectString<name="Effect Strings">;
     }WeapAuraEffects<name="Weapon Aura Effect Table">; byte padding22[3]<hidden=true>;
     
-	GenericSection block23; //23
+    struct sClassRelated2Table{ //23
+        DataSection sectionHeader<name="Section Header">;
+        struct sClassRelated2Entries{
+            for(i=0;i<sectionHeader.NumEntries;i++)
+                struct sClassRelated2Data{
+                    local ClassID name =i;
+                    float unkFloat0x0;
+                    float unkFloat0x4;
+                    float unkFloat0x8;
+                    float unkFloat0xc;
+                    float unkFloat0x10;
+                    float unkFloat0x14;
+                    float unkFloat0x18;
+                }ClassRelated2Data<read=EnumToString(name)>;
+        }ClassRelated2Entries;
+    }ClassRelated2Table<comment="probably related to drawing crest VFX around a class model">;
     
     struct Block24 { //24
         DataSection sectionHeader<name="Section Header">;
