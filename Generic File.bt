@@ -6,11 +6,9 @@
 //   Version: 1.0
 //   Purpose: Used to automatically parse files without requiring the user to know the file's contents or structures
 //  Category: Reichard
-// File Mask: *.bin
+// File Mask: 
 //  ID Bytes: 
 //   History: 
-//   1.1    3/9/25  ReichardTheThird: Added Generic FileMask to use as a default BT when no other BTs hit
-//                                  Added auto open Section on load
 //   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
 //------------------------------------------------
 
