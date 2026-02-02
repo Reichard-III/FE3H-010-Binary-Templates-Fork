@@ -61,15 +61,15 @@ struct GenericFile {
 		for (i = 0; i < Header.NumEntries; i++){
 			struct sunkEntry2 {
 				CharID Character;
-				ushort unkShort2FloatArray0x2[5];
-				ushort unkShort2FloatArray0xc[5];
-				ushort unkShort2FloatArray0x16[5];
-				ushort unkShort2FloatArray0x20[5];
-				ubyte indexes[5];
-				ubyte unkByte0x2f;
+				ushort DegreesRotation[5];
+				ushort X[5]<comment="coords/rotation indexed by # Total Gift Score / 10">;
+				ushort Z[5];
+				ushort Y[5];
+				ubyte indexes[5]<comment="used to index hard coded floats for XYZ values between 0.0 and 3.0, probably size related?">;
+				ubyte padding;
 			} unkEntry2<read=EnumToString(Character)>;
 		}
-	}unkTable2;
+	}GiftsInCharactersRoomData<comment="Places stuff in character's room after getting GiftScore. Gift Score +0 if MiscItem, +1 if Lost Item, +1 if Neutrally liked gift, +2 if liked gift/liked flower">;
 	
 	struct sunkTable3 {
 		DataSection Header;
