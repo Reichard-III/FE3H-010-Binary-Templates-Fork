@@ -424,10 +424,12 @@ struct FILE {
 	FSeekNextSection(Sections);
 	struct ItemStructure16 { //15
 		DataSection Header;
-		struct ITEM16{
-			ubyte someModelID[Header.size]<comment="unsure">;
-		}Item16[Header.NumEntries]<name="Item Data", optimize=false>;
-	}itemstructure16<name="Fixed Data Table 15", bgcolor=cYellow>;
+        for(i=0; i<Header.NumEntries;i++){
+		    struct ITEM16{
+			    WeaponModel MonasteryWeapon<comment="unsure">;
+		    }Item16<name="Item Data", optimize=false, read = EnumToString(MonasteryWeapon)>;
+        }
+	}itemstructure16<name="Monastery Weapons", bgcolor=cYellow>;
 
 }File<name="Item.bin File",open=true>;
 

@@ -668,19 +668,23 @@ enum<short> AID {
     Nemesis_AID = 56,
     Saint_Rhea_AID = 57,
     Blank_AID58,
+    
+    //Story NPCs 70 - 97
     Kid_Dimitri_AID = 70,
     Kid_Edelgard_AID = 71,
     Emperor_Ionius_AID = 72,
     Duke_Aegir_AID = 73,
     Fleche_AID,
     Lambert_AID = 75,
-    Metoady_AID = 80,
+    Metodey_AID = 80,
     Ladislava_AID = 81,
     Gwendal_AID = 82,
     Acheron_AID = 83,
     Pallardo_AID = 84,
 
     Edelgard_Flame_Emperor_AID = 99,
+    
+    //generic Battle NPCs 100 - 179
     Myrmidon_Male = 100,
     Myrmidon_Female = 101,
     Soldier_Male = 102,
@@ -783,6 +787,7 @@ enum<short> AID {
     DarkFlier_Mount_AID=245,
     Valkyrie_Mount_AID=246,
     
+    //Monsters 250 - 271
     Black_Beast_AID = 250,
     Wandering_Beast_AID = 251,
     Wild_Demon_Beast_AID,
@@ -804,6 +809,8 @@ enum<short> AID {
     Giant_Crawler_AID,
     Giant_Wolf_AID,
     Hegemon_AID,
+    
+    //Monastery NPCs 290 - 306
     Counselor_AID = 293,
     Saint_Statue_Artistan = 294,
     Trader_AID = 297,
@@ -813,7 +820,23 @@ enum<short> AID {
     Fishkeeper_AID = 305,
     GreenHouse_Keeper = 306,
 
+    //DLC 500 - 507
+    Yuri_AID = 500,
+    Balthus_AID = 501,
+    Constance_AID = 502,
+    Hapi_AID = 503,
+    
+    Playable_Jeritza_AID = 505,
     Death_Knight_Jeritza = 506,
+    Playable_Anna_AID = 507,
+    
+    
+    Student_1156_AID = 510,
+    Student_1157_AID = 511,
+    Student_1159_AID = 512,
+    Student_1160_AID = 513,
+    Student_1161_AID = 514,
+    Student_1162_AID = 515,
     Unit_Default = -1,
 };
 

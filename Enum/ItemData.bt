@@ -175,6 +175,8 @@ enum<ubyte> WeaponModel
     Asclepius_Model = 97,
     Aymr_Model = 98,
     Dark_Sword_of_the_Creator_Model = 99,
+    
+    //equips
     Leather_Shield_Model = 150,
     Iron_Shield_Model = 151,
     Steel_Shield_Model = 152,
@@ -197,6 +199,18 @@ enum<ubyte> WeaponModel
     Fortress_Knight_Shield_Model = 169,
     Flame_Shield_Model = 170,
     Emperor_Shield_Model = 171,
+    
+    //monastery
+    FishingRod_Model = 190,
+    FishingRod_Handle_Model_ = 191,
+    Kitchen_Knife_Model = 192,
+    unused193_model = 193,
+    unused194_model = 194,
+    unused195_model = 195,
+    unused196_model = 196,
+    unused197_model = 197,
+    unused198_model = 198,
+    unused199_model = 199,
 };
     
 
