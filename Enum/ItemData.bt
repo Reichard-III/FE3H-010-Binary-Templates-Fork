@@ -203,7 +203,7 @@ enum<ubyte> WeaponModel
     //monastery
     FishingRod_Model = 190,
     FishingRod_Handle_Model_ = 191,
-    Kitchen_Knife_Model = 192,
+    Feather_Pen_Model = 192,
     unused193_model = 193,
     unused194_model = 194,
     unused195_model = 195,
