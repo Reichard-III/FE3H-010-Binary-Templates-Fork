@@ -341,7 +341,7 @@ struct FILE {
 				struct BATTALIONDATA {
 					local BattalionID NameOfBatta<hidden=true>;
 					NameOfBatta = i;
-					uint StringPointer;
+					uint StringOffset;
 					Item weapon<name="Battalion Weapon">;
 					ushort BEndur<name="Endurance">;
 					byte BMag<name="Base Magical">;
@@ -387,6 +387,12 @@ struct FILE {
 				}BattalionData<name="Battalion Data", read=GetBattalionName>;
 			}
 		}Item12<name="Battalion">;
+        //strings are currently based on index, when they should probably be based on the Battalion.StringOffset
+        i = 0;
+        struct BattalionStrings{
+            local BattalionID Name = i++;
+            string BattString;
+        }BattalionString[Header.NumEntries]<optimize=false, read = Str("%-30.30s: %s",EnumToString(Name),BattString), comment="formatted as strings, but probably an array of indexes">;
 	}itemstructure12<name="Battalion Block", bgcolor=cYellow>;
 
 	FSeekNextSection(Sections);
