@@ -15,6 +15,51 @@
 LittleEndian();
 local int i=0;
 
+enum<byte> TacticsTarget_{
+    AimUser_,
+    AimTarget_,
+    AimAttacker_,
+    AimDefender_,
+    Aim5_
+};
+
+enum<int> TacticsAnimation{
+    TacticsAnimation0_101_KIRIBATO_tactics_fire_gimmick_burning = 0x00000000,        // 0.0f
+    TacticsAnimation1_101_KIRIBATO_tactics_fire_gimmick_explosion = 0x3f800000,      // 1.0f
+    TacticsAnimation2_101_KIRIBATO_tactics_fire_gimmick_misfire = 0x40000000,        // 2.0f
+    TacticsAnimation3_101_KIRIBATO_aura_army_attack_rush = 0x40400000,               // 3.0f
+    TacticsAnimation4_101_KIRIBATO_tactics_shoot_arrow_upward = 0x40800000,          // 4.0f
+    TacticsAnimation5_101_KIRIBATO_tactics_shoot_arrow_rain = 0x40a00000,            // 5.0f
+    TacticsAnimation6_101_KIRIBATO_hit_blow_s = 0x40c00000,                          // 6.0f
+    TacticsAnimation7_101_KIRIBATO_hit_blow_m_1m = 0x40e00000,                       // 7.0f
+    TacticsAnimation8_101_KIRIBATO_hit_blow_l_1m = 0x41000000,                       // 8.0f
+    TacticsAnimation9_101_KIRIBATO_hit_blow_m_3m = 0x41100000,                       // 9.0f
+    TacticsAnimation10_101_KIRIBATO_hit_blow_m_4m = 0x41200000,                      // 10.0f
+    TacticsAnimation11_101_KIRIBATO_hit_blow_m_5m = 0x41300000,                      // 11.0f
+    TacticsAnimation12_101_KIRIBATO_hit_blow_m_7m = 0x41400000,                      // 12.0f
+    TacticsAnimation13_101_KIRIBATO_hit_blow_m_8m = 0x41500000,                      // 13.0f
+    TacticsAnimation14_101_KIRIBATO_hit_blow_m_9m = 0x41600000,                      // 14.0f
+    TacticsAnimation15_101_KIRIBATO_hit_blow_l_5m = 0x41700000,                      // 15.0f
+    TacticsAnimation16_101_KIRIBATO_hit_blow_l_6m = 0x41800000,                      // 16.0f
+    TacticsAnimation17_101_KIRIBATO_hit_blow_l_7m = 0x41880000,                      // 17.0f
+    TacticsAnimation18_101_KIRIBATO_tactics_poison_gimmick_explosion = 0x41900000,   // 18.0f
+    TacticsAnimation19_101_KIRIBATO_tactics_poison_gimmick_smoke = 0x41980000,       // 19.0f
+    TacticsAnimation20_101_KIRIBATO_tactics_poison_gimmick_misfire = 0x41a00000,     // 20.0f
+    TacticsAnimation21_101_KIRIBATO_tactics_shoot_arrow_fire_upward = 0x41a80000,    // 21.0f
+    TacticsAnimation22_101_KIRIBATO_tactics_shoot_arrow_fire_rain = 0x41b00000,      // 22.0f
+    TacticsAnimation23_101_KIRIBATO_tactics_shoot_arrow_poison_upward = 0x41b80000,  // 23.0f
+    TacticsAnimation24_101_KIRIBATO_tactics_shoot_arrow_poison_rain = 0x41c00000,    // 24.0f
+    TacticsAnimation25_101_KIRIBATO_tactics_magic_fire_00 = 0x41c80000,              // 25.0f
+    TacticsAnimation26_101_KIRIBATO_tactics_magic_fire_01 = 0x41d00000,              // 26.0f
+    TacticsAnimation27_101_KIRIBATO_tactics_magic_ice_00 = 0x41d80000,               // 27.0f
+    TacticsAnimation28_101_KIRIBATO_tactics_magic_ice_01 = 0x41e00000,               // 28.0f
+    TacticsAnimation29_101_KIRIBATO_tactics_magic_thunder_00 = 0x41e80000,           // 29.0f
+    TacticsAnimation30_101_KIRIBATO_tactics_magic_thunder_01 = 0x41f00000,           // 30.0f
+    TacticsAnimation31_101_KIRIBATO_tactics_magic_heal_00 = 0x41f80000,              // 31.0f
+    TacticsAnimation32_101_KIRIBATO_tactics_magic_heal_01 = 0x42000000,              // 32.0f
+    TacticsAnimation33_101_KIRIBATO_tactics_cheering = 0x42040000,                   // 33.0f
+};
+
 struct sFile{
     FileSections Sections;
     
@@ -22,13 +67,22 @@ struct sFile{
         DataSection Header;
         for(i=0;i<Header.NumEntries;i++){
             struct sTacticsData{
-                float unkFloat0x0;
+                local float MultiPurposeF = ReadFloat(FTell());
+                if(MultiPurposeF >= 0 && MultiPurposeF <= 33){
+                    TacticsAnimation TAnimation<name="TacticsAnimation">;
+                }else{
+                    float unkFloat0x0;
+                }
                 float unkFloat0x4;
                 float unkFloat0x8;
                 float unkFloat0xc;
                 float unkFloat0x10;
                 float unkFloat0x14;
-                byte unkByte0x18[0xd];
+                byte unkByte0x18[0x8];
+                short unkShort0x20;
+                byte SomeIndex_;
+                byte unkByte0x23;
+                TacticsTarget_ Target_;
                 byte byte0x25;
                 byte unkByte0x26[0x2];
             }TacticsData;
