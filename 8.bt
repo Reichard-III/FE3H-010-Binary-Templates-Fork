@@ -6,7 +6,7 @@
 //   Version: 1.0
 //   Purpose: Parse the file name 8.bin, which controls XY positions of Battalion models relative to the main unit
 //  Category: Reichard
-// File Mask: *8.bin
+// File Mask: 8.bin
 //  ID Bytes: 
 //   History:
 //   1.0    09/03/25 ReichardTheThird: Started this, completed this
