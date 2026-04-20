@@ -367,7 +367,7 @@ struct File {
 				byte unkByte0xd<name="Unused? 0xd">;
 				byte HeatResistance;
 				byte Overheat_SkinReddeningLevel;
-			}entry14<read=EnumToString(character),name="Character Entry">;
+			}entry14<read=Str("%-13.13s - %-2d - %-2d %-2d",EnumToString(character), HeatResistance, Warmed_SkinReddeningLevel, Overheat_SkinReddeningLevel),name="Character Entry">;
 		}
 	}block14<name="Sauna Character Model/Animation Data">;
 
@@ -381,7 +381,7 @@ struct File {
 				short SeatingDistanceModifier<comment="Subtracts this position from Byleth's seat pos and Adds to Sauna Partner's seat pos, modifier of 71 will give them the same position">;
 				byte WarmupBarSize;
 				byte SaveChance;
-			}entry15<name="Sauna Support Bonuses",read=EnumToString(SMR)>;
+			}entry15<name="Sauna Support Bonuses",read=Str("%-5.5s - %-2d %-2d %-2d",EnumToString(SMR), SeatingDistanceModifier,WarmupBarSize,SaveChance)>;
 		}
 	}block15<name="Sauna Support Bonuses">;
 
