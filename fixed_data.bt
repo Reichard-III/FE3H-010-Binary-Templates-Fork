@@ -42,6 +42,8 @@ struct WepFlag02{
 	ubyte bit3 : 1<name="Flier 3x">;
 	ubyte bit4 : 1<name="Dragon 3x">;
 	ubyte bit5 : 1<name="Monster 3x">;
+    ubyte bit6 : 1<name="b6">;
+    ubyte bit7 : 1<name="b7">;
 };
 
 struct WepFlag01{

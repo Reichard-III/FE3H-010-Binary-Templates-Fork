@@ -387,8 +387,11 @@ enum<ubyte> GambitTargeting {
     UmbralSurge_Aoe = 14,
 };
 enum<ubyte> GambitEffects {
+    None_GambitFX = 0,
+    fx100_BMAP_tactics_weapon_attack = 1,
     Poison_Effect = 2,
     Ice_Effect  = 3,
     Lightning_Effect = 4,
+    fx100_BMAP_tactics_cajole = 5,
     Fire_Terrian = 7,
 };

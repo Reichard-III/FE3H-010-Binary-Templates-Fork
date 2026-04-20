@@ -6,7 +6,7 @@
 //   Version: 1.0
 //   Purpose: Parse the 21 different Tactics.* files
 //  Category: Reichard
-// File Mask: Tactics.*
+// File Mask: Tactics*, 48.bin, 49.bin, 50.bin, 51.bin, 52.bin, 53.bin, 54.bin, 55.bin, 56.bin, 57.bin, 58.bin, 59.bin, 60.bin, 61.bin, 62.bin
 //  ID Bytes: 01 00 00 00
 //   History: 
 //   1.0    01/27/26 ReichardTheThird: Started this file
@@ -16,48 +16,291 @@ LittleEndian();
 local int i=0;
 
 enum<byte> TacticsTarget_{
-    AimUser_,
-    AimTarget_,
-    AimAttacker_,
-    AimDefender_,
-    Aim5_
+    A_User,
+    A_Target,
+    A_Attacker,
+    A_Defender,
+    A_5,
+    A_Terrain,
 };
 
 enum<int> TacticsAnimation{
-    TacticsAnimation0_101_KIRIBATO_tactics_fire_gimmick_burning = 0x00000000,        // 0.0f
-    TacticsAnimation1_101_KIRIBATO_tactics_fire_gimmick_explosion = 0x3f800000,      // 1.0f
-    TacticsAnimation2_101_KIRIBATO_tactics_fire_gimmick_misfire = 0x40000000,        // 2.0f
-    TacticsAnimation3_101_KIRIBATO_aura_army_attack_rush = 0x40400000,               // 3.0f
-    TacticsAnimation4_101_KIRIBATO_tactics_shoot_arrow_upward = 0x40800000,          // 4.0f
-    TacticsAnimation5_101_KIRIBATO_tactics_shoot_arrow_rain = 0x40a00000,            // 5.0f
-    TacticsAnimation6_101_KIRIBATO_hit_blow_s = 0x40c00000,                          // 6.0f
-    TacticsAnimation7_101_KIRIBATO_hit_blow_m_1m = 0x40e00000,                       // 7.0f
-    TacticsAnimation8_101_KIRIBATO_hit_blow_l_1m = 0x41000000,                       // 8.0f
-    TacticsAnimation9_101_KIRIBATO_hit_blow_m_3m = 0x41100000,                       // 9.0f
-    TacticsAnimation10_101_KIRIBATO_hit_blow_m_4m = 0x41200000,                      // 10.0f
-    TacticsAnimation11_101_KIRIBATO_hit_blow_m_5m = 0x41300000,                      // 11.0f
-    TacticsAnimation12_101_KIRIBATO_hit_blow_m_7m = 0x41400000,                      // 12.0f
-    TacticsAnimation13_101_KIRIBATO_hit_blow_m_8m = 0x41500000,                      // 13.0f
-    TacticsAnimation14_101_KIRIBATO_hit_blow_m_9m = 0x41600000,                      // 14.0f
-    TacticsAnimation15_101_KIRIBATO_hit_blow_l_5m = 0x41700000,                      // 15.0f
-    TacticsAnimation16_101_KIRIBATO_hit_blow_l_6m = 0x41800000,                      // 16.0f
-    TacticsAnimation17_101_KIRIBATO_hit_blow_l_7m = 0x41880000,                      // 17.0f
-    TacticsAnimation18_101_KIRIBATO_tactics_poison_gimmick_explosion = 0x41900000,   // 18.0f
-    TacticsAnimation19_101_KIRIBATO_tactics_poison_gimmick_smoke = 0x41980000,       // 19.0f
-    TacticsAnimation20_101_KIRIBATO_tactics_poison_gimmick_misfire = 0x41a00000,     // 20.0f
-    TacticsAnimation21_101_KIRIBATO_tactics_shoot_arrow_fire_upward = 0x41a80000,    // 21.0f
-    TacticsAnimation22_101_KIRIBATO_tactics_shoot_arrow_fire_rain = 0x41b00000,      // 22.0f
-    TacticsAnimation23_101_KIRIBATO_tactics_shoot_arrow_poison_upward = 0x41b80000,  // 23.0f
-    TacticsAnimation24_101_KIRIBATO_tactics_shoot_arrow_poison_rain = 0x41c00000,    // 24.0f
-    TacticsAnimation25_101_KIRIBATO_tactics_magic_fire_00 = 0x41c80000,              // 25.0f
-    TacticsAnimation26_101_KIRIBATO_tactics_magic_fire_01 = 0x41d00000,              // 26.0f
-    TacticsAnimation27_101_KIRIBATO_tactics_magic_ice_00 = 0x41d80000,               // 27.0f
-    TacticsAnimation28_101_KIRIBATO_tactics_magic_ice_01 = 0x41e00000,               // 28.0f
-    TacticsAnimation29_101_KIRIBATO_tactics_magic_thunder_00 = 0x41e80000,           // 29.0f
-    TacticsAnimation30_101_KIRIBATO_tactics_magic_thunder_01 = 0x41f00000,           // 30.0f
-    TacticsAnimation31_101_KIRIBATO_tactics_magic_heal_00 = 0x41f80000,              // 31.0f
-    TacticsAnimation32_101_KIRIBATO_tactics_magic_heal_01 = 0x42000000,              // 32.0f
-    TacticsAnimation33_101_KIRIBATO_tactics_cheering = 0x42040000,                   // 33.0f
+    TA0_tactics_fireb_burning = 0x00000000,               // 0.0f         101_KIRIBATO_tactics_fire_gimmick_burning
+    TA1_tactics_fireb_explosion = 0x3f800000,             // 1.0f         101_KIRIBATO_tactics_fire_gimmick_explosion
+    TA2_tactics_fireb_misfire = 0x40000000,               // 2.0f         101_KIRIBATO_tactics_fire_gimmick_misfire
+    TA3_aura_army_attack_rush = 0x40400000,               // 3.0f         101_KIRIBATO_aura_army_attack_rush
+    TA4_tactics_shoot_upward = 0x40800000,                // 4.0f         101_KIRIBATO_tactics_shoot_arrow_upward
+    TA5_tactics_shoot_rain = 0x40a00000,                  // 5.0f         101_KIRIBATO_tactics_shoot_arrow_rain
+    TA6_hit_blow_s = 0x40c00000,                          // 6.0f         101_KIRIBATO_hit_blow_s
+    TA7_hit_blow_m_1m = 0x40e00000,                       // 7.0f         101_KIRIBATO_hit_blow_m_1m
+    TA8_hit_blow_l_1m = 0x41000000,                       // 8.0f         101_KIRIBATO_hit_blow_l_1m
+    TA9_hit_blow_m_3m = 0x41100000,                       // 9.0f         101_KIRIBATO_hit_blow_m_3m
+    TA10_hit_blow_m_4m = 0x41200000,                      // 10.0f        101_KIRIBATO_hit_blow_m_4m
+    TA11_hit_blow_m_5m = 0x41300000,                      // 11.0f        101_KIRIBATO_hit_blow_m_5m
+    TA12_hit_blow_m_7m = 0x41400000,                      // 12.0f        101_KIRIBATO_hit_blow_m_7m
+    TA13_hit_blow_m_8m = 0x41500000,                      // 13.0f        101_KIRIBATO_hit_blow_m_8m
+    TA14_hit_blow_m_9m = 0x41600000,                      // 14.0f        101_KIRIBATO_hit_blow_m_9m
+    TA15_hit_blow_l_5m = 0x41700000,                      // 15.0f        101_KIRIBATO_hit_blow_l_5m
+    TA16_hit_blow_l_6m = 0x41800000,                      // 16.0f        101_KIRIBATO_hit_blow_l_6m
+    TA17_hit_blow_l_7m = 0x41880000,                      // 17.0f        101_KIRIBATO_hit_blow_l_7m
+    TA18_tactics_poisonb_explosion = 0x41900000,          // 18.0f        101_KIRIBATO_tactics_poison_gimmick_explosion
+    TA19_tactics_poisonb_smoke = 0x41980000,              // 19.0f        101_KIRIBATO_tactics_poison_gimmick_smoke
+    TA20_tactics_poisonb_misfire = 0x41a00000,            // 20.0f        101_KIRIBATO_tactics_poison_gimmick_misfire
+    TA21_tactics_shoot_fire_upward = 0x41a80000,          // 21.0f        101_KIRIBATO_tactics_shoot_arrow_fire_upward
+    TA22_tactics_shoot_fire_rain = 0x41b00000,            // 22.0f        101_KIRIBATO_tactics_shoot_arrow_fire_rain
+    TA23_tactics_shoot_poison_upward = 0x41b80000,        // 23.0f        101_KIRIBATO_tactics_shoot_arrow_poison_upward
+    TA24_tactics_shoot_poison_rain = 0x41c00000,          // 24.0f        101_KIRIBATO_tactics_shoot_arrow_poison_rain
+    TA25_tactics_magic_fire_00 = 0x41c80000,              // 25.0f        101_KIRIBATO_tactics_magic_fire_00
+    TA26_tactics_magic_fire_01 = 0x41d00000,              // 26.0f        101_KIRIBATO_tactics_magic_fire_01
+    TA27_tactics_magic_ice_00 = 0x41d80000,               // 27.0f        101_KIRIBATO_tactics_magic_ice_00
+    TA28_tactics_magic_ice_01 = 0x41e00000,               // 28.0f        101_KIRIBATO_tactics_magic_ice_01
+    TA29_tactics_magic_thunder_00 = 0x41e80000,           // 29.0f        101_KIRIBATO_tactics_magic_thunder_00
+    TA30_tactics_magic_thunder_01 = 0x41f00000,           // 30.0f        101_KIRIBATO_tactics_magic_thunder_01
+    TA31_tactics_magic_heal_00 = 0x41f80000,              // 31.0f        101_KIRIBATO_tactics_magic_heal_00
+    TA32_tactics_magic_heal_01 = 0x42000000,              // 32.0f        101_KIRIBATO_tactics_magic_heal_01
+    TA33_tactics_cheering = 0x42040000,                   // 33.0f        101_KIRIBATO_tactics_cheering
+};
+
+enum<int> Float2Gambit{
+    Onslaught_00F = 0x0,                    //0         OnslaughtF
+    Assembly_01F = 0x3f800000,              //1         AssemblyF
+    Reversal_02F = 0x40000000,              //2         ReveralF
+    Lure_03F = 0x40400000,                  //3         LureF
+    Disturbance_04F = 0x40800000,           //4         DisturbanceF
+    Blaze_05F = 0x40a00000,                 //5         BlazeF
+    Fusillade_06F = 0x40c00000,             //6         FusilladeF
+    Assault_Troop_07F = 0x40e00000,         //7         Assault_TroopF
+    Absorption_08F = 0x41000000,            //8         AbsorptionF
+    Poisoned_Arrows_09F = 0x41100000,       //9         Poisoned_ArrowsF
+    Res_Flames_10F = 0x41200000,            //10        Resonant_FlamesF
+    Res_Ice_11F = 0x41300000,               //11        Resonant_IceF
+    Res_Lightning_12F = 0x41400000,         //12        Resonant_LightningF
+    Res_White_Magic_13F = 0x41500000,       //13        Resonant_White_MagicF
+    Flash_Fire_Arrows_14F = 0x41600000,     //14        Flash_Fire_ArrowsF
+    Gr_Lance_Attack_15F = 0x41700000,       //15        Group_Lance_AttackF
+    Linked_Horses_16F = 0x41800000,         //16        Linked_HorsesF
+    Poison_Tactic_17F = 0x41880000,         //17        Poison_TacticF
+    Bag_of_Tricks_18F = 0x41900000,         //18        Bag_of_TricksF
+    Recovery_Roar_19F = 0x41980000,         //19        Recovery_RoarF
+    Spare_20F = 0x41a00000,                 //20        SpareF
+    Impreg_Wall_21F = 0x41a80000,           //21        Impregnable_WallF
+    Sacred_Shield_22F = 0x41b00000,         //22        Sacred_ShieldF
+    Spare2_23F = 0x41b80000,                //23        Spare2F
+    Retribution_24F = 0x41c00000,           //24        RetributionF
+    Stride_25F = 0x41c80000,                //25        StrideF
+    Blessing_26F = 0x41d00000,              //26        BlessingF
+    GoddessDance_27F = 0x41d80000,          //27        Dance_of_the_GoddessF
+    Ashes_and_Dust_28F = 0x41e00000,        //28        Ashes_and_DustF
+    Raging_Flames_29F = 0x41e80000,         //29        Raging_FlamesF
+    Wave_Attack_30F = 0x41f00000,           //30        Wave_AttackF
+    Line_of_Lances_31F = 0x41f80000,        //31        Line_of_LancesF
+    Gr_Flames_32F = 0x42000000,             //32        Group_FlamesF
+    Gr_Ice_33F = 0x42040000,                //33        Group_IceF
+    Gr_Lightning_34F = 0x42080000,          //34        Group_LightningF
+    Mad_Melee_35F = 0x420c0000,             //35        Mad_MeleeF
+    Random_Shot_36F = 0x42100000,           //36        Random_ShotF
+    Abs_Defense_37F = 0x42140000,           //37        Absolute_DefenseF
+    BattleGr_Cafe_38F = 0x42180000,         //38        Battleground_CafeF
+    BattleGr_CleanUp_39F = 0x421c0000,      //39        Battleground_CleanUpF
+    Gambit40F = 0x42200000,                 //40        Gambit40F
+    Gambit41F = 0x42240000,                 //41        Gambit41F
+    Gambit42F = 0x42280000,                 //42        Gambit42F
+    Gambit43F = 0x422c0000,                 //43        Gambit43F
+    Gambit44F = 0x42300000,                 //44        Gambit44F
+    Gambit45F = 0x42340000,                 //45        Gambit45F
+    Gambit46F = 0x42380000,                 //46        Gambit46F
+    Gambit47F = 0x423c0000,                 //47        Gambit47F
+    Gambit48F = 0x42400000,                 //48        Gambit48F
+    Gambit49F = 0x42440000,                 //49        Gambit49F
+    Gambit50F = 0x42480000,                 //50        Gambit50F
+    Gambit51F = 0x424c0000,                 //51        Gambit51F
+    Gambit52F = 0x42500000,                 //52        Gambit52F
+    Gambit53F = 0x42540000,                 //53        Gambit53F
+    Gambit54F = 0x42580000,                 //54        Gambit54F
+    Gambit55F = 0x425c0000,                 //55        Gambit55F
+    Gambit56F = 0x42600000,                 //56        Gambit56F
+    Gambit57F = 0x42640000,                 //57        Gambit57F
+    Gambit58F = 0x42680000,                 //58        Gambit58F
+    Gambit59F = 0x426c0000,                 //59        Gambit59F
+    Gambit60F = 0x42700000,                 //60        Gambit60F
+    Gambit61F = 0x42740000,                 //61        Gambit61F
+    Gambit62F = 0x42780000,                 //62        Gambit62F
+    Gambit63F = 0x427c0000,                 //63        Gambit63F
+    Gambit64F = 0x42800000,                 //64        Gambit64F
+    Gambit65F = 0x42820000,                 //65        Gambit65F
+    Gambit66F = 0x42840000,                 //66        Gambit66F
+    Gambit67F = 0x42860000,                 //67        Gambit67F
+    Gambit68F = 0x42880000,                 //68        Gambit68F
+    Gambit69F = 0x428a0000,                 //69        Gambit69F
+    Gambit70F = 0x428c0000,                 //70        Gambit70F
+    Gambit71F = 0x428e0000,                 //71        Gambit71F
+    Gambit72F = 0x42900000,                 //72        Gambit72F
+    Gambit73F = 0x42920000,                 //73        Gambit73F
+    Gambit74F = 0x42940000,                 //74        Gambit74F
+    Gambit75F = 0x42960000,                 //75        Gambit75F
+    Gambit76F = 0x42980000,                 //76        Gambit76F
+    Gambit77F = 0x429a0000,                 //77        Gambit77F
+    Gambit78F = 0x429c0000,                 //78        Gambit78F
+    Gambit79F = 0x429e0000,                 //79        Gambit79F
+};
+
+enum<int> TacticsSFX_Adj{
+    TSFX00_0x20A = 0x00000000,
+	TSFX01_0x20B = 0x3f800000,
+	TSFX02_0x20C = 0x40000000,
+	TSFX03_0x20D = 0x40400000,
+	TSFX04_0x20E = 0x40800000,
+	TSFX05_0x20F_Meteor_Fire = 0x40a00000,
+	TSFX06_0x210 = 0x40c00000,
+	TSFX07_0x211 = 0x40e00000,
+	TSFX08_0x124_Shove = 0x41000000,
+	TSFX09_0x125 = 0x41100000,
+	TSFX10_0x225 = 0x41200000,
+	TSFX11_0x226 = 0x41300000,
+	TSFX12_0x227 = 0x41400000,
+	TSFX13_0x228 = 0x41500000,
+	TSFX14_0x229 = 0x41600000,
+	TSFX15_0x22A = 0x41700000,
+	TSFX16_0x22B = 0x41800000,
+	TSFX17_0x22C = 0x41880000,
+	TSFX18_0x218 = 0x41900000,
+	TSFX19_0x21A = 0x41980000,
+	TSFX20_0x21C = 0x41a00000,
+	TSFX21_0x21E = 0x41a80000,
+	TSFX22_0x219 = 0x41b00000,
+	TSFX23_0x21B = 0x41b80000,
+	TSFX24_0x21D = 0x41c00000,
+	TSFX25_0x21F = 0x41c80000,
+	TSFX26_0x133 = 0x41d00000,
+	TSFX27_0x220_Buff = 0x41d80000,
+    
+};
+
+enum<byte> TacticsEntryType{
+    Mode0,
+    SomeCoord_Rotation,
+	FlagSet_Clear,
+	Mode3,
+	Mode4,
+	Mode5,
+	Mode6,
+	Mode7,
+	Mode8,
+	SomeMoveClassEffectiveness,
+	Mode10,
+    HitVFX = 11,
+	AttackAnimation = 12,
+	Mode13, //ununsed
+	AreaVFX,
+	SetCM0x2a6,
+	TacticsSFX = 16,
+	Mode17,
+	Mode18,
+	TacticsVoice = 19,
+    TacticsSpecialSFX = 20,
+    ModeUnused = -1
+};
+
+enum<byte> TacticsHitRequirement{
+    HitOrMiss = 0,
+    Must_Hit = 1,
+    Must_Miss = 2
+};
+
+struct TacticsDefault{
+    float f0x0;
+    float f0x4;
+    float f0x8;
+    float f0xc;
+    float f0x10;
+    float f0x14;
+    byte unkByte0x18[0x8];
+    short sx20;
+    byte SomeIndex_;
+    TacticsEntryType Mode;
+    TacticsTarget_ Target_;
+    TacticsHitRequirement HitRequirement;
+    byte unkByte0x26[0x2];
+};
+
+struct TacticsHitVFX{ //11
+    TacticsAnimation f0x0<name="TacticsAnimation">;
+    float f0x4;
+    float f0x8;
+    float f0xc;
+    Float2Gambit GambitF;
+    float f0x14;
+    byte unkByte0x18[0x8];
+    short s0x20;
+    byte SomeIndex_;
+    TacticsEntryType Mode;
+    TacticsTarget_ Target_;
+    TacticsHitRequirement HitRequirement;
+    byte unkByte0x26[0x2];
+};
+
+struct TacticsAttack{ //12
+    TacticsAnimation f0x0<name="TacticsAnimation">;
+    float f0x4;
+    float f0x8;
+    Float2Gambit GambitF;
+    float f0x10;
+    float f0x14;
+    byte unkByte0x18[0x8];
+    short s0x20;
+    byte SomeIndex_;
+    TacticsEntryType Mode;
+    TacticsTarget_ Target_;
+    TacticsHitRequirement HitRequirement;
+    byte unkByte0x26[0x2];
+};
+
+struct TacticsM13{ //13 unused
+    TacticsAnimation f0x0<name="TacticsAnimation">;
+    float f0x4;
+    float f0x8;
+    float f0xc; //rotation
+    float f0x10;
+    Float2Gambit GambitF;
+    byte unkByte0x18[0x8];
+    short s0x20;
+    byte SomeIndex_;
+    TacticsEntryType Mode;
+    TacticsTarget_ Target_;
+    TacticsHitRequirement HitRequirement;
+    byte unkByte0x26[0x2];
+};
+
+struct TacticsAreaVFX{ //14
+    TacticsAnimation f0x0<name="TacticsAnimation">;
+    float f0x4;
+    float f0x8;
+    float f0xc;
+    Float2Gambit GambitF;
+    float f0x14;
+    byte unkByte0x18[0x8];
+    short s0x20;
+    byte SomeIndex_;
+    TacticsEntryType Mode;
+    TacticsTarget_ Target_;
+    TacticsHitRequirement HitRequirement;
+    byte unkByte0x26[0x2];
+};
+
+struct TacticsSFX{ //16
+    TacticsAnimation f0x0<name="TacticsAnimation">;
+    float f0x4;
+    float f0x8;
+    float f0xc;
+    Float2Gambit GambitF;
+    float f0x14;
+    byte unkByte0x18[0x8];
+    short s0x20;
+    byte SomeIndex_;
+    TacticsEntryType Mode;
+    TacticsTarget_ Target_;
+    TacticsHitRequirement HitRequirement;
+    byte unkByte0x26[0x2];
 };
 
 struct sFile{
@@ -67,27 +310,29 @@ struct sFile{
         DataSection Header;
         for(i=0;i<Header.NumEntries;i++){
             struct sTacticsData{
-                local float MultiPurposeF = ReadFloat(FTell());
-                if(MultiPurposeF >= 0 && MultiPurposeF <= 33){
-                    TacticsAnimation TAnimation<name="TacticsAnimation">;
-                }else{
-                    float unkFloat0x0;
+                local TacticsEntryType TacticsEntryT = ReadByte(FTell()+0x23);
+                switch(TacticsEntryT){
+                    case 11: TacticsHitVFX TE; break;
+                    case 12: TacticsAttack TE; break;
+                    case 13: TacticsM13 TE; break;
+                    case 14: TacticsAreaVFX TE; break;
+                    case 16: TacticsSFX TE; break;
+                    default: TacticsDefault TE; break;
                 }
-                float unkFloat0x4;
-                float unkFloat0x8;
-                float unkFloat0xc;
-                float unkFloat0x10;
-                float unkFloat0x14;
-                byte unkByte0x18[0x8];
-                short unkShort0x20;
-                byte SomeIndex_;
-                byte unkByte0x23;
-                TacticsTarget_ Target_;
-                byte byte0x25;
-                byte unkByte0x26[0x2];
-            }TacticsData;
-            
+            }TacticsData<read=GetTacticsDisplay(this)>;
         }
-        
     }Tactics;
-}File;
+}File<open=true>;
+
+string GetTacticsDisplay(sTacticsData & TD){
+    local string strA = EnumToString(TD.TE.Mode);
+    local string strB;
+    switch(TD.TE.Mode){
+        case 11: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
+        case 12: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
+        case 13: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
+        case 14: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
+        default: strB = Str("%7.1f %7.1f %7.1f %7.1f %7.1f",                TD.TE.f0x0, TD.TE.f0x4, TD.TE.f0x8,                     TD.TE.f0xc,               TD.TE.f0x10                                                         ); break;
+    } 
+    return Str("%-13.13s | %s", EnumToString(TD.TE.Mode),strB);
+};
