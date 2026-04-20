@@ -332,6 +332,7 @@ string GetTacticsDisplay(sTacticsData & TD){
         case 12: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
         case 13: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
         case 14: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
+        case 16: strB = Str("%7.1f %7.1f - %-18.18s - %-32.32s - %9.9s %s", TD.TE.f0x4, TD.TE.f0x8, EnumToString(TD.TE.GambitF),    EnumToString(TD.TE.f0x0), EnumToString(TD.TE.Target_),  EnumToString(TD.TE.HitRequirement)    ); break;
         default: strB = Str("%7.1f %7.1f %7.1f %7.1f %7.1f",                TD.TE.f0x0, TD.TE.f0x4, TD.TE.f0x8,                     TD.TE.f0xc,               TD.TE.f0x10                                                         ); break;
     } 
     return Str("%-13.13s | %s", EnumToString(TD.TE.Mode),strB);
