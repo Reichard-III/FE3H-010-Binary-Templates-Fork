@@ -206,29 +206,29 @@ struct FILE {
 	}WeapAnim;
     
     FSeekNextSection(Section);
-    struct sEquipmentRelatedTable{ //16
+    struct sEquipmentPoseTable{ //16
         DataSection sectionHeader<name="Section Header">;
-        struct sEquipmentRelatedEntries{
+        struct sEquipmentPoseEntries{
             for(i=0; i<sectionHeader.NumEntries; i++)
-                struct sEquipmentRelatedData{
+                struct sEquipmentPoseData{
                     local EquipID name = i;
-                    short A0;
-                    short B1;
-                    short C0;
-                    short A1;
-                    short C1;
-                    short D0;
-                    short E0;
-                    short F0;
-                    short E1;
-                    short F1;
-                    short B0;
-                    short D1;
-                    byte  byte2Float_0x18;
-                    byte  byte2Float_0x19;
-                }equipmentRelatedData<read=EnumToString(name)>;
-        }equipmentRelatedEntries;
-    } equipmentRelatedTable;
+                    short Heave;
+                    short Sway_MountClass;
+                    short Surge;
+                    short Heave_MountClass;
+                    short Surge_MountClasss;
+                    short Roll;
+                    short Yaw;
+                    short Pitch;
+                    short Yaw_MountClass;
+                    short Pitch_MountClass;
+                    short Sway;
+                    short Roll_MountClass;
+                    byte  Scale_MountClass;
+                    byte  Scale;
+                }EquipmentPoseData<read=EnumToString(name), comment="Coordinates/Rotations were tested with Thyrsus, may not make sense for other equips">;
+        }EquipmentPoseEntries<comment="Search up 6 Degrees of Freedom for Coordinates/Rotation diagram">;
+    } EquipmentPoseTable<comment="Not yet investigated if MountClass is the actual trigger for the alternative coordinates">;
     
     FSeekNextSection(Section);
     struct sClassRelatedTable{ //17
