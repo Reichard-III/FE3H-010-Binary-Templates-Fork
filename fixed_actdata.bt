@@ -363,7 +363,7 @@ struct FILE {
 				    string EffectName;
 			    }EquipmentEffectName<read=GetEquipEffectName, name="Effect Name">;
 		}EquipmentEffectString<name="Effect Strings">;
-    }EquipmentEffects<name="Equipment Effect Table">; byte padding21[2]<hidden=true>;
+    }EquipmentEffects<name="Equipment Effect Table">;
 	
     FSeekNextSection(Section);
     struct WEAPAURAEFFECTS { //22
@@ -473,7 +473,6 @@ struct FILE {
         };
         for(i=0;i<sectionHeader.NumEntries;i++)
             sMonasteryMovementAnimation MonasteryMovementAnimation;
-        byte padding[3];
     }MonasteryMovementAnimations<name="Movement-Related Monastery?">;
     
     FSeekNextSection(Section);
