@@ -20,9 +20,21 @@
 LittleEndian();
 local int i=0;
 
+enum<byte> GroupTaskID{
+    StableDuty,
+    UnusedGT1,
+    UnusedGT2,
+    Weeding,
+    Rubble_,
+    UnusedGT5,
+    SkyWaatch,
+    UnusedGT7
+};
+
 struct GroupTaskSection {
 	DataSection SectionHeader;
 	struct GroupTask {
+        local GroupTaskID name = i;
 		short goodGoldReward<name="Gold Reward (Good)">;
 		short perfectGoldReward<name="Gold Reward (Perfect)">;
 		RankStats raisedSkill<name="Skill to Improve">;
@@ -31,7 +43,10 @@ struct GroupTaskSection {
 		byte goodRewardAmount<name="Reward Amount (Good)">;
 		byte perfectRewardAmount<name="Reward Amount (Perfect)">;
 		byte Padding<bgcolor=cDkYellow,name="Padding">;
-	} groupTasks[SectionHeader.NumEntries];
+	};
+    for(i=0;i<SectionHeader.NumEntries;i++){
+        GroupTask GroupTaskRewards<read=Str("%-10.10s", EnumToString(this.name))>;
+    };
 };
 
 // These all affect what dialog is shown during group
@@ -70,7 +85,10 @@ struct ActivityConversationSection {
 
         byte weed_rubble_req_rank;
 		GroupTaskDialog groupTasks<name="Group Task Dialog Options">;
-	} activityConversations[SectionHeader.NumEntries]<read=getActivityConvoName>;
+	};
+    for(i=0;i<SectionHeader.NumEntries;i++){
+        ActivityConversationData groupWorkConversation<read=Str("%-12.12s | %-12.12s", EnumToString(this.charID1), EnumToString(this.charID2))>;
+    };
 };
 
 struct GroupTaskPreferenceEntry {
@@ -87,7 +105,7 @@ struct GroupTaskPreferenceEntry {
 		Preferences UnusedGroupTask7<bgcolor=cDkYellow>;
 	};
 	for(i=0;i<SectionHeader.NumEntries;i++){
-		GroupTaskPreferenceData GroupTaskPreference<read=EnumToString(Char)>;
+		GroupTaskPreferenceData GroupTaskPreference<read=Str("%-10.10s | Riding: %-10.10s - Armor: %-10.10s - Flying: %-10.10s", EnumToString(this.Char), this.StableDuty==0 ? "" : EnumToString(this.StableDuty), this.Weeding==0 ? "" : EnumToString(this.Weeding), this.SkyWatch==0 ? "" : EnumToString(this.SkyWatch))>;
 	}
 };
 
@@ -95,65 +113,65 @@ struct UnknownSection4 {
 	DataSection SectionHeader;
 	struct UnknownData4 {
 		local SaveBlockID Char = i;
-		TrueFalse MByleth;
-		TrueFalse FByleth;
-		TrueFalse Edelgard;
-		TrueFalse Dimitri;
+		TrueFalse SpecialCharacter<name="MByleth">;
+		TrueFalse SpecialCharacter<name="FByleth">;
+		TrueFalse SpecialCharacter<name="Edelgard">;
+		TrueFalse SpecialCharacter<name="Dimitri">;
 		
-		TrueFalse Claude;
-		TrueFalse Hubert;
-		TrueFalse Ferdinand;
-		TrueFalse Linhardt;
+		TrueFalse SpecialCharacter<name="Claude">;
+		TrueFalse SpecialCharacter<name="Hubert">;
+		TrueFalse SpecialCharacter<name="Ferdinand">;
+		TrueFalse SpecialCharacter<name="Linhardt">;
 		
-		TrueFalse Caspar;
-		TrueFalse Bernadetta;
-		TrueFalse Dorothea;
-		TrueFalse Petra;
+		TrueFalse SpecialCharacter<name="Caspar">;
+		TrueFalse SpecialCharacter<name="Bernadetta">;
+		TrueFalse SpecialCharacter<name="Dorothea">;
+		TrueFalse SpecialCharacter<name="Petra">;
 		
-		TrueFalse Dedue;
-		TrueFalse Felix;
-		TrueFalse Ashe;
-		TrueFalse Sylvain;
+		TrueFalse SpecialCharacter<name="Dedue">;
+		TrueFalse SpecialCharacter<name="Felix">;
+		TrueFalse SpecialCharacter<name="Ashe">;
+		TrueFalse SpecialCharacter<name="Sylvain">;
 		
-		TrueFalse Mercedes;
-		TrueFalse Annette;
-		TrueFalse Ingrid;
-		TrueFalse Lorenz;
+		TrueFalse SpecialCharacter<name="Mercedes">;
+		TrueFalse SpecialCharacter<name="Annette">;
+		TrueFalse SpecialCharacter<name="Ingrid">;
+		TrueFalse SpecialCharacter<name="Lorenz">;
 		
-		TrueFalse Raphael;
-		TrueFalse Ignatz;
-		TrueFalse Lysithea;
-		TrueFalse Marianne;
+		TrueFalse SpecialCharacter<name="Raphael">;
+		TrueFalse SpecialCharacter<name="Ignatz">;
+		TrueFalse SpecialCharacter<name="Lysithea">;
+		TrueFalse SpecialCharacter<name="Marianne">;
 		
-		TrueFalse Hilda;
-		TrueFalse Leonie;
-		TrueFalse Seteth;
-		TrueFalse Flayn;
+		TrueFalse SpecialCharacter<name="Hilda">;
+		TrueFalse SpecialCharacter<name="Leonie">;
+		TrueFalse SpecialCharacter<name="Seteth">;
+		TrueFalse SpecialCharacter<name="Flayn">;
 		
-		TrueFalse Hanneman;
-		TrueFalse Manuela;
-		TrueFalse Gilbert;
-		TrueFalse Alois;
+		TrueFalse SpecialCharacter<name="Hanneman">;
+		TrueFalse SpecialCharacter<name="Manuela">;
+		TrueFalse SpecialCharacter<name="Gilbert">;
+		TrueFalse SpecialCharacter<name="Alois">;
 		
-		TrueFalse Catherine;
-		TrueFalse Shamir;
-		TrueFalse Cyril;
-		TrueFalse Jeralt;
+		TrueFalse SpecialCharacter<name="Catherine">;
+		TrueFalse SpecialCharacter<name="Shamir">;
+		TrueFalse SpecialCharacter<name="Cyril">;
+		TrueFalse SpecialCharacter<name="Jeralt">;
 		
-		TrueFalse Rhea;
-		TrueFalse Sothis;
-		TrueFalse Yuri;
-		TrueFalse Balthus;
+		TrueFalse SpecialCharacter<name="Rhea">;
+		TrueFalse SpecialCharacter<name="Sothis">;
+		TrueFalse SpecialCharacter<name="Yuri">;
+		TrueFalse SpecialCharacter<name="Balthus">;
 		
-		TrueFalse Constance;
-		TrueFalse Hapi;
-		TrueFalse Aelfric;
-		TrueFalse Jeritza;
+		TrueFalse SpecialCharacter<name="Constance">;
+		TrueFalse SpecialCharacter<name="Hapi">;
+		TrueFalse SpecialCharacter<name="Aelfric">;
+		TrueFalse SpecialCharacter<name="Jeritza">;
 		
-		TrueFalse Anna;
+		TrueFalse SpecialCharacter<name="Anna">;
 	};
 	for(i=0;i<SectionHeader.NumEntries;i++){
-		UnknownData4 unkDat<read=EnumToString(Char)>;
+		UnknownData4 unkDat<read=getSpecialNameList(this)>;
 	}
 };
 
@@ -166,7 +184,10 @@ struct UnknownSection5 {
 		CharID A;
 		TrueFalse IsEnabled;
 		byte uncPadding<name="Padding?",bgcolor=cDkYellow>;
-	} unknownData5[SectionHeader.NumEntries];
+	};
+    for(i=0;i<SectionHeader.NumEntries;i++){
+        UnknownData5 unkDat<read=Str("%-15.15s - %-15.15s | %s",EnumToString(this.B),EnumToString(this.A), this.IsEnabled==1 ? "Enabled": "")>;
+    }
 };
 
 struct File {
@@ -189,4 +210,20 @@ struct File {
 	UnknownSection5 unknownSection4<bgcolor=cYellow>;
 } file<open=true>;
 
-string getActivityConvoName(ActivityConversationData & q) { return EnumToString(q.charID1) + " & " + EnumToString(q.charID2); }
+string getGroupTaskPreference(GroupTaskPreferenceData & q){
+    string out = Str("%-10.10 | Horse: %-10.10s | Armor: %-10.10s | Flying: %-10.10s", EnumToString(q.Char), EnumToString(q.StableDuty), EnumToString(q.Weeding), EnumToString(q.SkyWatch));
+    
+    return out;
+}
+string getSpecialNameList(UnknownData4 & q){
+    string out = Str("%-10.10s | ", EnumToString(q.Char));
+    local SaveBlockID name;
+    local int i;
+    for(i=0; i<45; i++){
+        if(SpecialCharacter[i]==1){
+            name = i;
+            out += Str("%-3.3s ",EnumToString(name));
+        }
+    }
+    return out;
+}
