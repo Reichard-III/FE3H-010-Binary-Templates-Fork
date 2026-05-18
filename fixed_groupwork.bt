@@ -68,8 +68,8 @@ struct ActivityConversationSection {
 		byte mealDialogSupportB<name="Unique Dining B - Major Support Rank Req">;
 		byte mealDialogASupportA<name="Unique Dining A - Major Support Rank Req">;
 
+        byte weed_rubble_req_rank;
 		GroupTaskDialog groupTasks<name="Group Task Dialog Options">;
-		TrueFalse unkVal;
 	} activityConversations[SectionHeader.NumEntries]<read=getActivityConvoName>;
 };
 

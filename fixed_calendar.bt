@@ -127,7 +127,8 @@ struct Unknown10Byte {
 struct sFishingEvent{
 	local FishingEventName FEN=i;
 	
-	byte unkByte0x0[2];
+	byte unkByte0x0;
+    byte MultipleFishRewards;
 	FishingEventType FishingGimmick<comment="used to index LobbyActivityTable5_0x1 data ">;
 	byte unkByte0x3[7];
 };
