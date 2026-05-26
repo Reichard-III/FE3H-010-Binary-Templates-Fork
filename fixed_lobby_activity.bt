@@ -90,14 +90,15 @@ struct File {
 	
     FSeekNextSection(Sections);
 	struct UnitPreferences{ //0
-		DataSection SectionHeader;
+		DataSection SectionHeader<read=Str("%-12.12s # | %-8.8s %-8.8s", "Character","Choir","Cooking")>;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Unit {
 				CharID character<bgcolor=cRed>;
 				Preferences Choir<name="Choir Preference", bgcolor=cSilver>;
 				Preferences Cooking<name="Cooking Preference", bgcolor=cLtBlue>;
-				short unkShort0x4;
-			}preferences<name="Unit", read=Str("%d %s",unkShort0x4,EnumToString(character))>;
+				byte NumberOfDiningAccessories;
+                byte padding;
+			}preferences<name="Unit", read=Str("%-12.12s %1d | %-8.8s %-8.8s",EnumToString(character), NumberOfDiningAccessories, Choir==0 ? "" : EnumToString(Choir), Cooking==0 ? "" : EnumToString(Cooking))>;
 		}
 	}unitpreferences<name="Activity Preferences">;
 	
@@ -135,7 +136,7 @@ struct File {
 					struct sCharacterPreference{
 						local SaveBlockID SaveID=j;
 						Preferences Preference;
-					}CharacterPreference<read=Str("%s - %s",EnumToString(Preference), EnumToString(SaveID))>;
+					}CharacterPreference<read=Str("%-7.7s - %s",EnumToString(Preference), EnumToString(SaveID))>;
 				}
 			}mealPreferences<name="Meal Preferences", bgcolor=cSilver, read = EnumToString(name)>;
 		}

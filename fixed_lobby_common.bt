@@ -237,14 +237,16 @@ struct File{
 	
 	FSeekNextSection(Sections);
 	struct sItemSpotAltItems{ //6
-		DataSection SectionHeader;
+		DataSection SectionHeader<read=Str("%-15.15s | Included in Item pools","Item")>;
 		struct sItemSpotAltDropItem{
-			Item MiscellaneousItem<name="Miscellaneous Item">;
+			Item AltItem<name="Miscellaneous Item">;
 			ubyte AdvancedItemPool<name="Enabled in Advanced Item Pool">;
 			ubyte IntermediateItemPool<name="Enabled in Intermediate Item Pool">;
 			ubyte BasicItemPool<name="Enabled in Basic Item Pool">;
 			ubyte unk1<name="padding?">;
-		}ItemSpotAltDropItem[SectionHeader.NumEntries]<name="ItemSpot Alt Drop Item">;
+		};
+        for(i=0;i<SectionHeader.NumEntries;i++)
+            sItemSpotAltDropItem ItemSpotAltDropItem<read=Str("%-15.15s | %s %s %s",EnumToString(AltItem), AdvancedItemPool==1?"Adv":"   ", IntermediateItemPool==1?"Int":"   ", BasicItemPool==1?"Bas":"   ")>;
 	}ItemSpotAltItems<name="ItemSpot Alt Drop Items",bgcolor=cGreen, comment="If ItemSpots are configured to drop random items, they have a chance to drop these items">;
 	
 	FSeekNextSection(Sections);

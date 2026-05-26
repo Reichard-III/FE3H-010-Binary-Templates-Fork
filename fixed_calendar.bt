@@ -137,7 +137,7 @@ struct sGardeningEvent{
 	local GardeningEventName GEN=i;
 	
 	byte unkByte0x0;
-	byte unkByte0x1;
+	byte Crop_QuantityBonus;
 	byte StatBoosterRollScoreBooster;
 	byte unkByte0x4;
 	byte unkByte0x5;
