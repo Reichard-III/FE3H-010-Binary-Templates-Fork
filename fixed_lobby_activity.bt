@@ -191,7 +191,7 @@ struct File {
 	                byte LotsOfLargeFish_FET<name="Lots of Large Fish Event">;
                 }LA5Thresholds<name="Marginal Roll Thresholds">;
 				byte unk[6]<name="Unused?">;
-			}LobbyActivity5Entry<name="Fish Tier Roll Thresholds",read=EnumToString(FT)>;
+			}LobbyActivity5Entry<name="Fish Tier Roll Thresholds",read=Str("%-20.20s | %3d %3d %3d %3d",EnumToString(FT), LA5Thresholds.Standard_FET, LA5Thresholds.FishOfMystery_FET, LA5Thresholds.GoldenFish_FET, LA5Thresholds.LotsOfLargeFish_FET)>;
 		}
         byte padding2[2];
 	}LobbyActivity5<name="Fish Tier Roll Thresholds">;

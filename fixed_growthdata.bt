@@ -88,20 +88,20 @@ struct sMagicExpCoefficientTable {
 struct sSkillGoalPairsTable {
 	DataSection SectionHeader;
 	struct sSkillGoalPairsData {
-		byte Sword:1;
-		byte Lance:1;
-		byte Axe:1;
-		byte Bow:1;
-		
-		byte Brawl:1;
-		byte Authority:1;
-		byte Reason:1;
-		byte Faith:1;
-		
-		byte HeavyArmor:1;
-		byte Riding:1;
-		byte Flying:1;
-	} unkBlock8[SectionHeader.NumEntries];
+		byte bit:1<name="Sword">;
+		byte bit:1<name="Lance">;
+		byte bit:1<name="Axe">;
+		byte bit:1<name="Bow">;
+		byte bit:1<name="Brawl">;
+		byte bit:1<name="Authority">;
+		byte bit:1<name="Reason">;
+		byte bit:1<name="Faith">;
+		byte bit:1<name="HeavyArmor">;
+		byte bit:1<name="Riding">;
+		byte bit:1<name="Flying">;
+	};
+    for(i=0;i<SectionHeader.NumEntries;i++)
+        sSkillGoalPairsData SkillGoalPairsData<read=getSkillGoals(this)>;
 };
 
 struct File {
@@ -138,3 +138,15 @@ struct File {
 string getRankName(PointsCap & q) {                return EnumToString(q.skillLevelName); };
 string getLevelString(PointsCap & q) {             return "Level " + q.levelString; };
 string getSpellName(sMagicExpCoefficientData &i) { return EnumToString(i.SpellName); };
+string getSkillGoals(sSkillGoalPairsData &i) {
+    string ret = "";
+    local int o;
+    local RankStats st;
+    for(o=0;o<11;o++){
+        if(i.bit[o]==1){
+            st=o;
+            ret+=Str("%-10.10s",EnumToString(st));
+        }
+    }  
+    return ret;
+}

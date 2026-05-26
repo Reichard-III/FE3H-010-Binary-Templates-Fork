@@ -71,15 +71,15 @@ struct sAuxUnit{
 	BattalionID Battalion;
 	ubyte UnitCount;
 	struct sUnitFlags{
-		byte bit0:1<name="Allowed In Random Pool?",comment="If not enabled then this is a quest only entry ">;
-		byte bit1:1<name="RarerEnemies?",comment="Seems to reserve up to a 1/4 of Spawnable enemies for rarer enemies">;
-		byte bit2:1<name="Green Ally">;
-		byte bit3:1;
+		byte bit:1<name="Allowed In Random Pool?",comment="If not enabled then this is a quest only entry ">;
+		byte bit:1<name="RarerEnemies?",comment="Seems to reserve up to a 1/4 of Spawnable enemies for rarer enemies">;
+		byte bit:1<name="Green Ally">;
+		byte bit:1;
 	   
-		byte bit4:1;
-		byte bit5:1;
-		byte bit6:1;
-		byte bit7:1;
+		byte bit:1;
+		byte bit:1;
+		byte bit:1;
+		byte bit:1;
 	}UnitFlags;
 	ubyte unkByte0x9<name="Padding?">;
 };
@@ -105,19 +105,19 @@ struct sAuxMoneyReward{
 struct sAuxItemRewards{
 	DataSection Header;
 	for(i=0; i<Header.NumEntries;i++)
-		sAuxItemReward AuxItemReward<read= Str("%s - %d%% %d%% %d%% - %s - %d",EnumToString(RewardBin),RollThreshold[0], RollThreshold[1],RollThreshold[2] ,EnumToString(RewardItem),RewardCount)>;
+		sAuxItemReward AuxItemReward<read= Str("%-16.16s - %3d%% %3d%% %3d%% - %2d %s ",EnumToString(RewardBin),RollThreshold[0], RollThreshold[1],RollThreshold[2], RewardCount ,EnumToString(RewardItem))>;
 };
 
 struct sAuxSpawnLimits{
 	DataSection Header;
 	for(i=0; i<Header.NumEntries;i++)
-		sAuxSpawnLimit AuxSpawnLimit<read=EnumToString(AuxI)>;
+		sAuxSpawnLimit AuxSpawnLimit<read=Str("%2d - %s",SpawnLimit,EnumToString(AuxI))>;
 };
 
 struct sAuxUnits{
 	DataSection Header;
 	for(i=0; i<Header.NumEntries;i++)
-		sAuxUnit AuxUnit<read=Str("Chapter %2d-%2d: %s %s",MinimumChapter,MaximumChapter,EnumToString(RedEnemyBin),EnumToString(Class))>;
+		sAuxUnit AuxUnit<read=Str("Ch %2d-%2d: %2d %-15.15s %-9.9s | %-6.6s %-6.6s %s",MinimumChapter,MaximumChapter, UnitCount, EnumToString(Class),EnumToString(RedEnemyBin), UnitFlags.bit[0]==0?"":"Random", UnitFlags.bit[1]==0?"":"Rare", UnitFlags.bit[2]==0?"":"Green")>;
 };
 
 struct sMonsterDroppableWeapons{
@@ -135,7 +135,7 @@ struct sAuxYellowMonsterUnits{
 struct sAuxMoneyRewardRewards{
 	DataSection Header;
 	for(i=0; i<Header.NumEntries;i++)
-		sAuxMoneyReward AuxMoneyReward<read=Str("Chapter %d",chapter)>;
+		sAuxMoneyReward AuxMoneyReward<read=Str("Chapter %2d - %d",chapter,BaseMoney)>;
 };
 
 struct freeScenario {
