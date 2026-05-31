@@ -431,25 +431,26 @@ struct FILE {
     FSeekNextSection(Section);
 	struct BULLETTABLE { //25
 		DataSection sectionHeader<name="Section Header">;
-        local int ptrStart = Section.SectionPointers[25].Ptr + 64;
 		struct BULLETDATA {
-            uint ptr[9];
-            uint unk;
-            local string effect1 = ReadString(ptrStart+40*16+ptr[0]);
-            local string effect2 = ReadString(ptrStart+40*16+ptr[1]);
-            local string effect3 = ReadString(ptrStart+40*16+ptr[2]);
-            local string effect4 = ReadString(ptrStart+40*16+ptr[3]);
-            local string effect5 = ReadString(ptrStart+40*16+ptr[4]);
-            local string effect6 = ReadString(ptrStart+40*16+ptr[5]);
-            local string effect7 = ReadString(ptrStart+40*16+ptr[6]);
-            local string effect8 = ReadString(ptrStart+40*16+ptr[7]);
-            local string effect9 = ReadString(ptrStart+40*16+ptr[8]);
-		}BulletData[sectionHeader.NumEntries]<bgcolor=cYellow, optimize=false>;
+            local BulletEffectEnum name = i;
+            struct sPointer{
+                uint ptr;
+                local int addr = Section.SectionPointers[25].Ptr + 0x40 + sectionHeader.size*sectionHeader.NumEntries+ptr;
+            }; local int o;
+            for(o=0; o < 9; o++){
+                sPointer sPtr<read=Str("%4d - %s", ptr, ReadString(addr))>;
+            }
+            uint IndexToSomeSFXTable;
+		};
+        for(i=0; i< sectionHeader.NumEntries;i++){
+            BULLETDATA BulletData<read=EnumToString(name)>;
+        };
 		struct WEAPBULLETSTRINGS {
 			for( i = 0; i < 9*sectionHeader.NumEntries; i++ )
                 struct BulletEffectName {
+                    local int addr = FTell() - (Section.SectionPointers[25].Ptr + 0x40 + sectionHeader.size*sectionHeader.NumEntries);
 				    string EffectName<bgcolor=cLtGreen>;
-                }WeapBulletName<read=EffectName, name="Effect Name">;
+                }WeapBulletName<read=Str("%4d - %s",addr,EffectName), name="Effect Name">;
         }WeapBulletStrings05<name="Bullet VFX Strings">;
 	}BulletTable;
     
