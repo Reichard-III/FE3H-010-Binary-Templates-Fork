@@ -1,0 +1,59 @@
+//------------------------------------------------
+//--- 010 Editor v16.0.4 Binary Template
+//
+//      File: Placards.bt
+//   Authors: claireliner
+//   Version: 1
+//   Purpose: Titles of books and readable placards around the monastery
+//  Category: enum
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+enum<ubyte> Placard {
+	Altar = 0,
+	Officers_Academy_Placard = 1,
+	Hooked_on_Fishing = 2,
+	Local_Fish_Guide = 3,
+	Top_Fishing_Spots = 4,
+	The_Art_of_Fishing = 5,
+	Planting_Seeds = 6,
+	Greenhouse_Crops = 7,
+	Best_Pest_Practices = 8,
+	The_Beginner_s_Guide_to_Fishing = 9,
+	A_Treatise_on_Freshwater_Fish = 10,
+	Wilderness_Survival_Guide = 11,
+	The_Complete_Gardening_Guide = 12,
+	All_About_Crops = 13,
+	Encyclopedia_of_Fodlan_s_Fish = 14,
+	Encyclopedia_of_Fodlan_s_Plants = 15,
+	Dried_Plum_Recipe = 22,
+	Baked_Pike_Recipe = 23,
+	Deep_Fried_Queen_Loach_Recipe = 24,
+	Saint_Cethleann_Statue = 25,
+	Saint_Cichol_Statue = 26,
+	Saint_Indech_Statue = 27,
+	Saint_Macuil_Statue = 28,
+	The_Book_of_Seiros_Part_I = 29,
+	The_Book_of_Seiros_Part_II = 33,
+ 	The_History_of_Fodlan_Part_I = 39,
+	The_History_of_Fodlan_Part_II = 46,
+	The_Book_of_Seiros_Part_V = 57,
+    Register_of_Empire_Nobles_Part_I = 60,
+	Register_of_Empire_Nobles_Part_II = 68,
+	Register_of_Alliance_Nobles = 75,
+	Register_of_Kingdom_Nobles = 83,
+	Traveler_s_Journal_Issue_1 = 92,
+	Traveler_s_Journal_Issue_2 = 97,
+	Roast_Duck_Recipe = 104,
+	Mysteries_of_the_Calendar_Vol_2 = 107,
+	Fragments_of_a_Forgotten_Memoir = 114,
+	The_Truth_of_the_Heroes__Relics = 118,
+	Romance_of_the_World_s_Perdition = 122,
+	Encyclopedia_of_Fodlan_s_Insects = 125,
+	Burnt_Remnants_of_a_Report = 130,
+	Words_of_Love = 135,
+    The_Feast_of_Decadence = 137,
+	An_Antiquated_Note = 141,
+	Letter_to_a_Mysterious_Noble = 145
+};
