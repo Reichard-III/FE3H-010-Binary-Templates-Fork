@@ -266,6 +266,7 @@ enum<ubyte> ExtraMagEffect
     Heal_on_Ally = 1,
     Heal_on_all_Allies = 2,
     Equipable_ = 3,
+    UnknownEff4_=4,
     Meteor_Splash_Damage = 5,
     Heal_Half_Damage = 6,
     Use_on_Self = 7,

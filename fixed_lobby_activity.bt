@@ -147,13 +147,13 @@ struct File {
 		DataSection SectionHeader;
 		for (i = 0; i < SectionHeader.NumEntries; i++){
 			struct Block3_Entry{
-				sWhiteCloudsEnabledChaptersBitMask WhiteCloudsAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d  %d %d %d %d  %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6,bit7, bit8,bit9,bit10,bit11, bit12)>;
+				sWhiteCloudsEnabledChaptersBitMask WhiteCloudsAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d  %d %d %d %d  %d",bit[0],bit[1],bit[2],bit[3], bit[4],bit[5],bit[6],bit[7], bit[8],bit[9],bit[10],bit[11], bit[12])>;
 				CharID character<bgcolor=cRed>;
                 sVerdantWindEnabledChaptersBitMask VerdantWindsAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6,bit7)>;
                 sSilverSnowEnabledChaptersBitMask SilverSnowAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6)>;
                 sCrimsonFlowerEnabledChaptersBitMask CrimsonFlowerAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d",bit0,bit1,bit2,bit3, bit4,bit5)>;
                 sAzureMoonEnabledChaptersBitMask AzureMoonAdviceBoxAvailability<read = Str("%d %d %d %d  %d %d %d %d",bit0,bit1,bit2,bit3, bit4,bit5,bit6,bit7)>;
-			}entry<read=EnumToString(character), bgcolor=cLtBlue>;
+			}entry<read=Str("%-12.12s | %s",EnumToString(character), WhiteCloudsAdviceBoxAvailability.bit[2]==1?"available Ch2":""), bgcolor=cLtBlue>;
 		}
 	}block3<name="Advice Box Availability">;
 	

@@ -6,7 +6,7 @@
 //   Version: 1.1
 //   Purpose: Parse entries for a LayeredFS-like file that patches DATA1.bin files.
 //  Category: Archives
-// File Mask: *INFO0.bin
+// File Mask: INFO0.bin
 //  ID Bytes: /
 //   History:
 //   1.0    2019-08-04  Raytwo: Made the original file

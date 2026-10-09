@@ -196,3 +196,53 @@ enum<ubyte> FishingEventName{
 enum<ubyte> GardeningEventName{
     Blessing_Of_The_Land_GEN  
 };
+
+enum<ubyte> FoodEventName{
+    Regular_Menu_FEN,
+	Founding_of_the_Empire_Celebration_FEN,
+	Founding_of_the_Kingdom_Celebration_FEN,
+	Founding_of_the_Alliance_Celebration_FEN,
+	Bonding_Bites_FEN,
+	Inter_House_Reception_FEN,
+	Faculty_and_Knight_Mixer_FEN,
+	Head_Chef_Challenge_FEN,
+	Sweet_Tooth_Week_FEN,
+	Hunting_Festival_FEN,
+	Harvest_Festival_FEN,
+	Fish_Bounty_Festival_FEN,
+	Spice_Festival_FEN,
+	Bitter_Eats_FEN,
+	Morale_Meals_FEN,
+};
+
+enum<ubyte> ChoirEventName{
+    Choir_Practice_CEN,
+	Choir_Festival_CEN,
+	Saint_Cichol_Hymn_Event_CEN,
+	Saint_Indech_Hymn_Event_CEN,
+	Saint_Macuil_Hymn_Event_CEN,
+	Saint_Cethleann_Hymn_Event_CEN,
+	Saint_Seiros_Hymn_Event_CEN
+};
+
+enum<ubyte> TournamentEventName{
+    Beginner_Sword_Tournament_TEN0,
+    House_vs__House_Lance_Tournament_TEN,
+    Beginner_Sword_Tournament_TEN,
+    Intermediate_Axe_Tournament_TEN,
+    House_vs__House_Sword_Tournament_TEN,
+    Intermediate_Brawling_Tournament_TEN,
+    Intermediate_Black_Magic_Tournament_TEN,
+    House_vs__House_Bow_Tournament_TEN,
+    Intermediate_Lance_Tournament_TEN,
+    House_vs__House_Magic_Tournament_TEN,
+    Advanced_Sword_Tournament_TEN,
+    Advanced_Lance_Tournament_TEN,
+    Advanced_Bow_Tournament_TEN,
+    Advanced_Black_Magic_Tournament_TEN,
+    Advanced_Axe_Tournament_TEN,
+    Advanced_Brawling_Tournament_TEN,
+    Ultimate_Sword_Tournament_TEN,
+    Proper_Conduct_Tournament_19_TEN,
+    Proper_Conduct_Tournament_20_TEN,
+};

@@ -85,7 +85,7 @@ struct ItemData {
 		if (MagEff == 21 || MagEff == 22)
 			Stat_Booster Statss<name="Stat">;
 		else 
-			byte unused<hidden=true>;
+			byte unused<hidden=false>;
 		ubyte itemIndex<name="Item Index">;
 		ubyte Weight<name="Weight">;
 	}
@@ -97,7 +97,7 @@ struct ItemData {
 	}
 	else {
 		byte Prt<name="Prt">;
-		short unused<name="Unused", hidden=true>;
+		short unused<name="Unused", hidden=false>;
 		byte Weight<name="Weight">;
 	};
 	SkillProperty Property1<name="Skill Property 1">;

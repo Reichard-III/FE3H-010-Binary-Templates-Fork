@@ -27,8 +27,8 @@ struct StageEnvInfo {
 				
 				float unkFloat0x0;
 				float unkFloat0x4;
-				float unkFloat0x8<comment="Unused?">;
-				float unkFloat0xc<comment="Unused?">;
+				float unkFloat0x8<comment="">;
+				float unkFloat0xc<comment="used for fog height?">;
 				float unkFloat0x10;
 				float unkFloat0x14;
 				float unkFloat0x18;

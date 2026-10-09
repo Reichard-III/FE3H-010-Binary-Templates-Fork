@@ -51,14 +51,14 @@ local int i = 0;
                 uint32 Unk;
                 uint32 Unk;
                 uint32 Unk;
-                uint32 Pointer1;
-                uint32 Pointer2;
-                uint32 P3EntryCount<bgcolor=cRed>;
-                uint32 Pointer3;
+                uint32 StartOfConditions;
+                uint32 EndOfConditions;
+                uint32 ActionsCount<bgcolor=cRed>;
+                uint32 StartOfActions;
                 uint32 Unk;
                 uint32 EndOfBlock;
             }eventhead<bgcolor=cDkBlue>;
-            FSeek(eventhead.Pointer1);
+            FSeek(eventhead.StartOfConditions);
             struct Block1{
                 uint32 Magic;
                 uint32 Unk;
@@ -69,13 +69,17 @@ local int i = 0;
                     uint32 CommandsAndArgs;
                 }
             }block1<bgcolor=cDkGreen, name="Commands block", comment="Contains the commands to execute">;
-            FSeek(eventhead.Pointer2);
+            FSeek(eventhead.EndOfConditions);
             struct Block2{
                 uint32 EventType;
                 uint32 Unk;
                 uint32 Unk;
                 uint32 Unk;
             }block1<bgcolor=cDkYellow>;
+            local uint32 num_arguments = (eventhead.EndOfBlock - eventhead.StartOfActions)/4;
+            if(num_arguments!=0){
+                uint32 actions[num_arguments]<format=decimal>;
+            }
         }eventBlock;
     }
 }file;

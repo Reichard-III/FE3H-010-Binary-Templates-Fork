@@ -83,7 +83,7 @@ struct ScheduleData {
 	FoodEvents foodEvent<name="Food Event">;
 	DayType dayType<name="Day Type">;
 	ChoirEvents choirEvent<name="Choir Event">;
-	byte unk1<bgcolor=cBlack>;
+	Meal SpecialtyMeal<bgcolor=cBlack>;
 	struct sEnabledMonasteryMerchants {
 		ubyte bit0 : 1<name="Southern Merchant">;
 		ubyte bit1 : 1<name="Eastern Merchant">;
@@ -114,7 +114,9 @@ struct ScheduleTable {
 	ScheduleData schedule[Header.NumEntries]<read=getScheduleName,optimize=false,bgcolor=cPurple>;
 };
 
-struct Unknown10Byte {
+struct sChoirEvent {
+    local ChoirEventName CEN=i;
+    
 	byte unk1;
 	byte unk2;
 	byte unk3;
@@ -165,6 +167,8 @@ struct sGardeningEvents {
 };
 
 struct sFoodEvent {
+    local FoodEventName FEN=i;
+    
 	byte unkByte0x0;  
 	byte unkByte0x1;
 	byte unkByte0x2;
@@ -181,15 +185,23 @@ struct sFoodEvent {
 
 struct sFoodEvents {
 	DataSection Header;
-	sFoodEvent FoodEvent[Header.NumEntries];
+    struct sFoodEventData{
+		for(i = 0; i<Header.NumEntries;i++)
+			sFoodEvent FoodEvent<read=EnumToString(FEN)>;
+	}DiningEvents;
 };
 
 struct sChoirEvents {
 	DataSection Header;
-	Unknown10Byte unknown[Header.NumEntries];
+	struct sChoirEventData{
+        for(i=0; i<Header.NumEntries; i++)
+            sChoirEvent ChoirEvent<read=EnumToString(CEN)>;
+    }Choir_Events;
 };
 
 struct sTournamentEvent {
+    local TournamentEventName TEN=i;
+    
 	ushort EntryFee<bgcolor=cBlue>;
 	Item unk1<name="Prize Item">;
 	short unk2<name="Gold reward #1">;
@@ -217,7 +229,10 @@ struct sTournamentEvent {
 
 struct sTournamentEvents {
 	DataSection Header;
-	sTournamentEvent TournamentEvent[Header.NumEntries];
+	struct sTournamentEventData{
+        for(i=0;i<Header.NumEntries; i++)
+            sTournamentEvent TournamentEvent<read=EnumToString(TEN)>;
+    }TournamentEvents;
 };
 
 struct File {
@@ -256,7 +271,11 @@ struct File {
 	sTournamentEvents TournamentEventTable<name="Tournament Event Table">;
 } file<open=true>;
 
-string getScheduleName(ScheduleData & q) {   return q.scheduleName; }
+string getScheduleName(ScheduleData & q) {
+    local string display;
+    display += Str("%s\t%2d\t%2d\t%s\t%d\t%s", q.scheduleName, q.month, q.day, q.dayType == 2 ? "FreeDay":"No", q.SpecialtyMeal, EnumToString(q.SpecialtyMeal)); 
+    return display;
+}
 string getCelebrationDisplay(Celebration & CD){
 	local string display;
 	display += Str("%-15.15s %2d/%2d - ",EnumToString(CD.eventMonth),CD.eventMonth+1,CD.eventDay);

@@ -417,13 +417,25 @@ struct FILE {
     struct Block24 { //24
         DataSection sectionHeader<name="Section Header">;
         struct Block24_Data {
-            int entry[30];
-        }data24[sectionHeader.NumEntries];
+            local TerrainVFXType name = i;
+            struct Block24_Pointers{
+                uint ptr;
+                local int addr = Section.SectionPointers[24].Ptr + 0x40 + sectionHeader.size*sectionHeader.NumEntries+ptr;
+                local TerrainInteraction name = m;
+            };
+            for(m=0; m<30;m++){
+                Block24_Pointers sPtr<name=Str("%-14s",EnumToString(name)),read=Str("%4d - %s", ptr, ReadString(addr))>;
+            }
+        };
+        for(i=0;i<sectionHeader.NumEntries;i++){
+            Block24_Data TerrainVFXPointers<read=EnumToString(name)>;
+        };
         struct sEffectNames{
             for (i = 0; i < 30*sectionHeader.NumEntries; ++i){
                 struct Block24String{
+                    local int addr = FTell() - (Section.SectionPointers[24].Ptr + 0x40 + sectionHeader.size*sectionHeader.NumEntries);
                     string EffectName<name="Effect Name",bgcolor=cLtGreen>;
-                } block27_entry<name="Effect Name",read=EffectName>;
+                } block27_entry<name="Effect Name",read=Str("%4d - %s",addr, EffectName)>;
             }
         }EffectNames;
     }block24<name="Terrain VFX Strings">;
@@ -436,8 +448,8 @@ struct FILE {
             struct sPointer{
                 uint ptr;
                 local int addr = Section.SectionPointers[25].Ptr + 0x40 + sectionHeader.size*sectionHeader.NumEntries+ptr;
-            }; local int o;
-            for(o=0; o < 9; o++){
+            };
+            for(m=0; m < 9; m++){
                 sPointer sPtr<read=Str("%4d - %s", ptr, ReadString(addr))>;
             }
             uint IndexToSomeSFXTable;
@@ -470,10 +482,18 @@ struct FILE {
     struct sMonasteryMovementAnimations{ //27
         DataSection sectionHeader;
         struct sMonasteryMovementAnimation{
-            byte unkByte0x0[9];
+            ubyte unk0;
+            TrueFalse EyesClosed;
+            ubyte unk2;
+            ubyte unk3;
+            ubyte unk4;
+            ubyte unk5;
+            ubyte unk6;
+            ubyte unk7;
+            ubyte unk8;
         };
         for(i=0;i<sectionHeader.NumEntries;i++)
-            sMonasteryMovementAnimation MonasteryMovementAnimation;
+            sMonasteryMovementAnimation MonasteryMovementAnimation<read=Str("%s",EnumToString(EyesClosed))>;
     }MonasteryMovementAnimations<name="Movement-Related Monastery?">;
     
     FSeekNextSection(Section);

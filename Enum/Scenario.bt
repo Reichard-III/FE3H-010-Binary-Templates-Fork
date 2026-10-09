@@ -394,22 +394,22 @@ struct sCrimsonFlowerEnabledChaptersBitMask{
 	ubyte bit7 : 1<name="Does nothing",comment="handled in anoth1er data field">;
 };
 struct sWhiteCloudsEnabledChaptersBitMask{
-	ubyte bit0 : 1<name="Chapter 0",comment="MonasteryScriptID = 0">;
-	ubyte bit1 : 1<name="Chapter 1",comment="MonasteryScriptID = 1">;
-	ubyte bit2 : 1<name="Chapter 2",comment="MonasteryScriptID = 2">;
-	ubyte bit3 : 1<name="Chapter 3",comment="MonasteryScriptID = 3">;
-	ubyte bit4 : 1<name="Chapter 4",comment="MonasteryScriptID = 4">;
-	ubyte bit5 : 1<name="Chapter 5",comment="MonasteryScriptID = 5">;
-	ubyte bit6 : 1<name="Chapter 6",comment="MonasteryScriptID = 6">;
-	ubyte bit7 : 1<name="Chapter 7",comment="MonasteryScriptID = 7">;
-	ubyte bit8 : 1<name="Chapter 8",comment="MonasteryScriptID = 8">;
-	ubyte bit9 : 1<name="Chapter 9",comment="MonasteryScriptID = 9">;
-	ubyte bit10 : 1<name="Chapter 10",comment="MonasteryScriptID = 10">;
-	ubyte bit11 : 1<name="Chapter 11",comment="MonasteryScriptID = 11">;
-	ubyte bit12 : 1<name="Chapter 12 NonCF",comment="MonasteryScriptID = 12">;
-	ubyte bit13 : 1<name="Does nothing",comment="handled in another data field">;
-	ubyte bit14 : 1<name="Does nothing",comment="handled in another data field">;
-	ubyte bit15 : 1<name="Does nothing",comment="handled in another data field">;
+	ubyte bit : 1<name="Chapter 0",comment="MonasteryScriptID = 0">;
+	ubyte bit : 1<name="Chapter 1",comment="MonasteryScriptID = 1">;
+	ubyte bit : 1<name="Chapter 2",comment="MonasteryScriptID = 2">;
+	ubyte bit : 1<name="Chapter 3",comment="MonasteryScriptID = 3">;
+	ubyte bit : 1<name="Chapter 4",comment="MonasteryScriptID = 4">;
+	ubyte bit : 1<name="Chapter 5",comment="MonasteryScriptID = 5">;
+	ubyte bit : 1<name="Chapter 6",comment="MonasteryScriptID = 6">;
+	ubyte bit : 1<name="Chapter 7",comment="MonasteryScriptID = 7">;
+	ubyte bit : 1<name="Chapter 8",comment="MonasteryScriptID = 8">;
+	ubyte bit : 1<name="Chapter 9",comment="MonasteryScriptID = 9">;
+	ubyte bit : 1<name="Chapter 10",comment="MonasteryScriptID = 10">;
+	ubyte bit : 1<name="Chapter 11",comment="MonasteryScriptID = 11">;
+	ubyte bit : 1<name="Chapter 12 NonCF",comment="MonasteryScriptID = 12">;
+	ubyte bit : 1<name="Does nothing",comment="handled in another data field">;
+	ubyte bit : 1<name="Does nothing",comment="handled in another data field">;
+	ubyte bit : 1<name="Does nothing",comment="handled in another data field">;
 };
 
 struct sAzureMoonEnabledChaptersBitMask{
@@ -442,4 +442,75 @@ struct sVerdantWindEnabledChaptersBitMask{
 	ubyte bit5 : 1<name="CH 19 VW", comment="MonasteryScriptID = 40">;
 	ubyte bit6 : 1<name="CH 20 VW", comment="MonasteryScriptID = 41">;
 	ubyte bit7 : 1<name="CH 21 VW", comment="MonasteryScriptID = 42">;
+};
+
+enum<byte> TileType {
+	Not_Passable = 0,
+	Flier_Only = 1,
+	Normal_Cost = 2,
+	Forest_TT = 3,
+	Sand_TT = 4,
+	Thicket_TT = 5,
+	ShoalSnow_TT = 6,
+	Unused_NoCav_3Infantry_TT = 7,
+	Unused_Thief3_NoCav_Infantry_TT = 8,
+	FlameSwampCrater_TT = 9,
+	SpecialTiles_TT = 10,
+	Stairs_TT = 11,
+	Wasteland_TT = 12,
+	Invalid13_TT = 13,
+	Invalid14_TT = 14,
+	Invalid15_TT = 15,
+};
+
+enum<ushort> TerrainVFXType{
+    None_0TVT,
+    Plains_1TVT,
+    Forest_2TVT,
+    Desert_3TVT,
+    Swamp_4TVT,
+    Stone_5TVT,
+    Wooden_6TVT,
+    Throne_7TVT,
+    Flame_8TVT,
+    Shoal_9TVT,
+    DoorFloor_10TVT,
+    Unknown_11TVT,
+    None_12TVT,
+    None_13TVT,
+    None_14TVT,
+    None_15TVT
+};
+
+enum<byte> TerrainInteraction{
+    step_s,
+    step_m,
+    step_l,
+    dash_s,
+    dash_m,
+    dash_l,
+    jump_s,
+    jump_m,
+    jump_l,
+    down_s,
+    down_m,
+    down_l,
+    quake_s,
+    quake_m,
+    quake_l,
+    smoke360_s,
+    smoke360_m,
+    smoke360_l,
+    dust360_s,
+    dust360_m,
+    dust360_l,
+    smoke180_s,
+    smoke180_m,
+    smoke180_l,
+    dust180_s,
+    dust180_m,
+    dust180_l,
+    crack_stone_s,
+    crack_stone_m,
+    crack_stone_l,
 };
