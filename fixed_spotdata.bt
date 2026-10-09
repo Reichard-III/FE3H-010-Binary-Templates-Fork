@@ -2,13 +2,15 @@
 //--- 010 Editor v14.0 Binary Template
 //
 //      File: fixed_spotdata.bt
-//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird
-//   Version: 1.0
+//   Authors: RayTwo?, DeathChaos?, Triabolical, ReichardTheThird, claireliner
+//   Version: 1.2
 //   Purpose: Probably the way you get random drops in the monastery
 //  Category: Reichard
 // File Mask: *fixed_spotdata.bin
 //  ID Bytes: 
 //   History: 
+//   1.2    10/6/26 claireliner: labeled placard display related variables + dlc status
+//
 //   1.1    4/27/25 ReichardTheThird: Moved away from using generic file format
 //                      
 //   1.0    2/16/25 ReichardTheThird: Started taking over maintainance and updates from previous authors
@@ -20,7 +22,7 @@ Item Slot appears at these location (need more research)
 
 */
 #include "Structs.bt"
-
+#include "Enum/Placards.bt"
 
 
 LittleEndian();
@@ -38,6 +40,7 @@ struct sFile{
                 struct sItemSpot{
                     int ItemSpotTypeStringOffset<comment="used to index the strings in ItemLocationType">;
                     local string name = ReadString(Sections.SectionPointers[0].Ptr + ItemSpotTypeStringOffset + 0x40 + SectionHeader.NumEntries * SectionHeader.size,-1);
+                    name = SubStr(name,28, Strlen(name)-1); //trim name prefix
                     struct Flags0x4{
                         ubyte bit : 1<name="Byleth's NG+ Journal">;
                         ubyte bit : 1<name="Spend Free Day on Battles">;
@@ -49,7 +52,7 @@ struct sFile{
                         ubyte bit : 1<name="unkF0B7">;
                     }SpecialSpotDataTypes;
                     struct Flags0x5{
-                        ubyte bit : 1<name="Uses Large Text box for Sitri Grave? Probably wrong">;
+                        ubyte bit : 1<name="Uses Large Placard Text Box">;
                         ubyte bit : 1<name="unkF1B1">;
                         ubyte bit : 1<name="unkF1B2">;
                         ubyte bit : 1<name="Makes item spots disappear?">;
@@ -108,7 +111,7 @@ struct sFile{
                         ubyte bit : 1<name="Unused", comment="">;
                         ubyte bit : 1<name="Unused", comment="">;
                     }RandomFlags;
-                    byte unk5;
+                    byte unk5<bgcolor=cGreen>;
                     byte MsgDataIndexMaybe;
                     byte unkByte0x2a;
                     byte EnableAlternateCamera<comment="enables the use of the special camera coordinates written above">;
@@ -117,12 +120,17 @@ struct sFile{
                     sRoutesEnabledBitMask RoutesEnabledBitMask;
                     byte unkByte0x30;
                     sVerdantWindEnabledChaptersBitMask VerdantWindEnabledChaptersBitMask;
-                    byte unkByte0x32;
-                    byte unkByte0x33;
-                    byte unkByte0x34;
+                    Placard PlacardIndex<comment="for displaying statues, grave, books, etc. taken from msgdata">;
+                    Placard BookEndIndex<comment="for books, the msgdata index of their final page. pages between placardindex and this are displayed">;
+                    byte DLCStatus<comment="0: base game, 1: anna's items, 2: abyss items">;
                     byte UnusedOrPadding[3];   
-                //}ItemSpot<name="Item Spot",read = Str("(%5d,%5d,%5d) | %-20.20s | %s",ItemXCoord,ItemYCoord, ItemZCoord, EnumToString(itemDrop), name)>;
-                }ItemSpot<name="Item Spot",read = Str("(%5d,%5d,%5d) | %-20.20s | %s",ItemXCoord,ItemYCoord, ItemZCoord, EnumToString(itemDrop), name)>;
+                    local string DisplayName = "";
+                    if (itemDrop != 65535) {
+                        DisplayName = EnumToString(itemDrop);
+                    } else if (PlacardIndex != 0 && PlacardIndex != 255) {
+                        DisplayName = "Placard: " + EnumToString(PlacardIndex);
+                    }
+                }ItemSpot<name="Item Spot",read = Str("(%5d,%5d,%5d) - %-33.33s %4d - %s",ItemXCoord,ItemYCoord, ItemZCoord, DisplayName, IncreaseProfessorExperience, name)>;
             };
         }ItemSpotEntries<name="Item Spot Entries",comment="Probably requires reloading monastery to see stuff update">;
         
