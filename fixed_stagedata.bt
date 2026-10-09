@@ -14,24 +14,6 @@
 LittleEndian();
 local int i, j = 0;
 #include "Structs.bt"
-enum<byte> TileType {
-	Not_Passable = 0,
-	Flier_Only = 1,
-	Normal_Cost = 2,
-	Forest_TT = 3,
-	Sand_TT = 4,
-	Thicket_TT = 5,
-	ShoalSnow_TT = 6,
-	Unused_NoCav_3Infantry_TT = 7,
-	Unused_Thief3_NoCav_Infantry_TT = 8,
-	FlameSwampCrater_TT = 9,
-	SpecialTiles_TT = 10,
-	Stairs_TT = 11,
-	Wasteland_TT = 12,
-	Invalid13_TT = 13,
-	Invalid14_TT = 14,
-	Invalid15_TT = 15,
-};
 
 struct StageData {
 	FileSections Sections;
@@ -48,7 +30,7 @@ struct StageData {
 				
 				byte unk<bgcolor=cGreen>;
 				byte unk<bgcolor=cGreen>;
-				ushort unkShort<bgcolor=cGreen>;
+				TerrainVFXType TerrainVFX<bgcolor=cGreen>;
 				byte Def<name="Protection+",bgcolor=cRed>;
 				byte Res<name="Resilence+",bgcolor=cBlue>;
 				byte Avoid<name="Avoid Bonus",bgcolor=cYellow>;
