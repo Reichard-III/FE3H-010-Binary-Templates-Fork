@@ -30,14 +30,15 @@ struct GenericFile {
 		DataSection Header;
 		for(i=0;i<Header.NumEntries;i++){
 			struct sunkEntry0{
-				ushort unkShort2Float0x0;
+                local LobbyCommon1Regions name = i;
+				ushort _X;
 				byte unkUnused0x2;
 				byte unkUnused0x3;   
-				ushort unkShort2Float0x4;
-				ushort unkShort2Float0x6;
-				ushort unkShort2Float0x8;   
-				ushort unkShort2Float0xa;
-				ushort unkShort2Float0xc;
+				ushort _Y;
+				ushort X;
+				ushort Y;   
+				ushort _Z;
+				ushort _A;
 				byte unkByte0xe;   
 				byte unkByte0xf;
 				byte unkByte0x10;
@@ -46,7 +47,7 @@ struct GenericFile {
 				byte unkByte0x13;   
 				byte unkByte0x14;
 				byte unkPadding0x15;
-			}unkEntry0;   
+			}unkEntry0<read = EnumToString(name)>;   
 		};
 	}unkTable0;
     
@@ -66,10 +67,10 @@ struct GenericFile {
 		DataSection Header;
 		for(i=0;i<Header.NumEntries;i++){
 			struct sunkEntry2{
-				CharID unkShort0x0;   
+				CharID Character;   
 				Spottable unk0x2<name="Spotability?", comment="Shows a message when you see this character in monastery, but there are a lot of various other conditions">;
 				byte unk0x3<name="padding?">;
-			}unkEntry2;
+			}unkEntry2<read=Str("%-18.18s - %s",EnumToString(Character),EnumToString(unk0x2))>;
 		};
 	}unkTable2;
 }File<open=true>;
